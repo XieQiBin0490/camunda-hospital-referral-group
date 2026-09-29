@@ -713,29 +713,29 @@
       <bpmndi:BPMNShape id="P_Hospital_di" bpmnElement="P_Hospital" isHorizontal="true">
         <dc:Bounds x="875" y="616" width="8420" height="1969" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_MS_di" bpmnElement="L_MS" isHorizontal="true">
-        <dc:Bounds x="905" y="616" width="8390" height="250" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_CT_di" bpmnElement="L_CT" isHorizontal="true">
-        <dc:Bounds x="905" y="866" width="8390" height="214" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_OB_di" bpmnElement="L_OB" isHorizontal="true">
-        <dc:Bounds x="905" y="1080" width="8390" height="200" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_CHT_di" bpmnElement="L_CHT" isHorizontal="true">
-        <dc:Bounds x="905" y="1280" width="8390" height="159" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_TB_di" bpmnElement="L_TB" isHorizontal="true">
-        <dc:Bounds x="905" y="1439" width="8390" height="297" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_FIN_di" bpmnElement="L_FIN" isHorizontal="true">
-        <dc:Bounds x="905" y="1736" width="8390" height="380" />
+      <bpmndi:BPMNShape id="L_PPC_di" bpmnElement="L_PPC" isHorizontal="true">
+        <dc:Bounds x="905" y="2357" width="8390" height="228" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="L_CNS_di" bpmnElement="L_CNS" isHorizontal="true">
         <dc:Bounds x="905" y="2116" width="8390" height="241" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="L_PPC_di" bpmnElement="L_PPC" isHorizontal="true">
-        <dc:Bounds x="905" y="2357" width="8390" height="228" />
+      <bpmndi:BPMNShape id="L_FIN_di" bpmnElement="L_FIN" isHorizontal="true">
+        <dc:Bounds x="905" y="1736" width="8390" height="380" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_TB_di" bpmnElement="L_TB" isHorizontal="true">
+        <dc:Bounds x="905" y="1439" width="8390" height="297" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_CHT_di" bpmnElement="L_CHT" isHorizontal="true">
+        <dc:Bounds x="905" y="1280" width="8390" height="159" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_OB_di" bpmnElement="L_OB" isHorizontal="true">
+        <dc:Bounds x="905" y="1080" width="8390" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_CT_di" bpmnElement="L_CT" isHorizontal="true">
+        <dc:Bounds x="905" y="866" width="8390" height="214" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_MS_di" bpmnElement="L_MS" isHorizontal="true">
+        <dc:Bounds x="905" y="616" width="8390" height="250" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="E_ReferralReceived_di" bpmnElement="E_ReferralReceived">
         <dc:Bounds x="1002" y="658" width="36" height="36" />
@@ -801,7 +801,7 @@
       <bpmndi:BPMNShape id="G_UrgentReferral_di" bpmnElement="G_UrgentReferral" isMarkerVisible="true">
         <dc:Bounds x="3095" y="1115" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="3085" y="1165" width="71" height="53" />
+          <dc:Bounds x="3085" y="1165" width="71" height="66" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="T_ExpediteUrgentBooking_di" bpmnElement="T_ExpediteUrgentBooking">
@@ -1385,27 +1385,6 @@
         <di:waypoint x="9075" y="1499" />
         <di:waypoint x="9192" y="1499" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="P_Patient_di" bpmnElement="P_Patient" isHorizontal="true">
-        <dc:Bounds x="160" y="794" width="300" height="150" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="P_Scheduling_di" bpmnElement="P_Scheduling" isHorizontal="true">
-        <dc:Bounds x="9800" y="580" width="330" height="150" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="P_Correspondence_di" bpmnElement="P_Correspondence" isHorizontal="true">
-        <dc:Bounds x="9800" y="754" width="330" height="130" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="P_OtherSpecialist_di" bpmnElement="P_OtherSpecialist" isHorizontal="true">
-        <dc:Bounds x="9800" y="908" width="330" height="130" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="P_ClinicalServices_di" bpmnElement="P_ClinicalServices" isHorizontal="true">
-        <dc:Bounds x="9800" y="1062" width="330" height="150" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="P_FundingOrganisation_di" bpmnElement="P_FundingOrganisation" isHorizontal="true">
-        <dc:Bounds x="9800" y="1236" width="330" height="150" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="P_PaymentProvider_di" bpmnElement="P_PaymentProvider" isHorizontal="true">
-        <dc:Bounds x="9800" y="1410" width="330" height="150" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="P_ReferringOrganisation_di" bpmnElement="P_ReferringOrganisation" isHorizontal="true">
         <dc:Bounds x="230" y="80" width="690" height="190" />
       </bpmndi:BPMNShape>
@@ -1457,6 +1436,27 @@
         <di:waypoint x="706" y="175" />
         <di:waypoint x="810" y="175" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="P_Patient_di" bpmnElement="P_Patient" isHorizontal="true">
+        <dc:Bounds x="160" y="794" width="300" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Scheduling_di" bpmnElement="P_Scheduling" isHorizontal="true">
+        <dc:Bounds x="9800" y="580" width="330" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Correspondence_di" bpmnElement="P_Correspondence" isHorizontal="true">
+        <dc:Bounds x="9800" y="754" width="330" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_OtherSpecialist_di" bpmnElement="P_OtherSpecialist" isHorizontal="true">
+        <dc:Bounds x="9800" y="908" width="330" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_ClinicalServices_di" bpmnElement="P_ClinicalServices" isHorizontal="true">
+        <dc:Bounds x="9800" y="1062" width="330" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_FundingOrganisation_di" bpmnElement="P_FundingOrganisation" isHorizontal="true">
+        <dc:Bounds x="9800" y="1236" width="330" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_PaymentProvider_di" bpmnElement="P_PaymentProvider" isHorizontal="true">
+        <dc:Bounds x="9800" y="1410" width="330" height="150" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MF_01_di" bpmnElement="MF_01">
         <di:waypoint x="575" y="270" />
         <di:waypoint x="575" y="624" />
@@ -1493,15 +1493,6 @@
           <dc:Bounds x="9674" y="965" width="79" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MF_06_di" bpmnElement="MF_06">
-        <di:waypoint x="9800" y="680" />
-        <di:waypoint x="9413" y="680" />
-        <di:waypoint x="9413" y="1140" />
-        <di:waypoint x="3615" y="1140" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="9648" y="1132" width="131" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MF_05_di" bpmnElement="MF_05">
         <di:waypoint x="3615" y="1140" />
         <di:waypoint x="9387" y="1140" />
@@ -1509,6 +1500,15 @@
         <di:waypoint x="9800" y="630" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="9652" y="622" width="122" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_06_di" bpmnElement="MF_06">
+        <di:waypoint x="9800" y="680" />
+        <di:waypoint x="9413" y="680" />
+        <di:waypoint x="9413" y="1140" />
+        <di:waypoint x="3615" y="1140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="9648" y="1132" width="131" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MF_07_di" bpmnElement="MF_07">
@@ -1538,15 +1538,6 @@
           <dc:Bounds x="529" y="1332" width="119" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MF_11_di" bpmnElement="MF_11">
-        <di:waypoint x="9800" y="1162" />
-        <di:waypoint x="9491" y="1162" />
-        <di:waypoint x="9491" y="1499" />
-        <di:waypoint x="6975" y="1499" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="9642" y="1491" width="142" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MF_10_di" bpmnElement="MF_10">
         <di:waypoint x="6975" y="1499" />
         <di:waypoint x="9465" y="1499" />
@@ -1556,13 +1547,13 @@
           <dc:Bounds x="9647" y="1104" width="133" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MF_13_di" bpmnElement="MF_13">
-        <di:waypoint x="9800" y="1336" />
-        <di:waypoint x="9543" y="1336" />
-        <di:waypoint x="9543" y="1926" />
-        <di:waypoint x="7815" y="1926" />
+      <bpmndi:BPMNEdge id="MF_11_di" bpmnElement="MF_11">
+        <di:waypoint x="9800" y="1162" />
+        <di:waypoint x="9491" y="1162" />
+        <di:waypoint x="9491" y="1499" />
+        <di:waypoint x="6975" y="1499" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="9646" y="1918" width="134" height="14" />
+          <dc:Bounds x="9642" y="1491" width="142" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MF_12_di" bpmnElement="MF_12">
@@ -1574,13 +1565,13 @@
           <dc:Bounds x="9651" y="1278" width="125" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MF_15_di" bpmnElement="MF_15">
-        <di:waypoint x="9800" y="1510" />
-        <di:waypoint x="9595" y="1510" />
-        <di:waypoint x="9595" y="1796" />
-        <di:waypoint x="8235" y="1796" />
+      <bpmndi:BPMNEdge id="MF_13_di" bpmnElement="MF_13">
+        <di:waypoint x="9800" y="1336" />
+        <di:waypoint x="9543" y="1336" />
+        <di:waypoint x="9543" y="1926" />
+        <di:waypoint x="7815" y="1926" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="9675" y="1788" width="76" height="14" />
+          <dc:Bounds x="9646" y="1918" width="134" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MF_14_di" bpmnElement="MF_14">
@@ -1590,6 +1581,15 @@
         <di:waypoint x="9800" y="1460" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="9653" y="1452" width="120" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_15_di" bpmnElement="MF_15">
+        <di:waypoint x="9800" y="1510" />
+        <di:waypoint x="9595" y="1510" />
+        <di:waypoint x="9595" y="1796" />
+        <di:waypoint x="8235" y="1796" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="9675" y="1788" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

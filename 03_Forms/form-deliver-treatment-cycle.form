@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Schedule and deliver the treatment cycles",
+      "id": "Header_form-deliver-treatment-cycle",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "letterDelayDays",
+      "label": "letterDelayDays",
+      "type": "checkbox"
+    },
+    {
+      "key": "furtherCyclesPlanned",
+      "label": "Further treatment cycles planned?",
+      "type": "checkbox"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-deliver-treatment-cycle",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

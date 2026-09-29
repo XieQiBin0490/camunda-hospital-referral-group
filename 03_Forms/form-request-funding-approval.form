@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Request funding approval or an additional payment",
+      "id": "Header_form-request-funding-approval",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "fundingApproved",
+      "label": "Funding approved or no payment required?",
+      "type": "checkbox"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-request-funding-approval",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

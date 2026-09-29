@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Confirm the treatment schedule and issue the patient instructions",
+      "id": "Header_form-confirm-treatment-schedule",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-confirm-treatment-schedule",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

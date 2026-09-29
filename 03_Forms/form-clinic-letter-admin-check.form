@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Perform the administrative checks and confirm the intended recipients",
+      "id": "Header_form-clinic-letter-admin-check",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "suspectedClinicalError",
+      "label": "Suspected clinical error in the letter?",
+      "type": "checkbox"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-clinic-letter-admin-check",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

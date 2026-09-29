@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Highlight the case and resolve the capacity constraint",
+      "id": "Header_form-resolve-capacity-constraint",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "suitableSlotFound",
+      "label": "Suitable appointment available in the requested period?",
+      "type": "checkbox"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-resolve-capacity-constraint",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

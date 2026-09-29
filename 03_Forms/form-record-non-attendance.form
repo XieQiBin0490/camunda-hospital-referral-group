@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Record the cancellation or non-attendance and determine the next step",
+      "id": "Header_form-record-non-attendance",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "appointmentPaid",
+      "label": "Does the cancelled appointment carry a payment?",
+      "type": "checkbox"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-record-non-attendance",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

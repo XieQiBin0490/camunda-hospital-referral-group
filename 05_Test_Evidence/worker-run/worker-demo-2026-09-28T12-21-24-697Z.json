@@ -1,0 +1,55 @@
+{
+  "target": "http://127.0.0.1:8080/v2",
+  "executedAt": "2026-09-28T12:21:24.699Z",
+  "results": [
+    {
+      "scenario": "enquiry",
+      "label": "Patient enquiry classified, answered and closed",
+      "workerEnv": {},
+      "processInstanceKey": "2251799813832352",
+      "state": "COMPLETED",
+      "reached": [
+        "E_EnquiryReceived",
+        "T_ClassifyEnquiry",
+        "G_EnquiryType",
+        "T_AnswerAdministrative",
+        "T_RecordEnquiryOutcome",
+        "E_EnquiryClosed"
+      ],
+      "variableCount": 2,
+      "variables": {
+        "patientId": "\"P-enquiry-1790598080333\"",
+        "enquiryType": "\"administrative\""
+      },
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ClassifyEnquiry",
+          "by": "human (this script)",
+          "set": {
+            "enquiryType": "administrative"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_AnswerAdministrative",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordEnquiryOutcome",
+          "by": "human (this script)",
+          "set": {}
+        }
+      ],
+      "incidents": [],
+      "status": "PASS",
+      "problems": []
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 1
+  }
+}

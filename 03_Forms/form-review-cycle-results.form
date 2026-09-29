@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Review the results and confirm whether the patient is fit to continue",
+      "id": "Header_form-review-cycle-results",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "fitToContinue",
+      "label": "Patient fit to continue as planned?",
+      "type": "checkbox"
+    },
+    {
+      "key": "urgentPostponement",
+      "label": "Immediate postponement required for patient safety?",
+      "type": "checkbox"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-review-cycle-results",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

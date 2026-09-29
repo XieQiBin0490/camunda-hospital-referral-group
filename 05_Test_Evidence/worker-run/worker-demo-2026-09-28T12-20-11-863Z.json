@@ -1,0 +1,282 @@
+{
+  "target": "http://127.0.0.1:8080/v2",
+  "executedAt": "2026-09-28T12:20:11.864Z",
+  "results": [
+    {
+      "scenario": "capacity-unavailable",
+      "label": "External capacity unavailable, then confirmed on the retry",
+      "workerEnv": {
+        "HPAS_CAPACITY_UNAVAILABLEONCE": "true"
+      },
+      "processInstanceKey": "2251799813831254",
+      "state": "COMPLETED",
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_TelephonePatient",
+        "T_RecordContactAttempt",
+        "G_ContactSuccessful",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_KeepPending",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RequestFundingApproval",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_SendSecurePaymentRequest",
+        "G_PaymentOutcome",
+        "T_RecordPayment",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "variableCount": 51,
+      "variables": {
+        "patientId": "\"P-capacity-unavailable-1790597993087\"",
+        "documentsComplete": "true",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "preferredTimeframeDays": "28",
+        "suitableSlotFound": "true",
+        "availableSlots": "[{\"clinic\":\"specialist service clinic\",\"date\":\"2026-10-19\",\"consultant\":\"Consultant on call\",\"reference\":\"SLOT-A\"},{\"clinic\":\"specialist service clinic\",\"date\":\"2026-10-26\",\"consultant\":\"Consultant on call\",\"reference\":\"SLOT-B\"}]",
+        "requestedSpeciality": "\"specialist service\"",
+        "availableSlotCount": "2",
+        "lastAutomatedAt": "\"2026-09-28T12:20:09.175038Z\"",
+        "episodeId": "\"EP-PCAPACITYUNAVAILABLE1790597993087\"",
+        "schedulingReference": "\"SCH-260928-298767\"",
+        "lastAutomatedActivity": "\"T_SendSecurePaymentRequest\"",
+        "schedulingQueriedAt": "\"2026-09-28T12:19:59.707432600Z\"",
+        "earliestSlotDate": "\"2026-10-19\"",
+        "schedulingServiceAnswered": "true",
+        "appointmentReference": "\"APT-0001\"",
+        "appointmentWithin14Days": "true",
+        "bookingConfirmed": "true",
+        "appointmentLetterReference": "\"LTR-260928-187084\"",
+        "appointmentLetterSent": "true",
+        "appointmentLetterSentAt": "\"2026-09-28T12:20:01.440953500Z\"",
+        "appointmentLetterChannel": "\"post\"",
+        "contactSuccessful": "true",
+        "consentGiven": "true",
+        "treatmentCode": "\"CHEMO-6\"",
+        "treatmentCycles": "6",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "capacityPendingSince": "\"2026-09-28T12:20:06.427890300Z\"",
+        "unavailableResource": "\"external treatment service\"",
+        "capacityAttemptCount": "2",
+        "capacityEscalationRequired": "false",
+        "capacityLastAttemptAt": "\"2026-09-28T12:20:06.887354600Z\"",
+        "duplicateAppointmentCreated": "false",
+        "capacityNextAttemptDate": "\"2026-09-29\"",
+        "capacityRetryCount": "0",
+        "capacityConfirmedResource": "\"hospital facility\"",
+        "capacityConfirmedForCycles": "6",
+        "capacityReference": "\"CAP-260928-993417\"",
+        "chargeAmount": "480",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "currency": "\"GBP\"",
+        "paymentDate": "\"2026-09-28\"",
+        "paymentStatus": "\"confirmed\"",
+        "paymentCurrency": "\"GBP\"",
+        "cardDataStored": "false",
+        "paymentReference": "\"PAY-260928-38036672\"",
+        "paymentAmount": "480.0",
+        "paymentRequestedAt": "\"2026-09-28T12:20:09.173573500Z\""
+      },
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "by": "human (this script)",
+          "set": {
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "by": "human (this script)",
+          "set": {
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "by": "human (this script)",
+          "set": {
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "by": "human (this script)",
+          "set": {
+            "referralUrgency": "routine",
+            "preferredTimeframeDays": 28
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "by": "human (this script)",
+          "set": {
+            "appointmentReference": "APT-0001",
+            "appointmentWithin14Days": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "by": "human (this script)",
+          "set": {
+            "bookingConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_TelephonePatient",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordContactAttempt",
+          "by": "human (this script)",
+          "set": {
+            "contactSuccessful": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "by": "human (this script)",
+          "set": {
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "by": "human (this script)",
+          "set": {
+            "requestAuthorised": true,
+            "treatmentCode": "CHEMO-6",
+            "treatmentCycles": 6
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_KeepPending",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": false,
+            "advancePaymentRequired": true,
+            "chargeAmount": 480,
+            "currency": "GBP"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RequestFundingApproval",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": true,
+            "advancePaymentRequired": true,
+            "chargeAmount": 480,
+            "currency": "GBP"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPayment",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "by": "human (this script)",
+          "set": {}
+        }
+      ],
+      "incidents": [],
+      "status": "PASS",
+      "problems": []
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 1
+  }
+}

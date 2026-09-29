@@ -1,0 +1,6 @@
+# Build output and machine-local tooling. Neither belongs in the delivered
+# package; the source, the pom and the run scripts are what is delivered.
+target/
+.tools/
+*.log
+workers.properties

@@ -1,0 +1,113 @@
+﻿==============================================================================================
+FILE: bpmn1.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : userTask, assignmentDefinition
+
+  -- STRUCTURAL PROBLEMS : 13
+     * [Process_1izycbs] DEAD END - Activity_036g430 "Record missing document list" has no outgoing sequence flow (Camunda: "Element is not connected")
+     * [Process_1izycbs] NO PATH TO ANY END EVENT (1): Activity_036g430
+     * [Process_0fl9bxn] DEAD END - Activity_1ippvne "Submit referral documentation" has no outgoing sequence flow (Camunda: "Element is not connected")
+     * [Process_0fl9bxn] NO PATH TO ANY END EVENT (2): Event_1hqqgsg, Activity_1ippvne
+     * [Process_0rkzkrk] DANGLING - nothing flows into Activity_1neohv8 "Send referral rejection letter" (Camunda: "Element is not connected")
+     * [Process_0rkzkrk] DANGLING - nothing flows into Activity_0imy8q3 "Send referral redirect notice" (Camunda: "Element is not connected")
+     * [Process_0rkzkrk] UNREACHABLE from any start or boundary event (4): Event_05ujvjt, Activity_1neohv8, Activity_0imy8q3, Event_0qpxjzi
+     * [Process_1izycbs] EMPTY LANE: "Call Handling Team" (Lane_031fx13) - declared but carries no work
+     * [Process_1izycbs] EMPTY LANE: "Clinical Nurse Specialist Team" (Lane_008tuly) - declared but carries no work
+     * [Process_1izycbs] EMPTY LANE: "Finance Team" (Lane_079vyw5) - declared but carries no work
+     * [Process_1izycbs] EMPTY LANE: "Treatment & Chemotherapy Bookings Team" (Lane_1tndv48) - declared but carries no work
+     * [Process_1izycbs] EMPTY LANE: "Administrative Management" (Lane_1grxdgc) - declared but carries no work
+     * [Process_1izycbs] EMPTY LANE: "Outpatient Bookings Team" (Lane_0krm7yd) - declared but carries no work
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 6 reports
+     [warn] camunda-compat/user-task-definition  x6  - A <User Task> should have a defined <Form>
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 12 reports
+     [warn] camunda-compat/user-task-definition  x6  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x6  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: bpmn2_dup.bpmn
+==============================================================================================
+  parsed with       : Camunda 7 (camunda) moddle
+  executionPlatform : (NOT DECLARED) / -
+  Camunda 7 (camunda:) constructs : expression, gatewayDirection, candidateGroups, formKey, type, topic
+
+  -- MODDLE WARNINGS (unrecognised elements/attributes) : 3
+     x3  unknown attribute <camunda:gatewayDirection>
+
+  -- STRUCTURAL PROBLEMS : 31
+     * [Process_PSP] DANGLING - nothing flows into Task_ProcessPayment "Process Payment" (Camunda: "Element is not connected")
+     * [Process_PSP] DEAD END - Task_ProcessPayment "Process Payment" has no outgoing sequence flow (Camunda: "Element is not connected")
+     * [Process_LabImaging] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_GPs] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_Patients] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_Scheduling] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_Correspondence] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [MainProcess_HospitalInternal] GATEWAY WITHOUT DEFAULT: ExclusiveGateway_FundingApproved "Funding Approved?" - 2 outgoing, no default flow -> runtime error "no outgoing sequence flow could be selected"
+     * [Process_0l3kpyr] DANGLING - nothing flows into Activity_0qa73gs "Process Payment" (Camunda: "Element is not connected")
+     * [Process_0l3kpyr] DEAD END - Activity_0qa73gs "Process Payment" has no outgoing sequence flow (Camunda: "Element is not connected")
+     * [Process_0xhy37q] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_0fl9bxn] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_0rjgrgt] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_0rkzkrk] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_0j1qj3s] EMPTY PROCESS -> renders as a blank pool (no flow nodes)
+     * [Process_LabImaging] EMPTY LANE: "External Lab/Imaging Services" (Lane_LabImaging) - declared but carries no work
+     * [Process_GPs] EMPTY LANE: "General Practitioners (GPs)" (Lane_GPs) - declared but carries no work
+     * [Process_Patients] EMPTY LANE: "Patients" (Lane_Patients) - declared but carries no work
+     * [Process_Scheduling] EMPTY LANE: "External Scheduling Service" (Lane_Scheduling) - declared but carries no work
+     * [Process_Correspondence] EMPTY LANE: "External Correspondence Service" (Lane_Correspondence) - declared but carries no work
+     * [MainProcess_HospitalInternal] EMPTY LANE: "Administrative Management" (Lane_AdminManagement) - declared but carries no work
+     * [MainProcess_HospitalInternal] EMPTY LANE: "Clinical Nurse Specialist Team" (Lane_ClinicalNurse) - declared but carries no work
+     * [MainProcess_HospitalInternal] EMPTY LANE: "Call Handling Team" (Lane_CallHandling) - declared but carries no work
+     * [MainProcess_HospitalInternal] EMPTY LANE: "Outpatient Bookings Team" (Lane_OutpatientBookings) - declared but carries no work
+     * [MainProcess_HospitalInternal] EMPTY LANE: "Medical Secretaries" (Lane_MedicalSecretaries) - declared but carries no work
+     * [Collaboration_027ob3g] participant "External Lab/Imaging Services" references an EMPTY process Process_0xhy37q
+     * [Collaboration_027ob3g] participant "General Practitioners (GPs)" references an EMPTY process Process_0fl9bxn
+     * [Collaboration_027ob3g] participant "Patients" references an EMPTY process Process_0rjgrgt
+     * [Collaboration_027ob3g] participant "External Scheduling Service" references an EMPTY process Process_0rkzkrk
+     * [Collaboration_027ob3g] participant "External Correspondence Service" references an EMPTY process Process_0j1qj3s
+     * [Collaboration_027ob3g] DUPLICATE PARTICIPANT NAME "External Payment Service Provider" x2
+
+  -- NOTES (informational, not defects) : 1
+     - [Collaboration_027ob3g] participant label "External Payment Service Provider" is displayed for process "Treatment Authorisation & Payment Process"
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 0 reports
+
+==============================================================================================
+FILE: bpmn3.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.9.0
+  Camunda 8 (zeebe:) constructs   : subscription, assignmentDefinition, formDefinition, userTask, taskDefinition
+
+  -- STRUCTURAL PROBLEMS : 4
+     * [Process_AppointmentBooking] GATEWAY WITHOUT DEFAULT: Gateway_PatientConfirm "Does the patient confirm the appointment slot?" - 2 outgoing, no default flow -> runtime error "no outgoing sequence flow could be selected"
+     * [Process_AppointmentBooking] GATEWAY WITHOUT DEFAULT: Gateway_SlotsAvailable "Are appointment slots available?" - 2 outgoing, no default flow -> runtime error "no outgoing sequence flow could be selected"
+     * [Process_AppointmentBooking] GATEWAY WITHOUT DEFAULT: Gateway_ReferralComplete "Is referral information complete?" - 2 outgoing, no default flow -> runtime error "no outgoing sequence flow could be selected"
+     * [Collaboration_AppointmentBooking] DUPLICATE PARTICIPANT NAME "External Scheduling Service" x2
+
+  -- NOTES (informational, not defects) : 7
+     - [Collaboration_AppointmentBooking] participant label "Hospital Internal System" is displayed for process "New Patient Appointment Booking"
+     - [Collaboration_AppointmentBooking] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_AppointmentBooking] participant "Patients" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_AppointmentBooking] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_AppointmentBooking] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_AppointmentBooking] participant "External Lab/Imaging Services" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_AppointmentBooking] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 15 reports
+     [error] camunda-compat/implementation  x3  - A <Service Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x3  - A <Message End Event> must have a <Task definition type>
+     [error] camunda-compat/subscription  x3  - A <Message End Event> with <Message Reference> must have a defined <Subscription correlation key>
+     [warn] camunda-compat/user-task-definition  x3  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x3  - A <User Task> with <Implementation: Job worker> managed by Camunda is deprecated. Consider migrating to <Implementation: Camunda user task>.
+
+==============================================================================================
+SUMMARY
+==============================================================================================
+  {"file":"bpmn1.bpmn","moddleWarnings":0,"structural":13}
+  {"file":"bpmn2_dup.bpmn","moddleWarnings":3,"structural":31}
+  {"file":"bpmn3.bpmn","moddleWarnings":0,"structural":4}

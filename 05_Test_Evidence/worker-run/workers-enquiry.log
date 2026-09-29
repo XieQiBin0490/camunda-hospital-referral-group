@@ -1,0 +1,15 @@
+20:29:18.525 INFO  WorkersApplication                             hospital external workers starting: gateway=127.0.0.1:26500 plaintext=true maxJobsActive=8 jobTimeout=PT30S pollInterval=PT0.2S threads=4 failureMode=off
+20:29:18.973 INFO  WorkersApplication                             job type coverage verified: 11 of 11 declared types have a subscriber
+20:29:18.981 INFO  RequestMissingDocumentationWorker              subscribed request-missing-documentation as 'hospital-external-workers:request-missing-documentation'
+20:29:18.981 INFO  SendReferralOutcomeWorker                      subscribed send-referral-outcome as 'hospital-external-workers:send-referral-outcome'
+20:29:18.981 INFO  RedirectReferralWorker                         subscribed redirect-referral as 'hospital-external-workers:redirect-referral'
+20:29:18.981 INFO  QueryAvailableAppointmentSlotsWorker           subscribed query-available-appointment-slots as 'hospital-external-workers:query-available-appointment-slots'
+20:29:18.981 INFO  SendAppointmentConfirmationLetterWorker        subscribed send-appointment-confirmation-letter as 'hospital-external-workers:send-appointment-confirmation-letter'
+20:29:18.983 INFO  RequestTreatmentCapacityWorker                 subscribed request-treatment-capacity as 'hospital-external-workers:request-treatment-capacity'
+20:29:18.983 INFO  RequestSecurePaymentWorker                     subscribed request-secure-payment as 'hospital-external-workers:request-secure-payment'
+20:29:18.983 INFO  DistributeClinicalCorrespondenceWorker         subscribed distribute-clinical-correspondence as 'hospital-external-workers:distribute-clinical-correspondence'
+20:29:18.983 INFO  RequestBloodTestWorker                         subscribed request-blood-test as 'hospital-external-workers:request-blood-test'
+20:29:18.983 INFO  RequestRefundWorker                            subscribed request-refund as 'hospital-external-workers:request-refund'
+20:29:18.983 INFO  GenerateManagementReportsWorker                subscribed generate-management-reports as 'hospital-external-workers:generate-management-reports'
+20:29:18.984 INFO  WorkersApplication                             11 workers subscribed and polling 127.0.0.1:26500
+20:29:19.205 WARN  ZeebeClientImpl                                ZeebeClient is deprecated and will be removed in version 8.10. Please migrate to io.camunda.client.CamundaClient.

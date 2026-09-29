@@ -1,0 +1,20 @@
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Java build output. The package ships the worker source; the jar is rebuilt with
+#   mvn -f 04_Java_Worker/pom.xml clean package
+04_Java_Worker/target/
+*.class
+
+# Node helpers used only by the rendering/verification scripts
+node_modules/
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# NOTE: 05_Test_Evidence/verification/*.log is delivered evidence and must be
+# committed, not ignored, even though verify-all.ps1 also writes new logs there.

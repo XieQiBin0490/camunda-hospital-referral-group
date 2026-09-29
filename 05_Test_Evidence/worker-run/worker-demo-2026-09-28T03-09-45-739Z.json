@@ -1,0 +1,266 @@
+{
+  "target": "http://127.0.0.1:8080/v2",
+  "executedAt": "2026-09-28T03:09:45.740Z",
+  "results": [
+    {
+      "scenario": "happy",
+      "label": "Worker-driven happy path",
+      "workerEnv": {},
+      "processInstanceKey": "2251799813740408",
+      "state": "COMPLETED",
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_TelephonePatient",
+        "T_RecordContactAttempt",
+        "G_ContactSuccessful",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RequestFundingApproval",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_SendSecurePaymentRequest",
+        "G_PaymentOutcome",
+        "T_RecordPayment",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "variableCount": 46,
+      "variables": {
+        "patientId": "\"P-happy-1790564965738\"",
+        "documentsComplete": "true",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "preferredTimeframeDays": "28",
+        "schedulingQueriedAt": "\"2026-09-28T03:09:33.113047400Z\"",
+        "requestedSpeciality": "\"specialist service\"",
+        "availableSlots": "[{\"clinic\":\"specialist service clinic\",\"date\":\"2026-10-19\",\"consultant\":\"Consultant on call\",\"reference\":\"SLOT-A\"},{\"clinic\":\"specialist service clinic\",\"date\":\"2026-10-26\",\"consultant\":\"Consultant on call\",\"reference\":\"SLOT-B\"}]",
+        "schedulingReference": "\"SCH-260928-390678\"",
+        "availableSlotCount": "2",
+        "earliestSlotDate": "\"2026-10-19\"",
+        "schedulingServiceAnswered": "true",
+        "lastAutomatedAt": "\"2026-09-28T03:09:43.538781400Z\"",
+        "episodeId": "\"EP-PHAPPY1790564965738\"",
+        "suitableSlotFound": "true",
+        "lastAutomatedActivity": "\"T_SendSecurePaymentRequest\"",
+        "appointmentReference": "\"APT-0001\"",
+        "appointmentWithin14Days": "true",
+        "bookingConfirmed": "true",
+        "appointmentLetterSent": "true",
+        "appointmentLetterSentAt": "\"2026-09-28T03:09:34.345178Z\"",
+        "appointmentLetterReference": "\"LTR-260928-713606\"",
+        "appointmentLetterChannel": "\"post\"",
+        "contactSuccessful": "true",
+        "consentGiven": "true",
+        "treatmentCode": "\"CHEMO-6\"",
+        "treatmentCycles": "6",
+        "requestAuthorised": "true",
+        "duplicateAppointmentCreated": "false",
+        "capacityReference": "\"CAP-260928-888415\"",
+        "capacityLastAttemptAt": "\"2026-09-28T03:09:39.206532300Z\"",
+        "capacityConfirmedForCycles": "6",
+        "treatmentCapacityConfirmed": "true",
+        "capacityAttemptCount": "1",
+        "capacityConfirmedResource": "\"hospital facility\"",
+        "chargeAmount": "480",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "currency": "\"GBP\"",
+        "paymentDate": "\"2026-09-28\"",
+        "paymentRequestedAt": "\"2026-09-28T03:09:43.537715100Z\"",
+        "paymentCurrency": "\"GBP\"",
+        "paymentAmount": "480.0",
+        "paymentStatus": "\"confirmed\"",
+        "cardDataStored": "false",
+        "paymentReference": "\"PAY-260928-32495665\""
+      },
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "by": "human (this script)",
+          "set": {
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "by": "human (this script)",
+          "set": {
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "by": "human (this script)",
+          "set": {
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "by": "human (this script)",
+          "set": {
+            "referralUrgency": "routine",
+            "preferredTimeframeDays": 28
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "by": "human (this script)",
+          "set": {
+            "appointmentReference": "APT-0001",
+            "appointmentWithin14Days": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "by": "human (this script)",
+          "set": {
+            "bookingConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_TelephonePatient",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordContactAttempt",
+          "by": "human (this script)",
+          "set": {
+            "contactSuccessful": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "by": "human (this script)",
+          "set": {
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "by": "human (this script)",
+          "set": {
+            "requestAuthorised": true,
+            "treatmentCode": "CHEMO-6",
+            "treatmentCycles": 6
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": false,
+            "advancePaymentRequired": true,
+            "chargeAmount": 480,
+            "currency": "GBP"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RequestFundingApproval",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": true,
+            "advancePaymentRequired": true,
+            "chargeAmount": 480,
+            "currency": "GBP"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPayment",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "by": "human (this script)",
+          "set": {}
+        }
+      ],
+      "incidents": [],
+      "status": "PASS",
+      "problems": []
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 1
+  }
+}

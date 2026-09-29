@@ -1,0 +1,876 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_S2_ReferralToAuthorisation" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.51.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
+  <bpmn:message id="Msg_Referral" name="Patient referral"></bpmn:message>
+  <bpmn:message id="Msg_MissingDocumentation" name="Missing documentation request"></bpmn:message>
+  <bpmn:message id="Msg_ReferralOutcome" name="Referral outcome notification"></bpmn:message>
+  <bpmn:message id="Msg_ReferralRedirect" name="Referral redirect"></bpmn:message>
+  <bpmn:message id="Msg_AppointmentSlotQuery" name="Appointment slot request"></bpmn:message>
+  <bpmn:message id="Msg_AppointmentSlotResponse" name="Appointment slot response"></bpmn:message>
+  <bpmn:message id="Msg_AppointmentConfirmationLetter" name="Appointment confirmation letter"></bpmn:message>
+  <bpmn:message id="Msg_AppointmentContact" name="Telephone contact attempt"></bpmn:message>
+  <bpmn:message id="Msg_AppointmentContactOutcome" name="Patient contact outcome"></bpmn:message>
+  <bpmn:collaboration id="Collaboration_S2" name="S2 | Strategic collaboration: from referral to authorised treatment">
+    <bpmn:participant id="P_Hospital" name="Specialist Hospital Service (Hospital Patient Administration System)" processRef="PR_ReferralToAuthorisation" />
+    <bpmn:participant id="P_ReferringOrganisation" name="Referring Organisation (GP or another hospital)" />
+    <bpmn:participant id="P_Patient" name="Patient / Authorised Representative" />
+    <bpmn:participant id="P_Scheduling" name="External Scheduling Service" />
+    <bpmn:participant id="P_Correspondence" name="External Correspondence Service" />
+    <bpmn:participant id="P_OtherSpecialist" name="Other Specialist Service" />
+    <bpmn:messageFlow id="MF_S1" name="Patient referral" sourceRef="P_ReferringOrganisation" targetRef="E_ReferralReceived" messageRef="Msg_Referral" />
+    <bpmn:messageFlow id="MF_S2" name="Missing documentation request" sourceRef="T_RequestMissingDocs" targetRef="P_ReferringOrganisation" messageRef="Msg_MissingDocumentation" />
+    <bpmn:messageFlow id="MF_S3" name="Referral outcome notification" sourceRef="T_NotifyNotAccepted" targetRef="P_ReferringOrganisation" messageRef="Msg_ReferralOutcome" />
+    <bpmn:messageFlow id="MF_S4" name="Referral redirect" sourceRef="T_RedirectReferral" targetRef="P_OtherSpecialist" messageRef="Msg_ReferralRedirect" />
+    <bpmn:messageFlow id="MF_S5" name="Appointment slot request" sourceRef="T_QuerySlots" targetRef="P_Scheduling" messageRef="Msg_AppointmentSlotQuery" />
+    <bpmn:messageFlow id="MF_S6" name="Appointment slot response" sourceRef="P_Scheduling" targetRef="T_QuerySlots" messageRef="Msg_AppointmentSlotResponse" />
+    <bpmn:messageFlow id="MF_S7" name="Appointment confirmation letter" sourceRef="T_SendAppointmentLetter" targetRef="P_Correspondence" messageRef="Msg_AppointmentConfirmationLetter" />
+    <bpmn:messageFlow id="MF_S8" name="Telephone contact attempt" sourceRef="T_TelephonePatient" targetRef="P_Patient" messageRef="Msg_AppointmentContact" />
+    <bpmn:messageFlow id="MF_S9" name="Patient contact outcome" sourceRef="P_Patient" targetRef="T_RecordContactOutcome" messageRef="Msg_AppointmentContactOutcome" />
+  </bpmn:collaboration>
+  <bpmn:process id="PR_ReferralToAuthorisation" name="Referral intake, appointment booking and treatment authorisation" isExecutable="true">
+    <bpmn:laneSet id="PR_ReferralToAuthorisation_laneSet">
+      <bpmn:lane id="L_MS" name="Medical Secretaries">
+        <bpmn:flowNodeRef>E_ReferralReceived</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_ReferralReceivedManual</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RegisterReferral</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_CheckDocumentation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_documentsComplete</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RequestMissingDocs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_NotifyNotAccepted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_NotAccepted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RedirectReferral</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_Redirected</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_CT" name="Consultant / Clinical Team">
+        <bpmn:flowNodeRef>T_ClinicalReview</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RecordDecision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_ReferralDecision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_ForwardAccepted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_NewPatientConsultation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_PatientConsent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RecordConsent</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_CreateAuthorisedRequest</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_RequestAuthorised</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_TreatmentAuthorised</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_OB" name="Outpatient Bookings Team">
+        <bpmn:flowNodeRef>T_ReceiveBookingRequest</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_UrgentReferral</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_ExpediteBooking</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_QuerySlots</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_SlotsAvailable</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_SelectBookAppointment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_ConfirmAppointment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_SendAppointmentLetter</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_WithinFourteenDays</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_PPC" name="Patient Pathway Coordinators">
+        <bpmn:flowNodeRef>T_ResolveCapacity</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_CHT" name="Call Handling Team">
+        <bpmn:flowNodeRef>T_TelephonePatient</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_RecordContactOutcome</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>G_ContactSuccessful</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_TB" name="Treatment &amp; Chemotherapy Bookings Team">
+        <bpmn:flowNodeRef>T_ReturnUnauthorisedRequest</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="L_CNS" name="Clinical Nurse Specialist Team">
+        <bpmn:flowNodeRef>T_ProvideCnsContactDetails</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>T_AdviseAndClose</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>E_Declined</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="E_ReferralReceived" name="Patient referral received">
+      <bpmn:documentation>Referral arrives from a General Practitioner or another hospital.</bpmn:documentation>
+      <bpmn:outgoing>F_A1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="E_ReferralReceived_msgdef" messageRef="Msg_Referral" />
+    </bpmn:startEvent>
+    <bpmn:startEvent id="E_ReferralReceivedManual" name="Referral received (manual start)">
+      <bpmn:documentation>The same referral, started by hand rather than by the incoming message, so the process can be run from the Operate or Tasklist user interface.</bpmn:documentation>
+      <bpmn:outgoing>F_A1m</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="T_RegisterReferral" name="Register the referral and confirm patient identification">
+      <bpmn:documentation>Accurate patient identification reduces the risk of records being linked to the wrong patient.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_A1</bpmn:incoming>
+      <bpmn:incoming>F_A1m</bpmn:incoming>
+      <bpmn:outgoing>F_A2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_CheckDocumentation" name="Check referral documentation completeness">
+      <bpmn:documentation>Checks for previous clinic letters, investigation results and diagnostic reports.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-check-referral-documents" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_A2</bpmn:incoming>
+      <bpmn:incoming>F_A6</bpmn:incoming>
+      <bpmn:outgoing>F_A3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_documentsComplete" name="All expected supporting documents available?" default="F_A4">
+      <bpmn:documentation>Medical Secretaries may request missing information but must not assess clinical suitability.</bpmn:documentation>
+      <bpmn:incoming>F_A3</bpmn:incoming>
+      <bpmn:outgoing>F_A4</bpmn:outgoing>
+      <bpmn:outgoing>F_A5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="T_RequestMissingDocs" name="Request the missing documentation from the referring organisation">
+      <bpmn:documentation>Records the outstanding documents and re-enters the completeness check when they arrive.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:taskDefinition type="request-missing-documentation" /></bpmn:extensionElements>
+      <bpmn:incoming>F_A4</bpmn:incoming>
+      <bpmn:incoming>F_A13</bpmn:incoming>
+      <bpmn:outgoing>F_A6</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:userTask id="T_ClinicalReview" name="Perform the clinical review of the referral">
+      <bpmn:documentation>Only a Consultant may judge clinical suitability.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-clinical-review-referral" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_A5</bpmn:incoming>
+      <bpmn:outgoing>F_A7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_RecordDecision" name="Record the referral decision, rationale and responsible clinician">
+      <bpmn:documentation>The reason for the decision and the identity of the decision maker must be recorded for audit.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-referral-decision" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_A7</bpmn:incoming>
+      <bpmn:outgoing>F_A8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_ReferralDecision" name="Referral decision?" default="F_A9">
+      <bpmn:documentation>Accept, reject, request further information or redirect to another specialist service.</bpmn:documentation>
+      <bpmn:incoming>F_A8</bpmn:incoming>
+      <bpmn:outgoing>F_A9</bpmn:outgoing>
+      <bpmn:outgoing>F_A11</bpmn:outgoing>
+      <bpmn:outgoing>F_A13</bpmn:outgoing>
+      <bpmn:outgoing>F_A14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_ForwardAccepted" name="Forward the accepted referral to the Outpatient Bookings Team">
+      <bpmn:documentation>A New Patient Appointment may only be arranged after an authorised Consultant has accepted the referral.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-forward-accepted-referral" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_A14</bpmn:incoming>
+      <bpmn:outgoing>F_B1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sendTask id="T_NotifyNotAccepted" name="Notify the referring organisation of the referral decision">
+      <bpmn:documentation>Tells the referring organisation that the referral was not accepted, quoting the recorded reason.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:taskDefinition type="send-referral-outcome" /></bpmn:extensionElements>
+      <bpmn:incoming>F_A9</bpmn:incoming>
+      <bpmn:outgoing>F_A10</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="E_NotAccepted" name="Referral closed: not accepted">
+      <bpmn:incoming>F_A10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="T_RedirectReferral" name="Redirect the referral to another specialist service">
+      <bpmn:documentation>Used where the patient needs a different specialist service.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:taskDefinition type="redirect-referral" /></bpmn:extensionElements>
+      <bpmn:incoming>F_A11</bpmn:incoming>
+      <bpmn:outgoing>F_A12</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="E_Redirected" name="Referral redirected">
+      <bpmn:incoming>F_A12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="T_ReceiveBookingRequest" name="Receive and validate the new patient booking request">
+      <bpmn:documentation>Booking request carries speciality, appointment priority, preferred timeframe and patient requirements.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-validate-booking-request" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B1</bpmn:incoming>
+      <bpmn:outgoing>F_B2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_UrgentReferral" name="Urgent referral requiring expedited booking?" default="F_B4">
+      <bpmn:documentation>Urgent referrals cannot wait for normal administrative timescales.</bpmn:documentation>
+      <bpmn:incoming>F_B2</bpmn:incoming>
+      <bpmn:outgoing>F_B3</bpmn:outgoing>
+      <bpmn:outgoing>F_B4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_ExpediteBooking" name="Escalate the booking as urgent and agree the clinical timescale">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-expedite-urgent-booking" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B3</bpmn:incoming>
+      <bpmn:outgoing>F_B5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="T_QuerySlots" name="Request available appointment slots from the External Scheduling Service">
+      <bpmn:documentation>Availability is held by an external scheduling service, not by the hospital system.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:taskDefinition type="query-available-appointment-slots" /></bpmn:extensionElements>
+      <bpmn:incoming>F_B4</bpmn:incoming>
+      <bpmn:incoming>F_B5</bpmn:incoming>
+      <bpmn:incoming>F_B9</bpmn:incoming>
+      <bpmn:outgoing>F_B6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="G_SlotsAvailable" name="Suitable appointment available within the requested period?" default="F_B8">
+      <bpmn:incoming>F_B6</bpmn:incoming>
+      <bpmn:outgoing>F_B7</bpmn:outgoing>
+      <bpmn:outgoing>F_B8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_ResolveCapacity" name="Highlight the case and resolve the capacity constraint">
+      <bpmn:documentation>A patient must never be booked silently outside the period requested by the Consultant.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-resolve-capacity-constraint" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="patient-pathway-coordinators" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B8</bpmn:incoming>
+      <bpmn:outgoing>F_B9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_SelectBookAppointment" name="Select and book the new patient appointment">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-select-book-appointment" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B7</bpmn:incoming>
+      <bpmn:outgoing>F_B10</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_ConfirmAppointment" name="Confirm the appointment and record the booking reference">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-confirm-appointment" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B10</bpmn:incoming>
+      <bpmn:outgoing>F_B11</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sendTask id="T_SendAppointmentLetter" name="Issue the appointment confirmation through the External Correspondence Service">
+      <bpmn:extensionElements><zeebe:taskDefinition type="send-appointment-confirmation-letter" /></bpmn:extensionElements>
+      <bpmn:incoming>F_B11</bpmn:incoming>
+      <bpmn:outgoing>F_B12</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:exclusiveGateway id="G_WithinFourteenDays" name="Appointment due within the next 14 days?" default="F_B13">
+      <bpmn:documentation>If the appointment is within two weeks the patient must also be contacted by telephone.</bpmn:documentation>
+      <bpmn:incoming>F_B12</bpmn:incoming>
+      <bpmn:outgoing>F_B13</bpmn:outgoing>
+      <bpmn:outgoing>F_B14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_TelephonePatient" name="Telephone the patient to confirm attendance">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-telephone-patient" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B14</bpmn:incoming>
+      <bpmn:incoming>F_B17</bpmn:incoming>
+      <bpmn:outgoing>F_B15</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_RecordContactOutcome" name="Record the contact attempt and its outcome">
+      <bpmn:documentation>A call may be unanswered, the number may be wrong, or the patient may request another appointment.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-contact-outcome" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B15</bpmn:incoming>
+      <bpmn:outgoing>F_B16</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_ContactSuccessful" name="Patient confirmed the appointment?" default="F_B17">
+      <bpmn:incoming>F_B16</bpmn:incoming>
+      <bpmn:outgoing>F_B17</bpmn:outgoing>
+      <bpmn:outgoing>F_B18</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_NewPatientConsultation" name="Deliver the new patient consultation and discuss treatment options">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-new-patient-consultation" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_B13</bpmn:incoming>
+      <bpmn:incoming>F_B18</bpmn:incoming>
+      <bpmn:outgoing>F_C1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_ProvideCnsContactDetails" name="Provide the patient with Clinical Nurse Specialist contact details">
+      <bpmn:documentation>Following the New Patient Appointment the patient receives information about the Clinical Nurse Specialist Team and an appropriate contact number.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-provide-cns-contact-details" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_C1</bpmn:incoming>
+      <bpmn:outgoing>F_C1b</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_PatientConsent" name="Patient consents to proceed with treatment?" default="F_C3">
+      <bpmn:incoming>F_C1b</bpmn:incoming>
+      <bpmn:outgoing>F_C2</bpmn:outgoing>
+      <bpmn:outgoing>F_C3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_AdviseAndClose" name="Provide clinical advice and record the decision not to proceed">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-advise-no-treatment" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_C3</bpmn:incoming>
+      <bpmn:outgoing>F_C4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="E_Declined" name="Pathway closed: treatment declined">
+      <bpmn:incoming>F_C4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="T_RecordConsent" name="Record the patient consent to treatment">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-patient-consent" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_C2</bpmn:incoming>
+      <bpmn:outgoing>F_C5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="T_CreateAuthorisedRequest" name="Create the authorised Treatment Booking Request">
+      <bpmn:documentation>Records the proposed treatment, start date, number and frequency of cycles, reviews between cycles and special resources.</bpmn:documentation>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-treatment-booking-request" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_C5</bpmn:incoming>
+      <bpmn:incoming>F_C9</bpmn:incoming>
+      <bpmn:outgoing>F_C6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_RequestAuthorised" name="Request completed and authorised by an authorised clinical professional?" default="F_C7">
+      <bpmn:documentation>A request that has not been completed and authorised must not be processed by administrative staff.</bpmn:documentation>
+      <bpmn:incoming>F_C6</bpmn:incoming>
+      <bpmn:outgoing>F_C7</bpmn:outgoing>
+      <bpmn:outgoing>F_C8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="T_ReturnUnauthorisedRequest" name="Return the unauthorised request to the clinical team">
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-return-unauthorised-request" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:incoming>F_C7</bpmn:incoming>
+      <bpmn:outgoing>F_C9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="E_TreatmentAuthorised" name="Treatment booking request authorised">
+      <bpmn:incoming>F_C8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_A1" sourceRef="E_ReferralReceived" targetRef="T_RegisterReferral">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A1m" sourceRef="E_ReferralReceivedManual" targetRef="T_RegisterReferral">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A2" sourceRef="T_RegisterReferral" targetRef="T_CheckDocumentation">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A3" sourceRef="T_CheckDocumentation" targetRef="G_documentsComplete">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A4" name="Documents missing" sourceRef="G_documentsComplete" targetRef="T_RequestMissingDocs">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= documentsComplete = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A5" name="Documents complete" sourceRef="G_documentsComplete" targetRef="T_ClinicalReview">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= documentsComplete = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A6" name="Documents received" sourceRef="T_RequestMissingDocs" targetRef="T_CheckDocumentation">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A7" sourceRef="T_ClinicalReview" targetRef="T_RecordDecision">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A8" sourceRef="T_RecordDecision" targetRef="G_ReferralDecision">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A9" name="Rejected" sourceRef="G_ReferralDecision" targetRef="T_NotifyNotAccepted">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralDecision = &quot;rejected&quot;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A10" sourceRef="T_NotifyNotAccepted" targetRef="E_NotAccepted">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A11" name="Redirected" sourceRef="G_ReferralDecision" targetRef="T_RedirectReferral">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralDecision = &quot;redirected&quot;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A12" sourceRef="T_RedirectReferral" targetRef="E_Redirected">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A13" name="Further information required" sourceRef="G_ReferralDecision" targetRef="T_RequestMissingDocs">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralDecision = &quot;information required&quot;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_A14" name="Accepted" sourceRef="G_ReferralDecision" targetRef="T_ForwardAccepted">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralDecision = &quot;accepted&quot;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B1" sourceRef="T_ForwardAccepted" targetRef="T_ReceiveBookingRequest">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B2" sourceRef="T_ReceiveBookingRequest" targetRef="G_UrgentReferral">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B3" name="Urgent" sourceRef="G_UrgentReferral" targetRef="T_ExpediteBooking">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralUrgency = &quot;urgent&quot;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B4" name="Routine" sourceRef="G_UrgentReferral" targetRef="T_QuerySlots">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralUrgency = &quot;routine&quot;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B5" sourceRef="T_ExpediteBooking" targetRef="T_QuerySlots">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B6" sourceRef="T_QuerySlots" targetRef="G_SlotsAvailable">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B7" name="Appointment available" sourceRef="G_SlotsAvailable" targetRef="T_SelectBookAppointment">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= suitableSlotFound = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B8" name="No suitable appointment" sourceRef="G_SlotsAvailable" targetRef="T_ResolveCapacity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= suitableSlotFound = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B9" name="Capacity reviewed" sourceRef="T_ResolveCapacity" targetRef="T_QuerySlots">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B10" sourceRef="T_SelectBookAppointment" targetRef="T_ConfirmAppointment">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B11" sourceRef="T_ConfirmAppointment" targetRef="T_SendAppointmentLetter">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B12" sourceRef="T_SendAppointmentLetter" targetRef="G_WithinFourteenDays">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B13" name="More than 14 days away" sourceRef="G_WithinFourteenDays" targetRef="T_NewPatientConsultation">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= appointmentWithin14Days = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B14" name="Within 14 days" sourceRef="G_WithinFourteenDays" targetRef="T_TelephonePatient">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= appointmentWithin14Days = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B15" sourceRef="T_TelephonePatient" targetRef="T_RecordContactOutcome">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B16" sourceRef="T_RecordContactOutcome" targetRef="G_ContactSuccessful">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B17" name="No answer, wrong number or alternative requested" sourceRef="G_ContactSuccessful" targetRef="T_TelephonePatient">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= contactSuccessful = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_B18" name="Attendance confirmed" sourceRef="G_ContactSuccessful" targetRef="T_NewPatientConsultation">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= contactSuccessful = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C1" sourceRef="T_NewPatientConsultation" targetRef="T_ProvideCnsContactDetails">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C1b" sourceRef="T_ProvideCnsContactDetails" targetRef="G_PatientConsent">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C2" name="Consent given" sourceRef="G_PatientConsent" targetRef="T_RecordConsent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= consentGiven = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C3" name="Consent refused" sourceRef="G_PatientConsent" targetRef="T_AdviseAndClose">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= consentGiven = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C4" sourceRef="T_AdviseAndClose" targetRef="E_Declined">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C5" sourceRef="T_RecordConsent" targetRef="T_CreateAuthorisedRequest">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C6" sourceRef="T_CreateAuthorisedRequest" targetRef="G_RequestAuthorised">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C7" name="Not authorised" sourceRef="G_RequestAuthorised" targetRef="T_ReturnUnauthorisedRequest">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= requestAuthorised = false</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C8" name="Authorised" sourceRef="G_RequestAuthorised" targetRef="E_TreatmentAuthorised">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= requestAuthorised = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_C9" name="Request corrected and resubmitted" sourceRef="T_ReturnUnauthorisedRequest" targetRef="T_CreateAuthorisedRequest">
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="NOTE_S2_Level">
+      <bpmn:text>ABSTRACTION LEVEL 2 - CROSS-FUNCTIONAL STRATEGIC COLLABORATION. Scope: referral intake and triage, new patient appointment booking, consultation and consent, and clinical authorisation of treatment. Activities are business activities, not keystrokes:
+each is attributed to the organisational unit accountable for it, and each carries a documentation element naming the operational sub-process it decomposes into. Only lanes that carry work in this scope are declared.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="NOTE_S2_Level_assoc" sourceRef="NOTE_S2_Level" targetRef="E_ReferralReceived" associationDirection="None" />
+    <bpmn:textAnnotation id="NOTE_S2_Link">
+      <bpmn:text>LINK TO THE DETAILED OPERATIONAL MODEL. The operational model O1_Operational_Merged implements this process at task level. Examples of the mapping: T_CheckDocumentation &gt; O1 T_CheckReferralDocuments; T_RequestMissingDocs &gt; O1
+T_RequestMissingDocuments (Zeebe job request-missing-documentation, message flow MF_S2); T_QuerySlots &gt; O1 T_QueryAvailableSlots (job query-available-appointment-slots); T_TelephonePatient &gt; O1 T_TelephonePatient (conditional on
+appointmentWithin14Days); T_CreateAuthorisedRequest &gt; O1 T_CreateTreatmentBookingRequest. An activity with no operational counterpart is a gap, not an implementation.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="NOTE_S2_Link_assoc" sourceRef="NOTE_S2_Link" targetRef="T_QuerySlots" associationDirection="None" />
+    <bpmn:textAnnotation id="NOTE_S2_Rules">
+      <bpmn:text>BUSINESS RULES MODELLED AS GATEWAYS AND CONSTRAINTS. Only an authorised Consultant may judge clinical suitability or accept a referral, and the reason and decision maker must be recorded (T_RecordDecision). A New Patient Appointment may only be
+arranged after an authorised acceptance (G_RequestAuthorised and F_A14). The patient must also be telephoned when the appointment is due within 14 days (G_WithinFourteenDays). An appointment is never booked silently outside the period requested by
+the Consultant (T_ResolveCapacity). A Treatment Booking Request that is incomplete or unauthorised must not be processed by administrative staff (G_RequestAuthorised).</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="NOTE_S2_Rules_assoc" sourceRef="NOTE_S2_Rules" targetRef="G_ReferralDecision" associationDirection="None" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_S2">
+      <bpmndi:BPMNShape id="P_Hospital_di" bpmnElement="P_Hospital" isHorizontal="true">
+        <dc:Bounds x="775" y="80" width="6110" height="1589" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_MS_di" bpmnElement="L_MS" isHorizontal="true">
+        <dc:Bounds x="805" y="80" width="6080" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_CT_di" bpmnElement="L_CT" isHorizontal="true">
+        <dc:Bounds x="805" y="330" width="6080" height="214" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_OB_di" bpmnElement="L_OB" isHorizontal="true">
+        <dc:Bounds x="805" y="544" width="6080" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_PPC_di" bpmnElement="L_PPC" isHorizontal="true">
+        <dc:Bounds x="805" y="744" width="6080" height="228" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_CHT_di" bpmnElement="L_CHT" isHorizontal="true">
+        <dc:Bounds x="805" y="972" width="6080" height="159" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_TB_di" bpmnElement="L_TB" isHorizontal="true">
+        <dc:Bounds x="805" y="1131" width="6080" height="297" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="L_CNS_di" bpmnElement="L_CNS" isHorizontal="true">
+        <dc:Bounds x="805" y="1428" width="6080" height="241" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_ReferringOrganisation_di" bpmnElement="P_ReferringOrganisation" isHorizontal="true">
+        <dc:Bounds x="60" y="90" width="300" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Patient_di" bpmnElement="P_Patient" isHorizontal="true">
+        <dc:Bounds x="60" y="284" width="300" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Scheduling_di" bpmnElement="P_Scheduling" isHorizontal="true">
+        <dc:Bounds x="7234" y="90" width="330" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_Correspondence_di" bpmnElement="P_Correspondence" isHorizontal="true">
+        <dc:Bounds x="7234" y="264" width="330" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_OtherSpecialist_di" bpmnElement="P_OtherSpecialist" isHorizontal="true">
+        <dc:Bounds x="7234" y="418" width="330" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_ReferralReceived_di" bpmnElement="E_ReferralReceived">
+        <dc:Bounds x="902" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_ReferralReceivedManual_di" bpmnElement="E_ReferralReceivedManual">
+        <dc:Bounds x="902" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_RegisterReferral_di" bpmnElement="T_RegisterReferral">
+        <dc:Bounds x="1055" y="95" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_CheckDocumentation_di" bpmnElement="T_CheckDocumentation">
+        <dc:Bounds x="1265" y="95" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_documentsComplete_di" bpmnElement="G_documentsComplete" isMarkerVisible="true">
+        <dc:Bounds x="1525" y="115" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_RequestMissingDocs_di" bpmnElement="T_RequestMissingDocs">
+        <dc:Bounds x="1685" y="95" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ClinicalReview_di" bpmnElement="T_ClinicalReview">
+        <dc:Bounds x="1685" y="345" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_RecordDecision_di" bpmnElement="T_RecordDecision">
+        <dc:Bounds x="1895" y="345" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_ReferralDecision_di" bpmnElement="G_ReferralDecision" isMarkerVisible="true">
+        <dc:Bounds x="2155" y="365" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ForwardAccepted_di" bpmnElement="T_ForwardAccepted">
+        <dc:Bounds x="2315" y="345" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_NotifyNotAccepted_di" bpmnElement="T_NotifyNotAccepted">
+        <dc:Bounds x="2315" y="95" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_NotAccepted_di" bpmnElement="E_NotAccepted">
+        <dc:Bounds x="2582" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_RedirectReferral_di" bpmnElement="T_RedirectReferral">
+        <dc:Bounds x="2315" y="225" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_Redirected_di" bpmnElement="E_Redirected">
+        <dc:Bounds x="2582" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ReceiveBookingRequest_di" bpmnElement="T_ReceiveBookingRequest">
+        <dc:Bounds x="2735" y="559" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_UrgentReferral_di" bpmnElement="G_UrgentReferral" isMarkerVisible="true">
+        <dc:Bounds x="2995" y="579" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ExpediteBooking_di" bpmnElement="T_ExpediteBooking">
+        <dc:Bounds x="3155" y="559" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_QuerySlots_di" bpmnElement="T_QuerySlots">
+        <dc:Bounds x="3365" y="559" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_SlotsAvailable_di" bpmnElement="G_SlotsAvailable" isMarkerVisible="true">
+        <dc:Bounds x="3625" y="579" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ResolveCapacity_di" bpmnElement="T_ResolveCapacity">
+        <dc:Bounds x="3785" y="759" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_SelectBookAppointment_di" bpmnElement="T_SelectBookAppointment">
+        <dc:Bounds x="3785" y="559" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ConfirmAppointment_di" bpmnElement="T_ConfirmAppointment">
+        <dc:Bounds x="3995" y="559" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_SendAppointmentLetter_di" bpmnElement="T_SendAppointmentLetter">
+        <dc:Bounds x="4205" y="559" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_WithinFourteenDays_di" bpmnElement="G_WithinFourteenDays" isMarkerVisible="true">
+        <dc:Bounds x="4465" y="579" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_TelephonePatient_di" bpmnElement="T_TelephonePatient">
+        <dc:Bounds x="4625" y="987" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_RecordContactOutcome_di" bpmnElement="T_RecordContactOutcome">
+        <dc:Bounds x="4835" y="987" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_ContactSuccessful_di" bpmnElement="G_ContactSuccessful" isMarkerVisible="true">
+        <dc:Bounds x="5095" y="1007" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_NewPatientConsultation_di" bpmnElement="T_NewPatientConsultation">
+        <dc:Bounds x="5255" y="345" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ProvideCnsContactDetails_di" bpmnElement="T_ProvideCnsContactDetails">
+        <dc:Bounds x="5465" y="1443" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_PatientConsent_di" bpmnElement="G_PatientConsent" isMarkerVisible="true">
+        <dc:Bounds x="5725" y="365" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_AdviseAndClose_di" bpmnElement="T_AdviseAndClose">
+        <dc:Bounds x="5885" y="1443" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_Declined_di" bpmnElement="E_Declined">
+        <dc:Bounds x="6152" y="1470" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_RecordConsent_di" bpmnElement="T_RecordConsent">
+        <dc:Bounds x="5885" y="345" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_CreateAuthorisedRequest_di" bpmnElement="T_CreateAuthorisedRequest">
+        <dc:Bounds x="6095" y="345" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_RequestAuthorised_di" bpmnElement="G_RequestAuthorised" isMarkerVisible="true">
+        <dc:Bounds x="6355" y="365" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="T_ReturnUnauthorisedRequest_di" bpmnElement="T_ReturnUnauthorisedRequest">
+        <dc:Bounds x="6515" y="1146" width="150" height="90" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_TreatmentAuthorised_di" bpmnElement="E_TreatmentAuthorised">
+        <dc:Bounds x="6782" y="372" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_A1_di" bpmnElement="F_A1">
+        <di:waypoint x="938" y="140" />
+        <di:waypoint x="1055" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A1m_di" bpmnElement="F_A1m">
+        <di:waypoint x="938" y="270" />
+        <di:waypoint x="1055" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A2_di" bpmnElement="F_A2">
+        <di:waypoint x="1205" y="140" />
+        <di:waypoint x="1265" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A3_di" bpmnElement="F_A3">
+        <di:waypoint x="1415" y="140" />
+        <di:waypoint x="1525" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A4_di" bpmnElement="F_A4">
+        <di:waypoint x="1575" y="140" />
+        <di:waypoint x="1685" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A5_di" bpmnElement="F_A5">
+        <di:waypoint x="1575" y="140" />
+        <di:waypoint x="1630" y="140" />
+        <di:waypoint x="1630" y="390" />
+        <di:waypoint x="1685" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A6_di" bpmnElement="F_A6">
+        <di:waypoint x="1760" y="185" />
+        <di:waypoint x="1760" y="1719" />
+        <di:waypoint x="1340" y="1719" />
+        <di:waypoint x="1340" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A7_di" bpmnElement="F_A7">
+        <di:waypoint x="1835" y="390" />
+        <di:waypoint x="1895" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A8_di" bpmnElement="F_A8">
+        <di:waypoint x="2045" y="390" />
+        <di:waypoint x="2155" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A9_di" bpmnElement="F_A9">
+        <di:waypoint x="2205" y="390" />
+        <di:waypoint x="2260" y="390" />
+        <di:waypoint x="2260" y="140" />
+        <di:waypoint x="2315" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A10_di" bpmnElement="F_A10">
+        <di:waypoint x="2465" y="140" />
+        <di:waypoint x="2582" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A11_di" bpmnElement="F_A11">
+        <di:waypoint x="2205" y="390" />
+        <di:waypoint x="2260" y="390" />
+        <di:waypoint x="2260" y="270" />
+        <di:waypoint x="2315" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A12_di" bpmnElement="F_A12">
+        <di:waypoint x="2465" y="270" />
+        <di:waypoint x="2582" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A13_di" bpmnElement="F_A13">
+        <di:waypoint x="2180" y="415" />
+        <di:waypoint x="2180" y="1745" />
+        <di:waypoint x="1760" y="1745" />
+        <di:waypoint x="1760" y="185" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_A14_di" bpmnElement="F_A14">
+        <di:waypoint x="2205" y="390" />
+        <di:waypoint x="2315" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B1_di" bpmnElement="F_B1">
+        <di:waypoint x="2465" y="390" />
+        <di:waypoint x="2600" y="390" />
+        <di:waypoint x="2600" y="604" />
+        <di:waypoint x="2735" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B2_di" bpmnElement="F_B2">
+        <di:waypoint x="2885" y="604" />
+        <di:waypoint x="2995" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B3_di" bpmnElement="F_B3">
+        <di:waypoint x="3045" y="604" />
+        <di:waypoint x="3155" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B4_di" bpmnElement="F_B4">
+        <di:waypoint x="3045" y="604" />
+        <di:waypoint x="3365" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B5_di" bpmnElement="F_B5">
+        <di:waypoint x="3305" y="604" />
+        <di:waypoint x="3365" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B6_di" bpmnElement="F_B6">
+        <di:waypoint x="3515" y="604" />
+        <di:waypoint x="3625" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B7_di" bpmnElement="F_B7">
+        <di:waypoint x="3675" y="604" />
+        <di:waypoint x="3785" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B8_di" bpmnElement="F_B8">
+        <di:waypoint x="3675" y="604" />
+        <di:waypoint x="3730" y="604" />
+        <di:waypoint x="3730" y="804" />
+        <di:waypoint x="3785" y="804" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B9_di" bpmnElement="F_B9">
+        <di:waypoint x="3860" y="849" />
+        <di:waypoint x="3860" y="1771" />
+        <di:waypoint x="3440" y="1771" />
+        <di:waypoint x="3440" y="649" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B10_di" bpmnElement="F_B10">
+        <di:waypoint x="3935" y="604" />
+        <di:waypoint x="3995" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B11_di" bpmnElement="F_B11">
+        <di:waypoint x="4145" y="604" />
+        <di:waypoint x="4205" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B12_di" bpmnElement="F_B12">
+        <di:waypoint x="4355" y="604" />
+        <di:waypoint x="4465" y="604" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B13_di" bpmnElement="F_B13">
+        <di:waypoint x="4515" y="604" />
+        <di:waypoint x="4885" y="604" />
+        <di:waypoint x="4885" y="390" />
+        <di:waypoint x="5255" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B14_di" bpmnElement="F_B14">
+        <di:waypoint x="4515" y="604" />
+        <di:waypoint x="4570" y="604" />
+        <di:waypoint x="4570" y="1032" />
+        <di:waypoint x="4625" y="1032" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B15_di" bpmnElement="F_B15">
+        <di:waypoint x="4775" y="1032" />
+        <di:waypoint x="4835" y="1032" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B16_di" bpmnElement="F_B16">
+        <di:waypoint x="4985" y="1032" />
+        <di:waypoint x="5095" y="1032" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B17_di" bpmnElement="F_B17">
+        <di:waypoint x="5120" y="1057" />
+        <di:waypoint x="5120" y="1797" />
+        <di:waypoint x="4700" y="1797" />
+        <di:waypoint x="4700" y="1077" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_B18_di" bpmnElement="F_B18">
+        <di:waypoint x="5145" y="1032" />
+        <di:waypoint x="5200" y="1032" />
+        <di:waypoint x="5200" y="390" />
+        <di:waypoint x="5255" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C1_di" bpmnElement="F_C1">
+        <di:waypoint x="5405" y="390" />
+        <di:waypoint x="5435" y="390" />
+        <di:waypoint x="5435" y="1488" />
+        <di:waypoint x="5465" y="1488" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C1b_di" bpmnElement="F_C1b">
+        <di:waypoint x="5615" y="1488" />
+        <di:waypoint x="5670" y="1488" />
+        <di:waypoint x="5670" y="390" />
+        <di:waypoint x="5725" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C2_di" bpmnElement="F_C2">
+        <di:waypoint x="5775" y="390" />
+        <di:waypoint x="5885" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C3_di" bpmnElement="F_C3">
+        <di:waypoint x="5775" y="390" />
+        <di:waypoint x="5830" y="390" />
+        <di:waypoint x="5830" y="1488" />
+        <di:waypoint x="5885" y="1488" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C4_di" bpmnElement="F_C4">
+        <di:waypoint x="6035" y="1488" />
+        <di:waypoint x="6152" y="1488" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C5_di" bpmnElement="F_C5">
+        <di:waypoint x="6035" y="390" />
+        <di:waypoint x="6095" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C6_di" bpmnElement="F_C6">
+        <di:waypoint x="6245" y="390" />
+        <di:waypoint x="6355" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C7_di" bpmnElement="F_C7">
+        <di:waypoint x="6405" y="390" />
+        <di:waypoint x="6460" y="390" />
+        <di:waypoint x="6460" y="1191" />
+        <di:waypoint x="6515" y="1191" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C8_di" bpmnElement="F_C8">
+        <di:waypoint x="6405" y="390" />
+        <di:waypoint x="6782" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_C9_di" bpmnElement="F_C9">
+        <di:waypoint x="6590" y="1236" />
+        <di:waypoint x="6590" y="1823" />
+        <di:waypoint x="6170" y="1823" />
+        <di:waypoint x="6170" y="435" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="NOTE_S2_Level_di" bpmnElement="NOTE_S2_Level">
+        <dc:Bounds x="775" y="1881" width="1520" height="46" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="NOTE_S2_Level_assoc_di" bpmnElement="NOTE_S2_Level_assoc">
+        <di:waypoint x="1535" y="1881" />
+        <di:waypoint x="1535" y="1019.5" />
+        <di:waypoint x="920" y="1019.5" />
+        <di:waypoint x="920" y="158" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="NOTE_S2_Link_di" bpmnElement="NOTE_S2_Link">
+        <dc:Bounds x="2321" y="1881" width="1520" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="NOTE_S2_Link_assoc_di" bpmnElement="NOTE_S2_Link_assoc">
+        <di:waypoint x="3081" y="1881" />
+        <di:waypoint x="3081" y="1265" />
+        <di:waypoint x="3440" y="1265" />
+        <di:waypoint x="3440" y="649" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="NOTE_S2_Rules_di" bpmnElement="NOTE_S2_Rules">
+        <dc:Bounds x="3867" y="1881" width="1520" height="61" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="NOTE_S2_Rules_assoc_di" bpmnElement="NOTE_S2_Rules_assoc">
+        <di:waypoint x="3867" y="1912" />
+        <di:waypoint x="2205" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S1_di" bpmnElement="MF_S1">
+        <di:waypoint x="360" y="133" />
+        <di:waypoint x="709" y="133" />
+        <di:waypoint x="709" y="140" />
+        <di:waypoint x="902" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="132" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S2_di" bpmnElement="MF_S2">
+        <di:waypoint x="1835" y="140" />
+        <di:waypoint x="683" y="140" />
+        <di:waypoint x="683" y="175" />
+        <di:waypoint x="360" y="175" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="167" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S3_di" bpmnElement="MF_S3">
+        <di:waypoint x="2465" y="140" />
+        <di:waypoint x="657" y="140" />
+        <di:waypoint x="657" y="218" />
+        <di:waypoint x="360" y="218" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="210" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S4_di" bpmnElement="MF_S4">
+        <di:waypoint x="2465" y="270" />
+        <di:waypoint x="6951" y="270" />
+        <di:waypoint x="6951" y="483" />
+        <di:waypoint x="7234" y="483" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="7063" y="475" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S5_di" bpmnElement="MF_S5">
+        <di:waypoint x="3515" y="604" />
+        <di:waypoint x="6977" y="604" />
+        <di:waypoint x="6977" y="140" />
+        <di:waypoint x="7234" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="7063" y="132" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S6_di" bpmnElement="MF_S6">
+        <di:waypoint x="7234" y="190" />
+        <di:waypoint x="7003" y="190" />
+        <di:waypoint x="7003" y="604" />
+        <di:waypoint x="3365" y="604" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="7063" y="596" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S7_di" bpmnElement="MF_S7">
+        <di:waypoint x="4355" y="604" />
+        <di:waypoint x="7029" y="604" />
+        <di:waypoint x="7029" y="329" />
+        <di:waypoint x="7234" y="329" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="7063" y="321" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S8_di" bpmnElement="MF_S8">
+        <di:waypoint x="4775" y="1032" />
+        <di:waypoint x="631" y="1032" />
+        <di:waypoint x="631" y="331" />
+        <di:waypoint x="360" y="331" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="323" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MF_S9_di" bpmnElement="MF_S9">
+        <di:waypoint x="360" y="377" />
+        <di:waypoint x="605" y="377" />
+        <di:waypoint x="605" y="1032" />
+        <di:waypoint x="4835" y="1032" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="1024" width="168" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

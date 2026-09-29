@@ -1,0 +1,4661 @@
+{
+  "target": "http://127.0.0.1:8080/v2",
+  "executedAt": "2026-09-26T16:17:23.628Z",
+  "processDefinitions": [
+    "PR_EnquiryHandling",
+    "PR_Landscape",
+    "PR_ManagementReporting",
+    "PR_Operational_Merged",
+    "PR_ReferralToAuthorisation",
+    "PR_TreatmentToAftercare"
+  ],
+  "summary": {
+    "total": 18,
+    "passed": 18,
+    "failed": 0
+  },
+  "results": [
+    {
+      "id": "TC-01",
+      "title": "Complete referral documentation is accepted for clinical review",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813703877",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-01",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT"
+      },
+      "expectations": {
+        "reached": [
+          "T_ClinicalReviewReferral",
+          "T_RecordReferralDecision"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_NotifyReferralOutcome",
+        "E_ReferralClosed"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_NotifyReferralOutcome": 1,
+        "E_ReferralClosed": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_NotifyReferralOutcome",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:11:36.952Z",
+      "durationMs": 6981
+    },
+    {
+      "id": "TC-02",
+      "title": "Missing documentation triggers a request and a return path",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813703946",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-02",
+        "documentsComplete": false
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_RequestMissingDocuments",
+          "T_ClinicalReviewReferral"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_CheckReferralDocuments": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_RequestMissingDocuments",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 2,
+        "G_DocumentsComplete": 2,
+        "T_RequestMissingDocuments": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": false
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestMissingDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:11:44.297Z",
+      "durationMs": 21378
+    },
+    {
+      "id": "TC-03",
+      "title": "Rejected referral closes with a notification",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704124",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-03",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "rejected"
+      },
+      "expectations": {
+        "reached": [
+          "T_NotifyReferralOutcome"
+        ],
+        "notReached": [
+          "T_ForwardAcceptedReferral"
+        ],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_NotifyReferralOutcome",
+        "E_ReferralClosed"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_NotifyReferralOutcome": 1,
+        "E_ReferralClosed": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"rejected\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "rejected"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_NotifyReferralOutcome",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:12:06.031Z",
+      "durationMs": 8539
+    },
+    {
+      "id": "TC-04",
+      "title": "Redirected referral is sent to another specialist service",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704195",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-04",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "redirected"
+      },
+      "expectations": {
+        "reached": [
+          "T_RedirectReferral"
+        ],
+        "notReached": [],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_RedirectReferral",
+        "E_ReferralRedirected"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_RedirectReferral": 1,
+        "E_ReferralRedirected": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"redirected\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "redirected"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RedirectReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:12:14.908Z",
+      "durationMs": 7522
+    },
+    {
+      "id": "TC-05",
+      "title": "No suitable appointment slot is escalated to the pathway coordinator",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704263",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-05",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_ResolveCapacity",
+          "T_SelectAndBookSlot"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_QueryAvailableSlots": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_ResolveCapacity",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 2,
+        "G_SlotsAvailable": 2,
+        "T_ResolveCapacity": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ResolveCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:12:22.814Z",
+      "durationMs": 21442
+    },
+    {
+      "id": "TC-06",
+      "title": "Appointment within 14 days requires a telephone call",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704437",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-06",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": true,
+        "contactSuccessful": true,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_TelephonePatient",
+          "T_RecordContactAttempt"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_TelephonePatient",
+        "T_RecordContactAttempt",
+        "G_ContactSuccessful",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_TelephonePatient": 1,
+        "T_RecordContactAttempt": 1,
+        "G_ContactSuccessful": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "true",
+        "contactSuccessful": "true",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_TelephonePatient",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "contactSuccessful": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordContactAttempt",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "contactSuccessful": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:12:44.641Z",
+      "durationMs": 22463
+    },
+    {
+      "id": "TC-07",
+      "title": "Appointment more than 14 days away skips the telephone call",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704612",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-07",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_NewPatientConsultation"
+        ],
+        "notReached": [
+          "T_TelephonePatient"
+        ],
+        "end": null,
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:13:07.476Z",
+      "durationMs": 18559
+    },
+    {
+      "id": "TC-08",
+      "title": "Unsuccessful contact is recorded and a further attempt is made",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704782",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-08",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": true,
+        "contactSuccessful": true,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_TelephonePatient"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_TelephonePatient": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_TelephonePatient",
+        "T_RecordContactAttempt",
+        "G_ContactSuccessful",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_TelephonePatient": 2,
+        "T_RecordContactAttempt": 2,
+        "G_ContactSuccessful": 2,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "true",
+        "contactSuccessful": "true",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_TelephonePatient",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "contactSuccessful": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordContactAttempt",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "contactSuccessful": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_TelephonePatient",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "contactSuccessful": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordContactAttempt",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "contactSuccessful": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:13:26.423Z",
+      "durationMs": 24207
+    },
+    {
+      "id": "TC-09",
+      "title": "Patient refuses consent and the pathway closes",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813704974",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-09",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": false
+      },
+      "expectations": {
+        "reached": [
+          "T_AdviseNoTreatment"
+        ],
+        "notReached": [
+          "T_CreateTreatmentBookingRequest"
+        ],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_AdviseNoTreatment",
+        "E_TreatmentDeclined"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_AdviseNoTreatment": 1,
+        "E_TreatmentDeclined": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_AdviseNoTreatment",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:13:50.993Z",
+      "durationMs": 14136
+    },
+    {
+      "id": "TC-10",
+      "title": "Unauthorised treatment booking request is returned to the clinical team",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813705089",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-10",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_ReturnUnauthorisedRequest"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_CreateTreatmentBookingRequest": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ReturnUnauthorisedRequest",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 2,
+        "G_RequestAuthorised": 2,
+        "T_ReturnUnauthorisedRequest": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReturnUnauthorisedRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:14:05.498Z",
+      "durationMs": 23291
+    },
+    {
+      "id": "TC-11",
+      "title": "Unavailable external capacity leaves the booking pending and retries",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813705271",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-11",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_KeepPending"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_RequestTreatmentCapacity": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_KeepPending",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 2,
+        "G_CapacityConfirmed": 2,
+        "T_KeepPending": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_KeepPending",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:14:29.148Z",
+      "durationMs": 20723
+    },
+    {
+      "id": "TC-12",
+      "title": "Unapproved funding raises a funding approval request",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813705449",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-12",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_RequestFundingApproval",
+          "T_RecordFundingApproval"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_DetermineFundingRoute": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RequestFundingApproval",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 2,
+        "G_FundingApproved": 2,
+        "T_RequestFundingApproval": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RequestFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:14:50.241Z",
+      "durationMs": 22415
+    },
+    {
+      "id": "TC-13",
+      "title": "Happy path: referral accepted and treatment schedule confirmed",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813705624",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-13",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_ConfirmTreatmentSchedule"
+        ],
+        "notReached": [],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:15:13.011Z",
+      "durationMs": 18312
+    },
+    {
+      "id": "TC-14",
+      "title": "Advance payment confirmed and recorded",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813705784",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-14",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": true,
+        "paymentStatus": "confirmed"
+      },
+      "expectations": {
+        "reached": [
+          "T_SendSecurePaymentRequest",
+          "T_RecordPayment"
+        ],
+        "notReached": [],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_SendSecurePaymentRequest",
+        "G_PaymentOutcome",
+        "T_RecordPayment",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_SendSecurePaymentRequest": 1,
+        "G_PaymentOutcome": 1,
+        "T_RecordPayment": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "paymentStatus": "\"confirmed\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": true
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendSecurePaymentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "paymentStatus": "confirmed"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPayment",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:15:31.679Z",
+      "durationMs": 20175
+    },
+    {
+      "id": "TC-15",
+      "title": "Declined payment is handled without creating a duplicate booking",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813705967",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-15",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": true,
+        "paymentStatus": "confirmed"
+      },
+      "expectations": {
+        "reached": [
+          "T_HandlePaymentFailure",
+          "T_RecordPayment"
+        ],
+        "notReached": [],
+        "end": null,
+        "minOccurrences": {
+          "T_SendSecurePaymentRequest": 2
+        }
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_SendSecurePaymentRequest",
+        "G_PaymentOutcome",
+        "T_HandlePaymentFailure",
+        "T_RecordPayment",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_SendSecurePaymentRequest": 2,
+        "G_PaymentOutcome": 2,
+        "T_HandlePaymentFailure": 1,
+        "T_RecordPayment": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "paymentStatus": "\"confirmed\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": true
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendSecurePaymentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "paymentStatus": "declined"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_HandlePaymentFailure",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendSecurePaymentRequest",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "paymentStatus": "confirmed"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPayment",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:15:52.199Z",
+      "durationMs": 22427
+    },
+    {
+      "id": "TC-16",
+      "title": "Payment without a returned confirmation is investigated, not re-requested",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813706153",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-16",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": true,
+        "paymentStatus": "no response"
+      },
+      "expectations": {
+        "reached": [
+          "T_MarkForInvestigation",
+          "T_ResolveTransaction"
+        ],
+        "notReached": [],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_SendSecurePaymentRequest",
+        "G_PaymentOutcome",
+        "T_MarkForInvestigation",
+        "T_ResolveTransaction",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_SendSecurePaymentRequest": 1,
+        "G_PaymentOutcome": 1,
+        "T_MarkForInvestigation": 1,
+        "T_ResolveTransaction": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "paymentStatus": "\"no response\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": true
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendSecurePaymentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "paymentStatus": "no response"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_MarkForInvestigation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ResolveTransaction",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:16:14.963Z",
+      "durationMs": 24207
+    },
+    {
+      "id": "TC-17",
+      "title": "Urgent treatment proceeds without confirmed payment and is referred to Finance",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813706334",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-17",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": true,
+        "paymentStatus": "urgent clinical need"
+      },
+      "expectations": {
+        "reached": [
+          "T_AuthoriseUrgentTreatment",
+          "T_ReferUnconfirmedPayment"
+        ],
+        "notReached": [],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_SendSecurePaymentRequest",
+        "G_PaymentOutcome",
+        "T_AuthoriseUrgentTreatment",
+        "T_ReferUnconfirmedPayment",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_SendSecurePaymentRequest": 1,
+        "G_PaymentOutcome": 1,
+        "T_AuthoriseUrgentTreatment": 1,
+        "T_ReferUnconfirmedPayment": 1,
+        "T_ConfirmTreatmentSchedule": 2,
+        "E_TreatmentScheduled": 2
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "paymentStatus": "\"urgent clinical need\""
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": true
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendSecurePaymentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "paymentStatus": "urgent clinical need"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_AuthoriseUrgentTreatment",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReferUnconfirmedPayment",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 2,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:16:39.536Z",
+      "durationMs": 23674
+    },
+    {
+      "id": "TC-18",
+      "title": "No advance payment required: no payment task is created",
+      "processDefinitionId": "PR_Operational_Merged",
+      "processInstanceKey": "2251799813706533",
+      "status": "PASS",
+      "problems": [],
+      "endState": "COMPLETED",
+      "startVariables": {
+        "patientId": "P-TC-18",
+        "documentsComplete": true
+      },
+      "decisionsTaken": {
+        "patientId": "P-ACCEPT",
+        "documentsComplete": true,
+        "referralDecision": "accepted",
+        "referralUrgency": "routine",
+        "suitableSlotFound": true,
+        "appointmentWithin14Days": false,
+        "consentGiven": true,
+        "requestAuthorised": true,
+        "treatmentCapacityConfirmed": true,
+        "fundingApproved": true,
+        "advancePaymentRequired": false
+      },
+      "expectations": {
+        "reached": [
+          "T_ConfirmTreatmentSchedule"
+        ],
+        "notReached": [
+          "T_SendSecurePaymentRequest"
+        ],
+        "end": "COMPLETED",
+        "minOccurrences": {}
+      },
+      "reached": [
+        "E_ReferralReceived",
+        "T_ReceiveReferral",
+        "T_CheckReferralDocuments",
+        "G_DocumentsComplete",
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision",
+        "G_ReferralDecision",
+        "T_ForwardAcceptedReferral",
+        "T_ReceiveBookingRequest",
+        "G_UrgentReferral",
+        "T_QueryAvailableSlots",
+        "G_SlotsAvailable",
+        "T_SelectAndBookSlot",
+        "T_ConfirmBooking",
+        "T_SendAppointmentLetter",
+        "G_WithinFourteenDays",
+        "T_NewPatientConsultation",
+        "G_PatientConsent",
+        "T_RecordPatientConsent",
+        "T_CreateTreatmentBookingRequest",
+        "G_RequestAuthorised",
+        "T_ValidateTreatmentRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFundingRoute",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_ConfirmTreatmentSchedule",
+        "E_TreatmentScheduled"
+      ],
+      "counts": {
+        "E_ReferralReceived": 1,
+        "T_ReceiveReferral": 1,
+        "T_CheckReferralDocuments": 1,
+        "G_DocumentsComplete": 1,
+        "T_ClinicalReviewReferral": 1,
+        "T_RecordReferralDecision": 1,
+        "G_ReferralDecision": 1,
+        "T_ForwardAcceptedReferral": 1,
+        "T_ReceiveBookingRequest": 1,
+        "G_UrgentReferral": 1,
+        "T_QueryAvailableSlots": 1,
+        "G_SlotsAvailable": 1,
+        "T_SelectAndBookSlot": 1,
+        "T_ConfirmBooking": 1,
+        "T_SendAppointmentLetter": 1,
+        "G_WithinFourteenDays": 1,
+        "T_NewPatientConsultation": 1,
+        "G_PatientConsent": 1,
+        "T_RecordPatientConsent": 1,
+        "T_CreateTreatmentBookingRequest": 1,
+        "G_RequestAuthorised": 1,
+        "T_ValidateTreatmentRequest": 1,
+        "T_RequestTreatmentCapacity": 1,
+        "G_CapacityConfirmed": 1,
+        "T_DetermineFundingRoute": 1,
+        "G_FundingApproved": 1,
+        "T_RecordFundingApproval": 1,
+        "G_AdvancePaymentRequired": 1,
+        "T_ConfirmTreatmentSchedule": 1,
+        "E_TreatmentScheduled": 1
+      },
+      "variables": {
+        "documentsComplete": "true",
+        "patientId": "\"P-ACCEPT\"",
+        "referralDecision": "\"accepted\"",
+        "referralUrgency": "\"routine\"",
+        "suitableSlotFound": "true",
+        "appointmentWithin14Days": "false",
+        "consentGiven": "true",
+        "requestAuthorised": "true",
+        "treatmentCapacityConfirmed": "true",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "false"
+      },
+      "incidents": [],
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CheckReferralDocuments",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ClinicalReviewReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "documentsComplete": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordReferralDecision",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralDecision": "accepted"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ForwardAcceptedReferral",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReceiveBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "referralUrgency": "routine"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_QueryAvailableSlots",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "suitableSlotFound": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_SelectAndBookSlot",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmBooking",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_SendAppointmentLetter",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "appointmentWithin14Days": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_NewPatientConsultation",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "consentGiven": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPatientConsent",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_CreateTreatmentBookingRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "requestAuthorised": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateTreatmentRequest",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        },
+        {
+          "kind": "job",
+          "elementId": "T_RequestTreatmentCapacity",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "treatmentCapacityConfirmed": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFundingRoute",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "fundingApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT",
+            "advancePaymentRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "occurrence": 1,
+          "set": {
+            "patientId": "P-ACCEPT"
+          }
+        }
+      ],
+      "startedAt": "2026-09-26T16:17:03.590Z",
+      "durationMs": 20037
+    }
+  ]
+}

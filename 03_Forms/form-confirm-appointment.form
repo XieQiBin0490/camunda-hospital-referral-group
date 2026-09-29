@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Confirm the booking and record the appointment reference",
+      "id": "Header_form-confirm-appointment",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "appointmentWithin14Days",
+      "label": "Appointment due within the next 14 days?",
+      "type": "checkbox"
+    },
+    {
+      "key": "appointmentReference",
+      "label": "Appointment reference recorded by the bookings team",
+      "type": "textfield"
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield"
+    }
+  ],
+  "type": "default",
+  "id": "form-confirm-appointment",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

@@ -1,0 +1,20 @@
+20:28:13.315 INFO  WorkersApplication                             hospital external workers starting: gateway=127.0.0.1:26500 plaintext=true maxJobsActive=8 jobTimeout=PT30S pollInterval=PT0.2S threads=4 failureMode=off
+20:28:13.745 INFO  WorkersApplication                             job type coverage verified: 11 of 11 declared types have a subscriber
+20:28:13.748 INFO  RequestMissingDocumentationWorker              subscribed request-missing-documentation as 'hospital-external-workers:request-missing-documentation'
+20:28:13.749 INFO  SendReferralOutcomeWorker                      subscribed send-referral-outcome as 'hospital-external-workers:send-referral-outcome'
+20:28:13.750 INFO  RedirectReferralWorker                         subscribed redirect-referral as 'hospital-external-workers:redirect-referral'
+20:28:13.750 INFO  QueryAvailableAppointmentSlotsWorker           subscribed query-available-appointment-slots as 'hospital-external-workers:query-available-appointment-slots'
+20:28:13.750 INFO  SendAppointmentConfirmationLetterWorker        subscribed send-appointment-confirmation-letter as 'hospital-external-workers:send-appointment-confirmation-letter'
+20:28:13.750 INFO  RequestTreatmentCapacityWorker                 subscribed request-treatment-capacity as 'hospital-external-workers:request-treatment-capacity'
+20:28:13.750 INFO  RequestSecurePaymentWorker                     subscribed request-secure-payment as 'hospital-external-workers:request-secure-payment'
+20:28:13.750 INFO  DistributeClinicalCorrespondenceWorker         subscribed distribute-clinical-correspondence as 'hospital-external-workers:distribute-clinical-correspondence'
+20:28:13.751 INFO  RequestBloodTestWorker                         subscribed request-blood-test as 'hospital-external-workers:request-blood-test'
+20:28:13.751 INFO  RequestRefundWorker                            subscribed request-refund as 'hospital-external-workers:request-refund'
+20:28:13.751 INFO  GenerateManagementReportsWorker                subscribed generate-management-reports as 'hospital-external-workers:generate-management-reports'
+20:28:13.751 INFO  WorkersApplication                             11 workers subscribed and polling 127.0.0.1:26500
+20:28:13.975 WARN  ZeebeClientImpl                                ZeebeClient is deprecated and will be removed in version 8.10. Please migrate to io.camunda.client.CamundaClient.
+20:28:20.310 INFO  QueryAvailableAppointmentSlotsWorker           query-available-appointment-slots 2251799813835849 element=T_QueryAvailableSlots instance=2251799813835778 -> completed in 77 ms [scheduling service returned 2 slot(s)]
+20:28:21.988 INFO  SendAppointmentConfirmationLetterWorker        send-appointment-confirmation-letter 2251799813835882 element=T_SendAppointmentLetter instance=2251799813835778 -> completed in 23 ms [issued appointment letter LTR-260928-116112 for APT-0001 by post]
+20:28:26.059 INFO  RequestTreatmentCapacityWorker                 request-treatment-capacity 2251799813835956 element=T_RequestTreatmentCapacity instance=2251799813835778 -> completed in 20 ms [capacity confirmed on attempt 1 as CAP-260928-035698]
+20:28:29.220 INFO  RequestSecurePaymentWorker                     request-secure-payment 2251799813836003 element=T_SendSecurePaymentRequest instance=2251799813835778 -> completed in 24 ms [no card data read from the job and none written back, provider declined GBP 480.0; a further attempt is permitted and no duplicate booking is created]
+20:28:30.111 INFO  RequestSecurePaymentWorker                     request-secure-payment 2251799813836022 element=T_SendSecurePaymentRequest instance=2251799813835778 -> completed in 19 ms [no card data read from the job and none written back, provider confirmed GBP 480.0 as PAY-260928-37545047]

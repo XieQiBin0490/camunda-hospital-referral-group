@@ -1,0 +1,605 @@
+﻿
+=== 1. Build and unit tests ===
+    41 tests, 0 failures, jar hospital-external-workers-1.0.0.jar
+
+=== 2. Model validation (4 models) ===
+========================================================================================
+FILE: O1_Operational_Merged.bpmn
+========================================================================================
+  processes : 1
+  flow nodes: 54
+  job types : query-available-appointment-slots, redirect-referral, request-missing-documentation, request-secure-payment, request-treatment-capacity, send-appointment-confirmation-letter, send-referral-outcome
+  Camunda 8 : 7 job type(s) declared on automated activities
+
+SUMMARY {"file":"O1_Operational_Merged.bpmn","moddleWarnings":0,"structural":0}
+========================================================================================
+FILE: S1_Strategic_Landscape.bpmn
+========================================================================================
+  processes : 1
+  flow nodes: 25
+  job types : distribute-clinical-correspondence, request-missing-documentation, send-referral-outcome
+  Camunda 8 : 3 job type(s) declared on automated activities
+
+SUMMARY {"file":"S1_Strategic_Landscape.bpmn","moddleWarnings":0,"structural":0}
+========================================================================================
+FILE: S2_Strategic_Referral_To_Authorisation.bpmn
+========================================================================================
+  processes : 1
+  flow nodes: 37
+  job types : query-available-appointment-slots, redirect-referral, request-missing-documentation, send-appointment-confirmation-letter, send-referral-outcome
+  Camunda 8 : 5 job type(s) declared on automated activities
+
+SUMMARY {"file":"S2_Strategic_Referral_To_Authorisation.bpmn","moddleWarnings":0,"structural":0}
+========================================================================================
+FILE: S3_Strategic_Treatment_To_Aftercare.bpmn
+========================================================================================
+  processes : 3
+  flow nodes: 77
+  job types : distribute-clinical-correspondence, generate-management-reports, request-blood-test, request-refund, request-secure-payment, request-treatment-capacity
+  Camunda 8 : 6 job type(s) declared on automated activities
+
+SUMMARY {"file":"S3_Strategic_Treatment_To_Aftercare.bpmn","moddleWarnings":0,"structural":0}
+RESULT: clean
+
+==============================================================================================
+FILE: O1_Operational_Merged.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 9
+     - [Collaboration_O1] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Referral, appointment, treatment authorisation and payment"
+     - [Collaboration_O1] participant "Referring Organisation (GP or another hospital)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "Other Specialist Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Clinical Services (treatment, laboratory, imaging)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "Funding Organisation / Insurer" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 65 reports
+     [error] camunda-compat/implementation  x4  - A <Send Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x3  - A <Service Task> must have a <Task definition type>
+     [warn] camunda-compat/user-task-definition  x29  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x29  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: S1_Strategic_Landscape.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 8
+     - [Collaboration_S1] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Specialist hospital patient pathway (strategic view)"
+     - [Collaboration_S1] participant "Referring Organisation (GP or another hospital)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Clinical Services (treatment, laboratory, imaging)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "Funding Organisation / Insurer" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 25 reports
+     [error] camunda-compat/implementation  x3  - A <Send Task> must have a <Task definition type>
+     [warn] camunda-compat/user-task-definition  x11  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x11  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: S2_Strategic_Referral_To_Authorisation.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 6
+     - [Collaboration_S2] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Referral intake, appointment booking and treatment authorisation"
+     - [Collaboration_S2] participant "Referring Organisation (GP or another hospital)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "Other Specialist Service" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 41 reports
+     [error] camunda-compat/implementation  x4  - A <Send Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x1  - A <Service Task> must have a <Task definition type>
+     [warn] camunda-compat/user-task-definition  x18  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x18  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: S3_Strategic_Treatment_To_Aftercare.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : subscription, formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 9
+     - [Collaboration_S3] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Treatment funding, delivery, correspondence and aftercare"
+     - [Collaboration_S3] participant label "Hospital Patient Administration System - patient enquiry handling" is displayed for process "Patient enquiry handling"
+     - [Collaboration_S3] participant label "Hospital Patient Administration System - management reporting" is displayed for process "Management reporting"
+     - [Collaboration_S3] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Clinical Services (treatment, laboratory, imaging)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "Funding Organisation / Insurer" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 89 reports
+     [error] camunda-compat/implementation  x5  - A <Service Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x1  - A <Send Task> must have a <Task definition type>
+     [error] camunda-compat/subscription  x1  - A <Message Boundary Event> with <Message Reference> must have a defined <Subscription correlation key>
+     [warn] camunda-compat/user-task-definition  x41  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x41  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+SUMMARY
+==============================================================================================
+  {"file":"O1_Operational_Merged.bpmn","moddleWarnings":0,"structural":0}
+  {"file":"S1_Strategic_Landscape.bpmn","moddleWarnings":0,"structural":0}
+  {"file":"S2_Strategic_Referral_To_Authorisation.bpmn","moddleWarnings":0,"structural":0}
+  {"file":"S3_Strategic_Treatment_To_Aftercare.bpmn","moddleWarnings":0,"structural":0}
+
+    4/4 models structurally clean, Camunda 8 lint 0 reports
+
+=== 3. Deploy models and forms ===
+deploying 68 forms and 4 models ...
+forms  -> 68/68 deployed
+models -> HTTP 200 OK
+  PR_ReferralToAuthorisation         v1  Referral intake, appointment booking and treatment authorisation
+  PR_TreatmentToAftercare            v1  Treatment funding, delivery, correspondence and aftercare
+  PR_EnquiryHandling                 v1  Patient enquiry handling
+  PR_ManagementReporting             v1  Management reporting
+  PR_Landscape                       v1  Specialist hospital patient pathway (strategic view)
+  PR_Operational_Merged              v1  Referral, appointment, treatment authorisation and payment
+  PR_Operational_Merged              v2  Referral, appointment, treatment authorisation and payment
+  PR_TreatmentToAftercare            v2  Treatment funding, delivery, correspondence and aftercare
+  PR_EnquiryHandling                 v2  Patient enquiry handling
+  PR_ManagementReporting             v2  Management reporting
+  PR_ReferralToAuthorisation         v2  Referral intake, appointment booking and treatment authorisation
+  PR_Landscape                       v2  Specialist hospital patient pathway (strategic view)
+  PR_ReferralToAuthorisation         v3  Referral intake, appointment booking and treatment authorisation
+  PR_TreatmentToAftercare            v3  Treatment funding, delivery, correspondence and aftercare
+  PR_EnquiryHandling                 v3  Patient enquiry handling
+  PR_ManagementReporting             v3  Management reporting
+  PR_Landscape                       v3  Specialist hospital patient pathway (strategic view)
+  PR_Operational_Merged              v3  Referral, appointment, treatment authorisation and payment
+(forms are linked to user tasks by form id; form deployments are not listed by the process-definition endpoint)
+
+    forms 68/68 deployed, 18 process definition(s) accepted
+
+=== 4. Acceptance run (18 cases, engine-driven) ===
+Camunda 8 acceptance run
+target: http://127.0.0.1:8080/v2
+started: 2026-09-28T08:32:04.753Z
+
+deployed process definitions (18): PR_EnquiryHandling, PR_EnquiryHandling, PR_EnquiryHandling, PR_Landscape, PR_Landscape, PR_Landscape, PR_ManagementReporting, PR_ManagementReporting, PR_ManagementReporting, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_TreatmentToAftercare, PR_TreatmentToAftercare, PR_TreatmentToAftercare
+cluster reset (active instances cancelled, incidents resolved)
+
+TC-01  PASS  Complete referral documentation is accepted for clinical review
+        instance 2251799813800913  final=COMPLETED  events=9  ms=7420
+TC-02  PASS  Missing documentation triggers a request and a return path
+        instance 2251799813800982  final=COMPLETED  events=33  ms=21892
+TC-03  PASS  Rejected referral closes with a notification
+        instance 2251799813801159  final=COMPLETED  events=9  ms=7078
+TC-04  PASS  Redirected referral is sent to another specialist service
+        instance 2251799813801224  final=COMPLETED  events=9  ms=8695
+TC-05  PASS  No suitable appointment slot is escalated to the pathway coordinator
+        instance 2251799813801289  final=COMPLETED  events=33  ms=20041
+TC-06  PASS  Appointment within 14 days requires a telephone call
+        instance 2251799813801466  final=COMPLETED  events=33  ms=21675
+TC-07  PASS  Appointment more than 14 days away skips the telephone call
+        instance 2251799813801650  final=COMPLETED  events=30  ms=20929
+TC-08  PASS  Unsuccessful contact is recorded and a further attempt is made
+        instance 2251799813801811  final=COMPLETED  events=36  ms=23942
+TC-09  PASS  Patient refuses consent and the pathway closes
+        instance 2251799813802000  final=COMPLETED  events=20  ms=12578
+TC-10  PASS  Unauthorised treatment booking request is returned to the clinical team
+        instance 2251799813802121  final=COMPLETED  events=33  ms=19294
+TC-11  PASS  Unavailable external capacity leaves the booking pending and retries
+        instance 2251799813802297  final=COMPLETED  events=33  ms=19872
+TC-12  PASS  Unapproved funding raises a funding approval request
+        instance 2251799813802466  final=COMPLETED  events=33  ms=20445
+TC-13  PASS  Happy path: referral accepted and treatment schedule confirmed
+        instance 2251799813802646  final=COMPLETED  events=30  ms=19717
+TC-14  PASS  Advance payment confirmed and recorded
+        instance 2251799813802815  final=COMPLETED  events=33  ms=20449
+TC-15  PASS  Declined payment is handled without creating a duplicate booking
+        instance 2251799813802984  final=COMPLETED  events=36  ms=19598
+TC-16  PASS  Payment without a returned confirmation is investigated, not re-requested
+        instance 2251799813803172  final=COMPLETED  events=34  ms=19465
+TC-17  PASS  Urgent treatment proceeds without confirmed payment and is referred to Finance
+        instance 2251799813803360  final=COMPLETED  events=36  ms=23347
+TC-18  PASS  No advance payment required: no payment task is created
+        instance 2251799813803549  final=COMPLETED  events=30  ms=20154
+
+SUMMARY: 18 cases executed, 18 passed, 0 failed
+finished: 2026-09-28T08:37:39.255Z
+
+wrote extract/acceptance-run/acceptance-run.json and .log
+
+    18 cases executed, 18 passed, 0 failed
+
+=== 5. Worker scenarios (6 cases, worker-driven) ===
+==> worker jar: C:\Users\a1620\Desktop\UFCEP4-0-3_Final\workers\target\hospital-external-workers-1.0.0.jar
+
+######## happy ########
+  fleet up (pid 22524)
+  
+  === Worker-driven happy path ===
+      instance 2251799813803717  state=COMPLETED  PASS
+        userTask T_ReceiveReferral                   by human (this script)
+        userTask T_CheckReferralDocuments            by human (this script)
+        userTask T_ClinicalReviewReferral            by human (this script)
+        userTask T_RecordReferralDecision            by human (this script)
+        userTask T_ForwardAcceptedReferral           by human (this script)
+        userTask T_ReceiveBookingRequest             by human (this script)
+        userTask T_SelectAndBookSlot                 by human (this script)
+        userTask T_ConfirmBooking                    by human (this script)
+        userTask T_TelephonePatient                  by human (this script)
+        userTask T_RecordContactAttempt              by human (this script)
+        userTask T_NewPatientConsultation            by human (this script)
+        userTask T_RecordPatientConsent              by human (this script)
+        userTask T_CreateTreatmentBookingRequest     by human (this script)
+        userTask T_ValidateTreatmentRequest          by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RequestFundingApproval            by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RecordFundingApproval             by human (this script)
+        userTask T_RecordPayment                     by human (this script)
+        userTask T_ConfirmTreatmentSchedule          by human (this script)
+      worker-set variables: episodeId, capacityConfirmedResource, capacityAttemptCount, capacityConfirmedForCycles, capacityLastAttemptAt, capacityReference, duplicateAppointmentCreated, paymentRequestedAt, paymentDate, cardDataStored, paymentAmount, paymentStatus, paymentCurrency, paymentReference
+  
+  1 of 1 scenario(s) passed   -> evidence\worker-run\worker-demo-2026-09-28T08-38-02-842Z.json
+
+######## capacity-unavailable ########
+  fleet up (pid 50392)
+  
+  === External capacity unavailable, then confirmed on the retry ===
+      worker environment needed: HPAS_CAPACITY_UNAVAILABLEONCE=true
+      instance 2251799813803996  state=COMPLETED  PASS
+        userTask T_ReceiveReferral                   by human (this script)
+        userTask T_CheckReferralDocuments            by human (this script)
+        userTask T_ClinicalReviewReferral            by human (this script)
+        userTask T_RecordReferralDecision            by human (this script)
+        userTask T_ForwardAcceptedReferral           by human (this script)
+        userTask T_ReceiveBookingRequest             by human (this script)
+        userTask T_SelectAndBookSlot                 by human (this script)
+        userTask T_ConfirmBooking                    by human (this script)
+        userTask T_TelephonePatient                  by human (this script)
+        userTask T_RecordContactAttempt              by human (this script)
+        userTask T_NewPatientConsultation            by human (this script)
+        userTask T_RecordPatientConsent              by human (this script)
+        userTask T_CreateTreatmentBookingRequest     by human (this script)
+        userTask T_ValidateTreatmentRequest          by human (this script)
+        userTask T_KeepPending                       by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RequestFundingApproval            by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RecordFundingApproval             by human (this script)
+        userTask T_RecordPayment                     by human (this script)
+        userTask T_ConfirmTreatmentSchedule          by human (this script)
+      worker-set variables: episodeId, capacityNextAttemptDate, duplicateAppointmentCreated, capacityEscalationRequired, capacityAttemptCount, capacityPendingSince, capacityRetryCount, capacityLastAttemptAt, capacityConfirmedForCycles, capacityConfirmedResource, capacityReference, paymentAmount, paymentCurrency, paymentDate, paymentReference, paymentRequestedAt, cardDataStored, paymentStatus
+  
+  1 of 1 scenario(s) passed   -> evidence\worker-run\worker-demo-2026-09-28T08-38-26-474Z.json
+
+######## payment-declined ########
+  fleet up (pid 31304)
+  
+  === Provider declines the payment; handled, then the permitted retry succeeds ===
+      worker environment needed: HPAS_PAYMENT_OUTCOME=DECLINED
+      instance 2251799813804279  state=COMPLETED  PASS
+        userTask T_ReceiveReferral                   by human (this script)
+        userTask T_CheckReferralDocuments            by human (this script)
+        userTask T_ClinicalReviewReferral            by human (this script)
+        userTask T_RecordReferralDecision            by human (this script)
+        userTask T_ForwardAcceptedReferral           by human (this script)
+        userTask T_ReceiveBookingRequest             by human (this script)
+        userTask T_SelectAndBookSlot                 by human (this script)
+        userTask T_ConfirmBooking                    by human (this script)
+        userTask T_TelephonePatient                  by human (this script)
+        userTask T_RecordContactAttempt              by human (this script)
+        userTask T_NewPatientConsultation            by human (this script)
+        userTask T_RecordPatientConsent              by human (this script)
+        userTask T_CreateTreatmentBookingRequest     by human (this script)
+        userTask T_ValidateTreatmentRequest          by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RequestFundingApproval            by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RecordFundingApproval             by human (this script)
+        userTask T_HandlePaymentFailure              by human (this script)
+        userTask T_RecordPayment                     by human (this script)
+        userTask T_ConfirmTreatmentSchedule          by human (this script)
+      worker-set variables: episodeId, duplicateAppointmentCreated, capacityConfirmedResource, capacityLastAttemptAt, capacityAttemptCount, capacityConfirmedForCycles, capacityReference, paymentCurrency, paymentRequestedAt, cardDataStored, paymentStatus, paymentAmount, paymentReference, paymentDate
+  
+  1 of 1 scenario(s) passed   -> evidence\worker-run\worker-demo-2026-09-28T08-38-50-038Z.json
+
+######## transient-retry ########
+  fleet up (pid 23476)
+  
+  === Scheduling service fails once; the engine retry recovers it ===
+      worker environment needed: HPAS_FAILURE_MODE=rules HPAS_FAILURE_PREFIX=query-available-appointment-slots
+      instance 2251799813804547  state=COMPLETED  PASS
+        userTask T_ReceiveReferral                   by human (this script)
+        userTask T_CheckReferralDocuments            by human (this script)
+        userTask T_ClinicalReviewReferral            by human (this script)
+        userTask T_RecordReferralDecision            by human (this script)
+        userTask T_ForwardAcceptedReferral           by human (this script)
+        userTask T_ReceiveBookingRequest             by human (this script)
+        userTask T_SelectAndBookSlot                 by human (this script)
+        userTask T_ConfirmBooking                    by human (this script)
+        userTask T_TelephonePatient                  by human (this script)
+        userTask T_RecordContactAttempt              by human (this script)
+        userTask T_NewPatientConsultation            by human (this script)
+        userTask T_RecordPatientConsent              by human (this script)
+        userTask T_CreateTreatmentBookingRequest     by human (this script)
+        userTask T_ValidateTreatmentRequest          by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RequestFundingApproval            by human (this script)
+        userTask T_DetermineFundingRoute             by human (this script)
+        userTask T_RecordFundingApproval             by human (this script)
+        userTask T_RecordPayment                     by human (this script)
+        userTask T_ConfirmTreatmentSchedule          by human (this script)
+      worker-set variables: episodeId, capacityLastAttemptAt, duplicateAppointmentCreated, capacityReference, capacityAttemptCount, capacityConfirmedForCycles, capacityConfirmedResource, paymentRequestedAt, paymentDate, cardDataStored, paymentReference, paymentAmount, paymentCurrency, paymentStatus
+  
+  1 of 1 scenario(s) passed   -> evidence\worker-run\worker-demo-2026-09-28T08-39-12-597Z.json
+
+######## aftercare-cycles ########
+  fleet up (pid 51080)
+  
+  === Treatment cycles, clinic letter, then cancellation and refund ===
+      instance 2251799813804828  state=COMPLETED  PASS
+        userTask T_ValidateRequest                   by human (this script)
+        userTask T_DetermineFunding                  by human (this script)
+        userTask T_RecordFundingApproval             by human (this script)
+        userTask T_RecordPayment                     by human (this script)
+        userTask T_ConfirmTreatmentSchedule          by human (this script)
+        userTask T_DeliverTreatmentCycle             by human (this script)
+        userTask T_ReviewCycleResults                by human (this script)
+        userTask T_ModifyTreatment                   by human (this script)
+        userTask T_ApplyTreatmentChange              by human (this script)
+        userTask T_DeliverTreatmentCycle             by human (this script)
+        userTask T_PrepareClinicLetter               by human (this script)
+        userTask T_ApproveClinicLetter               by human (this script)
+        userTask T_AdministrativeCheck               by human (this script)
+        userTask T_RequestFollowUp                   by human (this script)
+        userTask T_ArrangeFollowUp                   by human (this script)
+        boundary T_ConfirmFollowUp                   by message: Patient cancellation or non-attendance
+        userTask T_RecordNonAttendance               by human (this script)
+        userTask T_RefundDecision                    by human (this script)
+        userTask T_OfferAnotherAppointment           by human (this script)
+        userTask T_RecordRefund                      by human (this script)
+        userTask T_OfferAnotherAppointment           by human (this script)
+      worker-set variables: duplicateAppointmentCreated, capacityConfirmedResource, capacityLastAttemptAt, capacityAttemptCount, capacityConfirmedForCycles, capacityReference, episodeId, cardDataStored, paymentRequestedAt, paymentStatus, paymentCurrency, paymentReference, paymentDate, paymentAmount, bloodTestForCycle, bloodTestRequestedAt, bloodTestRequested, bloodTestDueDate, bloodTestReference, letterApproved, correspondenceChannel, correspondenceReference, correspondenceRecipients, correspondenceSentAt, correspondenceSent, refundAuthorised, refundAmount, refundProcessedAt, refundStatus, refundReference, refundOriginalReference
+  
+  1 of 1 scenario(s) passed   -> evidence\worker-run\worker-demo-2026-09-28T08-39-39-254Z.json
+
+######## enquiry ########
+  fleet up (pid 24068)
+  
+  === Patient enquiry classified, answered and closed ===
+      instance 2251799813805096  state=COMPLETED  PASS
+        userTask T_ClassifyEnquiry                   by human (this script)
+        userTask T_AnswerAdministrative              by human (this script)
+        userTask T_RecordEnquiryOutcome              by human (this script)
+      worker-set variables: 
+  
+  1 of 1 scenario(s) passed   -> evidence\worker-run\worker-demo-2026-09-28T08-39-47-500Z.json
+
+=== scenario summaries ===
+PASS  happy                  state=COMPLETED  instance=2251799813803717
+PASS  capacity-unavailable   state=COMPLETED  instance=2251799813803996
+PASS  payment-declined       state=COMPLETED  instance=2251799813804279
+PASS  transient-retry        state=COMPLETED  instance=2251799813804547
+PASS  aftercare-cycles       state=COMPLETED  instance=2251799813804828
+PASS  enquiry                state=COMPLETED  instance=2251799813805096
+    6 scenario(s) COMPLETED, 0 failure(s)
+
+=== 6. Document layout (every table cell) ===
+OK  UFCEP4-0-3_00_Cover_and_Contents.docx                    tables=2   sizes=10.5pt
+      t1   1446,6778,1414
+      t2   5956,3682
+OK  UFCEP4-0-3_01_Task01_02_Strategic_BPMN_and_iStar.docx    tables=4   sizes=10.5pt
+      t1   2153,5158,2327
+      t2   4819,4819
+      t3   674,4482,4482
+      t4   4101,4102,1435
+OK  UFCEP4-0-3_02_Task03_Alignment_Evaluation.docx           tables=3   sizes=10.5pt
+      t1   616,2561,2809,2576,1076
+      t2   406,2632,3080,2606,914
+      t3   907,4047,544,689,3451
+OK  UFCEP4-0-3_03_Task04_Acceptance_Evaluation.docx          tables=9   sizes=9pt,10.5pt
+      t1   2590,7048
+      t2   491,2971,758,1401,1055,2962
+      t3   6177,3461
+      t4   3024,774,5840
+      t5   4243,1152,4243
+      t6   507,1628,2325,2865,660,1653
+      t7   598,3035,3006,2999
+      t8   3006,6632
+      t9   3015,2808,3815
+OK  UFCEP4-0-3_04_Agile_Delivery_Record.docx                 tables=7   sizes=10.5pt
+      t1   1094,4272,4272
+      t2   654,3529,1171,3546,738
+      t3   3379,3380,2879
+      t4   947,3311,2719,2661
+      t5   947,2914,2883,2894
+      t6   469,2752,2752,907,2758
+      t7   947,983,831,2568,2262,1409,638
+OK  UFCEP4-0-3_05_References.docx                            tables=0   sizes=
+OK  UFCEP4-0-3_06_Appendices.docx                            tables=5   sizes=9pt,10.5pt
+      t1   1178,4448,2782,1230
+      t2   6438,3200
+      t3   4556,5082
+      t4   3532,6106
+      t5   4819,4819
+OK  UFCEP4-0-3_Portfolio.docx                                tables=30  sizes=9pt,10.5pt
+      t1   1446,6778,1414
+      t2   5956,3682
+      t3   2153,5158,2327
+      t4   4819,4819
+      t5   674,4482,4482
+      t6   4101,4102,1435
+      t7   616,2561,2809,2576,1076
+      t8   406,2632,3080,2606,914
+      t9   907,4047,544,689,3451
+      t10  2590,7048
+      t11  491,2971,758,1401,1055,2962
+      t12  6177,3461
+      t13  3024,774,5840
+      t14  4243,1152,4243
+      t15  507,1628,2325,2865,660,1653
+      t16  598,3035,3006,2999
+      t17  3006,6632
+      t18  3015,2808,3815
+      t19  1094,4272,4272
+      t20  654,3529,1171,3546,738
+      t21  3379,3380,2879
+      t22  947,3311,2719,2661
+      t23  947,2914,2883,2894
+      t24  469,2752,2752,907,2758
+      t25  947,983,831,2568,2262,1409,638
+      t26  1178,4448,2782,1230
+      t27  6438,3200
+      t28  4556,5082
+      t29  3532,6106
+      t30  4819,4819
+
+0 problem(s) across 8 file(s)
+
+    8/8 documents clean, 0 layout problem(s)
+
+=== 7. Form validation (every form, every binding) ===
+========================================================================================
+FORMS: C:/Users/a1620/Desktop/UFCEP4-0-3_Final/output/forms
+========================================================================================
+  form files            : 68
+  distinct form ids     : 68
+  user tasks in models  : 99
+  user tasks with a form: 99
+  distinct ids used     : 68
+  referenced but absent : 0
+  never referenced      : 0
+  invalid JSON          : 0
+
+SUMMARY {"forms":68,"ids":68,"tasks":99,"missing":0,"orphans":0,"invalid":0}
+
+RESULT: clean
+
+    68 form(s), bound to 99 user task(s), 0 missing, 0 orphaned, 0 invalid
+
+=== 8. Form rendering (form-js, the Tasklist renderer) ===
+rendering 68 form(s) from output\forms
+renderer: form-js (work\node_modules\@bpmn-io\form-js\dist)
+  PASS  form-advise-no-treatment.form                        3 element(s), 1 input(s)
+  PASS  form-answer-administrative-enquiry.form              3 element(s), 1 input(s)
+  PASS  form-answer-clinical-enquiry.form                    3 element(s), 1 input(s)
+  PASS  form-answer-financial-enquiry.form                   3 element(s), 1 input(s)
+  PASS  form-apply-treatment-change.form                     4 element(s), 2 input(s)
+  PASS  form-approve-clinic-letter.form                      4 element(s), 2 input(s)
+  PASS  form-arrange-follow-up.form                          4 element(s), 2 input(s)
+  PASS  form-authorise-treatment-funding.form                4 element(s), 2 input(s)
+  PASS  form-authorise-urgent-treatment.form                 3 element(s), 1 input(s)
+  PASS  form-book-new-patient-appointment.form               4 element(s), 2 input(s)
+  PASS  form-check-referral-documents.form                   4 element(s), 2 input(s)
+  PASS  form-classify-enquiry.form                           4 element(s), 2 input(s)
+  PASS  form-clinic-letter-admin-check.form                  4 element(s), 2 input(s)
+  PASS  form-clinical-review-referral.form                   4 element(s), 2 input(s)
+  PASS  form-complete-pathway.form                           3 element(s), 1 input(s)
+  PASS  form-confirm-appointment.form                        5 element(s), 3 input(s)
+  PASS  form-confirm-follow-up.form                          3 element(s), 1 input(s)
+  PASS  form-confirm-treatment-schedule.form                 3 element(s), 1 input(s)
+  PASS  form-deliver-treatment-cycle.form                    4 element(s), 2 input(s)
+  PASS  form-determine-funding-route.form                    4 element(s), 2 input(s)
+  PASS  form-escalate-correspondence.form                    3 element(s), 1 input(s)
+  PASS  form-escalate-higher-management.form                 3 element(s), 1 input(s)
+  PASS  form-escalate-to-manager.form                        4 element(s), 2 input(s)
+  PASS  form-expedite-urgent-booking.form                    4 element(s), 2 input(s)
+  PASS  form-follow-up-review.form                           4 element(s), 2 input(s)
+  PASS  form-forward-accepted-referral.form                  4 element(s), 2 input(s)
+  PASS  form-handle-patient-enquiry.form                     3 element(s), 1 input(s)
+  PASS  form-handle-payment-failure.form                     4 element(s), 2 input(s)
+  PASS  form-highlight-follow-up.form                        3 element(s), 1 input(s)
+  PASS  form-issue-letter-reminder.form                      4 element(s), 2 input(s)
+  PASS  form-mark-payment-investigation.form                 3 element(s), 1 input(s)
+  PASS  form-new-patient-consultation.form                   4 element(s), 2 input(s)
+  PASS  form-offer-another-appointment.form                  3 element(s), 1 input(s)
+  PASS  form-prepare-accessible-format.form                  4 element(s), 2 input(s)
+  PASS  form-prepare-clinic-letter.form                      4 element(s), 2 input(s)
+  PASS  form-provide-clinical-advice.form                    3 element(s), 1 input(s)
+  PASS  form-provide-cns-contact-details.form                4 element(s), 2 input(s)
+  PASS  form-receive-referral.form                           4 element(s), 2 input(s)
+  PASS  form-record-consultation-consent.form                4 element(s), 2 input(s)
+  PASS  form-record-contact-outcome.form                     4 element(s), 2 input(s)
+  PASS  form-record-enquiry-outcome.form                     3 element(s), 1 input(s)
+  PASS  form-record-funding-approval.form                    4 element(s), 2 input(s)
+  PASS  form-record-non-attendance.form                      4 element(s), 2 input(s)
+  PASS  form-record-patient-consent.form                     4 element(s), 2 input(s)
+  PASS  form-record-payment.form                             3 element(s), 1 input(s)
+  PASS  form-record-pending-booking.form                     4 element(s), 2 input(s)
+  PASS  form-record-referral-decision.form                   5 element(s), 3 input(s)
+  PASS  form-record-refund.form                              3 element(s), 1 input(s)
+  PASS  form-refer-unconfirmed-payment.form                  3 element(s), 1 input(s)
+  PASS  form-refund-decision.form                            3 element(s), 1 input(s)
+  PASS  form-register-referral.form                          4 element(s), 2 input(s)
+  PASS  form-request-follow-up.form                          4 element(s), 2 input(s)
+  PASS  form-request-funding-approval.form                   4 element(s), 2 input(s)
+  PASS  form-resolve-capacity-constraint.form                4 element(s), 2 input(s)
+  PASS  form-resolve-funding-issue.form                      4 element(s), 2 input(s)
+  PASS  form-resolve-payment-transaction.form                3 element(s), 1 input(s)
+  PASS  form-return-unauthorised-request.form                4 element(s), 2 input(s)
+  PASS  form-review-cycle-results.form                       5 element(s), 3 input(s)
+  PASS  form-review-financial-impact.form                    4 element(s), 2 input(s)
+  PASS  form-review-management-reports.form                  3 element(s), 1 input(s)
+  PASS  form-select-book-appointment.form                    5 element(s), 3 input(s)
+  PASS  form-telephone-patient.form                          4 element(s), 2 input(s)
+  PASS  form-treatment-booking-request.form                  4 element(s), 2 input(s)
+  PASS  form-treatment-modification-request.form             4 element(s), 2 input(s)
+  PASS  form-urgent-clinical-concern.form                    3 element(s), 1 input(s)
+  PASS  form-urgent-postponement.form                        4 element(s), 2 input(s)
+  PASS  form-validate-booking-request.form                   4 element(s), 2 input(s)
+  PASS  form-validate-treatment-request.form                 4 element(s), 2 input(s)
+
+TOTAL=68 FAILED=0
+2026-09-28T08:39:53.111Z
+
+evidence: evidence\worker-run\form-render.txt
+
+    68/68 forms rendered by form-js, 0 failure(s)
+
+=== 9. Worker input contract (what a form must supply) ===
+========================================================================================
+WORKER INPUT CONTRACT
+========================================================================================
+  hard requirements in the worker source : 3
+  distinct form fields                   : 27
+
+  appointmentReference       SendAppointmentConfirmationLetterWorker 2 form(s)
+  patientId                  DistributeClinicalCorrespondenceWorker, QueryAvailableAppointmentSlotsWorker, RedirectReferralWorker, RequestBloodTestWorker, RequestMissingDocumentationWorker, RequestRefundWorker, RequestSecurePaymentWorker, RequestTreatmentCapacityWorker, SendAppointmentConfirmationLetterWorker, SendReferralOutcomeWorker 68 form(s) <- process start variable
+  redirectDestination        RedirectReferralWorker             1 form(s)
+
+
+SUMMARY {"requirements":3,"unsupplied":0}
+RESULT: every worker requirement can be supplied
+
+    3 worker requirement(s), 0 that no form or worker can supply
+
+============================================================
+ VERIFICATION SUMMARY
+============================================================
+  PASS 1. Build and unit tests
+  PASS 2. Model validation (4 models)
+  PASS 3. Deploy models and forms
+  PASS 4. Acceptance run (18 cases, engine-driven)
+  PASS 5. Worker scenarios (6 cases, worker-driven)
+  PASS 6. Document layout (every table cell)
+  PASS 7. Form validation (every form, every binding)
+  PASS 8. Form rendering (form-js, the Tasklist renderer)
+  PASS 9. Worker input contract (what a form must supply)
+
+  9 passed, 0 skipped, 0 failed  (of 9)

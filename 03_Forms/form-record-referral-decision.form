@@ -1,0 +1,40 @@
+{
+  "components": [
+    {
+      "text": "# Record the referral decision, rationale and responsible clinician",
+      "type": "text",
+      "id": "Header_form-record-referral-decision",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "label": "Referral decision (accepted / rejected / information required / redirected)",
+      "key": "referralDecision",
+      "type": "textfield",
+      "id": "Field_1s1dwkj"
+    },
+    {
+      "label": "Destination service (only when the referral is redirected)",
+      "key": "redirectDestination",
+      "type": "textfield",
+      "id": "Field_032b4l2"
+    },
+    {
+      "label": "Patient identifier",
+      "key": "patientId",
+      "type": "textfield",
+      "id": "Field_1u3bw0v"
+    }
+  ],
+  "schemaVersion": 19,
+  "type": "default",
+  "id": "form-record-referral-decision",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.51.0"
+  }
+}

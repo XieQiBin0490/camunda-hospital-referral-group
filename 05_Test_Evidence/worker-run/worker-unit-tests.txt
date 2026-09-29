@@ -1,0 +1,14 @@
+Hospital external workers - unit test run
+command : mvn -f workers/pom.xml clean package   (Java 22, Maven 3.9.9, JUnit 5.11.4)
+date    : 2026-09-28 10:49
+
+Running uk.ac.uwe.hospital.ExternalServicesTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.098 s -- in uk.ac.uwe.hospital.ExternalServicesTest
+Running uk.ac.uwe.hospital.JobContextTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in uk.ac.uwe.hospital.JobContextTest
+Running uk.ac.uwe.hospital.SupportTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in uk.ac.uwe.hospital.SupportTest
+Running uk.ac.uwe.hospital.WorkerContractTest
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.204 s -- in uk.ac.uwe.hospital.WorkerContractTest
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS

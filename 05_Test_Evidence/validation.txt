@@ -1,0 +1,103 @@
+﻿==============================================================================================
+FILE: O1_Operational_Merged.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 9
+     - [Collaboration_O1] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Referral, appointment, treatment authorisation and payment"
+     - [Collaboration_O1] participant "Referring Organisation (GP or another hospital)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "Other Specialist Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Clinical Services (treatment, laboratory, imaging)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "Funding Organisation / Insurer" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_O1] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 65 reports
+     [error] camunda-compat/implementation  x4  - A <Send Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x3  - A <Service Task> must have a <Task definition type>
+     [warn] camunda-compat/user-task-definition  x29  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x29  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: S1_Strategic_Landscape.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 8
+     - [Collaboration_S1] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Specialist hospital patient pathway (strategic view)"
+     - [Collaboration_S1] participant "Referring Organisation (GP or another hospital)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "External Clinical Services (treatment, laboratory, imaging)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S1] participant "Funding Organisation / Insurer" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 25 reports
+     [error] camunda-compat/implementation  x3  - A <Send Task> must have a <Task definition type>
+     [warn] camunda-compat/user-task-definition  x11  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x11  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: S2_Strategic_Referral_To_Authorisation.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 6
+     - [Collaboration_S2] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Referral intake, appointment booking and treatment authorisation"
+     - [Collaboration_S2] participant "Referring Organisation (GP or another hospital)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S2] participant "Other Specialist Service" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 41 reports
+     [error] camunda-compat/implementation  x4  - A <Send Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x1  - A <Service Task> must have a <Task definition type>
+     [warn] camunda-compat/user-task-definition  x18  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x18  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+FILE: S3_Strategic_Treatment_To_Aftercare.bpmn
+==============================================================================================
+  parsed with       : Camunda 8 (zeebe) moddle
+  executionPlatform : Camunda Cloud / 8.10.0
+  Camunda 8 (zeebe:) constructs   : subscription, formDefinition, assignmentDefinition, userTask, taskDefinition
+
+  -- NOTES (informational, not defects) : 9
+     - [Collaboration_S3] participant label "Specialist Hospital Service (Hospital Patient Administration System)" is displayed for process "Treatment funding, delivery, correspondence and aftercare"
+     - [Collaboration_S3] participant label "Hospital Patient Administration System - patient enquiry handling" is displayed for process "Patient enquiry handling"
+     - [Collaboration_S3] participant label "Hospital Patient Administration System - management reporting" is displayed for process "Management reporting"
+     - [Collaboration_S3] participant "Patient / Authorised Representative" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Clinical Services (treatment, laboratory, imaging)" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "Funding Organisation / Insurer" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Payment Service Provider" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Correspondence Service" is a black-box pool (no processRef) - intended for external parties
+     - [Collaboration_S3] participant "External Scheduling Service" is a black-box pool (no processRef) - intended for external parties
+
+  -- CAMUNDA LINT [Camunda 8 (cloud)] : 0 reports
+  -- CAMUNDA LINT [Camunda 7 (platform)] : 89 reports
+     [error] camunda-compat/implementation  x5  - A <Service Task> must have a <Task definition type>
+     [error] camunda-compat/implementation  x1  - A <Send Task> must have a <Task definition type>
+     [error] camunda-compat/subscription  x1  - A <Message Boundary Event> with <Message Reference> must have a defined <Subscription correlation key>
+     [warn] camunda-compat/user-task-definition  x41  - A <User Task> should have a defined <Form>
+     [warn] camunda-compat/zeebe-user-task  x41  - A <User Task> with <Implementation: Job worker> managed by Camunda is not supported. Migrate to <Implementation: Camunda user task>.
+
+==============================================================================================
+SUMMARY
+==============================================================================================
+  {"file":"O1_Operational_Merged.bpmn","moddleWarnings":0,"structural":0}
+  {"file":"S1_Strategic_Landscape.bpmn","moddleWarnings":0,"structural":0}
+  {"file":"S2_Strategic_Referral_To_Authorisation.bpmn","moddleWarnings":0,"structural":0}
+  {"file":"S3_Strategic_Treatment_To_Aftercare.bpmn","moddleWarnings":0,"structural":0}

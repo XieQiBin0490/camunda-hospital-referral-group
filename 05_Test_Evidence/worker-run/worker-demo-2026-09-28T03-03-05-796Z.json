@@ -1,0 +1,276 @@
+{
+  "target": "http://127.0.0.1:8080/v2",
+  "executedAt": "2026-09-28T03:03:05.798Z",
+  "results": [
+    {
+      "scenario": "aftercare-cycles",
+      "label": "Treatment cycles, clinic letter, then cancellation and refund",
+      "workerEnv": {},
+      "processInstanceKey": "2251799813737259",
+      "state": "COMPLETED",
+      "reached": [
+        "E_AuthorisedRequestReceived",
+        "T_ValidateRequest",
+        "T_RequestTreatmentCapacity",
+        "G_CapacityConfirmed",
+        "T_DetermineFunding",
+        "G_FundingApproved",
+        "T_RecordFundingApproval",
+        "G_AdvancePaymentRequired",
+        "T_RequestSecurePayment",
+        "G_PaymentOutcome",
+        "T_RecordPayment",
+        "T_ConfirmTreatmentSchedule",
+        "T_DeliverTreatmentCycle",
+        "G_FurtherCycles",
+        "T_RequestBloodTest",
+        "T_ReviewCycleResults",
+        "G_FitnessToContinue",
+        "T_ModifyTreatment",
+        "G_FinancialImpact",
+        "T_ApplyTreatmentChange",
+        "T_DeliverTreatmentCycle",
+        "G_FurtherCycles",
+        "T_PrepareClinicLetter",
+        "T_ApproveClinicLetter",
+        "G_LetterApproved",
+        "T_AdministrativeCheck",
+        "G_ClinicalError",
+        "G_CommunicationPreference",
+        "T_DistributeClinicLetter",
+        "T_RequestFollowUp",
+        "T_ArrangeFollowUp",
+        "G_FollowUpWithinPeriod",
+        "T_ConfirmFollowUp",
+        "B_NotAttending",
+        "T_RecordNonAttendance",
+        "G_PaymentOnAppointment",
+        "T_RefundDecision",
+        "T_OfferAnotherAppointment",
+        "T_RequestRefund",
+        "T_RecordRefund",
+        "E_PathwayReviewed",
+        "T_OfferAnotherAppointment",
+        "E_PathwayReviewed"
+      ],
+      "variableCount": 50,
+      "variables": {
+        "patientId": "\"P-aftercare-cycles-1790564566189\"",
+        "treatmentCode": "\"CHEMO-6\"",
+        "treatmentCycles": "6",
+        "requestAuthorised": "true",
+        "duplicateAppointmentCreated": "false",
+        "capacityLastAttemptAt": "\"2026-09-28T03:02:49.245070200Z\"",
+        "lastAutomatedActivity": "\"T_RequestRefund\"",
+        "episodeId": "\"EP-PAFTERCARECYCLES1790564566189\"",
+        "capacityAttemptCount": "1",
+        "treatmentCapacityConfirmed": "true",
+        "lastAutomatedAt": "\"2026-09-28T03:03:02.700658600Z\"",
+        "capacityConfirmedResource": "\"hospital facility\"",
+        "capacityConfirmedForCycles": "6",
+        "capacityReference": "\"CAP-260928-973725\"",
+        "chargeAmount": "480",
+        "fundingApproved": "true",
+        "advancePaymentRequired": "true",
+        "currency": "\"GBP\"",
+        "paymentDate": "\"2026-09-28\"",
+        "paymentAmount": "480.0",
+        "paymentStatus": "\"confirmed\"",
+        "paymentRequestedAt": "\"2026-09-28T03:02:50.923185100Z\"",
+        "cardDataStored": "false",
+        "paymentCurrency": "\"GBP\"",
+        "paymentReference": "\"PAY-260928-04760586\"",
+        "furtherCyclesPlanned": "false",
+        "bloodTestRequested": "true",
+        "bloodTestReference": "\"LAB-260928-722307\"",
+        "bloodTestForCycle": "\"next cycle\"",
+        "bloodTestRequestedAt": "\"2026-09-28T03:02:53.149867100Z\"",
+        "bloodTestDueDate": "\"2026-09-30\"",
+        "fitToContinue": "false",
+        "urgentPostponement": "false",
+        "financialImpact": "false",
+        "letterApproved": "true",
+        "suspectedClinicalError": "false",
+        "accessibleFormatRequired": "false",
+        "correspondenceRecipients": "\"patient\"",
+        "correspondenceReference": "\"LTR-260928-046652\"",
+        "correspondenceSent": "true",
+        "correspondenceSentAt": "\"2026-09-28T03:02:58.088254300Z\"",
+        "correspondenceChannel": "\"post\"",
+        "followUpSlotWithinPeriod": "true",
+        "appointmentPaid": "true",
+        "refundAuthorised": "true",
+        "refundAmount": "480.0",
+        "refundReference": "\"REF-260928-772326\"",
+        "refundOriginalReference": "\"PAY-260928-04760586\"",
+        "refundStatus": "\"refunded\"",
+        "refundProcessedAt": "\"2026-09-28T03:03:02.700658600Z\""
+      },
+      "trace": [
+        {
+          "kind": "userTask",
+          "elementId": "T_ValidateRequest",
+          "by": "human (this script)",
+          "set": {
+            "requestAuthorised": true,
+            "treatmentCode": "CHEMO-6",
+            "treatmentCycles": 6
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DetermineFunding",
+          "by": "human (this script)",
+          "set": {
+            "fundingApproved": true,
+            "advancePaymentRequired": true,
+            "chargeAmount": 480,
+            "currency": "GBP"
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordFundingApproval",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordPayment",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ConfirmTreatmentSchedule",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DeliverTreatmentCycle",
+          "by": "human (this script)",
+          "set": {
+            "furtherCyclesPlanned": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ReviewCycleResults",
+          "by": "human (this script)",
+          "set": {
+            "fitToContinue": false,
+            "urgentPostponement": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ModifyTreatment",
+          "by": "human (this script)",
+          "set": {
+            "financialImpact": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ApplyTreatmentChange",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_DeliverTreatmentCycle",
+          "by": "human (this script)",
+          "set": {
+            "furtherCyclesPlanned": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_PrepareClinicLetter",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ApproveClinicLetter",
+          "by": "human (this script)",
+          "set": {
+            "letterApproved": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_AdministrativeCheck",
+          "by": "human (this script)",
+          "set": {
+            "suspectedClinicalError": false,
+            "accessibleFormatRequired": false
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RequestFollowUp",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_ArrangeFollowUp",
+          "by": "human (this script)",
+          "set": {
+            "followUpSlotWithinPeriod": true
+          }
+        },
+        {
+          "kind": "boundary",
+          "elementId": "T_ConfirmFollowUp",
+          "by": "message: Patient cancellation or non-attendance",
+          "http": 200
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordNonAttendance",
+          "by": "human (this script)",
+          "set": {
+            "appointmentPaid": true
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RefundDecision",
+          "by": "human (this script)",
+          "set": {
+            "refundAuthorised": true,
+            "refundAmount": 480
+          }
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_OfferAnotherAppointment",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_RecordRefund",
+          "by": "human (this script)",
+          "set": {}
+        },
+        {
+          "kind": "userTask",
+          "elementId": "T_OfferAnotherAppointment",
+          "by": "human (this script)",
+          "set": {}
+        }
+      ],
+      "incidents": [],
+      "status": "PASS",
+      "problems": []
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "passed": 1
+  }
+}

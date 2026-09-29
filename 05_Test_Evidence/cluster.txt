@@ -1,0 +1,27 @@
+Camunda 8 acceptance test environment
+====================================
+
+Runtime            : Camunda 8 Run (c8run) 8.10.0-alpha5, Windows x86_64
+Java               : bundled JRE (java 25.0.4.1 reported by c8run)
+Secondary storage  : RDBMS
+API                : Orchestration Cluster API v2, http://127.0.0.1:8080/v2/
+Modeler            : Camunda Modeler 5.51.0
+
+Deployed process definitions
+----------------------------
+PR_EnquiryHandling
+PR_Landscape
+PR_ManagementReporting
+PR_Operational_Merged
+PR_ReferralToAuthorisation
+PR_TreatmentToAftercare
+
+Deployed forms
+--------------
+68 Camunda Forms, generated from the models by tools/build-forms.mjs and deployed
+with them, so that no user task raises a FORM_NOT_FOUND incident.
+
+Execution
+---------
+18 acceptance test cases executed, 18 passed, 0 failed.
+Executed at 2026-09-26T16:17:23.628Z.

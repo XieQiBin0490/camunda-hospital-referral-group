@@ -13,12 +13,21 @@
     {
       "key": "letterAgeMonths",
       "label": "Age of the outstanding letter, in months",
-      "type": "checkbox"
+      "type": "number",
+      "validate": {
+        "max": 120,
+        "min": 0,
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "type": "default",

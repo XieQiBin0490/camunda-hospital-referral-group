@@ -13,12 +13,37 @@
     {
       "key": "paymentStatus",
       "label": "Payment status (confirmed / declined / no response / urgent clinical need)",
-      "type": "textfield"
+      "type": "select",
+      "values": [
+        {
+          "label": "Confirmed",
+          "value": "confirmed"
+        },
+        {
+          "label": "Declined",
+          "value": "declined"
+        },
+        {
+          "label": "No response",
+          "value": "no response"
+        },
+        {
+          "label": "Urgent clinical need",
+          "value": "urgent clinical need"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "type": "default",

@@ -13,12 +13,29 @@
     {
       "key": "referralUrgency",
       "label": "Referral urgency (urgent / routine)",
-      "type": "textfield"
+      "type": "select",
+      "values": [
+        {
+          "label": "Urgent",
+          "value": "urgent"
+        },
+        {
+          "label": "Routine",
+          "value": "routine"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "type": "default",

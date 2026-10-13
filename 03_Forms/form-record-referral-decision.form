@@ -12,8 +12,29 @@
     {
       "label": "Referral decision (accepted / rejected / information required / redirected)",
       "key": "referralDecision",
-      "type": "textfield",
-      "id": "Field_1s1dwkj"
+      "type": "select",
+      "id": "Field_1s1dwkj",
+      "values": [
+        {
+          "label": "Accepted",
+          "value": "accepted"
+        },
+        {
+          "label": "Rejected",
+          "value": "rejected"
+        },
+        {
+          "label": "Information required",
+          "value": "information required"
+        },
+        {
+          "label": "Redirected",
+          "value": "redirected"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
     },
     {
       "label": "Destination service (only when the referral is redirected)",
@@ -25,7 +46,11 @@
       "label": "Patient identifier",
       "key": "patientId",
       "type": "textfield",
-      "id": "Field_1u3bw0v"
+      "id": "Field_1u3bw0v",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "schemaVersion": 19,

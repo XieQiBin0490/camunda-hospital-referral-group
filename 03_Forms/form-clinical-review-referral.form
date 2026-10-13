@@ -13,12 +13,37 @@
     {
       "key": "referralDecision",
       "label": "Referral decision (accepted / rejected / information required / redirected)",
-      "type": "textfield"
+      "type": "select",
+      "values": [
+        {
+          "label": "Accepted",
+          "value": "accepted"
+        },
+        {
+          "label": "Rejected",
+          "value": "rejected"
+        },
+        {
+          "label": "Information required",
+          "value": "information required"
+        },
+        {
+          "label": "Redirected",
+          "value": "redirected"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "type": "default",

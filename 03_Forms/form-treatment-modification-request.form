@@ -13,12 +13,19 @@
     {
       "key": "financialImpact",
       "label": "Modification affects a charge, funding approval or payment?",
-      "type": "checkbox"
+      "type": "checkbox",
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "type": "default",

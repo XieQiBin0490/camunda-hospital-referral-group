@@ -13,12 +13,37 @@
     {
       "key": "treatmentCapacityConfirmed",
       "label": "External treatment capacity confirmed?",
-      "type": "checkbox"
+      "type": "checkbox",
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "requiredResource",
+      "label": "Resource that could not be confirmed",
+      "validate": {
+        "maxLength": 80,
+        "required": true
+      }
+    },
+    {
+      "type": "number",
+      "key": "preferredTimeframeDays",
+      "label": "Requested timeframe that could not be met, in days",
+      "validate": {
+        "max": 365,
+        "min": 1
+      }
     }
   ],
   "type": "default",

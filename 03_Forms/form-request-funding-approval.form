@@ -13,12 +13,19 @@
     {
       "key": "fundingApproved",
       "label": "Funding approved or no payment required?",
-      "type": "checkbox"
+      "type": "checkbox",
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
     }
   ],
   "type": "default",

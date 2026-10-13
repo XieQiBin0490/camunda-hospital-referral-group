@@ -1,0 +1,18 @@
+{
+  "forms": 68,
+  "distinctFormFields": 53,
+  "gatewayVariables": 25,
+  "gatewayVariablesCollected": 24,
+  "formProblems": [],
+  "modelDefects": [
+    "[A] accepted: a gateway branches on it but no form collects it (S1_Strategic_Landscape.bpmn)",
+    "[D] O1_Operational_Merged.bpmn: T_AuthoriseUrgentTreatment has 2 outgoing flows and no gateway; BPMN treats this as a parallel split, so every branch runs",
+    "[D] S3_Strategic_Treatment_To_Aftercare.bpmn: T_AuthoriseUrgentTreatment has 2 outgoing flows and no gateway; BPMN treats this as a parallel split, so every branch runs",
+    "[D] S3_Strategic_Treatment_To_Aftercare.bpmn: T_RefundDecision has 2 outgoing flows and no gateway; BPMN treats this as a parallel split, so every branch runs"
+  ],
+  "notes": [
+    "[B] soft read with no form source: documentationCheckResult (RequestMissingDocumentationWorker)",
+    "[B] soft read with no form source: letterRecipients (DistributeClinicalCorrespondenceWorker)",
+    "[B] soft read with no form source: refundAuthorised (RequestRefundWorker)"
+  ]
+}

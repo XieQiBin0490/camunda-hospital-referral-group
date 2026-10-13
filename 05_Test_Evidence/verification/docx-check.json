@@ -1,0 +1,160 @@
+{
+  "format": "docx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "\u8868\u5355\u5b57\u6bb5\u7c7b\u578b\u6574\u6539"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "letterDelayDays"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "G_LetterAge"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "DEF-FORM-05"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Tasklist"
+    }
+  ],
+  "summary": {
+    "paragraphs": 735,
+    "tables": [
+      {
+        "rows": 10,
+        "columns": 4
+      },
+      {
+        "rows": 3,
+        "columns": 3
+      },
+      {
+        "rows": 5,
+        "columns": 6
+      },
+      {
+        "rows": 4,
+        "columns": 3
+      },
+      {
+        "rows": 7,
+        "columns": 6
+      },
+      {
+        "rows": 17,
+        "columns": 3
+      },
+      {
+        "rows": 25,
+        "columns": 2
+      },
+      {
+        "rows": 6,
+        "columns": 3
+      },
+      {
+        "rows": 4,
+        "columns": 5
+      },
+      {
+        "rows": 4,
+        "columns": 4
+      },
+      {
+        "rows": 4,
+        "columns": 2
+      },
+      {
+        "rows": 5,
+        "columns": 4
+      },
+      {
+        "rows": 13,
+        "columns": 6
+      },
+      {
+        "rows": 5,
+        "columns": 3
+      },
+      {
+        "rows": 5,
+        "columns": 4
+      },
+      {
+        "rows": 6,
+        "columns": 4
+      },
+      {
+        "rows": 11,
+        "columns": 5
+      },
+      {
+        "rows": 9,
+        "columns": 2
+      }
+    ],
+    "sections": [
+      {
+        "page_twips": {
+          "w": "11906",
+          "h": "16838"
+        },
+        "margins_twips": {
+          "top": "1134",
+          "right": "1020",
+          "bottom": "1134",
+          "left": "1020",
+          "header": "720",
+          "footer": "720",
+          "gutter": "0"
+        }
+      },
+      {
+        "page_twips": {
+          "w": "16838",
+          "h": "11906",
+          "orient": "landscape"
+        },
+        "margins_twips": {
+          "top": "1020",
+          "right": "1020",
+          "bottom": "1020",
+          "left": "1020",
+          "header": "720",
+          "footer": "720",
+          "gutter": "0"
+        }
+      },
+      {
+        "page_twips": {
+          "w": "11906",
+          "h": "16838"
+        },
+        "margins_twips": {
+          "top": "1134",
+          "right": "1020",
+          "bottom": "1134",
+          "left": "1020",
+          "header": "720",
+          "footer": "720",
+          "gutter": "0"
+        }
+      }
+    ]
+  }
+}

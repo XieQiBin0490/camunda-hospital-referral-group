@@ -13,12 +13,54 @@
     {
       "key": "suspectedClinicalError",
       "label": "Suspected clinical error in the letter?",
-      "type": "checkbox"
+      "type": "checkbox",
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
+    },
+    {
+      "type": "checkbox",
+      "key": "accessibleFormatRequired",
+      "label": "Does the patient require an accessible format, translation or a representative?",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "select",
+      "key": "communicationPreference",
+      "label": "Preferred communication channel",
+      "values": [
+        {
+          "label": "Standard post",
+          "value": "post"
+        },
+        {
+          "label": "Email",
+          "value": "email"
+        },
+        {
+          "label": "Accessible format",
+          "value": "accessible format"
+        },
+        {
+          "label": "Translation",
+          "value": "translation"
+        },
+        {
+          "label": "Via a representative",
+          "value": "representative"
+        }
+      ]
     }
   ],
   "type": "default",

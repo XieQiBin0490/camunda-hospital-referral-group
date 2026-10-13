@@ -13,12 +13,76 @@
     {
       "key": "advancePaymentRequired",
       "label": "Advance payment required before confirmation?",
-      "type": "checkbox"
+      "type": "checkbox",
+      "validate": {
+        "required": true
+      }
     },
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "fundingOrganisation",
+      "label": "Funding organisation or insurer",
+      "validate": {
+        "maxLength": 120,
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "fundingAuthorisationReference",
+      "label": "Funding authorisation reference",
+      "validate": {
+        "maxLength": 40,
+        "required": true
+      }
+    },
+    {
+      "type": "number",
+      "key": "approvedAmount",
+      "label": "Amount approved, in whole GBP",
+      "validate": {
+        "min": 0,
+        "required": true
+      }
+    },
+    {
+      "type": "select",
+      "key": "currency",
+      "label": "Currency",
+      "values": [
+        {
+          "label": "Pound sterling (GBP)",
+          "value": "GBP"
+        },
+        {
+          "label": "Euro (EUR)",
+          "value": "EUR"
+        },
+        {
+          "label": "US dollar (USD)",
+          "value": "USD"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "key": "fundingLimitations",
+      "label": "Limitations attached to the approval",
+      "validate": {
+        "maxLength": 500
+      }
     }
   ],
   "type": "default",

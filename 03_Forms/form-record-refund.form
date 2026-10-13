@@ -13,7 +13,38 @@
     {
       "key": "patientId",
       "label": "Patient identifier",
-      "type": "textfield"
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "refundReference",
+      "label": "Refund reference returned by the provider",
+      "validate": {
+        "maxLength": 40,
+        "required": true
+      }
+    },
+    {
+      "type": "number",
+      "key": "refundAmount",
+      "label": "Amount refunded, in whole GBP",
+      "validate": {
+        "min": 0,
+        "required": true
+      }
+    },
+    {
+      "type": "datetime",
+      "key": "refundDate",
+      "label": "Date the refund was issued",
+      "subtype": "date",
+      "validate": {
+        "required": true
+      }
     }
   ],
   "type": "default",

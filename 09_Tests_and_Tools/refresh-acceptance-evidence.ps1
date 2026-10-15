@@ -53,12 +53,15 @@ function Test-Cluster {
 Write-Host '### 1. cluster' -ForegroundColor Cyan
 if (-not (Test-Cluster)) {
     Write-Host '  not answering; starting c8run'
-    # c8run resolves configuration/application.yaml relative to its own directory, so it
-    # has to be launched from there. Start-Process is also unreliable under a confined
-    # environment, and a detached cluster gets reaped when the job that launched it ends,
-    # so it is invoked in this process tree.
+    # c8run resolves configuration/application.yaml relative to its own directory, so it has
+    # to be launched from there.
+    #
+    # Its output goes to a file, NOT down a pipeline. The Java processes c8run launches
+    # inherit its stdout, so `c8run start | Select-Object -Last 3` does not return when
+    # c8run exits - the pipeline stays open until those children close it, which is when
+    # the cluster stops. Piping it hangs this script until the cluster is gone.
     Push-Location $C8
-    try { & (Join-Path $C8 'c8run.exe') start 2>&1 | Select-Object -Last 3 }
+    try { & (Join-Path $C8 'c8run.exe') start *> (Join-Path $C8 'c8run-start.log') }
     finally { Pop-Location }
     for ($i = 1; $i -le 50 -and -not (Test-Cluster); $i++) { Start-Sleep -Seconds 6 }
 }

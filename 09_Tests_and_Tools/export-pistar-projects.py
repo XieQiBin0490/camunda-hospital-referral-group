@@ -48,6 +48,22 @@ def new_id():
     return str(uuid.uuid4())
 
 
+# piStar writes these on every actor and node it saves, and names the diagram. They are
+# not required by docs/JSON.md, but matching a file piStar produced byte-shape for
+# byte-shape is cheap insurance against a loader that is stricter than its own docs.
+DESCRIPTION = {"Description": ""}
+
+
+def actor(aid, text, x, y, nodes=None):
+    return {"id": aid, "text": text, "type": "istar.Actor", "x": x, "y": y,
+            "customProperties": dict(DESCRIPTION), "nodes": nodes or []}
+
+
+def node(nid, text, kind, x, y):
+    return {"id": nid, "text": text, "type": PISTAR_TYPE[kind], "x": x, "y": y,
+            "customProperties": dict(DESCRIPTION)}
+
+
 def layout_actors(actors, externals, internal_cols=2, gap_x=300, gap_y=260):
     """A deterministic grid: internal actors in columns, external actors down the right."""
     placed = []
@@ -69,10 +85,8 @@ def build_sd(src):
         col, row = divmod(i, 4)
         x, y = 80 + col * 520, 60 + row * 300
         pos[a["id"]] = (x, y)
-        actors.append({"id": a["id"], "text": a["name"], "type": "istar.Actor",
-                       "x": x, "y": y, "nodes": []})
+        actors.append(actor(a["id"], a["name"], x, y))
 
-    nodes = {a["id"]: a for a in actors}
     dependencies, links = [], []
     for i, dep in enumerate(sd["dependencies"]):
         did = new_id()
@@ -86,8 +100,12 @@ def build_sd(src):
                       "source": dep["from"], "target": did})
         links.append({"id": new_id(), "type": "istar.DependencyLink",
                       "source": did, "target": dep["to"]})
-    return {"actors": actors, "orphans": [], "dependencies": dependencies, "links": links,
-            "display": {}, "diagram": {"width": 2200, "height": 1700}}, nodes
+    project = {"actors": actors, "orphans": [], "dependencies": dependencies,
+               "links": links, "display": {},
+               "diagram": {"width": 2400, "height": 1500,
+                           "name": "i* SD - HPAS initial release",
+                           "customProperties": dict(DESCRIPTION)}}
+    return project
 
 
 def build_sr(src):
@@ -97,33 +115,27 @@ def build_sr(src):
 
     actors = []
     for a in sr["actors"]:
-        nodes = []
-        for e in a["elements"]:
-            nodes.append({
-                "id": e["id"], "text": e["name"], "type": PISTAR_TYPE[e["kind"]],
-                "x": a["x"] + GRID_X0 + e["col"] * GRID_DX,
-                "y": a["y"] + GRID_Y0 + e["row"] * GRID_DY})
-        actors.append({"id": a["id"], "text": a["name"], "type": "istar.Actor",
-                       "x": a["x"], "y": a["y"], "nodes": nodes,
-                       "w": a["w"], "cols": a["cols"], "rows": a["rows"]})
+        nodes = [node(e["id"], e["name"], e["kind"],
+                      a["x"] + GRID_X0 + e["col"] * GRID_DX,
+                      a["y"] + GRID_Y0 + e["row"] * GRID_DY)
+                 for e in a["elements"]]
+        actors.append(actor(a["id"], a["name"], a["x"], a["y"], nodes))
 
     externals = []
-    for i, e in enumerate(sr.get("externals", [])):
-        externals.append({"id": e["id"], "text": e["name"], "type": "istar.Actor",
-                          "x": e["x"], "y": e["y"], "nodes": []})
+    for e in sr.get("externals", []):
+        externals.append(actor(e["id"], e["name"], e["x"], e["y"]))
     known = {a["id"] for a in actors} | {e["id"] for e in externals}
     for b in sr["boundaries"]:
         if b["to"] not in known:
-            externals.append({"id": b["to"], "text": sd_by_id.get(b["to"], b["to"]),
-                              "type": "istar.Actor", "x": 1900, "y": 100 + len(externals) * 240,
-                              "nodes": []})
+            externals.append(actor(b["to"], sd_by_id.get(b["to"], b["to"]),
+                                   2150, 100 + len(externals) * 240))
             known.add(b["to"])
 
     dependencies, links = [], []
     for b in sr["boundaries"]:
         did = new_id()
         dependencies.append({"id": did, "text": b["label"], "type": PISTAR_TYPE[b["kind"]],
-                             "x": 1650, "y": 120 + len(dependencies) * 90,
+                             "x": 1800, "y": 120 + len(dependencies) * 90,
                              "source": b["fromEl"], "target": b["to"]})
         links.append({"id": new_id(), "type": "istar.DependencyLink",
                       "source": b["fromEl"], "target": did})
@@ -133,8 +145,10 @@ def build_sr(src):
     display = {a["id"]: {"collapsed": True} for a in externals}
     project = {"actors": actors + externals, "orphans": [], "dependencies": dependencies,
                "links": links, "display": display,
-               "diagram": {"width": sr["width"] + 600, "height": sr["height"]}}
-    return project, sr
+               "diagram": {"width": sr["width"] + 700, "height": sr["height"],
+                           "name": "i* SR - HPAS initial release",
+                           "customProperties": dict(DESCRIPTION)}}
+    return project
 
 
 def stamp(project):
@@ -142,6 +156,52 @@ def stamp(project):
     project["istar"] = "2.0"
     project["saveDate"] = "Thu, 01 Jan 2026 00:00:00 GMT"
     return project
+
+
+# The key sets the documented schema uses. A file that carries these, with unique ids
+# and no dangling reference, is what piStar reads.
+ROOT_KEYS = {"actors", "orphans", "dependencies", "links", "display", "tool", "istar",
+             "saveDate", "diagram"}
+ACTOR_KEYS = {"id", "text", "type", "x", "y", "nodes"}
+NODE_KEYS = {"id", "text", "type", "x", "y"}
+DEP_KEYS = {"id", "text", "type", "x", "y", "source", "target"}
+LINK_KEYS = {"id", "type", "source", "target"}
+
+
+def conforms(project, label):
+    """Check the projection against the documented schema, so a rejected load can be
+    attributed to the file rather than guessed at."""
+    bad = []
+    if not ROOT_KEYS <= set(project):
+        bad.append(f"root is missing {ROOT_KEYS - set(project)}")
+    ids = set()
+    for a in project["actors"]:
+        if not ACTOR_KEYS <= set(a):
+            bad.append(f"actor {a.get('id')} is missing {ACTOR_KEYS - set(a)}")
+        if a["id"] in ids:
+            bad.append(f"duplicate id {a['id']}")
+        ids.add(a["id"])
+        if a["type"] not in ("istar.Actor", "istar.Agent", "istar.Role"):
+            bad.append(f"actor {a['id']} has type {a['type']}")
+        for n in a["nodes"]:
+            if not NODE_KEYS <= set(n):
+                bad.append(f"node {n.get('id')} is missing {NODE_KEYS - set(n)}")
+            if n["id"] in ids:
+                bad.append(f"duplicate id {n['id']}")
+            ids.add(n["id"])
+    for d in project["dependencies"]:
+        if not DEP_KEYS <= set(d):
+            bad.append(f"dependency {d.get('id')} is missing {DEP_KEYS - set(d)}")
+        ids.add(d["id"])
+    for l in project["links"]:
+        if not LINK_KEYS <= set(l):
+            bad.append(f"link {l.get('id')} is missing {LINK_KEYS - set(l)}")
+        if l["source"] not in ids or l["target"] not in ids:
+            bad.append(f"link {l['id']} points outside the model")
+    print(f"  {label}: {'conforms to the piStar schema' if not bad else 'SCHEMA PROBLEMS'}")
+    for b in bad[:6]:
+        print(f"      {b}")
+    return not bad
 
 
 def main():
@@ -153,25 +213,30 @@ def main():
     src = json.loads(SOURCE.read_text(encoding="utf-8"))
     out.mkdir(parents=True, exist_ok=True)
 
-    sd_project, _ = build_sd(src)
-    sd_project = stamp(sd_project)
+    sd_project = stamp(build_sd(src))
     (out / "iStar_SD_pistar.json").write_text(
         json.dumps(sd_project, indent=1, ensure_ascii=False), encoding="utf-8")
 
-    sr_project, sr = build_sr(src)
-    sr_project = stamp(sr_project)
+    sr_project = stamp(build_sr(src))
     (out / "iStar_SR_pistar.json").write_text(
         json.dumps(sr_project, indent=1, ensure_ascii=False), encoding="utf-8")
 
+    sr = src["strategicRationaleModel"]
     print(f"SD: actors {len(sd_project['actors'])}  dependencies "
           f"{len(sd_project['dependencies'])}  links {len(sd_project['links'])}")
     print(f"SR: actors {len(sr_project['actors'])} "
-          f"(opened {len(sr['actors'])}, external {len(sr_project['actors']) - len(sr['actors'])})  "
-          f"nodes {sum(len(a['nodes']) for a in sr_project['actors'])}  "
-          f"dependencies {len(sr_project['dependencies'])}  "
-          f"links {len(sr_project['links'])}")
+          f"(opened {len(sr['actors'])}, external "
+          f"{len(sr_project['actors']) - len(sr['actors'])})  nodes "
+          f"{sum(len(a['nodes']) for a in sr_project['actors'])}  dependencies "
+          f"{len(sr_project['dependencies'])}  links {len(sr_project['links'])}")
+    ok = conforms(sd_project, "iStar_SD_pistar.json")
+    ok = conforms(sr_project, "iStar_SR_pistar.json") and ok
     print(f"wrote {out}")
-    return 0
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
 
 
 if __name__ == "__main__":

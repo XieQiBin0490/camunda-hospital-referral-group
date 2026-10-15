@@ -6,81 +6,111 @@
    "type": "istar.Actor",
    "x": 60,
    "y": 90,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_C0",
      "text": "Manage the patient clinical pathway",
      "type": "istar.Task",
      "x": 84,
-     "y": 136
+     "y": 136,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_C1",
      "text": "Referral decision justified and recorded",
      "type": "istar.Goal",
      "x": 84,
-     "y": 214
+     "y": 214,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_C2",
      "text": "Treatment authorised and auditable",
      "type": "istar.Goal",
      "x": 300,
-     "y": 214
+     "y": 214,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_C3",
      "text": "Correspondence clinically accurate",
      "type": "istar.Goal",
      "x": 516,
-     "y": 214
+     "y": 214,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_C1",
      "text": "Perform clinical review of the referral",
      "type": "istar.Task",
      "x": 84,
-     "y": 292
+     "y": 292,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_C2",
      "text": "Record decision, rationale and clinician",
      "type": "istar.Task",
      "x": 300,
-     "y": 292
+     "y": 292,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_C3",
      "text": "Obtain and record patient consent",
      "type": "istar.Task",
      "x": 516,
-     "y": 292
+     "y": 292,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_C4",
      "text": "Create and authorise Treatment Booking Request",
      "type": "istar.Task",
      "x": 84,
-     "y": 370
+     "y": 370,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_C5",
      "text": "Approve clinic letter content",
      "type": "istar.Task",
      "x": 300,
-     "y": 370
+     "y": 370,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_C1",
      "text": "Clinical accountability maintained",
      "type": "istar.Quality",
      "x": 516,
-     "y": 370
+     "y": 370,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "ACT_Treatment",
@@ -88,74 +118,101 @@
    "type": "istar.Actor",
    "x": 830,
    "y": 90,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_T0",
      "text": "Coordinate and confirm treatment appointments",
      "type": "istar.Task",
      "x": 854,
-     "y": 136
+     "y": 136,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_T1",
      "text": "Treatment scheduled without duplication",
      "type": "istar.Goal",
      "x": 854,
-     "y": 214
+     "y": 214,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_T2",
      "text": "Only authorised requests processed",
      "type": "istar.Goal",
      "x": 1070,
-     "y": 214
+     "y": 214,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_T3",
      "text": "External capacity used safely",
      "type": "istar.Goal",
      "x": 1286,
-     "y": 214
+     "y": 214,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_T1",
      "text": "Validate the authorised request",
      "type": "istar.Task",
      "x": 854,
-     "y": 292
+     "y": 292,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_T2",
      "text": "Request treatment appointments from external services",
      "type": "istar.Task",
      "x": 1070,
-     "y": 292
+     "y": 292,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_T3",
      "text": "Keep the booking pending and record the retry",
      "type": "istar.Task",
      "x": 1286,
-     "y": 292
+     "y": 292,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_T1",
      "text": "No duplicate appointments created",
      "type": "istar.Quality",
      "x": 854,
-     "y": 370
+     "y": 370,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_T2",
      "text": "Treatment delays visible to the team",
      "type": "istar.Quality",
      "x": 1070,
-     "y": 370
+     "y": 370,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "ACT_Secretary",
@@ -163,67 +220,91 @@
    "type": "istar.Actor",
    "x": 60,
    "y": 560,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_S0",
      "text": "Process incoming referrals and correspondence",
      "type": "istar.Task",
      "x": 84,
-     "y": 606
+     "y": 606,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_S1",
      "text": "Referral prepared for clinical review",
      "type": "istar.Goal",
      "x": 84,
-     "y": 684
+     "y": 684,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_S2",
      "text": "Clinic letter processed without changing clinical meaning",
      "type": "istar.Goal",
      "x": 300,
-     "y": 684
+     "y": 684,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_S1",
      "text": "Check referral documentation completeness",
      "type": "istar.Task",
      "x": 84,
-     "y": 762
+     "y": 762,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_S2",
      "text": "Request missing documentation",
      "type": "istar.Task",
      "x": 300,
-     "y": 762
+     "y": 762,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_S3",
      "text": "Perform administrative checks and confirm recipients",
      "type": "istar.Task",
      "x": 516,
-     "y": 762
+     "y": 762,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_S1",
      "text": "No clinical judgement by administrative staff",
      "type": "istar.Quality",
      "x": 516,
-     "y": 684
+     "y": 684,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_S2",
      "text": "Referral administration kept proportionate",
      "type": "istar.Quality",
      "x": 84,
-     "y": 840
+     "y": 840,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "ACT_Finance",
@@ -231,81 +312,111 @@
    "type": "istar.Actor",
    "x": 830,
    "y": 560,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_F0",
      "text": "Administer funding, payment and refunds",
      "type": "istar.Task",
      "x": 854,
-     "y": 606
+     "y": 606,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_F1",
      "text": "Funding route determined and recorded",
      "type": "istar.Goal",
      "x": 854,
-     "y": 684
+     "y": 684,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_F2",
      "text": "Payment collected without double charging",
      "type": "istar.Goal",
      "x": 1070,
-     "y": 684
+     "y": 684,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_F3",
      "text": "Refunds decided under financial authority",
      "type": "istar.Goal",
      "x": 1286,
-     "y": 684
+     "y": 684,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_F1",
      "text": "Request funding approval or additional payment",
      "type": "istar.Task",
      "x": 854,
-     "y": 762
+     "y": 762,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_F2",
      "text": "Send the secure payment request",
      "type": "istar.Task",
      "x": 1070,
-     "y": 762
+     "y": 762,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_F3",
      "text": "Mark unexplained transactions for investigation",
      "type": "istar.Task",
      "x": 1286,
-     "y": 762
+     "y": 762,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_F4",
      "text": "Determine retention, transfer or refund",
      "type": "istar.Task",
      "x": 854,
-     "y": 840
+     "y": 840,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_F1",
      "text": "Patient is never charged twice",
      "type": "istar.Quality",
      "x": 1070,
-     "y": 840
+     "y": 840,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_F2",
      "text": "No unnecessary financial data stored",
      "type": "istar.Quality",
      "x": 1286,
-     "y": 840
+     "y": 840,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "ACT_Bookings",
@@ -313,74 +424,101 @@
    "type": "istar.Actor",
    "x": 60,
    "y": 1030,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_B0",
      "text": "Book and confirm new patient appointments",
      "type": "istar.Task",
      "x": 84,
-     "y": 1076
+     "y": 1076,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_B1",
      "text": "Appointment offered within the requested period",
      "type": "istar.Goal",
      "x": 84,
-     "y": 1154
+     "y": 1154,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_B2",
      "text": "Patient informed and attendance confirmed",
      "type": "istar.Goal",
      "x": 300,
-     "y": 1154
+     "y": 1154,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_B1",
      "text": "Validate the booking request and its urgency",
      "type": "istar.Task",
      "x": 84,
-     "y": 1232
+     "y": 1232,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_B2",
      "text": "Query the external scheduling service",
      "type": "istar.Task",
      "x": 300,
-     "y": 1232
+     "y": 1232,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_B3",
      "text": "Book and confirm the appointment in HPAS",
      "type": "istar.Task",
      "x": 516,
-     "y": 1232
+     "y": 1232,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_B4",
      "text": "Telephone the patient when within 14 days",
      "type": "istar.Task",
      "x": 84,
-     "y": 1310
+     "y": 1310,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_B1",
      "text": "Never booked silently outside the clinical period",
      "type": "istar.Quality",
      "x": 516,
-     "y": 1154
+     "y": 1154,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_B2",
      "text": "No duplicate appointments",
      "type": "istar.Quality",
      "x": 300,
-     "y": 1310
+     "y": 1310,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "ACT_Pathway",
@@ -388,67 +526,91 @@
    "type": "istar.Actor",
    "x": 830,
    "y": 1030,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_P0",
      "text": "Monitor and unblock patient pathways",
      "type": "istar.Task",
      "x": 854,
-     "y": 1076
+     "y": 1076,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_P1",
      "text": "Pathways progress within the clinical timescale",
      "type": "istar.Goal",
      "x": 854,
-     "y": 1154
+     "y": 1154,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_P2",
      "text": "Outstanding correspondence escalated",
      "type": "istar.Goal",
      "x": 1070,
-     "y": 1154
+     "y": 1154,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_P1",
      "text": "Resolve capacity when no suitable slot exists",
      "type": "istar.Task",
      "x": 854,
-     "y": 1232
+     "y": 1232,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_P2",
      "text": "Issue weekly reminders for outstanding letters",
      "type": "istar.Task",
      "x": 1070,
-     "y": 1232
+     "y": 1232,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_P3",
      "text": "Escalate after one month and after three months",
      "type": "istar.Task",
      "x": 1286,
-     "y": 1232
+     "y": 1232,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_P1",
      "text": "Delays visible before they become harm",
      "type": "istar.Quality",
      "x": 1286,
-     "y": 1154
+     "y": 1154,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_P2",
      "text": "Escalation proportionate, not repetitive",
      "type": "istar.Quality",
      "x": 854,
-     "y": 1310
+     "y": 1310,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "ACT_CNS",
@@ -456,60 +618,81 @@
    "type": "istar.Actor",
    "x": 60,
    "y": 1500,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": [
     {
      "id": "T_N0",
      "text": "Provide clinical advice and support",
      "type": "istar.Task",
      "x": 84,
-     "y": 1546
+     "y": 1546,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_N1",
      "text": "Patients receive clinically safe advice",
      "type": "istar.Goal",
      "x": 84,
-     "y": 1624
+     "y": 1624,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "G_N2",
      "text": "Clinical enquiries handled by qualified staff",
      "type": "istar.Goal",
      "x": 300,
-     "y": 1624
+     "y": 1624,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_N1",
      "text": "Advise when a patient declines treatment",
      "type": "istar.Task",
      "x": 84,
-     "y": 1702
+     "y": 1702,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_N2",
      "text": "Answer clinical enquiries referred by call handlers",
      "type": "istar.Task",
      "x": 300,
-     "y": 1702
+     "y": 1702,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "T_N3",
      "text": "Handle urgent clinical concerns",
      "type": "istar.Task",
      "x": 516,
-     "y": 1702
+     "y": 1702,
+     "customProperties": {
+      "Description": ""
+     }
     },
     {
      "id": "S_N1",
      "text": "No clinical advice from non-clinical staff",
      "type": "istar.Quality",
      "x": 516,
-     "y": 1624
+     "y": 1624,
+     "customProperties": {
+      "Description": ""
+     }
     }
-   ],
-   "w": 680,
-   "cols": 3,
-   "rows": 4
+   ]
   },
   {
    "id": "A_Patient",
@@ -517,6 +700,9 @@
    "type": "istar.Actor",
    "x": 2010,
    "y": 170,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": []
   },
   {
@@ -525,6 +711,9 @@
    "type": "istar.Actor",
    "x": 2010,
    "y": 470,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": []
   },
   {
@@ -533,6 +722,9 @@
    "type": "istar.Actor",
    "x": 2010,
    "y": 790,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": []
   },
   {
@@ -541,6 +733,9 @@
    "type": "istar.Actor",
    "x": 2010,
    "y": 1110,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": []
   },
   {
@@ -549,96 +744,102 @@
    "type": "istar.Actor",
    "x": 2010,
    "y": 1380,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": []
   },
   {
    "id": "A_Scheduling",
    "text": "External Scheduling Service",
    "type": "istar.Actor",
-   "x": 1900,
+   "x": 2150,
    "y": 1300,
+   "customProperties": {
+    "Description": ""
+   },
    "nodes": []
   }
  ],
  "orphans": [],
  "dependencies": [
   {
-   "id": "4f818d89-2154-4519-b204-767ec7c6815d",
+   "id": "2700310b-f8b8-4496-9665-43324248a4df",
    "text": "Receive clinically appropriate treatment",
    "type": "istar.Goal",
-   "x": 1650,
+   "x": 1800,
    "y": 120,
    "source": "T_C1",
    "target": "A_Patient"
   },
   {
-   "id": "baf35ab8-4ee6-4206-85ca-3a866ecba646",
+   "id": "158f3656-fa9b-43ee-83bc-99fecb8d3fc5",
    "text": "Investigation and test results",
    "type": "istar.Resource",
-   "x": 1650,
+   "x": 1800,
    "y": 210,
    "source": "T_C4",
    "target": "A_Clinical"
   },
   {
-   "id": "948ea86d-70db-4fdb-bc9c-4bab91b02a65",
+   "id": "c18f6811-b3d8-45b4-8135-6b1abb28a11b",
    "text": "Distribute clinic letters",
    "type": "istar.Task",
-   "x": 1650,
+   "x": 1800,
    "y": 300,
    "source": "T_C5",
    "target": "A_Correspondence"
   },
   {
-   "id": "6a0ed2c2-6aef-49ac-a79c-62c11d7b8310",
+   "id": "8c41661b-ed00-4b2a-b08e-f5e9ca59dda4",
    "text": "Supply missing referral information",
    "type": "istar.Task",
-   "x": 1650,
+   "x": 1800,
    "y": 390,
    "source": "T_S2",
    "target": "A_Referrer"
   },
   {
-   "id": "2c4476ed-dee0-4fb5-99cf-28602a98aa5d",
+   "id": "c8c3aa3f-8a63-406a-b59c-781e35df5010",
    "text": "Process payment and return the status",
    "type": "istar.Task",
-   "x": 1650,
+   "x": 1800,
    "y": 480,
    "source": "T_F2",
    "target": "A_PSP"
   },
   {
-   "id": "97648caf-11c8-484c-afdd-9c26cfb62d91",
+   "id": "00c10077-c8cc-4c30-9922-295a301790ed",
    "text": "Available appointment slots",
    "type": "istar.Resource",
-   "x": 1650,
+   "x": 1800,
    "y": 570,
    "source": "T_B2",
    "target": "A_Scheduling"
   },
   {
-   "id": "56ea3540-4ebf-4c9d-8cff-03911bbb6983",
+   "id": "0de5f678-1e29-4408-b071-bb8ae913394b",
    "text": "Inform the referring organisation of pathway changes",
    "type": "istar.Task",
-   "x": 1650,
+   "x": 1800,
    "y": 660,
    "source": "T_P2",
    "target": "A_Referrer"
   },
   {
-   "id": "a398c338-41e9-4d8b-9903-4c0564e9c4aa",
+   "id": "2ec1ae57-ef89-4c98-9c85-72a4130ca62f",
    "text": "Confirm attendance by telephone",
    "type": "istar.Task",
-   "x": 1650,
+   "x": 1800,
    "y": 750,
    "source": "T_B4",
    "target": "A_Patient"
   },
   {
-   "id": "84930dca-6c80-4ab9-a591-53a585f38da1",
+   "id": "9c7eea9a-6226-4ce7-9ae9-df2c9082237b",
    "text": "Urgent investigation results",
    "type": "istar.Resource",
-   "x": 1650,
+   "x": 1800,
    "y": 840,
    "source": "T_N3",
    "target": "A_Clinical"
@@ -646,111 +847,111 @@
  ],
  "links": [
   {
-   "id": "22277165-38b9-40c7-aad3-09c6309b60b9",
+   "id": "16ebb4a6-a39f-4d7d-a888-b5156abca3dc",
    "type": "istar.DependencyLink",
    "source": "T_C1",
-   "target": "4f818d89-2154-4519-b204-767ec7c6815d"
+   "target": "2700310b-f8b8-4496-9665-43324248a4df"
   },
   {
-   "id": "9c188aab-b223-4524-ad4d-52f34b2bb976",
+   "id": "842f7054-002c-4aad-aae9-4a3ed2a881ec",
    "type": "istar.DependencyLink",
-   "source": "4f818d89-2154-4519-b204-767ec7c6815d",
+   "source": "2700310b-f8b8-4496-9665-43324248a4df",
    "target": "A_Patient"
   },
   {
-   "id": "6fed7f58-1562-4d6d-b891-05bc7851af20",
+   "id": "471a1dee-865f-477c-9aa1-084420e531cd",
    "type": "istar.DependencyLink",
    "source": "T_C4",
-   "target": "baf35ab8-4ee6-4206-85ca-3a866ecba646"
+   "target": "158f3656-fa9b-43ee-83bc-99fecb8d3fc5"
   },
   {
-   "id": "a3be76f9-2015-4912-becc-2103e3640074",
+   "id": "59dcebd5-5878-4c11-ab5f-1fc53d151da1",
    "type": "istar.DependencyLink",
-   "source": "baf35ab8-4ee6-4206-85ca-3a866ecba646",
+   "source": "158f3656-fa9b-43ee-83bc-99fecb8d3fc5",
    "target": "A_Clinical"
   },
   {
-   "id": "78a297d8-5f65-4f1b-aab8-19e99bd5e71c",
+   "id": "beda8134-244c-4471-afa3-0fdb680f5ec9",
    "type": "istar.DependencyLink",
    "source": "T_C5",
-   "target": "948ea86d-70db-4fdb-bc9c-4bab91b02a65"
+   "target": "c18f6811-b3d8-45b4-8135-6b1abb28a11b"
   },
   {
-   "id": "df05c70a-6d3e-45ad-895e-4a5179d6b353",
+   "id": "2d2e4e57-0c5a-4c3a-bdbe-606c8b0244f6",
    "type": "istar.DependencyLink",
-   "source": "948ea86d-70db-4fdb-bc9c-4bab91b02a65",
+   "source": "c18f6811-b3d8-45b4-8135-6b1abb28a11b",
    "target": "A_Correspondence"
   },
   {
-   "id": "b14ed3ba-f288-448e-be20-4d19c2c6f1bd",
+   "id": "c4a53445-92b1-4a03-9a2e-9163c409b311",
    "type": "istar.DependencyLink",
    "source": "T_S2",
-   "target": "6a0ed2c2-6aef-49ac-a79c-62c11d7b8310"
+   "target": "8c41661b-ed00-4b2a-b08e-f5e9ca59dda4"
   },
   {
-   "id": "d5eeb6a8-f2e1-422e-b3b5-46eb658d8a78",
+   "id": "e075a90c-06dc-482f-8910-496be874c3cb",
    "type": "istar.DependencyLink",
-   "source": "6a0ed2c2-6aef-49ac-a79c-62c11d7b8310",
+   "source": "8c41661b-ed00-4b2a-b08e-f5e9ca59dda4",
    "target": "A_Referrer"
   },
   {
-   "id": "8ba81f81-a2b7-4c3f-b9aa-5ff8de51e32b",
+   "id": "7e7bd6bd-3247-4fa7-ac4f-2a45027e7a8f",
    "type": "istar.DependencyLink",
    "source": "T_F2",
-   "target": "2c4476ed-dee0-4fb5-99cf-28602a98aa5d"
+   "target": "c8c3aa3f-8a63-406a-b59c-781e35df5010"
   },
   {
-   "id": "610ed08a-3432-4597-8574-34de215f46cf",
+   "id": "a46cb2fd-d396-44f0-97cc-a2f6aac65581",
    "type": "istar.DependencyLink",
-   "source": "2c4476ed-dee0-4fb5-99cf-28602a98aa5d",
+   "source": "c8c3aa3f-8a63-406a-b59c-781e35df5010",
    "target": "A_PSP"
   },
   {
-   "id": "a9417819-5a9f-4cce-8223-7a71d3e9c8f0",
+   "id": "ea617f97-8866-4118-8c10-545829bb444c",
    "type": "istar.DependencyLink",
    "source": "T_B2",
-   "target": "97648caf-11c8-484c-afdd-9c26cfb62d91"
+   "target": "00c10077-c8cc-4c30-9922-295a301790ed"
   },
   {
-   "id": "4e3145a8-6685-452e-a63f-84ac9498d94a",
+   "id": "889c7f7d-587e-4d81-a8ab-7ffb4ee2894e",
    "type": "istar.DependencyLink",
-   "source": "97648caf-11c8-484c-afdd-9c26cfb62d91",
+   "source": "00c10077-c8cc-4c30-9922-295a301790ed",
    "target": "A_Scheduling"
   },
   {
-   "id": "871165b4-7ac1-42eb-86ad-c43122b34b6a",
+   "id": "a26fe465-169f-4752-82bd-bd7d344df59b",
    "type": "istar.DependencyLink",
    "source": "T_P2",
-   "target": "56ea3540-4ebf-4c9d-8cff-03911bbb6983"
+   "target": "0de5f678-1e29-4408-b071-bb8ae913394b"
   },
   {
-   "id": "1321fa78-efaf-4b04-8b1e-c8f0236cacb5",
+   "id": "a28a4fc8-40ed-48de-86ab-9f44fa9a326d",
    "type": "istar.DependencyLink",
-   "source": "56ea3540-4ebf-4c9d-8cff-03911bbb6983",
+   "source": "0de5f678-1e29-4408-b071-bb8ae913394b",
    "target": "A_Referrer"
   },
   {
-   "id": "befb19e4-05dd-4130-883f-0176c0bd62ce",
+   "id": "c930689d-209e-49c7-935f-92df186bdfb7",
    "type": "istar.DependencyLink",
    "source": "T_B4",
-   "target": "a398c338-41e9-4d8b-9903-4c0564e9c4aa"
+   "target": "2ec1ae57-ef89-4c98-9c85-72a4130ca62f"
   },
   {
-   "id": "28f374b6-4ed6-40c0-a302-5b6c837f4d3a",
+   "id": "03428765-00a4-45c9-a9e8-cacc6ed719f0",
    "type": "istar.DependencyLink",
-   "source": "a398c338-41e9-4d8b-9903-4c0564e9c4aa",
+   "source": "2ec1ae57-ef89-4c98-9c85-72a4130ca62f",
    "target": "A_Patient"
   },
   {
-   "id": "f46d2404-0f94-4493-9996-8e9b3544e26b",
+   "id": "affade39-fe3f-40fe-a5f1-33ab1a433567",
    "type": "istar.DependencyLink",
    "source": "T_N3",
-   "target": "84930dca-6c80-4ab9-a591-53a585f38da1"
+   "target": "9c7eea9a-6226-4ce7-9ae9-df2c9082237b"
   },
   {
-   "id": "e949f1b2-770a-4c29-ae8c-59cc55536d78",
+   "id": "cd597e2b-03b9-449a-8aa2-1ce758e0fda4",
    "type": "istar.DependencyLink",
-   "source": "84930dca-6c80-4ab9-a591-53a585f38da1",
+   "source": "9c7eea9a-6226-4ce7-9ae9-df2c9082237b",
    "target": "A_Clinical"
   }
  ],
@@ -775,8 +976,12 @@
   }
  },
  "diagram": {
-  "width": 2800,
-  "height": 1470
+  "width": 2900,
+  "height": 1470,
+  "name": "i* SR - HPAS initial release",
+  "customProperties": {
+   "Description": ""
+  }
  },
  "tool": "pistar.2.0.0",
  "istar": "2.0",

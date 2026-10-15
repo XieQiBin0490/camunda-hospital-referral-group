@@ -1,10 +1,11 @@
-﻿/**
+/**
  * Execute the acceptance test cases against the models deployed on the local
  * Camunda 8 cluster, and record the REAL results.
  *
  *   node 09_Tests_and_Tools/run-acceptance.mjs
  *
- * Evidence is written to extract/acceptance-run/ as JSON plus a plain-text log.
+ * Evidence is written next to the other delivered evidence, in
+ * 05_Test_Evidence/acceptance-run/, as JSON plus a plain-text log.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -12,7 +13,12 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..');
-const EVID = path.join(ROOT, 'extract', 'acceptance-run');
+// The delivered evidence lives in 05_Test_Evidence as acceptance-run.json, which is the
+// file the acceptance plan and the portfolio cite. Writing to a separate extract/
+// directory left that file stale, so a re-run now refreshes it in place.
+const EVID = fs.existsSync(path.join(ROOT, '05_Test_Evidence'))
+  ? path.join(ROOT, '05_Test_Evidence')
+  : path.join(ROOT, 'extract', 'acceptance-run');
 fs.mkdirSync(EVID, { recursive: true });
 
 const B = process.env.C8_BASE || 'http://127.0.0.1:8080/v2';
@@ -405,4 +411,4 @@ fs.writeFileSync(path.join(EVID, 'acceptance-cases.json'), JSON.stringify(
     reached: c.expectReached || [], notReached: c.expectNotReached || [],
     end: c.expectEnd || null, minOccurrences: c.expectMinOccurrences || {},
     vars: c.expectVars || {} } })), null, 2), 'utf8');
-console.log('\nwrote extract/acceptance-run/acceptance-run.json and .log');
+console.log('\nwrote ' + path.relative(ROOT, EVID) + '/acceptance-run.json and .log');

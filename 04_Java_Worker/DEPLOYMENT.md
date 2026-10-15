@@ -1,4 +1,4 @@
-﻿# Deployment and configuration
+# Deployment and configuration
 
 ## What you need
 
@@ -172,7 +172,7 @@ unresolved route rather than presented as a working one.
 | TLS handshake failures | the gateway needs `HPAS_GATEWAY_PLAINTEXT=false` and a credentials provider (SaaS) |
 | `FORM_NOT_FOUND` incident on the first user task | the forms were not deployed - run `node 09_Tests_and_Tools/deploy-all.mjs` |
 | A worker completes a job but the gateway branches wrongly | the worker is writing a variable the gateway does not read, or not writing one it does. Compare against the table in `README.md`; the three gating job types are the ones to check first |
-| Duplicate-looking tasks after a restart | expected: the in-memory store does not survive a restart, so duplicate detection starts from empty. This is stated in the acceptance evaluation as a limitation |
+| Duplicate-looking tasks after a restart | not expected any more: the store is now an H2 database file, so duplicate-payment detection and the appointment index survive a restart. Run `java -cp target/hospital-external-workers-1.0.0.jar uk.ac.uwe.hospital.PersistenceCheck dump` to see what is stored |
 
 ## What is not production-ready
 
@@ -181,10 +181,14 @@ this is worse than useless:
 
 * The external providers are **simulated**. No real scheduling, correspondence,
   clinical or payment service is called.
-* `HospitalStore` and `OperationsLog` are **in-memory**. Nothing survives a
-  restart, so duplicate-payment detection and the audit trail reset with it.
-* There is **no authentication** on the gateway; c8run runs plaintext without
-  credentials, and this fleet follows it.
+* `HospitalStore` and `OperationsLog` are backed by an **embedded H2 database file**
+  (`support/Database.java`), so records, the appointment index, the attempt counters and
+  the audit trail survive a restart. Two limits remain: H2 embedded suits a single node
+  rather than a cluster, and one process writes at a time - a later process opening the
+  same file gets read-only access. See `08_Repository_Documents/database-integration.md`.
+* The **gRPC gateway takes no client credentials**: the fleet connects to the plaintext
+  endpoint c8run exposes. HTTP authorization *is* enabled on the cluster for the REST API
+  and Tasklist, with one group per role - see `08_Repository_Documents/rbac-setup.md`.
 * There are **no error boundary events** on the service tasks, so a thrown BPMN
   error surfaces as an incident instead of being caught. See the note in
   `README.md`.

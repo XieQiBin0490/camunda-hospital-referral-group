@@ -461,168 +461,6 @@
             "row": 3,
             "span": 1
           }
-        ],
-        "links": [
-          {
-            "from": "T_C0",
-            "to": "G_C1",
-            "kind": "decomposition"
-          },
-          {
-            "from": "T_C0",
-            "to": "G_C2",
-            "kind": "decomposition"
-          },
-          {
-            "from": "T_C0",
-            "to": "G_C3",
-            "kind": "decomposition"
-          },
-          {
-            "from": "T_C1",
-            "to": "G_C1",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_C2",
-            "to": "G_C1",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_C3",
-            "to": "G_C2",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_C4",
-            "to": "G_C2",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_C5",
-            "to": "G_C3",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_C2",
-            "to": "S_C1",
-            "kind": "contribution",
-            "label": "help"
-          }
-        ]
-      },
-      {
-        "id": "ACT_Secretary",
-        "name": "Medical Secretaries",
-        "x": 60,
-        "y": 560,
-        "w": 680,
-        "cols": 3,
-        "rows": 4,
-        "elements": [
-          {
-            "id": "T_S0",
-            "kind": "task",
-            "name": "Process incoming referrals and correspondence",
-            "col": 0,
-            "row": 0,
-            "span": 3
-          },
-          {
-            "id": "G_S1",
-            "kind": "goal",
-            "name": "Referral prepared for clinical review",
-            "col": 0,
-            "row": 1,
-            "span": 1
-          },
-          {
-            "id": "G_S2",
-            "kind": "goal",
-            "name": "Clinic letter processed without changing clinical meaning",
-            "col": 1,
-            "row": 1,
-            "span": 1
-          },
-          {
-            "id": "T_S1",
-            "kind": "task",
-            "name": "Check referral documentation completeness",
-            "col": 0,
-            "row": 2,
-            "span": 1
-          },
-          {
-            "id": "T_S2",
-            "kind": "task",
-            "name": "Request missing documentation",
-            "col": 1,
-            "row": 2,
-            "span": 1
-          },
-          {
-            "id": "T_S3",
-            "kind": "task",
-            "name": "Perform administrative checks and confirm recipients",
-            "col": 2,
-            "row": 2,
-            "span": 1
-          },
-          {
-            "id": "S_S1",
-            "kind": "softgoal",
-            "name": "No clinical judgement by administrative staff",
-            "col": 2,
-            "row": 1,
-            "span": 1
-          },
-          {
-            "id": "S_S2",
-            "kind": "softgoal",
-            "name": "Referral administration kept proportionate",
-            "col": 0,
-            "row": 3,
-            "span": 1
-          }
-        ],
-        "links": [
-          {
-            "from": "T_S0",
-            "to": "G_S1",
-            "kind": "decomposition"
-          },
-          {
-            "from": "T_S0",
-            "to": "G_S2",
-            "kind": "decomposition"
-          },
-          {
-            "from": "T_S1",
-            "to": "G_S1",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_S2",
-            "to": "G_S1",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_S3",
-            "to": "G_S2",
-            "kind": "meansend"
-          },
-          {
-            "from": "T_S3",
-            "to": "S_S1",
-            "kind": "contribution",
-            "label": "make"
-          },
-          {
-            "from": "T_S2",
-            "to": "S_S2",
-            "kind": "contribution",
-            "label": "hurt"
-          }
         ]
       },
       {
@@ -706,49 +544,80 @@
             "row": 3,
             "span": 1
           }
-        ],
-        "links": [
+        ]
+      },
+      {
+        "id": "ACT_Secretary",
+        "name": "Medical Secretaries",
+        "x": 60,
+        "y": 560,
+        "w": 680,
+        "cols": 3,
+        "rows": 4,
+        "elements": [
           {
-            "from": "T_T0",
-            "to": "G_T1",
-            "kind": "decomposition"
+            "id": "T_S0",
+            "kind": "task",
+            "name": "Process incoming referrals and correspondence",
+            "col": 0,
+            "row": 0,
+            "span": 3
           },
           {
-            "from": "T_T0",
-            "to": "G_T2",
-            "kind": "decomposition"
+            "id": "G_S1",
+            "kind": "goal",
+            "name": "Referral prepared for clinical review",
+            "col": 0,
+            "row": 1,
+            "span": 1
           },
           {
-            "from": "T_T0",
-            "to": "G_T3",
-            "kind": "decomposition"
+            "id": "G_S2",
+            "kind": "goal",
+            "name": "Clinic letter processed without changing clinical meaning",
+            "col": 1,
+            "row": 1,
+            "span": 1
           },
           {
-            "from": "T_T1",
-            "to": "G_T2",
-            "kind": "meansend"
+            "id": "T_S1",
+            "kind": "task",
+            "name": "Check referral documentation completeness",
+            "col": 0,
+            "row": 2,
+            "span": 1
           },
           {
-            "from": "T_T2",
-            "to": "G_T1",
-            "kind": "meansend"
+            "id": "T_S2",
+            "kind": "task",
+            "name": "Request missing documentation",
+            "col": 1,
+            "row": 2,
+            "span": 1
           },
           {
-            "from": "T_T3",
-            "to": "G_T3",
-            "kind": "meansend"
+            "id": "T_S3",
+            "kind": "task",
+            "name": "Perform administrative checks and confirm recipients",
+            "col": 2,
+            "row": 2,
+            "span": 1
           },
           {
-            "from": "T_T2",
-            "to": "S_T2",
-            "kind": "contribution",
-            "label": "help"
+            "id": "S_S1",
+            "kind": "softgoal",
+            "name": "No clinical judgement by administrative staff",
+            "col": 2,
+            "row": 1,
+            "span": 1
           },
           {
-            "from": "T_T3",
-            "to": "S_T1",
-            "kind": "contribution",
-            "label": "make"
+            "id": "S_S2",
+            "kind": "softgoal",
+            "name": "Referral administration kept proportionate",
+            "col": 0,
+            "row": 3,
+            "span": 1
           }
         ]
       },
@@ -841,60 +710,230 @@
             "row": 3,
             "span": 1
           }
-        ],
-        "links": [
+        ]
+      },
+      {
+        "id": "ACT_Bookings",
+        "name": "Outpatient Bookings Team",
+        "x": 60,
+        "y": 1030,
+        "w": 680,
+        "cols": 3,
+        "rows": 4,
+        "elements": [
           {
-            "from": "T_F0",
-            "to": "G_F1",
-            "kind": "decomposition"
+            "id": "T_B0",
+            "kind": "task",
+            "name": "Book and confirm new patient appointments",
+            "col": 0,
+            "row": 0,
+            "span": 3
           },
           {
-            "from": "T_F0",
-            "to": "G_F2",
-            "kind": "decomposition"
+            "id": "G_B1",
+            "kind": "goal",
+            "name": "Appointment offered within the requested period",
+            "col": 0,
+            "row": 1,
+            "span": 1
           },
           {
-            "from": "T_F0",
-            "to": "G_F3",
-            "kind": "decomposition"
+            "id": "G_B2",
+            "kind": "goal",
+            "name": "Patient informed and attendance confirmed",
+            "col": 1,
+            "row": 1,
+            "span": 1
           },
           {
-            "from": "T_F1",
-            "to": "G_F1",
-            "kind": "meansend"
+            "id": "T_B1",
+            "kind": "task",
+            "name": "Validate the booking request and its urgency",
+            "col": 0,
+            "row": 2,
+            "span": 1
           },
           {
-            "from": "T_F2",
-            "to": "G_F2",
-            "kind": "meansend"
+            "id": "T_B2",
+            "kind": "task",
+            "name": "Query the external scheduling service",
+            "col": 1,
+            "row": 2,
+            "span": 1
           },
           {
-            "from": "T_F3",
-            "to": "G_F2",
-            "kind": "meansend"
+            "id": "T_B3",
+            "kind": "task",
+            "name": "Book and confirm the appointment in HPAS",
+            "col": 2,
+            "row": 2,
+            "span": 1
           },
           {
-            "from": "T_F4",
-            "to": "G_F3",
-            "kind": "meansend"
+            "id": "T_B4",
+            "kind": "task",
+            "name": "Telephone the patient when within 14 days",
+            "col": 0,
+            "row": 3,
+            "span": 1
           },
           {
-            "from": "T_F3",
-            "to": "S_F1",
-            "kind": "contribution",
-            "label": "make"
+            "id": "S_B1",
+            "kind": "softgoal",
+            "name": "Never booked silently outside the clinical period",
+            "col": 2,
+            "row": 1,
+            "span": 1
           },
           {
-            "from": "T_F2",
-            "to": "S_F1",
-            "kind": "contribution",
-            "label": "hurt"
+            "id": "S_B2",
+            "kind": "softgoal",
+            "name": "No duplicate appointments",
+            "col": 1,
+            "row": 3,
+            "span": 1
+          }
+        ]
+      },
+      {
+        "id": "ACT_Pathway",
+        "name": "Patient Pathway Coordinators",
+        "x": 830,
+        "y": 1030,
+        "w": 680,
+        "cols": 3,
+        "rows": 4,
+        "elements": [
+          {
+            "id": "T_P0",
+            "kind": "task",
+            "name": "Monitor and unblock patient pathways",
+            "col": 0,
+            "row": 0,
+            "span": 3
           },
           {
-            "from": "T_F2",
-            "to": "S_F2",
-            "kind": "contribution",
-            "label": "make"
+            "id": "G_P1",
+            "kind": "goal",
+            "name": "Pathways progress within the clinical timescale",
+            "col": 0,
+            "row": 1,
+            "span": 1
+          },
+          {
+            "id": "G_P2",
+            "kind": "goal",
+            "name": "Outstanding correspondence escalated",
+            "col": 1,
+            "row": 1,
+            "span": 1
+          },
+          {
+            "id": "T_P1",
+            "kind": "task",
+            "name": "Resolve capacity when no suitable slot exists",
+            "col": 0,
+            "row": 2,
+            "span": 1
+          },
+          {
+            "id": "T_P2",
+            "kind": "task",
+            "name": "Issue weekly reminders for outstanding letters",
+            "col": 1,
+            "row": 2,
+            "span": 1
+          },
+          {
+            "id": "T_P3",
+            "kind": "task",
+            "name": "Escalate after one month and after three months",
+            "col": 2,
+            "row": 2,
+            "span": 1
+          },
+          {
+            "id": "S_P1",
+            "kind": "softgoal",
+            "name": "Delays visible before they become harm",
+            "col": 2,
+            "row": 1,
+            "span": 1
+          },
+          {
+            "id": "S_P2",
+            "kind": "softgoal",
+            "name": "Escalation proportionate, not repetitive",
+            "col": 0,
+            "row": 3,
+            "span": 1
+          }
+        ]
+      },
+      {
+        "id": "ACT_CNS",
+        "name": "Clinical Nurse Specialist Team",
+        "x": 60,
+        "y": 1500,
+        "w": 680,
+        "cols": 3,
+        "rows": 4,
+        "elements": [
+          {
+            "id": "T_N0",
+            "kind": "task",
+            "name": "Provide clinical advice and support",
+            "col": 0,
+            "row": 0,
+            "span": 3
+          },
+          {
+            "id": "G_N1",
+            "kind": "goal",
+            "name": "Patients receive clinically safe advice",
+            "col": 0,
+            "row": 1,
+            "span": 1
+          },
+          {
+            "id": "G_N2",
+            "kind": "goal",
+            "name": "Clinical enquiries handled by qualified staff",
+            "col": 1,
+            "row": 1,
+            "span": 1
+          },
+          {
+            "id": "T_N1",
+            "kind": "task",
+            "name": "Advise when a patient declines treatment",
+            "col": 0,
+            "row": 2,
+            "span": 1
+          },
+          {
+            "id": "T_N2",
+            "kind": "task",
+            "name": "Answer clinical enquiries referred by call handlers",
+            "col": 1,
+            "row": 2,
+            "span": 1
+          },
+          {
+            "id": "T_N3",
+            "kind": "task",
+            "name": "Handle urgent clinical concerns",
+            "col": 2,
+            "row": 2,
+            "span": 1
+          },
+          {
+            "id": "S_N1",
+            "kind": "softgoal",
+            "name": "No clinical advice from non-clinical staff",
+            "col": 2,
+            "row": 1,
+            "span": 1
           }
         ]
       }
@@ -939,6 +978,13 @@
     "boundaries": [
       {
         "fromActor": "ACT_Consultant",
+        "fromEl": "T_C1",
+        "to": "A_Patient",
+        "kind": "goal",
+        "label": "Receive clinically appropriate treatment"
+      },
+      {
+        "fromActor": "ACT_Consultant",
         "fromEl": "T_C4",
         "to": "A_Clinical",
         "kind": "resource",
@@ -952,13 +998,6 @@
         "label": "Distribute clinic letters"
       },
       {
-        "fromActor": "ACT_Finance",
-        "fromEl": "T_F2",
-        "to": "A_PSP",
-        "kind": "task",
-        "label": "Process payment and return the status"
-      },
-      {
         "fromActor": "ACT_Secretary",
         "fromEl": "T_S2",
         "to": "A_Referrer",
@@ -966,11 +1005,39 @@
         "label": "Supply missing referral information"
       },
       {
-        "fromActor": "ACT_Consultant",
-        "fromEl": "T_C1",
+        "fromActor": "ACT_Finance",
+        "fromEl": "T_F2",
+        "to": "A_PSP",
+        "kind": "task",
+        "label": "Process payment and return the status"
+      },
+      {
+        "fromActor": "ACT_Bookings",
+        "fromEl": "T_B2",
+        "to": "A_Scheduling",
+        "kind": "resource",
+        "label": "Available appointment slots"
+      },
+      {
+        "fromActor": "ACT_Pathway",
+        "fromEl": "T_P2",
+        "to": "A_Referrer",
+        "kind": "task",
+        "label": "Inform the referring organisation of pathway changes"
+      },
+      {
+        "fromActor": "ACT_Bookings",
+        "fromEl": "T_B4",
         "to": "A_Patient",
-        "kind": "goal",
-        "label": "Receive clinically appropriate treatment"
+        "kind": "task",
+        "label": "Confirm attendance by telephone"
+      },
+      {
+        "fromActor": "ACT_CNS",
+        "fromEl": "T_N3",
+        "to": "A_Clinical",
+        "kind": "resource",
+        "label": "Urgent investigation results"
       }
     ]
   }

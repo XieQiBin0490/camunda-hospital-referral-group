@@ -31,6 +31,10 @@ public final class WorkerConfig {
         // 中文：默认值面向本地 Camunda 8 Run：明文 gRPC 的 127.0.0.1:26500，开箱即可运行。
         props.setProperty("gateway.address", "127.0.0.1:26500");
         props.setProperty("gateway.plaintext", "true");
+        // 中文：网关凭据。留空表示不附加认证，沿用 c8run 的默认（不开启授权）即可直接运行；
+        // 一旦集群开启授权并关闭未受保护接口，就必须在这里填上帐号，否则作业激活只会静默返回空。
+        props.setProperty("gateway.username", "");
+        props.setProperty("gateway.password", "");
         props.setProperty("worker.maxJobsActive", "8");
         props.setProperty("worker.timeoutSeconds", "30");
         props.setProperty("worker.pollIntervalMillis", "200");
@@ -102,6 +106,16 @@ public final class WorkerConfig {
     /** 中文：是否使用明文连接；Camunda 8 Run 与 docker-compose 为明文，SaaS 需要 TLS。 */
     public boolean plaintext() {
         return Boolean.parseBoolean(props.getProperty("gateway.plaintext"));
+    }
+
+    /** 中文：gRPC 网关的用户名；留空表示不附加认证头。 */
+    public String gatewayUsername() {
+        return props.getProperty("gateway.username", "");
+    }
+
+    /** 中文：gRPC 网关的口令；仅在用户名非空时使用，且不会出现在任何日志里。 */
+    public String gatewayPassword() {
+        return props.getProperty("gateway.password", "");
     }
 
     /** 中文：每个工作器的本地预取上限，直接决定对引擎施加的背压强度。 */

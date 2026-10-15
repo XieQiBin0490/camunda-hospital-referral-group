@@ -95,6 +95,12 @@ public final class WorkersApplication {
             // 中文：只有显式配置为明文时才关闭 TLS，避免误把 SaaS 端点降级为不安全连接。
             builder = builder.usePlaintext();
         }
+        if (!config.gatewayUsername().isBlank()) {
+            // 中文：集群开启授权后，匿名调用不会报错，只会拿不到作业；这里附加 Basic 凭据。
+            builder = builder.withInterceptors(new uk.ac.uwe.hospital.support.BasicAuthInterceptor(
+                    config.gatewayUsername(), config.gatewayPassword()));
+            log.info("gRPC calls carry basic authentication for {}", config.gatewayUsername());
+        }
         ZeebeClient client = builder.build();
 
         // 中文：把同一个客户端交给消息发布器，使消息抛出事件对应的工作器能够真正发出跨池消息。

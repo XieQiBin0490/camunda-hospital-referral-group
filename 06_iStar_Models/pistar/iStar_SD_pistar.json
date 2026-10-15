@@ -1,0 +1,922 @@
+{
+ "actors": [
+  {
+   "id": "A_Patient",
+   "text": "Patient / Authorised Representative",
+   "type": "istar.Actor",
+   "x": 80,
+   "y": 60,
+   "nodes": []
+  },
+  {
+   "id": "A_Referrer",
+   "text": "Referring Organisation (GP or other hospital)",
+   "type": "istar.Actor",
+   "x": 80,
+   "y": 360,
+   "nodes": []
+  },
+  {
+   "id": "A_Secretary",
+   "text": "Medical Secretaries",
+   "type": "istar.Actor",
+   "x": 80,
+   "y": 660,
+   "nodes": []
+  },
+  {
+   "id": "A_Consultant",
+   "text": "Consultant / Clinical Team",
+   "type": "istar.Actor",
+   "x": 80,
+   "y": 960,
+   "nodes": []
+  },
+  {
+   "id": "A_CNS",
+   "text": "Clinical Nurse Specialist Team",
+   "type": "istar.Actor",
+   "x": 600,
+   "y": 60,
+   "nodes": []
+  },
+  {
+   "id": "A_Pathway",
+   "text": "Patient Pathway Coordinators",
+   "type": "istar.Actor",
+   "x": 600,
+   "y": 360,
+   "nodes": []
+  },
+  {
+   "id": "A_Booking",
+   "text": "Outpatient Bookings Team",
+   "type": "istar.Actor",
+   "x": 600,
+   "y": 660,
+   "nodes": []
+  },
+  {
+   "id": "A_Treatment",
+   "text": "Treatment & Chemotherapy Bookings Team",
+   "type": "istar.Actor",
+   "x": 600,
+   "y": 960,
+   "nodes": []
+  },
+  {
+   "id": "A_Call",
+   "text": "Call Handling Team",
+   "type": "istar.Actor",
+   "x": 1120,
+   "y": 60,
+   "nodes": []
+  },
+  {
+   "id": "A_Finance",
+   "text": "Finance Team",
+   "type": "istar.Actor",
+   "x": 1120,
+   "y": 360,
+   "nodes": []
+  },
+  {
+   "id": "A_Scheduling",
+   "text": "External Scheduling Service",
+   "type": "istar.Actor",
+   "x": 1120,
+   "y": 660,
+   "nodes": []
+  },
+  {
+   "id": "A_Correspondence",
+   "text": "External Correspondence Service",
+   "type": "istar.Actor",
+   "x": 1120,
+   "y": 960,
+   "nodes": []
+  },
+  {
+   "id": "A_Clinical",
+   "text": "External Clinical Services (treatment, laboratory, imaging)",
+   "type": "istar.Actor",
+   "x": 1640,
+   "y": 60,
+   "nodes": []
+  },
+  {
+   "id": "A_PSP",
+   "text": "External Payment Service Provider",
+   "type": "istar.Actor",
+   "x": 1640,
+   "y": 360,
+   "nodes": []
+  },
+  {
+   "id": "A_Funding",
+   "text": "Funding Organisation / Insurer",
+   "type": "istar.Actor",
+   "x": 1640,
+   "y": 660,
+   "nodes": []
+  },
+  {
+   "id": "A_Management",
+   "text": "Hospital Management Team",
+   "type": "istar.Actor",
+   "x": 1640,
+   "y": 960,
+   "nodes": []
+  }
+ ],
+ "orphans": [],
+ "dependencies": [
+  {
+   "id": "88087e9a-79c1-4226-ab4e-f423ccfeecc6",
+   "text": "Complete referral documentation",
+   "type": "istar.Resource",
+   "x": 80,
+   "y": 510,
+   "source": "A_Referrer",
+   "target": "A_Secretary"
+  },
+  {
+   "id": "53619340-47fd-4f16-b0a3-e1434b2bcba2",
+   "text": "Referral decision and recorded reason",
+   "type": "istar.Resource",
+   "x": 80,
+   "y": 678,
+   "source": "A_Referrer",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "507fe951-f80a-4356-a733-44955f0b3710",
+   "text": "Offer a timely new patient appointment",
+   "type": "istar.Task",
+   "x": 340,
+   "y": 396,
+   "source": "A_Patient",
+   "target": "A_Booking"
+  },
+  {
+   "id": "ff6dde65-1234-44b7-806e-1e4086f3abbf",
+   "text": "Receive clinically appropriate treatment",
+   "type": "istar.Goal",
+   "x": 80,
+   "y": 564,
+   "source": "A_Patient",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "d1e522c5-6422-499d-af46-2606243920f0",
+   "text": "Provide clinical advice and support",
+   "type": "istar.Task",
+   "x": 340,
+   "y": 132,
+   "source": "A_Patient",
+   "target": "A_CNS"
+  },
+  {
+   "id": "cbb8e683-32fa-4d04-9aee-aca8b5fcb157",
+   "text": "Protect personal and financial information",
+   "type": "istar.Quality",
+   "x": 600,
+   "y": 210,
+   "source": "A_Patient",
+   "target": "A_Finance"
+  },
+  {
+   "id": "e1738a65-99c7-4c25-a72d-eabb0924d726",
+   "text": "Referral checked and prepared for review",
+   "type": "istar.Resource",
+   "x": 80,
+   "y": 828,
+   "source": "A_Secretary",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "97ee24e7-251b-4b41-a033-0ef08a44b1f0",
+   "text": "Accurate patient identification",
+   "type": "istar.Resource",
+   "x": 80,
+   "y": 396,
+   "source": "A_Secretary",
+   "target": "A_Patient"
+  },
+  {
+   "id": "998c35fc-57f0-4516-a6f5-cf7b63008042",
+   "text": "Administer and distribute clinic letters",
+   "type": "istar.Task",
+   "x": 80,
+   "y": 864,
+   "source": "A_Consultant",
+   "target": "A_Secretary"
+  },
+  {
+   "id": "f644f409-ba28-4453-a9a6-ccb94d74a1d2",
+   "text": "Administrative burden minimised",
+   "type": "istar.Quality",
+   "x": 80,
+   "y": 882,
+   "source": "A_Consultant",
+   "target": "A_Secretary"
+  },
+  {
+   "id": "c5a742cd-f170-442f-b854-c78b8d5381b6",
+   "text": "Accepted referral with priority and timeframe",
+   "type": "istar.Resource",
+   "x": 340,
+   "y": 810,
+   "source": "A_Consultant",
+   "target": "A_Booking"
+  },
+  {
+   "id": "e2324e3b-2024-4cca-a284-a5cdcd2e4562",
+   "text": "Authorised Treatment Booking Request",
+   "type": "istar.Resource",
+   "x": 340,
+   "y": 978,
+   "source": "A_Consultant",
+   "target": "A_Treatment"
+  },
+  {
+   "id": "450fd803-bd35-48ce-837d-5595f75fcbd9",
+   "text": "Clinical authorisation for urgent treatment",
+   "type": "istar.Resource",
+   "x": 600,
+   "y": 696,
+   "source": "A_Consultant",
+   "target": "A_Finance"
+  },
+  {
+   "id": "79127634-4ad4-4298-98d3-a46a56e2b9ea",
+   "text": "Updated treatment plan",
+   "type": "istar.Resource",
+   "x": 340,
+   "y": 564,
+   "source": "A_Consultant",
+   "target": "A_CNS"
+  },
+  {
+   "id": "e9460262-9e23-4366-b2f5-e8e5d9ac5f53",
+   "text": "Informed consent to treatment",
+   "type": "istar.Resource",
+   "x": 80,
+   "y": 582,
+   "source": "A_Consultant",
+   "target": "A_Patient"
+  },
+  {
+   "id": "f7c82ef1-a90e-4a24-b60e-7f10000fc502",
+   "text": "Confirmed appointment and contact outcome",
+   "type": "istar.Resource",
+   "x": 340,
+   "y": 810,
+   "source": "A_Booking",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "289975cf-2d4b-4fa9-8616-c6c523f237ab",
+   "text": "Treatment charge and schedule details",
+   "type": "istar.Resource",
+   "x": 860,
+   "y": 678,
+   "source": "A_Treatment",
+   "target": "A_Finance"
+  },
+  {
+   "id": "791c0cd1-ec4f-4071-89cb-33e828136ce3",
+   "text": "Confirmed treatment schedule",
+   "type": "istar.Resource",
+   "x": 340,
+   "y": 996,
+   "source": "A_Treatment",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "807077ea-8539-4d84-865c-4502fc60dc75",
+   "text": "Funding confirmed before treatment",
+   "type": "istar.Goal",
+   "x": 860,
+   "y": 714,
+   "source": "A_Finance",
+   "target": "A_Treatment"
+  },
+  {
+   "id": "23c54e19-7616-474e-b914-c4d4c880df69",
+   "text": "Refer paid appointment changes",
+   "type": "istar.Task",
+   "x": 860,
+   "y": 582,
+   "source": "A_Finance",
+   "target": "A_Booking"
+  },
+  {
+   "id": "5135e2bb-11b8-4e93-9d37-20bae9635911",
+   "text": "Answer clinical enquiries",
+   "type": "istar.Task",
+   "x": 860,
+   "y": 60,
+   "source": "A_Call",
+   "target": "A_CNS"
+  },
+  {
+   "id": "cea6a89c-44bc-4be3-b422-23ceba50cb37",
+   "text": "Answer payment and funding enquiries",
+   "type": "istar.Task",
+   "x": 1120,
+   "y": 228,
+   "source": "A_Call",
+   "target": "A_Finance"
+  },
+  {
+   "id": "c698803d-5061-41d6-92b7-ee0468c8a543",
+   "text": "Classify and route the enquiry",
+   "type": "istar.Task",
+   "x": 600,
+   "y": 96,
+   "source": "A_Patient",
+   "target": "A_Call"
+  },
+  {
+   "id": "3c68f439-3225-4b6b-9c5a-646a344f97d7",
+   "text": "Complete and approve clinic letters",
+   "type": "istar.Task",
+   "x": 340,
+   "y": 714,
+   "source": "A_Pathway",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "57466daa-99bc-4d81-abd2-30960322ad5d",
+   "text": "Accessible communication preferences",
+   "type": "istar.Resource",
+   "x": 340,
+   "y": 282,
+   "source": "A_Pathway",
+   "target": "A_Patient"
+  },
+  {
+   "id": "a977baf4-5e53-4f7d-be2e-ed5d59078bdc",
+   "text": "Pathway delays visible and escalated",
+   "type": "istar.Quality",
+   "x": 1120,
+   "y": 660,
+   "source": "A_Pathway",
+   "target": "A_Management"
+  },
+  {
+   "id": "be7702a2-2142-4fb6-8b56-dbfdd246db70",
+   "text": "Outstanding correspondence report",
+   "type": "istar.Resource",
+   "x": 1120,
+   "y": 678,
+   "source": "A_Management",
+   "target": "A_Pathway"
+  },
+  {
+   "id": "d4b8e837-760d-4fd6-a710-5d6eb078de0d",
+   "text": "Funding, payment and refund reports",
+   "type": "istar.Resource",
+   "x": 1380,
+   "y": 696,
+   "source": "A_Management",
+   "target": "A_Finance"
+  },
+  {
+   "id": "337928ed-8345-46bc-8032-26d0869d41a3",
+   "text": "Waiting time and contact attempt reports",
+   "type": "istar.Resource",
+   "x": 1120,
+   "y": 864,
+   "source": "A_Management",
+   "target": "A_Booking"
+  },
+  {
+   "id": "56eb4ab8-c41d-4ed2-9c67-de202a1737a3",
+   "text": "Available appointment slots",
+   "type": "istar.Resource",
+   "x": 860,
+   "y": 732,
+   "source": "A_Booking",
+   "target": "A_Scheduling"
+  },
+  {
+   "id": "277b16c8-7af7-4752-8ffd-da8bef358a5c",
+   "text": "Send appointment confirmation letters",
+   "type": "istar.Task",
+   "x": 860,
+   "y": 810,
+   "source": "A_Booking",
+   "target": "A_Correspondence"
+  },
+  {
+   "id": "bb87ab3b-27f3-4aff-b1fa-adc4c5a8bba9",
+   "text": "Investigation and test results",
+   "type": "istar.Resource",
+   "x": 860,
+   "y": 528,
+   "source": "A_Consultant",
+   "target": "A_Clinical"
+  },
+  {
+   "id": "69840d65-e079-4483-b3ed-e67af994f35a",
+   "text": "Treatment, laboratory and imaging capacity",
+   "type": "istar.Resource",
+   "x": 1120,
+   "y": 546,
+   "source": "A_Treatment",
+   "target": "A_Clinical"
+  },
+  {
+   "id": "41ae20c5-fb02-49fa-ac60-fa1c22afab0c",
+   "text": "Funding authorisation, amount and limitations",
+   "type": "istar.Resource",
+   "x": 1380,
+   "y": 564,
+   "source": "A_Finance",
+   "target": "A_Funding"
+  },
+  {
+   "id": "68b959a6-1f19-4289-9452-bdc551940f22",
+   "text": "Process payment and return the status",
+   "type": "istar.Task",
+   "x": 1380,
+   "y": 432,
+   "source": "A_Finance",
+   "target": "A_PSP"
+  },
+  {
+   "id": "665ef57e-3868-4ae4-8dc4-436d11acadd6",
+   "text": "Distribute clinic letters",
+   "type": "istar.Task",
+   "x": 600,
+   "y": 810,
+   "source": "A_Secretary",
+   "target": "A_Correspondence"
+  },
+  {
+   "id": "cbc851d1-656c-43d4-8fca-ba666a165750",
+   "text": "Blood test and assessment results",
+   "type": "istar.Resource",
+   "x": 1120,
+   "y": 78,
+   "source": "A_CNS",
+   "target": "A_Clinical"
+  }
+ ],
+ "links": [
+  {
+   "id": "d1583c0d-007d-4891-9765-946e1064b949",
+   "type": "istar.DependencyLink",
+   "source": "A_Referrer",
+   "target": "88087e9a-79c1-4226-ab4e-f423ccfeecc6"
+  },
+  {
+   "id": "8ad32a2c-b2dc-41dc-808f-88d651669d81",
+   "type": "istar.DependencyLink",
+   "source": "88087e9a-79c1-4226-ab4e-f423ccfeecc6",
+   "target": "A_Secretary"
+  },
+  {
+   "id": "40aa5cbf-73b5-4ab7-b076-9b1341b37841",
+   "type": "istar.DependencyLink",
+   "source": "A_Referrer",
+   "target": "53619340-47fd-4f16-b0a3-e1434b2bcba2"
+  },
+  {
+   "id": "12922a72-9d4d-4fad-b031-2985ffdfcb94",
+   "type": "istar.DependencyLink",
+   "source": "53619340-47fd-4f16-b0a3-e1434b2bcba2",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "27f25910-128d-4e7d-8852-a5cf6e7eb4b7",
+   "type": "istar.DependencyLink",
+   "source": "A_Patient",
+   "target": "507fe951-f80a-4356-a733-44955f0b3710"
+  },
+  {
+   "id": "f4c16ffe-d38a-4e5c-bd78-0b302a0d4b29",
+   "type": "istar.DependencyLink",
+   "source": "507fe951-f80a-4356-a733-44955f0b3710",
+   "target": "A_Booking"
+  },
+  {
+   "id": "a4e945df-82fb-454a-b4cf-568e64d2f0bc",
+   "type": "istar.DependencyLink",
+   "source": "A_Patient",
+   "target": "ff6dde65-1234-44b7-806e-1e4086f3abbf"
+  },
+  {
+   "id": "42ce8424-d59a-4da2-ba90-c0430dedfdd1",
+   "type": "istar.DependencyLink",
+   "source": "ff6dde65-1234-44b7-806e-1e4086f3abbf",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "8d746f9b-708d-42fe-a103-a6a65d7890a4",
+   "type": "istar.DependencyLink",
+   "source": "A_Patient",
+   "target": "d1e522c5-6422-499d-af46-2606243920f0"
+  },
+  {
+   "id": "80604c2b-60d3-4d6e-b65b-41c123734875",
+   "type": "istar.DependencyLink",
+   "source": "d1e522c5-6422-499d-af46-2606243920f0",
+   "target": "A_CNS"
+  },
+  {
+   "id": "e80744a0-fda0-4a41-82c3-188549723189",
+   "type": "istar.DependencyLink",
+   "source": "A_Patient",
+   "target": "cbb8e683-32fa-4d04-9aee-aca8b5fcb157"
+  },
+  {
+   "id": "67961e01-fb7e-44a5-b8bf-1df7b871c055",
+   "type": "istar.DependencyLink",
+   "source": "cbb8e683-32fa-4d04-9aee-aca8b5fcb157",
+   "target": "A_Finance"
+  },
+  {
+   "id": "1e456a24-6f1a-48e0-829c-72585a3372ea",
+   "type": "istar.DependencyLink",
+   "source": "A_Secretary",
+   "target": "e1738a65-99c7-4c25-a72d-eabb0924d726"
+  },
+  {
+   "id": "cf810f14-a4a8-446d-ba30-8f325ba68d3e",
+   "type": "istar.DependencyLink",
+   "source": "e1738a65-99c7-4c25-a72d-eabb0924d726",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "a3ff30e8-ddf9-4331-a48a-6efc2ff65737",
+   "type": "istar.DependencyLink",
+   "source": "A_Secretary",
+   "target": "97ee24e7-251b-4b41-a033-0ef08a44b1f0"
+  },
+  {
+   "id": "35dfd7d6-edb6-4be8-b8cd-f34ec631bcc1",
+   "type": "istar.DependencyLink",
+   "source": "97ee24e7-251b-4b41-a033-0ef08a44b1f0",
+   "target": "A_Patient"
+  },
+  {
+   "id": "dc1b42a8-f830-475e-b6e7-8d53baf908cf",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "998c35fc-57f0-4516-a6f5-cf7b63008042"
+  },
+  {
+   "id": "3f3d6732-3af8-442e-af23-81878eafac8f",
+   "type": "istar.DependencyLink",
+   "source": "998c35fc-57f0-4516-a6f5-cf7b63008042",
+   "target": "A_Secretary"
+  },
+  {
+   "id": "c1f552dc-9182-4a4a-8b7b-a7f4715b1c95",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "f644f409-ba28-4453-a9a6-ccb94d74a1d2"
+  },
+  {
+   "id": "74722c1b-c486-4242-bd71-b5f46299489f",
+   "type": "istar.DependencyLink",
+   "source": "f644f409-ba28-4453-a9a6-ccb94d74a1d2",
+   "target": "A_Secretary"
+  },
+  {
+   "id": "91f6d03c-dd25-49cc-939d-3d094abd46d1",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "c5a742cd-f170-442f-b854-c78b8d5381b6"
+  },
+  {
+   "id": "36911191-5b04-4592-8c76-77ef4d299dd8",
+   "type": "istar.DependencyLink",
+   "source": "c5a742cd-f170-442f-b854-c78b8d5381b6",
+   "target": "A_Booking"
+  },
+  {
+   "id": "c3216f8f-84eb-448a-885a-ae3216535b90",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "e2324e3b-2024-4cca-a284-a5cdcd2e4562"
+  },
+  {
+   "id": "7b990f06-3879-455b-94d5-1e6365ba2eeb",
+   "type": "istar.DependencyLink",
+   "source": "e2324e3b-2024-4cca-a284-a5cdcd2e4562",
+   "target": "A_Treatment"
+  },
+  {
+   "id": "b35541c0-f537-43e1-809f-b3d4acdd040b",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "450fd803-bd35-48ce-837d-5595f75fcbd9"
+  },
+  {
+   "id": "a7fd89f5-a5d0-4e02-9f14-77a7ffb93111",
+   "type": "istar.DependencyLink",
+   "source": "450fd803-bd35-48ce-837d-5595f75fcbd9",
+   "target": "A_Finance"
+  },
+  {
+   "id": "077e3561-3bde-45a7-8413-8410cdc9a6ec",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "79127634-4ad4-4298-98d3-a46a56e2b9ea"
+  },
+  {
+   "id": "0a3eee4e-ae53-452e-91b3-a7fda6b262c3",
+   "type": "istar.DependencyLink",
+   "source": "79127634-4ad4-4298-98d3-a46a56e2b9ea",
+   "target": "A_CNS"
+  },
+  {
+   "id": "fcdfe249-ff6a-42af-a4ac-99fa4b177484",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "e9460262-9e23-4366-b2f5-e8e5d9ac5f53"
+  },
+  {
+   "id": "89a9b21e-4bdd-4e61-8ffa-11ef0ad3df32",
+   "type": "istar.DependencyLink",
+   "source": "e9460262-9e23-4366-b2f5-e8e5d9ac5f53",
+   "target": "A_Patient"
+  },
+  {
+   "id": "d286de3d-5264-4ab4-a0e8-4acb584b9d06",
+   "type": "istar.DependencyLink",
+   "source": "A_Booking",
+   "target": "f7c82ef1-a90e-4a24-b60e-7f10000fc502"
+  },
+  {
+   "id": "bd53fc9c-ea10-4e30-837d-ed7239c3e3fd",
+   "type": "istar.DependencyLink",
+   "source": "f7c82ef1-a90e-4a24-b60e-7f10000fc502",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "c7193b37-55e7-44c8-8bee-e65308353a31",
+   "type": "istar.DependencyLink",
+   "source": "A_Treatment",
+   "target": "289975cf-2d4b-4fa9-8616-c6c523f237ab"
+  },
+  {
+   "id": "3ddcdd60-f904-46ee-b2f7-f7d3014f1955",
+   "type": "istar.DependencyLink",
+   "source": "289975cf-2d4b-4fa9-8616-c6c523f237ab",
+   "target": "A_Finance"
+  },
+  {
+   "id": "213cadad-a0fd-4298-9101-559d0e2fe662",
+   "type": "istar.DependencyLink",
+   "source": "A_Treatment",
+   "target": "791c0cd1-ec4f-4071-89cb-33e828136ce3"
+  },
+  {
+   "id": "3bdd73a1-b7e9-46fb-949b-9dc93aa4ff76",
+   "type": "istar.DependencyLink",
+   "source": "791c0cd1-ec4f-4071-89cb-33e828136ce3",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "1360cf10-e19c-4537-8f82-f0c22b3e1c52",
+   "type": "istar.DependencyLink",
+   "source": "A_Finance",
+   "target": "807077ea-8539-4d84-865c-4502fc60dc75"
+  },
+  {
+   "id": "e8e0cf7e-29c8-4518-ac62-04e9caf81142",
+   "type": "istar.DependencyLink",
+   "source": "807077ea-8539-4d84-865c-4502fc60dc75",
+   "target": "A_Treatment"
+  },
+  {
+   "id": "c29dbac9-e64e-4042-ac26-c781f1bb45d9",
+   "type": "istar.DependencyLink",
+   "source": "A_Finance",
+   "target": "23c54e19-7616-474e-b914-c4d4c880df69"
+  },
+  {
+   "id": "8c31eda9-1b13-4bd8-abb7-c04178890d6b",
+   "type": "istar.DependencyLink",
+   "source": "23c54e19-7616-474e-b914-c4d4c880df69",
+   "target": "A_Booking"
+  },
+  {
+   "id": "fd093a13-c2df-428c-8b5e-fbb6a35cdfe2",
+   "type": "istar.DependencyLink",
+   "source": "A_Call",
+   "target": "5135e2bb-11b8-4e93-9d37-20bae9635911"
+  },
+  {
+   "id": "02096507-8474-4162-b164-4de827640150",
+   "type": "istar.DependencyLink",
+   "source": "5135e2bb-11b8-4e93-9d37-20bae9635911",
+   "target": "A_CNS"
+  },
+  {
+   "id": "0a3a57f5-ecd2-4f91-91e4-bc072a1c61de",
+   "type": "istar.DependencyLink",
+   "source": "A_Call",
+   "target": "cea6a89c-44bc-4be3-b422-23ceba50cb37"
+  },
+  {
+   "id": "6c40ed5f-eb4b-4fe8-9b61-a5259e788e43",
+   "type": "istar.DependencyLink",
+   "source": "cea6a89c-44bc-4be3-b422-23ceba50cb37",
+   "target": "A_Finance"
+  },
+  {
+   "id": "e5285245-6558-491d-9661-b06b2f5f7b4e",
+   "type": "istar.DependencyLink",
+   "source": "A_Patient",
+   "target": "c698803d-5061-41d6-92b7-ee0468c8a543"
+  },
+  {
+   "id": "a2c5b98f-4ddb-4a9c-b260-41cdb7687409",
+   "type": "istar.DependencyLink",
+   "source": "c698803d-5061-41d6-92b7-ee0468c8a543",
+   "target": "A_Call"
+  },
+  {
+   "id": "5007ec84-9abd-48c3-a5ea-0220d1ba0b80",
+   "type": "istar.DependencyLink",
+   "source": "A_Pathway",
+   "target": "3c68f439-3225-4b6b-9c5a-646a344f97d7"
+  },
+  {
+   "id": "d1415d9b-ce12-4e7f-b099-43ab01508105",
+   "type": "istar.DependencyLink",
+   "source": "3c68f439-3225-4b6b-9c5a-646a344f97d7",
+   "target": "A_Consultant"
+  },
+  {
+   "id": "ae6c6a36-f012-4e28-b161-b668688ab706",
+   "type": "istar.DependencyLink",
+   "source": "A_Pathway",
+   "target": "57466daa-99bc-4d81-abd2-30960322ad5d"
+  },
+  {
+   "id": "8e92ca3d-041f-468b-a292-b3db42a7b355",
+   "type": "istar.DependencyLink",
+   "source": "57466daa-99bc-4d81-abd2-30960322ad5d",
+   "target": "A_Patient"
+  },
+  {
+   "id": "42147767-048a-4cec-a43f-790bb0bd43c8",
+   "type": "istar.DependencyLink",
+   "source": "A_Pathway",
+   "target": "a977baf4-5e53-4f7d-be2e-ed5d59078bdc"
+  },
+  {
+   "id": "2962e2b5-f88d-41ea-b148-767400d32047",
+   "type": "istar.DependencyLink",
+   "source": "a977baf4-5e53-4f7d-be2e-ed5d59078bdc",
+   "target": "A_Management"
+  },
+  {
+   "id": "f953a0b0-1e37-4cb8-8f58-c3eb6b925fb7",
+   "type": "istar.DependencyLink",
+   "source": "A_Management",
+   "target": "be7702a2-2142-4fb6-8b56-dbfdd246db70"
+  },
+  {
+   "id": "2c428520-023d-4cd0-8768-4635df99c75d",
+   "type": "istar.DependencyLink",
+   "source": "be7702a2-2142-4fb6-8b56-dbfdd246db70",
+   "target": "A_Pathway"
+  },
+  {
+   "id": "fdac0b8f-3c33-4e33-938b-0af11cd3c74c",
+   "type": "istar.DependencyLink",
+   "source": "A_Management",
+   "target": "d4b8e837-760d-4fd6-a710-5d6eb078de0d"
+  },
+  {
+   "id": "516be4f0-d609-4ad5-8241-f6dcca816a42",
+   "type": "istar.DependencyLink",
+   "source": "d4b8e837-760d-4fd6-a710-5d6eb078de0d",
+   "target": "A_Finance"
+  },
+  {
+   "id": "f7976d6b-10e3-438d-ab7a-4c2eac73a7a6",
+   "type": "istar.DependencyLink",
+   "source": "A_Management",
+   "target": "337928ed-8345-46bc-8032-26d0869d41a3"
+  },
+  {
+   "id": "6f465249-c3e0-45a3-ad22-5b70e63c63f0",
+   "type": "istar.DependencyLink",
+   "source": "337928ed-8345-46bc-8032-26d0869d41a3",
+   "target": "A_Booking"
+  },
+  {
+   "id": "e65b353b-9672-4a69-8343-50bcbb650650",
+   "type": "istar.DependencyLink",
+   "source": "A_Booking",
+   "target": "56eb4ab8-c41d-4ed2-9c67-de202a1737a3"
+  },
+  {
+   "id": "8c04f3be-f5b9-4839-b313-ccdab4fee35c",
+   "type": "istar.DependencyLink",
+   "source": "56eb4ab8-c41d-4ed2-9c67-de202a1737a3",
+   "target": "A_Scheduling"
+  },
+  {
+   "id": "64cc8eb5-33ae-4850-adff-9a1dda63242f",
+   "type": "istar.DependencyLink",
+   "source": "A_Booking",
+   "target": "277b16c8-7af7-4752-8ffd-da8bef358a5c"
+  },
+  {
+   "id": "8ba4a238-4361-4dd9-87b4-3215a74333b5",
+   "type": "istar.DependencyLink",
+   "source": "277b16c8-7af7-4752-8ffd-da8bef358a5c",
+   "target": "A_Correspondence"
+  },
+  {
+   "id": "b8885354-7356-4db8-a82d-1c22035d881d",
+   "type": "istar.DependencyLink",
+   "source": "A_Consultant",
+   "target": "bb87ab3b-27f3-4aff-b1fa-adc4c5a8bba9"
+  },
+  {
+   "id": "e125728d-f4f0-4f2d-801c-5e6a41528f40",
+   "type": "istar.DependencyLink",
+   "source": "bb87ab3b-27f3-4aff-b1fa-adc4c5a8bba9",
+   "target": "A_Clinical"
+  },
+  {
+   "id": "df51e511-1b2d-48bc-8790-c260f1d156d3",
+   "type": "istar.DependencyLink",
+   "source": "A_Treatment",
+   "target": "69840d65-e079-4483-b3ed-e67af994f35a"
+  },
+  {
+   "id": "19a9b2ad-d3ce-4e8f-a2b4-32a803293331",
+   "type": "istar.DependencyLink",
+   "source": "69840d65-e079-4483-b3ed-e67af994f35a",
+   "target": "A_Clinical"
+  },
+  {
+   "id": "1d541165-a95d-4427-b57f-2bfeae15a9d9",
+   "type": "istar.DependencyLink",
+   "source": "A_Finance",
+   "target": "41ae20c5-fb02-49fa-ac60-fa1c22afab0c"
+  },
+  {
+   "id": "217a183f-20da-464f-b5d8-3321b6717d15",
+   "type": "istar.DependencyLink",
+   "source": "41ae20c5-fb02-49fa-ac60-fa1c22afab0c",
+   "target": "A_Funding"
+  },
+  {
+   "id": "57cc6143-a862-48ce-8c32-191c7fd389f9",
+   "type": "istar.DependencyLink",
+   "source": "A_Finance",
+   "target": "68b959a6-1f19-4289-9452-bdc551940f22"
+  },
+  {
+   "id": "0b88378f-13c8-4498-8598-99bf2592f517",
+   "type": "istar.DependencyLink",
+   "source": "68b959a6-1f19-4289-9452-bdc551940f22",
+   "target": "A_PSP"
+  },
+  {
+   "id": "5f46cf1f-fb23-493e-9c66-303703cdc2a2",
+   "type": "istar.DependencyLink",
+   "source": "A_Secretary",
+   "target": "665ef57e-3868-4ae4-8dc4-436d11acadd6"
+  },
+  {
+   "id": "8cc3c26c-945f-4eaf-89a9-f2577846f834",
+   "type": "istar.DependencyLink",
+   "source": "665ef57e-3868-4ae4-8dc4-436d11acadd6",
+   "target": "A_Correspondence"
+  },
+  {
+   "id": "d28738c0-6926-4749-8f54-7c4a555caab6",
+   "type": "istar.DependencyLink",
+   "source": "A_CNS",
+   "target": "cbc851d1-656c-43d4-8fca-ba666a165750"
+  },
+  {
+   "id": "b78bab93-6149-4655-a1a1-924782e9788e",
+   "type": "istar.DependencyLink",
+   "source": "cbc851d1-656c-43d4-8fca-ba666a165750",
+   "target": "A_Clinical"
+  }
+ ],
+ "display": {},
+ "diagram": {
+  "width": 2200,
+  "height": 1700
+ },
+ "tool": "pistar.2.0.0",
+ "istar": "2.0",
+ "saveDate": "Thu, 01 Jan 2026 00:00:00 GMT"
+}

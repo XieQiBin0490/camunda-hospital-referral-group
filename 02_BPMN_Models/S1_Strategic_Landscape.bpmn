@@ -52,7 +52,7 @@
     </bpmn:startEvent>
     <bpmn:userTask id="T_Register" name="Register and validate the patient referral">
       <bpmn:documentation>Receives, registers and validates the referral and confirms patient identification.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral-landscape" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_1</bpmn:incoming>
       <bpmn:incoming>F_1m</bpmn:incoming>
       <bpmn:incoming>F_5</bpmn:incoming>
@@ -191,10 +191,9 @@
     <bpmn:sequenceFlow id="F_5" name="Documentation supplied" sourceRef="T_RequestDocs" targetRef="T_Register">
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_6" name="Accepted" sourceRef="G_Accepted" targetRef="T_BookAppointment">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= accepted = true</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= referralDecision = "accepted"</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_7" name="Not accepted" sourceRef="G_Accepted" targetRef="T_NotifyOutcome">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= accepted = false</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_8" sourceRef="T_NotifyOutcome" targetRef="E_NotAccepted">
     </bpmn:sequenceFlow>

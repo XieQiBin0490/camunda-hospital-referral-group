@@ -510,9 +510,13 @@
         <zeebe:userTask />
       </bpmn:extensionElements>
       <bpmn:incoming>F_3_27</bpmn:incoming>
+      <bpmn:outgoing>F_3_28a</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="G_UrgentTreatmentAuthorised" name="Treatment proceeds and the reason is referred to Finance">
+      <bpmn:incoming>F_3_28a</bpmn:incoming>
       <bpmn:outgoing>F_3_28</bpmn:outgoing>
       <bpmn:outgoing>F_3_29</bpmn:outgoing>
-    </bpmn:userTask>
+    </bpmn:parallelGateway>
     <bpmn:userTask id="T_ResolveTransaction" name="Resolve the outstanding transaction with the provider">
       <bpmn:extensionElements>
         <zeebe:formDefinition formId="form-resolve-payment-transaction" binding="deployment" />
@@ -663,8 +667,9 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_3_23" sourceRef="T_RecordPayment" targetRef="T_ConfirmTreatmentSchedule" />
     <bpmn:sequenceFlow id="F_3_25" sourceRef="T_MarkForInvestigation" targetRef="T_ResolveTransaction" />
-    <bpmn:sequenceFlow id="F_3_28" name="Treatment proceeds on clinical grounds" sourceRef="T_AuthoriseUrgentTreatment" targetRef="T_ConfirmTreatmentSchedule" />
-    <bpmn:sequenceFlow id="F_3_29" name="Refer for financial resolution" sourceRef="T_AuthoriseUrgentTreatment" targetRef="T_ReferUnconfirmedPayment" />
+    <bpmn:sequenceFlow id="F_3_28a" sourceRef="T_AuthoriseUrgentTreatment" targetRef="G_UrgentTreatmentAuthorised" />
+    <bpmn:sequenceFlow id="F_3_28" name="Treatment proceeds on clinical grounds" sourceRef="G_UrgentTreatmentAuthorised" targetRef="T_ConfirmTreatmentSchedule" />
+    <bpmn:sequenceFlow id="F_3_29" name="Refer for financial resolution" sourceRef="G_UrgentTreatmentAuthorised" targetRef="T_ReferUnconfirmedPayment" />
     <bpmn:sequenceFlow id="F_3_26" sourceRef="T_ResolveTransaction" targetRef="T_ConfirmTreatmentSchedule" />
     <bpmn:sequenceFlow id="F_3_30" sourceRef="T_ReferUnconfirmedPayment" targetRef="T_ConfirmTreatmentSchedule" />
     <bpmn:sequenceFlow id="F_3_31" sourceRef="T_ConfirmTreatmentSchedule" targetRef="E_TreatmentScheduled" />
@@ -1352,7 +1357,7 @@
         <di:waypoint x="8715" y="1926" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_3_28_di" bpmnElement="F_3_28">
-        <di:waypoint x="8655" y="926" />
+        <di:waypoint x="8750" y="926" />
         <di:waypoint x="8790" y="926" />
         <di:waypoint x="8790" y="1499" />
         <di:waypoint x="8925" y="1499" />
@@ -1361,7 +1366,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_3_29_di" bpmnElement="F_3_29">
-        <di:waypoint x="8655" y="926" />
+        <di:waypoint x="8750" y="926" />
         <di:waypoint x="8685" y="926" />
         <di:waypoint x="8685" y="2056" />
         <di:waypoint x="8715" y="2056" />
@@ -1592,6 +1597,13 @@
           <dc:Bounds x="9675" y="1788" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-    </bpmndi:BPMNPlane>
+      <bpmndi:BPMNShape id="G_UrgentTreatmentAuthorised_di" bpmnElement="G_UrgentTreatmentAuthorised">
+      <dc:Bounds x="8700" y="901" width="50" height="50" />
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="F_3_28a_di" bpmnElement="F_3_28a">
+      <di:waypoint x="8655" y="926" />
+      <di:waypoint x="8700" y="926" />
+    </bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

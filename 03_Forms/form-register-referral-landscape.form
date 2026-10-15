@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 19,
+  "components": [
+    {
+      "type": "text",
+      "text": "# Register the referral, confirm identification and record the decision",
+      "id": "Header_form-register-referral-landscape",
+      "layout": {
+        "row": "Row_0",
+        "columns": null
+      }
+    },
+    {
+      "key": "documentsComplete",
+      "label": "All expected supporting documents available?",
+      "type": "checkbox",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "key": "patientId",
+      "label": "Patient identifier",
+      "type": "textfield",
+      "validate": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-]{2,39}$",
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "referralReference",
+      "label": "Referral reference issued at registration",
+      "validate": {
+        "maxLength": 40,
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "referringOrganisation",
+      "label": "Referring organisation (GP practice or hospital)",
+      "validate": {
+        "maxLength": 120,
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "key": "requestedSpeciality",
+      "label": "Requested speciality or service",
+      "validate": {
+        "maxLength": 80,
+        "required": true
+      }
+    },
+    {
+      "type": "select",
+      "key": "referralUrgency",
+      "label": "Referral urgency",
+      "values": [
+        {
+          "label": "Urgent",
+          "value": "urgent"
+        },
+        {
+          "label": "Routine",
+          "value": "routine"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "select",
+      "key": "referralDecision",
+      "label": "Referral decision after documentation review",
+      "values": [
+        {
+          "label": "Accepted",
+          "value": "accepted"
+        },
+        {
+          "label": "Rejected",
+          "value": "rejected"
+        },
+        {
+          "label": "Information required",
+          "value": "information required"
+        },
+        {
+          "label": "Redirected",
+          "value": "redirected"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "form-register-referral-landscape",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0"
+}

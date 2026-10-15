@@ -61,6 +61,15 @@
           "value": "representative"
         }
       ]
+    },
+    {
+      "type": "textarea",
+      "key": "letterRecipients",
+      "label": "Recipients the letter is to be distributed to",
+      "validate": {
+        "required": true,
+        "maxLength": 300
+      }
     }
   ],
   "type": "default",

@@ -34,6 +34,24 @@
       "validate": {
         "maxLength": 500
       }
+    },
+    {
+      "type": "select",
+      "key": "documentationCheckResult",
+      "label": "Documentation check outcome",
+      "values": [
+        {
+          "label": "Complete",
+          "value": "complete"
+        },
+        {
+          "label": "Incomplete",
+          "value": "incomplete"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
     }
   ],
   "type": "default",

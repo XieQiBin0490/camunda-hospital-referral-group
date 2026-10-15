@@ -211,9 +211,13 @@
       <bpmn:documentation>Clinical staff may proceed where delaying care creates a patient risk; the reason must be recorded.</bpmn:documentation>
       <bpmn:extensionElements><zeebe:formDefinition formId="form-authorise-urgent-treatment" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_D21</bpmn:incoming>
+      <bpmn:outgoing>F_D22a</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="G_UrgentTreatmentAuthorised" name="Treatment proceeds and the reason is referred to Finance">
+      <bpmn:incoming>F_D22a</bpmn:incoming>
       <bpmn:outgoing>F_D22</bpmn:outgoing>
       <bpmn:outgoing>F_D23</bpmn:outgoing>
-    </bpmn:userTask>
+    </bpmn:parallelGateway>
     <bpmn:userTask id="T_ResolveTransaction" name="Resolve the outstanding transaction with the payment provider or funding organisation">
       <bpmn:extensionElements><zeebe:formDefinition formId="form-resolve-payment-transaction" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="finance-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_D19</bpmn:incoming>
@@ -424,11 +428,15 @@
       <bpmn:extensionElements><zeebe:formDefinition formId="form-refund-decision" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="finance-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_G11</bpmn:incoming>
       <bpmn:outgoing>F_G12</bpmn:outgoing>
-      <bpmn:outgoing>F_G16</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="G_RefundDecision" name="Payment refunded, retained or transferred?" default="F_G16">
+      <bpmn:incoming>F_G12</bpmn:incoming>
+      <bpmn:outgoing>F_G122</bpmn:outgoing>
+      <bpmn:outgoing>F_G16</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="T_RequestRefund" name="Send the approved refund request to the External Payment Service Provider">
       <bpmn:extensionElements><zeebe:taskDefinition type="request-refund" /></bpmn:extensionElements>
-      <bpmn:incoming>F_G12</bpmn:incoming>
+      <bpmn:incoming>F_G122</bpmn:incoming>
       <bpmn:outgoing>F_G13</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:userTask id="T_RecordRefund" name="Record the refund result against the patient account">
@@ -508,9 +516,10 @@
     <bpmn:sequenceFlow id="F_D21" name="Urgent clinical need" sourceRef="G_PaymentOutcome" targetRef="T_AuthoriseUrgentTreatment">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= paymentStatus = &quot;urgent clinical need&quot;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="F_D22" name="Treatment proceeds" sourceRef="T_AuthoriseUrgentTreatment" targetRef="T_ConfirmTreatmentSchedule">
+    <bpmn:sequenceFlow id="F_D22a" sourceRef="T_AuthoriseUrgentTreatment" targetRef="G_UrgentTreatmentAuthorised" />
+    <bpmn:sequenceFlow id="F_D22" name="Treatment proceeds" sourceRef="G_UrgentTreatmentAuthorised" targetRef="T_ConfirmTreatmentSchedule">
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="F_D23" name="Refer for financial resolution" sourceRef="T_AuthoriseUrgentTreatment" targetRef="T_ReferUnconfirmedPayment">
+    <bpmn:sequenceFlow id="F_D23" name="Refer for financial resolution" sourceRef="G_UrgentTreatmentAuthorised" targetRef="T_ReferUnconfirmedPayment">
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_D24" sourceRef="T_ReferUnconfirmedPayment" targetRef="T_ConfirmTreatmentSchedule">
     </bpmn:sequenceFlow>
@@ -625,7 +634,10 @@
     <bpmn:sequenceFlow id="F_G11" name="Payment involved" sourceRef="G_PaymentOnAppointment" targetRef="T_RefundDecision">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= appointmentPaid = true</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="F_G12" name="Refund approved" sourceRef="T_RefundDecision" targetRef="T_RequestRefund">
+    <bpmn:sequenceFlow id="F_G12" name="Decision recorded" sourceRef="T_RefundDecision" targetRef="G_RefundDecision">
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_G122" name="Refund approved" sourceRef="G_RefundDecision" targetRef="T_RequestRefund">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= refundDecision = &quot;refunded&quot;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_G13" sourceRef="T_RequestRefund" targetRef="T_RecordRefund">
     </bpmn:sequenceFlow>
@@ -634,7 +646,7 @@
     <bpmn:sequenceFlow id="F_G15" name="No payment involved" sourceRef="G_PaymentOnAppointment" targetRef="T_OfferAnotherAppointment">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= appointmentPaid = false</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="F_G16" name="Payment retained or transferred" sourceRef="T_RefundDecision" targetRef="T_OfferAnotherAppointment">
+    <bpmn:sequenceFlow id="F_G16" name="Payment retained or transferred" sourceRef="G_RefundDecision" targetRef="T_OfferAnotherAppointment">
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="F_G17" sourceRef="T_OfferAnotherAppointment" targetRef="E_PathwayReviewed">
     </bpmn:sequenceFlow>
@@ -1162,13 +1174,13 @@ repeated reminders are not generated unnecessarily after a letter has been compl
         <di:waypoint x="3287" y="687" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_D22_di" bpmnElement="F_D22">
-        <di:waypoint x="3437" y="687" />
+        <di:waypoint x="3532" y="687" />
         <di:waypoint x="3467" y="687" />
         <di:waypoint x="3467" y="140" />
         <di:waypoint x="3497" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_D23_di" bpmnElement="F_D23">
-        <di:waypoint x="3437" y="687" />
+        <di:waypoint x="3532" y="687" />
         <di:waypoint x="3467" y="687" />
         <di:waypoint x="3467" y="567" />
         <di:waypoint x="3497" y="567" />
@@ -1408,7 +1420,7 @@ repeated reminders are not generated unnecessarily after a letter has been compl
         <di:waypoint x="8117" y="437" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_G12_di" bpmnElement="F_G12">
-        <di:waypoint x="8267" y="437" />
+        <di:waypoint x="8270" y="437" />
         <di:waypoint x="8327" y="437" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_G13_di" bpmnElement="F_G13">
@@ -1426,7 +1438,7 @@ repeated reminders are not generated unnecessarily after a letter has been compl
         <di:waypoint x="8747" y="1187" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="F_G16_di" bpmnElement="F_G16">
-        <di:waypoint x="8267" y="437" />
+        <di:waypoint x="8320" y="437" />
         <di:waypoint x="8507" y="437" />
         <di:waypoint x="8507" y="1187" />
         <di:waypoint x="8747" y="1187" />
@@ -1709,6 +1721,20 @@ repeated reminders are not generated unnecessarily after a letter has been compl
           <dc:Bounds x="404" y="1949" width="168" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-    </bpmndi:BPMNPlane>
+      <bpmndi:BPMNShape id="G_UrgentTreatmentAuthorised_di" bpmnElement="G_UrgentTreatmentAuthorised">
+      <dc:Bounds x="3482" y="662" width="50" height="50" />
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="G_RefundDecision_di" bpmnElement="G_RefundDecision">
+      <dc:Bounds x="8270" y="412" width="50" height="50" />
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="F_D22a_di" bpmnElement="F_D22a">
+      <di:waypoint x="3437" y="687" />
+      <di:waypoint x="3482" y="687" />
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="F_G122_di" bpmnElement="F_G122">
+      <di:waypoint x="8320" y="437" />
+      <di:waypoint x="8327" y="437" />
+    </bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

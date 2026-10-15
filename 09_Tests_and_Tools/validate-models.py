@@ -140,7 +140,11 @@ def check(path):
                 fd = ext.find(ZEEBE + 'formDefinition') if ext is not None else None
                 if fd is None or not fd.get('formId'):
                     warnings.append('user task %s "%s" has no form reference' % (i, name))
-            if kind.endswith('Gateway'):
+            # Only a data-based choice needs every branch guarded. A parallel gateway
+            # splits unconditionally by definition, and an event-based gateway waits on
+            # events, so requiring a condition of them is a false positive - the same
+            # rule in validate.js is limited to exclusive and inclusive gateways.
+            if kind in ('exclusiveGateway', 'inclusiveGateway', 'complexGateway'):
                 outs = outgoing.get(i, [])
                 if len(outs) > 1:
                     if not el.get('default') and not all(

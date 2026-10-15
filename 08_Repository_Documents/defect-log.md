@@ -53,3 +53,16 @@ strict. DEF-04 is a runtime defect that only appears once an instance is started
 | --- | --- | --- | --- | --- |
 | Sprint 1 / Sprint 2 working files (categories) | 16 | 15 | 1 | 0 |
 | Deployment and runtime | 4 | 4 | 0 | 0 |
+
+## D. Defects found by the second-release review (item 3 of the review list)
+
+Found by auditing the delivered models against the case study, after the initial release
+was accepted. All four are fixed, deployed and re-validated.
+
+| ID | Defect | Case-study basis | Status | Resolution | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| DEF-17 | `T_RefundDecision` (S3) had two unconditional outgoing flows and no gateway, so BPMN read it as a parallel split and every refund case both refunded and retained the payment | Para 15 makes this a choice: an authorised member of the Finance Team determines whether a refund is appropriate | Fixed | Inserted the exclusive gateway `G_RefundDecision` with `= refundDecision = "refunded"` on the refund branch and the retain/transfer branch declared as the default flow | `validate-models.py` clean; deployed as PR_TreatmentToAftercare v5 |
+| DEF-18 | `T_AuthoriseUrgentTreatment` (O1 and S3) had two unconditional outgoing flows, so the AND-split was implicit | Para 14 requires both: the treatment proceeds on clinical grounds **and** the reason is referred to the Finance Team | Fixed | Inserted the explicit `G_UrgentTreatmentAuthorised` parallel gateway, making the intent visible instead of implied | Deployed as PR_Operational_Merged v12 and PR_TreatmentToAftercare v5 |
+| DEF-19 | `G_Accepted` in S1 branched on an `accepted` boolean that no form collected and no other model used, so the gateway could never leave its default flow | Para 6: the Consultant accepts, rejects, requests information or redirects | Fixed | S1 now branches on the controlled `referralDecision`, and `T_Register` binds to the new `form-register-referral-landscape`; the shared `form-register-referral` is left alone because S2's registration task belongs to the Medical Secretaries, who para 5 forbids from deciding acceptance | Deployed as PR_Landscape v5; the form count rose from 68 to 69 |
+| DEF-20 | `form-prepare-accessible-format` collected `followUpSlotWithinPeriod`, a follow-up booking flag belonging to the follow-up forms | Task attribution | Fixed | Field removed from that form | `validate-form-controls.py` reports 0 inappropriate controls |
+| DEF-21 | Three worker inputs had no form anywhere, so their value could only ever be the worker's own default: `documentationCheckResult`, `letterRecipients`, `refundAuthorised` | Para 5, 22 and 15 require a person to record the check outcome, the letter recipients and the financial authorisation | Fixed | Added to `form-check-referral-documents`, `form-clinic-letter-admin-check` and `form-refund-decision` respectively | `validate-form-controls.py` reports 0 worker inputs with no form source |

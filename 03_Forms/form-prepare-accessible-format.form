@@ -11,14 +11,6 @@
       }
     },
     {
-      "key": "followUpSlotWithinPeriod",
-      "label": "Follow-up appointment found within the requested period?",
-      "type": "checkbox",
-      "validate": {
-        "required": true
-      }
-    },
-    {
       "key": "patientId",
       "label": "Patient identifier",
       "type": "textfield",

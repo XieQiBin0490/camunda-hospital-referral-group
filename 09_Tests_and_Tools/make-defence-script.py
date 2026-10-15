@@ -6,6 +6,10 @@ they can open), how to show it, the evidence, and the answer to the likely quest
 English is deliberately simple - short sentences, everyday words - because it has to be
 read aloud. Every English line is followed by its Chinese.
 
+The four parts are balanced by speaking time rather than by line count, and any extra
+material given to a member comes from their own section of 01_Agile_Planning/work-division.md
+so that they can answer questions about it.
+
 Laid out as paragraphs, not a table: a two-column table lets a long unbreakable file name
 widen its column and push the other one off the page, and this is a sheet to read from, so
 wrapping text is what is wanted.
@@ -21,7 +25,7 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "08_Repository_Documents" / "答辩讲稿_四人分讲_中英对照.docx"
+OUT = ROOT / "08_Repository_Documents" / "答辩讲稿_四人分讲_中英对照_均衡版.docx"
 
 EN_FONT = "Calibri"
 ZH_FONT = "微软雅黑"
@@ -34,15 +38,14 @@ PAGES = [
         "第 1 部分 - Max：修复 BPMN 模型",
         [
             ("My job", "我负责", "head"),
-            ("I work on the BPMN model.", "我负责 BPMN 模型。", "body"),
-            ("The model shows how the hospital works.", "模型画出医院的工作流程。", "body"),
-            ("Some parts were wrong. I fixed them.", "有些地方是错的，我把它们修好了。", "body"),
+            ("I work on the BPMN model. It shows how the hospital works.",
+             "我负责 BPMN 模型。模型画出医院的工作流程。", "body"),
+            ("Some parts were wrong. I fixed them.",
+             "有些地方是错的，我把它们修好了。", "body"),
 
             ("What was wrong", "原来哪里不对", "head"),
-            ("One task had two lines out. There was no rule. So both lines ran.",
-             "有一个任务有两条出线，却没有条件，所以两条路都会走。", "body"),
-            ("This was the refund task. So every refund case also kept the money.",
-             "这就是退款那个任务。结果每个退款单同时也保留了钱。", "body"),
+            ("One task had two lines out, with no rule, so both lines ran. It was the refund task, so every refund also kept the money.",
+             "有一个任务有两条出线却没有条件，所以两条路都会走。这就是退款任务，结果每个退款单同时也保留了钱。", "body"),
             ("Another task also had two lines out. Here both lines should run, but nobody could see that.",
              "另一个任务也有两条出线。这里两条本来就都该走，但没有人看得出来。", "body"),
             ("In model S1, a gate looked at a word that nobody wrote. So it never worked.",
@@ -51,18 +54,12 @@ PAGES = [
              "有一个表单问了不属于它的问题。还有三个答案根本没有表单可填。", "body"),
 
             ("What I changed", "我改了什么", "head"),
-            ("I put a gate in the middle. Now it must pick one line.",
-             "我在中间加了一个网关。现在它必须选一条路。", "body"),
-            ("File S3_Strategic_Treatment_To_Aftercare.bpmn, line 432 and line 639.",
-             "文件 S3_Strategic_Treatment_To_Aftercare.bpmn，第 432 行和第 639 行。", "body"),
-            ("I put in a clear 'both' gate. Now everyone can see both lines run.",
-             "我加了一个明确的“两条都走”网关，现在一眼就能看出两条都要走。", "body"),
-            ("File O1_Operational_Merged.bpmn line 515. File S3 line 216.",
-             "文件 O1_Operational_Merged.bpmn 第 515 行。S3 第 216 行。", "body"),
-            ("S1 now uses a word that a form really writes.",
-             "S1 现在改用一个表单真的会写的变量。", "body"),
-            ("File S1_Strategic_Landscape.bpmn line 194 and line 55.",
-             "文件 S1_Strategic_Landscape.bpmn 第 194 行和第 55 行。", "body"),
+            ("I put a gate in the middle, so now it must pick one line. File S3_Strategic_Treatment_To_Aftercare.bpmn, line 432 and line 639.",
+             "我在中间加了一个网关，现在它必须选一条路。文件 S3_Strategic_Treatment_To_Aftercare.bpmn，第 432 行和第 639 行。", "body"),
+            ("I put in a clear 'both' gate, so everyone can see both lines run. File O1_Operational_Merged.bpmn line 515, file S3 line 216.",
+             "我加了一个明确的“两条都走”网关，一眼就能看出两条都要走。文件 O1_Operational_Merged.bpmn 第 515 行，S3 第 216 行。", "body"),
+            ("S1 now uses a word that a form really writes. File S1_Strategic_Landscape.bpmn line 194 and line 55.",
+             "S1 现在改用一个表单真的会写的变量。文件 S1_Strategic_Landscape.bpmn 第 194 行和第 55 行。", "body"),
             ("I moved the wrong question out, and gave the three answers their own forms.",
              "我把那个错的问题移走，并给那三个答案各自加了表单。", "body"),
 
@@ -83,12 +80,8 @@ PAGES = [
              "见 defect-log.md 的 D 组（DEF-17 到 DEF-21）。", "body"),
 
             ("If the teacher asks", "老师问就答", "head"),
-            ("Why one gate here, but a 'both' gate there?",
-             "为什么这里用一个网关，那里却用“两条都走”的网关？", "body"),
-            ("The case study says the money is either refunded or kept. Pick one.",
-             "案例研究说：钱要么退，要么留。只能选一个。", "body"),
-            ("The case study says the patient still gets care, AND the reason goes to Finance. Both.",
-             "案例研究说：病人照样治疗，同时理由要交给财务。两个都要。", "body"),
+            ("The case study says the money is either refunded or kept: pick one. And the patient still gets care AND the reason goes to Finance: both.",
+             "案例研究说：钱要么退要么留，只能选一个；而病人照样治疗、理由同时交给财务，两个都要。", "body"),
         ],
     ),
     (
@@ -100,13 +93,10 @@ PAGES = [
              "我负责全部 69 个表单。表单就是员工填写的那个页面。", "body"),
 
             ("What was wrong", "原来哪里不对", "head"),
-            ("We used only two kinds of box: a text box and a tick box.",
-             "我们只用了两种控件：文本框和复选框。", "body"),
-            ("A date? A text box. A number? A text box.",
-             "日期用文本框，数字也用文本框。", "body"),
-            ("One number was a tick box.", "有一个数字用的是复选框。", "body"),
-            ("A tick box gives true or false. The gate asks: is the number 7 or less?",
-             "复选框给出的是 true 或 false。而网关问的是：这个数字小于等于 7 吗？", "body"),
+            ("We used only two kinds of box: a text box and a tick box. A date? A text box. A number? A text box.",
+             "我们只用了两种控件：文本框和复选框。日期用文本框，数字也用文本框。", "body"),
+            ("One number was a tick box. A tick box gives true or false, but the gate asks: is the number 7 or less?",
+             "有一个数字用的是复选框。复选框给出的是 true 或 false，而网关问的是：这个数字小于等于 7 吗？", "body"),
             ("True is not a number. So the gate never worked the right way.",
              "true 不是数字。所以这个网关一直不对。", "body"),
             ("Nobody had to fill anything. You could send an empty form.",
@@ -114,38 +104,30 @@ PAGES = [
             ("Three answers had no box at all.", "有三个答案根本没有框可以填。", "body"),
 
             ("What I changed", "我改了什么", "head"),
-            ("Now we use 6 kinds of box.", "现在我们用了 6 种控件。", "body"),
-            ("4 tick boxes became number boxes.",
-             "4 个复选框改成了数字框。", "body"),
+            ("Now we use 6 kinds of box. 4 tick boxes became number boxes.",
+             "现在我们用了 6 种控件。4 个复选框改成了数字框。", "body"),
             ("File form-deliver-treatment-cycle.form: key on line 14, type=number on line 16.",
              "文件 form-deliver-treatment-cycle.form：key 在第 14 行，type=number 在第 16 行。", "body"),
-            ("6 text boxes became drop-down lists.",
-             "6 个文本框改成了下拉框。", "body"),
-            ("Files form-clinical-review-referral.form and 5 more, line 14 to line 16.",
-             "文件 form-clinical-review-referral.form 等 6 个，第 14 行到第 16 行。", "body"),
+            ("6 text boxes became drop-down lists. File form-clinical-review-referral.form and 5 more, line 14 to line 16.",
+             "6 个文本框改成了下拉框。文件 form-clinical-review-referral.form 等 6 个，第 14 行到第 16 行。", "body"),
             ("Now 162 boxes have rules. 157 must be filled, 70 check the format.",
              "现在有 162 个框带校验规则，其中 157 个必填、70 个校验格式。", "body"),
-            ("All 69 forms check the patient number.",
-             "69 个表单全部校验患者编号。", "body"),
-            ("File form-receive-referral.form, line 22 to line 27.",
-             "文件 form-receive-referral.form，第 22 到 27 行。", "body"),
+            ("All 69 forms check the patient number. File form-receive-referral.form, line 22 to line 27.",
+             "69 个表单全部校验患者编号。文件 form-receive-referral.form，第 22 到 27 行。", "body"),
             ("All 25 gate words now have a box, and must be filled.",
              "25 个网关变量现在都有框，而且都是必填。", "body"),
 
             ("How to show it (30 seconds)", "现场怎么演示（30 秒）", "head"),
-            ("Open form-deliver-treatment-cycle.form, lines 14 to 21.",
-             "打开 form-deliver-treatment-cycle.form，第 14 到 21 行。", "body"),
-            ("You can see key, label, type=number and the rules on one screen.",
-             "一屏就能看到 key、label、type=number 和校验规则。", "body"),
+            ("Open form-deliver-treatment-cycle.form, lines 14 to 21. Key, label, type=number and the rules are on one screen.",
+             "打开 form-deliver-treatment-cycle.form 第 14 到 21 行，一屏就能看到 key、label、type=number 和校验规则。", "body"),
             ("Then open that task in Tasklist. You see a number box, not a tick box.",
              "再在 Tasklist 打开那个任务，看到的是数字框，不是复选框。", "body"),
             ("Send an empty form. It is blocked.",
              "提交一张空白表单，会被直接拦住。", "body"),
 
             ("Proof", "证据", "head"),
-            ("validate-forms.py: clean.", "validate-forms.py：clean。", "body"),
-            ("validate-form-controls.py: clean, 0 problems.",
-             "validate-form-controls.py：clean，0 个问题。", "body"),
+            ("validate-forms.py: clean. validate-form-controls.py: clean, 0 problems.",
+             "validate-forms.py：clean。validate-form-controls.py：clean，0 个问题。", "body"),
             ("See form-field-change-log.md.", "见 form-field-change-log.md。", "body"),
 
             ("If the teacher asks", "老师问就答", "head"),
@@ -163,30 +145,36 @@ PAGES = [
         "第 3 部分 - Henry：角色权限（RBAC）",
         [
             ("My job", "我负责", "head"),
-            ("I work on the rules and the proof.", "我负责规则和证据。", "body"),
+            ("I work on the rules, the checkers and the proof.",
+             "我负责规则、检查器和证据。", "body"),
             ("The teacher asked: different people should see different tasks.",
              "老师要求：不同的人应该看到不同的任务。", "body"),
 
             ("What I found", "我发现了什么", "head"),
-            ("First I checked. Was it working? No.",
-             "我先去验证。它生效了吗？没有。", "body"),
-            ("In the server settings, permission checks were OFF.",
-             "服务器配置里，权限检查是关着的。", "body"),
+            ("First I checked. Was it working? No. In the server settings, permission checks were OFF.",
+             "我先去验证。它生效了吗？没有。服务器配置里，权限检查是关着的。", "body"),
             ("So every person could see every task.",
              "所以每个人都能看到所有任务。", "body"),
             ("'Different people see different tasks' was not true at all.",
              "“不同角色看到不同任务”当时根本不成立。", "body"),
 
             ("What I changed", "我改了什么", "head"),
-            ("I turned the permission checks ON.", "我把权限检查打开了。", "body"),
-            ("File c8run configuration application.yaml - two lines.",
-             "文件 c8run 的 configuration/application.yaml - 改了两行。", "body"),
+            ("I turned the permission checks ON. File c8run configuration application.yaml - two lines.",
+             "我把权限检查打开了。文件 c8run 的 configuration/application.yaml - 改了两行。", "body"),
             ("I made 10 groups and 10 users. Each user is in one group only.",
              "我建了 10 个组和 10 个用户，每个用户只在一个组里。", "body"),
             ("Every task already says which group owns it: 99 places in the model.",
              "模型里每个任务本来就写了属于哪个组，一共 99 处。", "body"),
             ("Files setup-rbac.py and verify-rbac.py.",
              "文件 setup-rbac.py 和 verify-rbac.py。", "body"),
+
+            ("Another thing I check", "我还检查的另一件事", "head"),
+            ("Every value a worker needs must be written by a form or another worker. I wrote a checker for that contract.",
+             "工作者需要的每个变量，都必须由某个表单或其他工作者写入。我为这份契约写了一个检查器。", "body"),
+            ("It found two real gaps, and one of them stalled a live run.",
+             "它发现了两个真实的缺口，其中一个让一次真实运行卡住了。", "body"),
+            ("A missing value makes a gate take a branch nobody chose, and nothing shows an error.",
+             "值缺失会让网关走一条没人选的分支，而且不会报错。", "body"),
 
             ("How to show it (30 seconds)", "现场怎么演示（30 秒）", "head"),
             ("Run: python 09_Tests_and_Tools/verify-rbac.py",
@@ -197,7 +185,7 @@ PAGES = [
              "B：没有任何权限的用户看到 0 条，有权限的用户看到 785 条。", "body"),
             ("C: each group sees only its own tasks. 0 mistakes.",
              "C：每个组只看到自己的任务，0 处错配。", "body"),
-            ("Then open Tasklist. Log in as secretary.demo, then as finance.demo. The lists differ.",
+            ("Then open Tasklist and log in as secretary.demo, then as finance.demo. The two lists differ.",
              "再打开 Tasklist，分别用 secretary.demo 和 finance.demo 登录，两个列表不一样。", "body"),
 
             ("Proof", "证据", "head"),
@@ -222,7 +210,8 @@ PAGES = [
         "第 4 部分 - Finn：把数据存进数据库",
         [
             ("My job", "我负责", "head"),
-            ("I work on the workers' memory.", "我负责工作器的状态存储。", "body"),
+            ("I work on the workers' memory, and on what a failure means.",
+             "我负责工作器的状态存储，以及判断失败意味着什么。", "body"),
             ("The teacher asked: save the business data in a database.",
              "老师要求：把业务数据保存进数据库。", "body"),
 
@@ -237,36 +226,34 @@ PAGES = [
             ("What I changed", "我改了什么", "head"),
             ("I added a real database. It is called H2, and it has 4 tables.",
              "我接入了真正的数据库，叫 H2，一共有 4 张表。", "body"),
-            ("Table 1: the business records.", "表 1：业务记录。", "body"),
-            ("Table 2: the appointments. It stops the same appointment being booked twice.",
-             "表 2：预约。它能防止同一个预约被确认两次。", "body"),
-            ("Table 3: the retry counts.", "表 3：重试次数。", "body"),
-            ("Table 4: the audit log. It can only add. It can never change.",
-             "表 4：审计日志。只能追加，永远不能修改。", "body"),
+            ("Table 1: the business records. Table 2: the appointments, and it stops the same appointment being booked twice.",
+             "表 1：业务记录。表 2：预约，它能防止同一个预约被确认两次。", "body"),
+            ("Table 3: the retry counts. Table 4: the audit log, which can only add and never change.",
+             "表 3：重试次数。表 4：审计日志，只能追加，永远不能修改。", "body"),
             ("I did not change any worker. The outside of the code is the same.",
              "我没有改动任何工作器，代码对外的样子完全一样。", "body"),
             ("Files Database.java (new), HospitalStore.java, OperationsLog.java.",
              "文件 Database.java（新增）、HospitalStore.java、OperationsLog.java。", "body"),
 
             ("How to show it (30 seconds)", "现场怎么演示（30 秒）", "head"),
-            ("Run the write command. Then run the read command.",
-             "先运行写入命令，再运行读取命令。", "body"),
-            ("These are two different programs. The first one is already closed.",
-             "这是两个不同的程序，第一个已经关闭了。", "body"),
-            ("The second one reads all 7 things. 7 of 7 pass.",
-             "第二个程序读到了全部 7 项，7/7 通过。", "body"),
-            ("So the data did not die.", "所以数据没有丢。", "body"),
-
-            ("Proof", "证据", "head"),
-            ("See 05_Test_Evidence/persistence/run-1-write.txt and run-2-read.txt.",
-             "见 05_Test_Evidence/persistence/run-1-write.txt 和 run-2-read.txt。", "body"),
+            ("Run the write command, then the read command. They are two different programs, and the first one is already closed.",
+             "先运行写入命令，再运行读取命令。这是两个不同的程序，第一个已经关闭了。", "body"),
+            ("The second one reads all 7 things, so the data did not die. 7 of 7 pass.",
+             "第二个程序读到了全部 7 项，所以数据没有丢，7/7 通过。", "body"),
             ("The 41 unit tests still pass.", "41 个单元测试仍然全部通过。", "body"),
-            ("See database-integration.md.", "见 database-integration.md。", "body"),
+            ("See run-1-write.txt and run-2-read.txt in 05_Test_Evidence/persistence, and database-integration.md.",
+             "见 05_Test_Evidence/persistence 下的 run-1-write.txt 和 run-2-read.txt，以及 database-integration.md。", "body"),
 
             ("If the teacher asks", "老师问就答", "head"),
+            ("Why is 'no answer' not the same as 'no capacity'?",
+             "为什么“没有回复”和“没有容量”不是一回事？", "body"),
+            ("A provider that says no is a normal business answer, and the model already has a branch for it.",
+             "供应商回答“没有”是正常的业务结果，模型里本来就有对应分支。", "body"),
+            ("A provider that says nothing is a fault, so we retry it. If we mix them up, a network fault looks like no capacity and the patient is escalated for the wrong reason.",
+             "供应商什么都不回是故障，我们会重试。两者混在一起，网络故障就会被当成没有容量，病人会被错误地升级处理。", "body"),
             ("Is the data really safe?", "数据真的不丢吗？", "body"),
-            ("Yes. Two programs. One writes and closes. The other reads everything.",
-             "是的。两个程序，一个写完就关，另一个全部读到。", "body"),
+            ("Yes. Two programs: one writes and closes, the other reads everything.",
+             "是的。两个程序：一个写完就关，另一个全部读到。", "body"),
             ("But say this as well, do not hide it:", "但也要主动说，不要掩盖：", "note"),
             ("On this laptop a restarted worker cannot write again, because the sandbox blocks the database file lock. On a normal computer this does not happen, and we wrote it down.",
              "在这台笔记本上，重启后的工作器无法再写，因为沙箱拦住了数据库文件锁。普通电脑上不会这样。我们已经把这个写进了文档。", "body"),
@@ -298,7 +285,7 @@ def add_person(document, title_en, title_zh, rows):
     p.paragraph_format.space_before = Pt(0)
     p.paragraph_format.space_after = Pt(3)
     style_run(p.add_run(title_en + "   "), size=12, bold=True, colour=NAVY)
-    style_run(p.add_run(title_zh), zh=True, size=11.5, bold=True, colour=NAVY)
+    style_run(p.add_run(title_zh), zh=True, size=11, bold=True, colour=NAVY)
 
     for en, zh, kind in rows:
         para = document.add_paragraph()
@@ -331,7 +318,7 @@ def build():
     head2 = document.add_paragraph()
     head2.alignment = WD_ALIGN_PARAGRAPH.CENTER
     head2.paragraph_format.space_after = Pt(5)
-    style_run(head2.add_run("17 组整改清单：四人分讲稿（中英对照，一人一页）"),
+    style_run(head2.add_run("17 组整改清单：四人分讲稿（中英对照）"),
               zh=True, size=11, bold=True, colour=NAVY)
 
     for i, (title_en, title_zh, rows) in enumerate(PAGES):

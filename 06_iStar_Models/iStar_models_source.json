@@ -363,6 +363,24 @@
         "to": "A_Clinical",
         "kind": "resource",
         "label": "Blood test and assessment results"
+      },
+      {
+        "from": "A_Secretary",
+        "to": "A_Referrer",
+        "kind": "task",
+        "label": "Supply missing referral information"
+      },
+      {
+        "from": "A_Booking",
+        "to": "A_Patient",
+        "kind": "task",
+        "label": "Confirm attendance by telephone"
+      },
+      {
+        "from": "A_Pathway",
+        "to": "A_Referrer",
+        "kind": "task",
+        "label": "Inform the referring organisation of pathway changes"
       }
     ]
   },
@@ -991,8 +1009,8 @@
         "label": "Investigation and test results"
       },
       {
-        "fromActor": "ACT_Consultant",
-        "fromEl": "T_C5",
+        "fromActor": "ACT_Secretary",
+        "fromEl": "T_S3",
         "to": "A_Correspondence",
         "kind": "task",
         "label": "Distribute clinic letters"
@@ -1037,7 +1055,7 @@
         "fromEl": "T_N3",
         "to": "A_Clinical",
         "kind": "resource",
-        "label": "Urgent investigation results"
+        "label": "Blood test and assessment results"
       }
     ]
   }

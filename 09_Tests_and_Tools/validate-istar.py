@@ -30,8 +30,10 @@ TYPE_OF_KIND = {"goal": "istar.Goal", "softgoal": "istar.Quality",
                 "task": "istar.Task", "resource": "istar.Resource"}
 KIND_OF_TYPE = {v: k for k, v in TYPE_OF_KIND.items()}
 
-# What portfolio section B.2 and B.3 assert, so a mismatch is caught here.
-CLAIMED = {"sd_actors": 16, "sd_dependencies": 37, "sr_actors": 7,
+# What portfolio section B.2 and B.3 assert, so a mismatch is caught here. The SD count
+# rose from 37 to 40 when the three dependencies the case study requires were added (see
+# apply-istar-consistency-fix.py); the portfolio text was updated to match.
+CLAIMED = {"sd_actors": 16, "sd_dependencies": 40, "sr_actors": 7,
            "sr_elements": 61, "sr_boundaries": 9}
 
 problems = []

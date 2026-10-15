@@ -151,8 +151,15 @@ def build_sr(src):
     return project
 
 
+# The version piStar writes into the file it saves, and reads back to decide how to load
+# it. The live tool at istar.rwth-aachen.de reports "v2.1.0, released on November, 2021",
+# so the file has to claim the version of the tool that will open it - a file stamped
+# with a version string the loader does not recognise is rejected as "not valid".
+PISTAR_TOOL = "pistar.2.1.0"
+
+
 def stamp(project):
-    project["tool"] = "pistar.2.0.0"
+    project["tool"] = PISTAR_TOOL
     project["istar"] = "2.0"
     project["saveDate"] = "Thu, 01 Jan 2026 00:00:00 GMT"
     return project

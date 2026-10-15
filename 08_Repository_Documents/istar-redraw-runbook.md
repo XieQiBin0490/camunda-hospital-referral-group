@@ -12,7 +12,7 @@
 
 | | 早期草稿（6 个 actor 的 piStar 截图那一版） | 仓库里的成品 `06_iStar_Models/` |
 | --- | --- | --- |
-| SD | 6 个 actor、约 11 条依赖 | **16 个 actor、37 条 typed dependency** |
+| SD | 6 个 actor、约 11 条依赖 | **16 个 actor、40 条 typed dependency** |
 | SR | 一个 "Specialist Hospital" 边界 | **7 个 actor 打开、61 个 intentional element、9 条 boundary dependency** |
 | 与作品集正文一致？ | 对不上 | 一致（正文写的正是这些数字） |
 
@@ -73,7 +73,7 @@ i\* 这一项占 **20%**，评分标准 70%+ 那一档要求：
 
 `File → Load`，选 `06_iStar_Models/pistar/iStar_SD_pistar.json`。
 
-导入后应该有 **16 个 actor**（其中外部服务是 dependee only）、**37 个 dependum**、**74 条 DependencyLink**。
+导入后应该有 **16 个 actor**（其中外部服务是 dependee only）、**40 个 dependum**、**80 条 DependencyLink**。
 
 SD 的依赖关系全部来自模型，**不需要你再画任何链接**；只需要调整布局：把医院内部的 actor 放左侧，
 外部 actor 放右侧，dependum 摆在两者之间，避免线交叉。
@@ -140,7 +140,7 @@ SD 的依赖关系全部来自模型，**不需要你再画任何链接**；只�
 
 作品集 `..._01_Task01_02_Strategic_BPMN_and_iStar.docx` 里写着：
 
-- B.2：`The SD model contains 16 actors and 37 dependencies`
+- B.2：`The SD model contains 16 actors and 40 dependencies`
 - B.3 / Figure 6：`seven actors, 61 intentional elements, 56 internal links, 9 boundary dependencies`
 
 **重画之后回去核这几个数字。** 如果 SR 的内部链接数不是 56，要么补齐，要么把正文里的 56 改成实际数字——
@@ -169,7 +169,7 @@ SD 的依赖关系全部来自模型，**不需要你再画任何链接**；只�
 | 14 | External Payment Service Provider | external actor (dependee only) |
 | 15 | Funding Organisation / Insurer | external actor (dependee only) |
 
-## 5. 数据包：SD 的 37 条依赖
+## 5. 数据包：SD 的 40 条依赖
 
 | 类型 | Depender | Dependee | Dependum（依赖的东西） |
 | --- | --- | --- | --- |
@@ -189,6 +189,9 @@ SD 的依赖关系全部来自模型，**不需要你再画任何链接**；只�
 | Task | Outpatient Bookings Team | External Correspondence Service | Send appointment confirmation letters |
 | Task | Finance Team | External Payment Service Provider | Process payment and return the status |
 | Task | Medical Secretaries | External Correspondence Service | Distribute clinic letters |
+| Task | Medical Secretaries | Referring Organisation (GP or other hospital) | Supply missing referral information |
+| Task | Outpatient Bookings Team | Patient / Authorised Representative | Confirm attendance by telephone |
+| Task | Patient Pathway Coordinators | Referring Organisation (GP or other hospital) | Inform the referring organisation of pathway changes |
 | Resource | Referring Organisation (GP or other hospital) | Medical Secretaries | Complete referral documentation |
 | Resource | Referring Organisation (GP or other hospital) | Consultant / Clinical Team | Referral decision and recorded reason |
 | Resource | Medical Secretaries | Consultant / Clinical Team | Referral checked and prepared for review |
@@ -297,13 +300,13 @@ SD 的依赖关系全部来自模型，**不需要你再画任何链接**；只�
 | --- | --- | --- | --- | --- |
 | ACT_Consultant | `T_C1` | A_Patient | Goal | Receive clinically appropriate treatment |
 | ACT_Consultant | `T_C4` | A_Clinical | Resource | Investigation and test results |
-| ACT_Consultant | `T_C5` | A_Correspondence | Task | Distribute clinic letters |
+| ACT_Secretary | `T_S3` | A_Correspondence | Task | Distribute clinic letters |
 | ACT_Secretary | `T_S2` | A_Referrer | Task | Supply missing referral information |
 | ACT_Finance | `T_F2` | A_PSP | Task | Process payment and return the status |
 | ACT_Bookings | `T_B2` | A_Scheduling | Resource | Available appointment slots |
 | ACT_Pathway | `T_P2` | A_Referrer | Task | Inform the referring organisation of pathway changes |
 | ACT_Bookings | `T_B4` | A_Patient | Task | Confirm attendance by telephone |
-| ACT_CNS | `T_N3` | A_Clinical | Resource | Urgent investigation results |
+| ACT_CNS | `T_N3` | A_Clinical | Resource | Blood test and assessment results |
 
 ---
 
@@ -318,21 +321,21 @@ SD 的依赖关系全部来自模型，**不需要你再画任何链接**；只�
 
 **但把 SR 的每一条 boundary dependency 拿去 SD 里逐条比对，结果是：**
 
-- 完全一致：**4 / 9**
-- 指向同一对 actor、但名字或类型不同：**4**
-- SD 里根本没有这条依赖：**1**
+- 完全一致：**9 / 9**
+- 指向同一对 actor、但名字或类型不同：**0**
+- SD 里根本没有这条依赖：**0**
 
 | SR 的来源 actor | 指向 | 类型 | Dependum | 与 SD 的比对 |
 | --- | --- | --- | --- | --- |
 | Consultant / Clinical Team | Patient / Authorised Representative | Goal | Receive clinically appropriate treatment | 一致（SR 里方向相反，符合 i\* 记法） |
 | Consultant / Clinical Team | External Clinical Services (treatment, laboratory, imaging) | Resource | Investigation and test results | 一致 |
-| Consultant / Clinical Team | External Correspondence Service | Task | Distribute clinic letters | **归属不同**：SD 里是 Medical Secretaries → External Correspondence Service |
-| Medical Secretaries | Referring Organisation (GP or other hospital) | Task | Supply missing referral information | **名字/类型不同**：SD 叫 “Complete referral documentation”，类型是 Resource |
+| Medical Secretaries | External Correspondence Service | Task | Distribute clinic letters | 一致 |
+| Medical Secretaries | Referring Organisation (GP or other hospital) | Task | Supply missing referral information | 一致 |
 | Finance Team | External Payment Service Provider | Task | Process payment and return the status | 一致 |
 | Outpatient Bookings Team | External Scheduling Service | Resource | Available appointment slots | 一致 |
-| Patient Pathway Coordinators | Referring Organisation (GP or other hospital) | Task | Inform the referring organisation of pathway changes | **SD 里完全没有这条依赖** |
-| Outpatient Bookings Team | Patient / Authorised Representative | Task | Confirm attendance by telephone | **名字/类型不同**：SD 叫 “Offer a timely new patient appointment”，类型是 Task |
-| Clinical Nurse Specialist Team | External Clinical Services (treatment, laboratory, imaging) | Resource | Urgent investigation results | **名字/类型不同**：SD 叫 “Blood test and assessment results”，类型是 Resource |
+| Patient Pathway Coordinators | Referring Organisation (GP or other hospital) | Task | Inform the referring organisation of pathway changes | 一致 |
+| Outpatient Bookings Team | Patient / Authorised Representative | Task | Confirm attendance by telephone | 一致 |
+| Clinical Nurse Specialist Team | External Clinical Services (treatment, laboratory, imaging) | Resource | Blood test and assessment results | 一致 |
 
 **必须做的选择（二选一，然后统一）：**
 

@@ -764,7 +764,7 @@
  "orphans": [],
  "dependencies": [
   {
-   "id": "2700310b-f8b8-4496-9665-43324248a4df",
+   "id": "aa20db41-f0c5-4f90-8c76-7a7a72bd9956",
    "text": "Receive clinically appropriate treatment",
    "type": "istar.Goal",
    "x": 1800,
@@ -773,7 +773,7 @@
    "target": "A_Patient"
   },
   {
-   "id": "158f3656-fa9b-43ee-83bc-99fecb8d3fc5",
+   "id": "0217acd2-d907-4d98-b796-f78214a02355",
    "text": "Investigation and test results",
    "type": "istar.Resource",
    "x": 1800,
@@ -782,16 +782,16 @@
    "target": "A_Clinical"
   },
   {
-   "id": "c18f6811-b3d8-45b4-8135-6b1abb28a11b",
+   "id": "d5bfc443-6604-41b2-9665-96df2352fe26",
    "text": "Distribute clinic letters",
    "type": "istar.Task",
    "x": 1800,
    "y": 300,
-   "source": "T_C5",
+   "source": "T_S3",
    "target": "A_Correspondence"
   },
   {
-   "id": "8c41661b-ed00-4b2a-b08e-f5e9ca59dda4",
+   "id": "6690c638-8653-4618-abfc-a6b83d7de1aa",
    "text": "Supply missing referral information",
    "type": "istar.Task",
    "x": 1800,
@@ -800,7 +800,7 @@
    "target": "A_Referrer"
   },
   {
-   "id": "c8c3aa3f-8a63-406a-b59c-781e35df5010",
+   "id": "c8e2d502-1076-4846-8ef4-8acdfb463452",
    "text": "Process payment and return the status",
    "type": "istar.Task",
    "x": 1800,
@@ -809,7 +809,7 @@
    "target": "A_PSP"
   },
   {
-   "id": "00c10077-c8cc-4c30-9922-295a301790ed",
+   "id": "c51985a1-3259-45bb-983b-300f5fd37cad",
    "text": "Available appointment slots",
    "type": "istar.Resource",
    "x": 1800,
@@ -818,7 +818,7 @@
    "target": "A_Scheduling"
   },
   {
-   "id": "0de5f678-1e29-4408-b071-bb8ae913394b",
+   "id": "065bf42e-beb6-4f85-a8c0-0e744dbd3c3a",
    "text": "Inform the referring organisation of pathway changes",
    "type": "istar.Task",
    "x": 1800,
@@ -827,7 +827,7 @@
    "target": "A_Referrer"
   },
   {
-   "id": "2ec1ae57-ef89-4c98-9c85-72a4130ca62f",
+   "id": "e9df8adf-200b-4472-91fb-cf65a6e1e81c",
    "text": "Confirm attendance by telephone",
    "type": "istar.Task",
    "x": 1800,
@@ -836,8 +836,8 @@
    "target": "A_Patient"
   },
   {
-   "id": "9c7eea9a-6226-4ce7-9ae9-df2c9082237b",
-   "text": "Urgent investigation results",
+   "id": "1bdf7519-aed5-4f1e-ad69-2da9d559090c",
+   "text": "Blood test and assessment results",
    "type": "istar.Resource",
    "x": 1800,
    "y": 840,
@@ -847,111 +847,111 @@
  ],
  "links": [
   {
-   "id": "16ebb4a6-a39f-4d7d-a888-b5156abca3dc",
+   "id": "198e8d17-7f62-45c7-9dfb-def376ca775f",
    "type": "istar.DependencyLink",
    "source": "T_C1",
-   "target": "2700310b-f8b8-4496-9665-43324248a4df"
+   "target": "aa20db41-f0c5-4f90-8c76-7a7a72bd9956"
   },
   {
-   "id": "842f7054-002c-4aad-aae9-4a3ed2a881ec",
+   "id": "a1162e3d-9fd4-4e60-a950-6cd43d443716",
    "type": "istar.DependencyLink",
-   "source": "2700310b-f8b8-4496-9665-43324248a4df",
+   "source": "aa20db41-f0c5-4f90-8c76-7a7a72bd9956",
    "target": "A_Patient"
   },
   {
-   "id": "471a1dee-865f-477c-9aa1-084420e531cd",
+   "id": "6216b7a3-1bd5-4eb1-8051-1c7bf7d0ee4b",
    "type": "istar.DependencyLink",
    "source": "T_C4",
-   "target": "158f3656-fa9b-43ee-83bc-99fecb8d3fc5"
+   "target": "0217acd2-d907-4d98-b796-f78214a02355"
   },
   {
-   "id": "59dcebd5-5878-4c11-ab5f-1fc53d151da1",
+   "id": "16e6b9b0-21ee-4b72-bbe8-d1459eddaac0",
    "type": "istar.DependencyLink",
-   "source": "158f3656-fa9b-43ee-83bc-99fecb8d3fc5",
+   "source": "0217acd2-d907-4d98-b796-f78214a02355",
    "target": "A_Clinical"
   },
   {
-   "id": "beda8134-244c-4471-afa3-0fdb680f5ec9",
+   "id": "067aa2c0-802c-44d9-a9c2-33912028f240",
    "type": "istar.DependencyLink",
-   "source": "T_C5",
-   "target": "c18f6811-b3d8-45b4-8135-6b1abb28a11b"
+   "source": "T_S3",
+   "target": "d5bfc443-6604-41b2-9665-96df2352fe26"
   },
   {
-   "id": "2d2e4e57-0c5a-4c3a-bdbe-606c8b0244f6",
+   "id": "e45be436-a83a-4675-9ab7-95ad052f8c9c",
    "type": "istar.DependencyLink",
-   "source": "c18f6811-b3d8-45b4-8135-6b1abb28a11b",
+   "source": "d5bfc443-6604-41b2-9665-96df2352fe26",
    "target": "A_Correspondence"
   },
   {
-   "id": "c4a53445-92b1-4a03-9a2e-9163c409b311",
+   "id": "b38bfad9-ed7f-4666-a43d-d9f15a5c6e2d",
    "type": "istar.DependencyLink",
    "source": "T_S2",
-   "target": "8c41661b-ed00-4b2a-b08e-f5e9ca59dda4"
+   "target": "6690c638-8653-4618-abfc-a6b83d7de1aa"
   },
   {
-   "id": "e075a90c-06dc-482f-8910-496be874c3cb",
+   "id": "e943edc2-b79d-46f5-929d-96391e07b090",
    "type": "istar.DependencyLink",
-   "source": "8c41661b-ed00-4b2a-b08e-f5e9ca59dda4",
+   "source": "6690c638-8653-4618-abfc-a6b83d7de1aa",
    "target": "A_Referrer"
   },
   {
-   "id": "7e7bd6bd-3247-4fa7-ac4f-2a45027e7a8f",
+   "id": "23439922-83ed-4957-a0b1-408a1bdfea51",
    "type": "istar.DependencyLink",
    "source": "T_F2",
-   "target": "c8c3aa3f-8a63-406a-b59c-781e35df5010"
+   "target": "c8e2d502-1076-4846-8ef4-8acdfb463452"
   },
   {
-   "id": "a46cb2fd-d396-44f0-97cc-a2f6aac65581",
+   "id": "1f8770e1-e0df-4b10-913d-532d79805d78",
    "type": "istar.DependencyLink",
-   "source": "c8c3aa3f-8a63-406a-b59c-781e35df5010",
+   "source": "c8e2d502-1076-4846-8ef4-8acdfb463452",
    "target": "A_PSP"
   },
   {
-   "id": "ea617f97-8866-4118-8c10-545829bb444c",
+   "id": "5077a674-56d1-4439-a5d9-d6e3d48d5b6b",
    "type": "istar.DependencyLink",
    "source": "T_B2",
-   "target": "00c10077-c8cc-4c30-9922-295a301790ed"
+   "target": "c51985a1-3259-45bb-983b-300f5fd37cad"
   },
   {
-   "id": "889c7f7d-587e-4d81-a8ab-7ffb4ee2894e",
+   "id": "ab178e80-b1d1-418f-ae80-ad7a3e6ff83c",
    "type": "istar.DependencyLink",
-   "source": "00c10077-c8cc-4c30-9922-295a301790ed",
+   "source": "c51985a1-3259-45bb-983b-300f5fd37cad",
    "target": "A_Scheduling"
   },
   {
-   "id": "a26fe465-169f-4752-82bd-bd7d344df59b",
+   "id": "d4612035-05cd-4695-8d65-823fc416e8f4",
    "type": "istar.DependencyLink",
    "source": "T_P2",
-   "target": "0de5f678-1e29-4408-b071-bb8ae913394b"
+   "target": "065bf42e-beb6-4f85-a8c0-0e744dbd3c3a"
   },
   {
-   "id": "a28a4fc8-40ed-48de-86ab-9f44fa9a326d",
+   "id": "083e2152-6351-47ff-a4a0-a8063a3d27e8",
    "type": "istar.DependencyLink",
-   "source": "0de5f678-1e29-4408-b071-bb8ae913394b",
+   "source": "065bf42e-beb6-4f85-a8c0-0e744dbd3c3a",
    "target": "A_Referrer"
   },
   {
-   "id": "c930689d-209e-49c7-935f-92df186bdfb7",
+   "id": "dcbb38d1-a6c5-46d6-bb81-2b91ef6e65c1",
    "type": "istar.DependencyLink",
    "source": "T_B4",
-   "target": "2ec1ae57-ef89-4c98-9c85-72a4130ca62f"
+   "target": "e9df8adf-200b-4472-91fb-cf65a6e1e81c"
   },
   {
-   "id": "03428765-00a4-45c9-a9e8-cacc6ed719f0",
+   "id": "71b14711-3776-4be6-86e9-b6a51aabc92e",
    "type": "istar.DependencyLink",
-   "source": "2ec1ae57-ef89-4c98-9c85-72a4130ca62f",
+   "source": "e9df8adf-200b-4472-91fb-cf65a6e1e81c",
    "target": "A_Patient"
   },
   {
-   "id": "affade39-fe3f-40fe-a5f1-33ab1a433567",
+   "id": "e95bf637-2049-4a36-a5bd-22ab70e9b9c0",
    "type": "istar.DependencyLink",
    "source": "T_N3",
-   "target": "9c7eea9a-6226-4ce7-9ae9-df2c9082237b"
+   "target": "1bdf7519-aed5-4f1e-ad69-2da9d559090c"
   },
   {
-   "id": "cd597e2b-03b9-449a-8aa2-1ce758e0fda4",
+   "id": "ff2030cf-3bbf-454a-9388-f47be7cc3e6c",
    "type": "istar.DependencyLink",
-   "source": "9c7eea9a-6226-4ce7-9ae9-df2c9082237b",
+   "source": "1bdf7519-aed5-4f1e-ad69-2da9d559090c",
    "target": "A_Clinical"
   }
  ],
@@ -983,7 +983,7 @@
    "Description": ""
   }
  },
- "tool": "pistar.2.0.0",
+ "tool": "pistar.2.1.0",
  "istar": "2.0",
  "saveDate": "Thu, 01 Jan 2026 00:00:00 GMT"
 }

@@ -150,7 +150,7 @@ process-definition deploy line, `05_Test_Evidence/`.
 
 **Portfolio work.** `S3-09` closed the i\* tooling decision and drafted the SD
 model (12 actors, 27 dependencies); `S3-10` wrote the SR decompositions; `S4-12`
-delivered SD v1.0 (16 actors, 37 typed dependencies) and `S4-13` the SR;
+delivered SD v1.0 (16 actors, 40 typed dependencies) and `S4-13` the SR;
 `S4-14` recorded the soft goals with their conflicts; `S4-15` reconciled the
 assumptions note. 60% of the i\* activity.
 

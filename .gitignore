@@ -8,6 +8,12 @@
 04_Java_Worker/target/
 *.class
 
+# The worker's embedded database. It is created on first run and rebuilt from scratch by
+# 09_Tests_and_Tools/PersistenceCheck, so the binary belongs in no one's checkout.
+data/
+*.mv.db
+*.trace.db
+
 # Node helpers used only by the rendering/verification scripts
 node_modules/
 

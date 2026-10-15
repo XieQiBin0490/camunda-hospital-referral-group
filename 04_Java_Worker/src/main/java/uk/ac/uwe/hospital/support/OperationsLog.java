@@ -1,29 +1,33 @@
 package uk.ac.uwe.hospital.support;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * An append-only audit log of what each worker did.
  *
- * <p>The initial release has no audit store, so requirement REQ-37 ("audit
- * records must identify user, date, time and action, and must not be editable by
- * ordinary users") is only partly supported. The workers cannot fix that on
- * their own, but they can stop making it worse: every automated decision is
- * written here with the actor, the instant, the action and the correlation
- * handle, and the log exposes no update or delete operation. The gap that
- * remains is persistence and access control, which is stated in the acceptance
- * evaluation rather than papered over.
+ * <p>Requirement REQ-37 asks that audit records identify user, date, time and action, and
+ * that ordinary users cannot edit them. The workers cannot settle the access-control half
+ * on their own, but they can stop making it worse: every automated decision is written
+ * here with the actor, the instant, the action and the correlation handle, and the log
+ * exposes no update or delete operation. Review item 1 closed the other half of the gap -
+ * the log used to live in a list in the process and vanished on restart; it is now a table
+ * in {@link Database}, and the table is only ever appended to.
  *
  * <p>中文：这是只追加的审计日志：记录操作人、时间点、动作与关联句柄，并且刻意不提供任何
  * 更新或删除方法，也没有暴露底层集合，因此普通使用者无法篡改已写入的条目——这一点用
  * API 表面来保证，而不是靠约定。每条记录都带上关联句柄，使一次转诊全过程中的自动化决策
- * 可以被串起来复核。真正的缺口是持久化与访问控制，属于基础设施层面的问题，已在验收说明中
- * 陈述，此处不假装已经解决。
+ * 可以被串起来复核。整改清单第 1 项补上了原先陈述的缺口：日志原先存放在进程内存的列表里，
+ * 重启即失，现在改为数据库中的一张表，且该表只允许追加。
  */
 public final class OperationsLog {
 
@@ -39,10 +43,10 @@ public final class OperationsLog {
     /** 中文：进程级单例，保证所有工作者写入同一份审计日志，序号与内容才具有全局意义。 */
     private static final OperationsLog INSTANCE = new OperationsLog();
 
-    /** 中文：全局条目序列，用同步包装的列表保证多线程追加时不丢条目；读取时会持锁复制快照。 */
-    private final List<Entry> entries = Collections.synchronizedList(new ArrayList<>());
-    /** 中文：按关联句柄建立的次级索引，使查询一次事务的全部记录无需扫描整个日志。 */
-    private final Map<String, List<Entry>> byCorrelation = new ConcurrentHashMap<>();
+    /** 中文：查询语句共用一份，避免在多个方法里重复书写列清单。 */
+    private static final String SELECT_COLUMNS =
+            "SELECT occurred_at, actor, action, correlation_id, process_instance_key, "
+                    + "element_id, detail FROM audit_log";
 
     /** 中文：单例模式，构造器私有，避免出现互不可见的第二份审计序列。 */
     private OperationsLog() {
@@ -53,39 +57,87 @@ public final class OperationsLog {
         return INSTANCE;
     }
 
-    /** 中文：追加一条记录。时间点由日志自己在写入时确定，调用方无法伪造；明细先复制为不可变映射。 */
+    /**
+     * 中文：追加一条记录。时间点由日志自己在写入时确定，调用方无法伪造；明细先复制为不可变映射，
+     * 防止调用方事后修改已归档的条目内容。
+     */
     public void record(String actor, String action, String correlationId,
                        long processInstanceKey, String elementId, Map<String, Object> detail) {
-        // 中文：时间在写入瞬间取当前时刻，明细做防御性复制，防止调用方事后修改已归档的条目内容。
-        Entry e = new Entry(Instant.now(), actor, action, correlationId,
-                processInstanceKey, elementId, Map.copyOf(detail));
-        entries.add(e);
-        // 中文：同时写入关联索引，查询单次事务时只需读取对应列表；句柄缺失时归入占位键。
-        byCorrelation.computeIfAbsent(correlationId == null ? "-" : correlationId,
-                k -> Collections.synchronizedList(new ArrayList<>())).add(e);
+        Instant at = Instant.now();
+        Database.inConnection("cannot append to the audit log", c -> {
+            try (PreparedStatement ps = c.prepareStatement("""
+                    INSERT INTO audit_log
+                      (occurred_at, actor, action, correlation_id, process_instance_key, element_id, detail)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)""")) {
+                ps.setTimestamp(1, Timestamp.from(at));
+                ps.setString(2, actor);
+                ps.setString(3, action);
+                ps.setString(4, correlationId == null ? "-" : correlationId);
+                ps.setLong(5, processInstanceKey);
+                ps.setString(6, elementId);
+                ps.setString(7, Database.json().writeValueAsString(Map.copyOf(detail)));
+                ps.executeUpdate();
+            }
+            return null;
+        });
     }
 
-    /** 中文：返回全部条目的不可变快照。持锁复制是为了避免遍历期间被并发追加所干扰。 */
+    /** 中文：返回全部条目的快照，按追加顺序排列，读取不会改变日志内容。 */
     public List<Entry> all() {
-        // 中文：同步块与写入端的列表锁一致，保证复制过程中不会读到中间状态。
-        synchronized (entries) {
-            return List.copyOf(entries);
-        }
+        return query(SELECT_COLUMNS + " ORDER BY seq", null);
     }
 
     /** 中文：按关联句柄查询条目；没有记录时返回空列表，使调用方无需额外判空。 */
     public List<Entry> forCorrelation(String correlationId) {
-        return List.copyOf(byCorrelation.getOrDefault(correlationId, List.of()));
+        return query(SELECT_COLUMNS + " WHERE correlation_id = ? ORDER BY seq",
+                correlationId == null ? "-" : correlationId);
     }
 
     /** 中文：返回条目总数，用于测试断言与运行监控，不改变日志内容。 */
     public int size() {
-        return entries.size();
+        return Database.inConnection("cannot count the audit log", c -> {
+            try (PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM audit_log");
+                 ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? rs.getInt(1) : 0;
+            }
+        });
     }
 
-    /** 中文：清空日志与索引，仅供测试隔离或重放演示使用，正常业务流程不应调用。 */
+    /** 中文：清空日志，仅供测试隔离或重放演示使用，正常业务流程不应调用。 */
     public void clear() {
-        entries.clear();
-        byCorrelation.clear();
+        Database.inConnection("cannot clear the audit log", c -> {
+            try (PreparedStatement ps = c.prepareStatement("DELETE FROM audit_log")) {
+                ps.executeUpdate();
+            }
+            return null;
+        });
+    }
+
+    /**
+     * 中文：共用的查询实现。读出的明细用不可修改映射包装；这里刻意不用 Map.copyOf，
+     * 因为库中可能存有原始记录里的空值，而空值会让 Map.copyOf 抛异常。
+     */
+    private static List<Entry> query(String sql, String correlationId) {
+        return Database.inConnection("cannot read the audit log", c -> {
+            List<Entry> out = new ArrayList<>();
+            try (PreparedStatement ps = c.prepareStatement(sql)) {
+                if (correlationId != null) {
+                    ps.setString(1, correlationId);
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        Map<String, Object> detail = rs.getString(7) == null
+                                ? Map.of()
+                                : Database.json().readValue(rs.getString(7),
+                                        new TypeReference<LinkedHashMap<String, Object>>() {
+                                        });
+                        out.add(new Entry(rs.getTimestamp(1).toInstant(), rs.getString(2),
+                                rs.getString(3), rs.getString(4), rs.getLong(5), rs.getString(6),
+                                Collections.unmodifiableMap(detail)));
+                    }
+                }
+            }
+            return List.copyOf(out);
+        });
     }
 }

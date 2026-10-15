@@ -24,6 +24,8 @@
     <slf4j.version>2.0.17</slf4j.version>
     <logback.version>1.5.32</logback.version>
     <junit.version>5.11.4</junit.version>
+    <h2.version>2.2.224</h2.version>
+    <jackson.version>2.21.1</jackson.version>
   </properties>
 
   <dependencies>
@@ -41,6 +43,30 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
+    </dependency>
+
+    <!--
+      Review item 1: business data must be saved and read back, not held in a map
+      that dies with the process. H2 is the same engine the cluster uses for its own
+      secondary storage, and it runs embedded, so the worker keeps no external server.
+
+      H2 is an embedded, file-backed database. Jackson serialises the record payloads,
+      which are the free-form maps the workers already pass around.
+    -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${h2.version}</version>
+    </dependency>
+
+    <!--
+      JSON for the record payloads. This is the version the Zeebe client already brings in
+      transitively, pinned here so the dependency is declared rather than relied on.
+    -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
 
     <!--
@@ -75,6 +101,15 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
+        <configuration>
+          <!--
+            The tests must not touch the file-backed store the workers use, so they run
+            against an in-memory database of the same schema.
+          -->
+          <systemPropertyVariables>
+            <hospital.db.url>jdbc:h2:mem:hospital-test;DB_CLOSE_DELAY=-1</hospital.db.url>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

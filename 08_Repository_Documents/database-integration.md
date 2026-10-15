@@ -47,10 +47,32 @@ Schema, created on first use:
 
 H2 normally allows several connections to one file database. Acquiring its file lock is
 not permitted in every environment, and where the lock cannot be taken H2 opens the
-database **read-only**, so a second connection in the same process then fails to write.
-`Database` therefore holds a single connection for the life of the process and serialises
-access to it with `inConnection`. A later process opening the same file gets it read-only,
-which is exactly what reading back saved data needs.
+database **read-only**. Two consequences follow, and both were observed here rather than
+assumed:
+
+1. **Within one process**, a second connection is read-only, so `Database` holds a single
+   connection for the life of the process and serialises access to it with `inConnection`.
+   This is a design choice and it works everywhere.
+2. **Across processes**, in this sandbox the H2 file lock cannot be acquired at all, so a
+   database file that already exists is opened **read-only** by every later process,
+   including a restarted worker. Measured directly: a first `PersistenceCheck write` into a
+   fresh directory reports `RESULT: PASS`, and a second one against the same file fails
+   with *"The database is read only"*. `ACCESS_MODE_DATA=rw`, `FILE_LOCK=NO` and
+   `FILE_LOCK=SOCKET` were each tried and none of them changes it - `FILE_LOCK=SOCKET` is
+   worse, it makes even the first connection read-only.
+
+   This is an environment restriction, not a property of the design. On an ordinary
+   Windows, macOS or Linux machine the lock is available and a restarted worker writes
+   normally. It does not affect the item being demonstrated, because **saving and reading
+   back** is exactly what the two-process check verifies: the writing process exits, and a
+   fresh JVM reads everything it stored.
+
+   Operationally it does mean that, in this sandbox, the database file must be cleared
+   before the worker fleet starts if the fleet is to write at all:
+
+   ```powershell
+   Remove-Item -Recurse -Force data      # only needed here, before starting the workers
+   ```
 
 ## How to reproduce and verify
 

@@ -41,18 +41,38 @@ and the cluster stays up.
 | Zeebe gRPC (what Modeler uses) | `localhost:26500` |
 | Login | `demo` / `demo` |
 
-## 2. Deploy with the script, not from Modeler
+## 2. Deploy: run the script once, then the Modeler's button also works
 
 ```powershell
 cd D:\camunda-hospital-referral-group\camunda-hospital-referral-group
 node 09_Tests_and_Tools\deploy-all.mjs
 ```
 
-Each model is deployed **together with the forms it references**, in one deployment. This
-is now load-bearing rather than merely tidy: every user task says
-`bindingType="deployment"`, so an instance resolves its form from its own deployment. A
-`.bpmn` deployed on its own will fail with *"expected to find form with id X in current
-deployment, but not found"* on every user task.
+`deploy-all.mjs` sends each model **together with the forms it references**, in one
+deployment. Run it once on a fresh cluster. After that the Modeler's own **Deploy** button
+works too, which matters because that is what a marker will press.
+
+### The binding, and why there are two modes
+
+Every user task carries `bindingType` on its `zeebe:formDefinition`. The models ship with
+**`bindingType="latest"`**, for this reason:
+
+| mode | the Modeler's Deploy button | a task renders | who this suits |
+| --- | --- | --- | --- |
+| **`latest`** (shipped) | **works** - a `.bpmn` on its own is accepted | the newest deployed version of that form | marking and demonstration |
+| `deployment` | **fails** - the engine rejects a model whose forms are not in the same deployment | the form from the instance's own deployment | strict control of what a running process shows |
+
+Switch between them with:
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File 09_Tests_and_Tools\set-form-binding.ps1 show
+pwsh -ExecutionPolicy Bypass -File 09_Tests_and_Tools\set-form-binding.ps1 latest
+pwsh -ExecutionPolicy Bypass -File 09_Tests_and_Tools\set-form-binding.ps1 deployment
+```
+
+**Neither mode can put the forms on the cluster by itself.** A form is a separate resource,
+not part of the `.bpmn`, so a fresh cluster needs `deploy-all.mjs` once. Under `latest` the
+first user task otherwise fails with `FORM_NOT_FOUND` rather than at deploy time.
 
 ### Why the drop-downs disappeared
 
@@ -60,14 +80,14 @@ The models used to say `binding="deployment"`. `binding` is **not an attribute o
 `zeebe:formDefinition`** - the element takes `formId`, `formKey`, `externalReference`,
 `bindingType` and `versionTag`, and `bindingType` is an enum of exactly `deployment`,
 `latest` and `versionTag`. An unknown attribute is not rejected, so the engine ignored it
-and used the **default binding, `latest`**: an instance rendered whichever version of a form
-had been deployed most recently by *anyone*. A teammate deploying their own copy of the
-forms therefore made their older text-box forms the latest ones, and the drop-downs were
-gone. All 99 references now say `bindingType="deployment"`.
+and used the **default binding, `latest`** - the same value the models now carry on
+purpose. A teammate deploying their own copy of the forms therefore made their older
+text-box forms the newest ones, and the drop-downs were gone. That is the hazard `latest`
+keeps: **always deploy from this repository's `03_Forms`, never from a personal copy.**
 
-Camunda Modeler had been reporting it all along: `unknown attribute <binding>`, 29 warnings
-on O1 alone, which is exactly its formDefinition count. Reopen the models now and the
-warning count is 0.
+Camunda Modeler had been reporting the misspelling all along: `unknown attribute <binding>`,
+29 warnings on O1 alone, which is exactly its formDefinition count. Reopen the models now
+and the warning count is 0.
 
 Check it, end to end, with:
 

@@ -70,11 +70,34 @@ async function main() {
   }
   const xml = await fetch(`${API}/process-definitions/${op.processDefinitionKey}/xml`,
     { headers: { Authorization: AUTH } }).then(r => r.text());
-  const rightAttr = (xml.match(/bindingType="deployment"/g) || []).length;
+  const deployedBinding = (xml.match(/bindingType="(deployment|latest|versionTag)"/g) || []).length;
+  const which = (xml.match(/bindingType="(deployment|latest|versionTag)"/) || [])[1] || 'none';
   const wrongAttr = (xml.match(/formDefinition[^>]*\sbinding="/g) || []).length;
-  line(rightAttr > 0 && wrongAttr === 0,
-    `deployed model v${op.version} uses bindingType`,
-    `bindingType=${rightAttr}, wrong attribute=${wrongAttr}`);
+  line(deployedBinding > 0 && wrongAttr === 0,
+    `deployed model v${op.version} uses the real attribute`,
+    `bindingType=${which} x${deployedBinding}, wrong attribute=${wrongAttr}`);
+  console.log(`         binding mode: ${which}` +
+    (which === 'latest'
+      ? '  (the Modeler Deploy button works; a task uses the newest deployed form version)'
+      : '  (a task uses the form from its own deployment; deploy with deploy-all.mjs)'));
+
+  // A model deployed on its own is what the Modeler's Deploy button does. With the strict
+  // binding the engine rejects that, so the check is only meaningful for `latest`.
+  const solo = new FormData();
+  solo.append('name', 'solo-deploy-check');
+  solo.append('resources',
+    new Blob([fs.readFileSync(path.join(ROOT, '02_BPMN_Models', 'O1_Operational_Merged.bpmn'))],
+      { type: 'application/xml' }),
+    'O1_Operational_Merged.bpmn');
+  const soloRes = await fetch(`${API}/deployments`,
+    { method: 'POST', headers: { Authorization: AUTH }, body: solo });
+  if (which === 'latest') {
+    line(soloRes.ok, 'the Modeler Deploy button works (a .bpmn deploys on its own)',
+      `HTTP ${soloRes.status}`);
+  } else {
+    line(true, 'a .bpmn on its own is rejected by design',
+      `HTTP ${soloRes.status} - deploy with deploy-all.mjs`);
+  }
 
   // 2. Start a real referral so an instance exists with the current deployment.
   const patientId = 'BINDING-' + Date.now();

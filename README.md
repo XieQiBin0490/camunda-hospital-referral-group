@@ -94,6 +94,31 @@ Install **Camunda Modeler 5.51.0** and open any file in `02_BPMN_Models/`. Each
 file declares `modeler:executionPlatform="Camunda Cloud"`, platform version
 `8.10.0`.
 
+### Deploy the forms once before you run anything
+
+```bash
+node 09_Tests_and_Tools/deploy-all.mjs
+```
+
+Every user task names a **Camunda Form** that lives in `03_Forms/`, and a form is
+not part of the `.bpmn` file: it has to be deployed. `deploy-all.mjs` sends each
+model and the forms it references in **one deployment**, which is the way the
+forms and the model are meant to travel together.
+
+The models bind their forms with `bindingType="latest"`, so the Modeler's own
+Deploy button works as well - it sends the `.bpmn` on its own, which the engine
+accepts. What it cannot send is the forms, so run `deploy-all.mjs` at least once
+on a fresh cluster, or the first user task will fail with `FORM_NOT_FOUND`.
+
+> The binding used to be misspelt as `binding="deployment"`. That attribute does
+> not exist on `zeebe:formDefinition`, so the engine ignored it and used the
+> default, `latest` - which is why the Modeler's Deploy button worked, and also
+> why a teammate deploying their own copy of the forms silently replaced every
+> drop-down with an old text box. The attribute is now spelt correctly, and
+> `bindingType` can be set to `deployment` (strict, deploy with the script) or
+> `latest` (convenient, the Deploy button works) with
+> `09_Tests_and_Tools/set-form-binding.ps1`.
+
 ## How to run the workers
 
 ```bash

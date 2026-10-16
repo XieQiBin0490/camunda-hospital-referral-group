@@ -91,14 +91,14 @@
     </bpmn:startEvent>
     <bpmn:userTask id="T_RegisterReferral" name="Register the referral and confirm patient identification">
       <bpmn:documentation>Accurate patient identification reduces the risk of records being linked to the wrong patient.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_A1</bpmn:incoming>
       <bpmn:incoming>F_A1m</bpmn:incoming>
       <bpmn:outgoing>F_A2</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_CheckDocumentation" name="Check referral documentation completeness">
       <bpmn:documentation>Checks for previous clinic letters, investigation results and diagnostic reports.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-check-referral-documents" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-check-referral-documents" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_A2</bpmn:incoming>
       <bpmn:incoming>F_A6</bpmn:incoming>
       <bpmn:outgoing>F_A3</bpmn:outgoing>
@@ -118,13 +118,13 @@
     </bpmn:sendTask>
     <bpmn:userTask id="T_ClinicalReview" name="Perform the clinical review of the referral">
       <bpmn:documentation>Only a Consultant may judge clinical suitability.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-clinical-review-referral" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-clinical-review-referral" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_A5</bpmn:incoming>
       <bpmn:outgoing>F_A7</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_RecordDecision" name="Record the referral decision, rationale and responsible clinician">
       <bpmn:documentation>The reason for the decision and the identity of the decision maker must be recorded for audit.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-referral-decision" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-referral-decision" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_A7</bpmn:incoming>
       <bpmn:outgoing>F_A8</bpmn:outgoing>
     </bpmn:userTask>
@@ -138,7 +138,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ForwardAccepted" name="Forward the accepted referral to the Outpatient Bookings Team">
       <bpmn:documentation>A New Patient Appointment may only be arranged after an authorised Consultant has accepted the referral.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-forward-accepted-referral" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-forward-accepted-referral" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_A14</bpmn:incoming>
       <bpmn:outgoing>F_B1</bpmn:outgoing>
     </bpmn:userTask>
@@ -162,7 +162,7 @@
     </bpmn:endEvent>
     <bpmn:userTask id="T_ReceiveBookingRequest" name="Receive and validate the new patient booking request">
       <bpmn:documentation>Booking request carries speciality, appointment priority, preferred timeframe and patient requirements.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-validate-booking-request" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-validate-booking-request" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B1</bpmn:incoming>
       <bpmn:outgoing>F_B2</bpmn:outgoing>
     </bpmn:userTask>
@@ -173,7 +173,7 @@
       <bpmn:outgoing>F_B4</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ExpediteBooking" name="Escalate the booking as urgent and agree the clinical timescale">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-expedite-urgent-booking" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-expedite-urgent-booking" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B3</bpmn:incoming>
       <bpmn:outgoing>F_B5</bpmn:outgoing>
     </bpmn:userTask>
@@ -192,17 +192,17 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ResolveCapacity" name="Highlight the case and resolve the capacity constraint">
       <bpmn:documentation>A patient must never be booked silently outside the period requested by the Consultant.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-resolve-capacity-constraint" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="patient-pathway-coordinators" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-resolve-capacity-constraint" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="patient-pathway-coordinators" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B8</bpmn:incoming>
       <bpmn:outgoing>F_B9</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_SelectBookAppointment" name="Select and book the new patient appointment">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-select-book-appointment" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-select-book-appointment" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B7</bpmn:incoming>
       <bpmn:outgoing>F_B10</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_ConfirmAppointment" name="Confirm the appointment and record the booking reference">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-confirm-appointment" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-confirm-appointment" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B10</bpmn:incoming>
       <bpmn:outgoing>F_B11</bpmn:outgoing>
     </bpmn:userTask>
@@ -218,14 +218,14 @@
       <bpmn:outgoing>F_B14</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_TelephonePatient" name="Telephone the patient to confirm attendance">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-telephone-patient" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-telephone-patient" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B14</bpmn:incoming>
       <bpmn:incoming>F_B17</bpmn:incoming>
       <bpmn:outgoing>F_B15</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_RecordContactOutcome" name="Record the contact attempt and its outcome">
       <bpmn:documentation>A call may be unanswered, the number may be wrong, or the patient may request another appointment.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-contact-outcome" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-contact-outcome" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B15</bpmn:incoming>
       <bpmn:outgoing>F_B16</bpmn:outgoing>
     </bpmn:userTask>
@@ -235,14 +235,14 @@
       <bpmn:outgoing>F_B18</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_NewPatientConsultation" name="Deliver the new patient consultation and discuss treatment options">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-new-patient-consultation" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-new-patient-consultation" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_B13</bpmn:incoming>
       <bpmn:incoming>F_B18</bpmn:incoming>
       <bpmn:outgoing>F_C1</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_ProvideCnsContactDetails" name="Provide the patient with Clinical Nurse Specialist contact details">
       <bpmn:documentation>Following the New Patient Appointment the patient receives information about the Clinical Nurse Specialist Team and an appropriate contact number.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-provide-cns-contact-details" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-provide-cns-contact-details" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_C1</bpmn:incoming>
       <bpmn:outgoing>F_C1b</bpmn:outgoing>
     </bpmn:userTask>
@@ -252,7 +252,7 @@
       <bpmn:outgoing>F_C3</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_AdviseAndClose" name="Provide clinical advice and record the decision not to proceed">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-advise-no-treatment" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-advise-no-treatment" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_C3</bpmn:incoming>
       <bpmn:outgoing>F_C4</bpmn:outgoing>
     </bpmn:userTask>
@@ -260,13 +260,13 @@
       <bpmn:incoming>F_C4</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:userTask id="T_RecordConsent" name="Record the patient consent to treatment">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-patient-consent" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-patient-consent" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_C2</bpmn:incoming>
       <bpmn:outgoing>F_C5</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_CreateAuthorisedRequest" name="Create the authorised Treatment Booking Request">
       <bpmn:documentation>Records the proposed treatment, start date, number and frequency of cycles, reviews between cycles and special resources.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-treatment-booking-request" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-treatment-booking-request" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_C5</bpmn:incoming>
       <bpmn:incoming>F_C9</bpmn:incoming>
       <bpmn:outgoing>F_C6</bpmn:outgoing>
@@ -278,7 +278,7 @@
       <bpmn:outgoing>F_C8</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ReturnUnauthorisedRequest" name="Return the unauthorised request to the clinical team">
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-return-unauthorised-request" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-return-unauthorised-request" bindingType="latest" /><zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_C7</bpmn:incoming>
       <bpmn:outgoing>F_C9</bpmn:outgoing>
     </bpmn:userTask>

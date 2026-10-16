@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_O1_Operational" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.51.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
   <bpmn:message id="Msg_Referral" name="Patient referral" />
   <bpmn:message id="Msg_MissingDocumentation" name="Missing documentation request" />
@@ -130,7 +130,7 @@
     <bpmn:userTask id="T_ReceiveReferral" name="Receive and register the referral">
       <bpmn:documentation>Registers the referral and confirms patient identification so that records are not associated with the wrong patient.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-receive-referral" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-receive-referral" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="medical-secretaries" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -141,7 +141,7 @@
     <bpmn:userTask id="T_CheckReferralDocuments" name="Check referral documentation completeness">
       <bpmn:documentation>Checks for previous clinic letters, investigation results, diagnostic reports and other relevant clinical documentation.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-check-referral-documents" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-check-referral-documents" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="medical-secretaries" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -167,7 +167,7 @@
     <bpmn:userTask id="T_ClinicalReviewReferral" name="Perform the clinical review of the referral">
       <bpmn:documentation>Business rule: only an authorised Consultant may judge clinical suitability or decide whether the referral is accepted.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-clinical-review-referral" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-clinical-review-referral" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -177,7 +177,7 @@
     <bpmn:userTask id="T_RecordReferralDecision" name="Record the referral decision, rationale and responsible clinician">
       <bpmn:documentation>The reason for the decision and the identity of the person making it must be recorded.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-record-referral-decision" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-record-referral-decision" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -195,7 +195,7 @@
     <bpmn:userTask id="T_ForwardAcceptedReferral" name="Forward the accepted referral to the Outpatient Bookings Team">
       <bpmn:documentation>Business rule: a New Patient Appointment may only be arranged after an authorised Consultant has accepted the referral.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-forward-accepted-referral" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-forward-accepted-referral" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -218,7 +218,7 @@
     <bpmn:userTask id="T_ReceiveBookingRequest" name="Receive and validate the booking request">
       <bpmn:documentation>The booking request carries the required speciality, appointment priority, preferred timeframe and any relevant patient requirements.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-validate-booking-request" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-validate-booking-request" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -233,7 +233,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ExpediteUrgentBooking" name="Escalate the booking as urgent and agree the clinical timescale">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-expedite-urgent-booking" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-expedite-urgent-booking" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -258,7 +258,7 @@
     <bpmn:userTask id="T_ResolveCapacity" name="Highlight the case and resolve the capacity constraint">
       <bpmn:documentation>Exception path: where no suitable appointment exists, the patient must not be booked silently outside the period requested by the Consultant.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-resolve-capacity-constraint" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-resolve-capacity-constraint" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="patient-pathway-coordinators" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -267,7 +267,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_SelectAndBookSlot" name="Select and book the new patient appointment">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-select-book-appointment" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-select-book-appointment" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -276,7 +276,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_ConfirmBooking" name="Confirm the booking and record the appointment reference">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-confirm-appointment" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-confirm-appointment" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -298,7 +298,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_TelephonePatient" name="Telephone the patient to confirm attendance">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-telephone-patient" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-telephone-patient" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="call-handling-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -309,7 +309,7 @@
     <bpmn:userTask id="T_RecordContactAttempt" name="Record the contact attempt and its outcome">
       <bpmn:documentation>Business rule: a telephone call may be unanswered, the contact number may be incorrect, or the patient may request an alternative appointment. Each attempt and its outcome must be recorded.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-record-contact-outcome" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-record-contact-outcome" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="call-handling-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -324,7 +324,7 @@
     <bpmn:userTask id="T_NewPatientConsultation" name="Deliver the new patient consultation and discuss treatment options">
       <bpmn:documentation>The Consultant and the relevant clinical team assess the patient, discuss the diagnosis and explain the available treatment options.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-new-patient-consultation" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-new-patient-consultation" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -339,7 +339,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_AdviseNoTreatment" name="Provide clinical advice and record the decision not to proceed">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-advise-no-treatment" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-advise-no-treatment" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -351,7 +351,7 @@
     </bpmn:endEvent>
     <bpmn:userTask id="T_RecordPatientConsent" name="Record the patient consent to treatment">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-record-patient-consent" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-record-patient-consent" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -361,7 +361,7 @@
     <bpmn:userTask id="T_CreateTreatmentBookingRequest" name="Create the authorised Treatment Booking Request">
       <bpmn:documentation>Identifies the proposed treatment, the required start date, the number and frequency of treatment cycles, any reviews required between cycles and any special resources needed.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-treatment-booking-request" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-treatment-booking-request" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -377,7 +377,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ReturnUnauthorisedRequest" name="Return the unauthorised request to the clinical team">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-return-unauthorised-request" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-return-unauthorised-request" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -386,7 +386,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_ValidateTreatmentRequest" name="Validate the authorised request and confirm resource requirements">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-validate-treatment-request" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-validate-treatment-request" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -410,7 +410,7 @@
     <bpmn:userTask id="T_KeepPending" name="Keep the booking pending, notify the responsible team and record the retry">
       <bpmn:documentation>Exception path: if an external service is temporarily unavailable the booking must remain pending, the responsible team must be notified and further attempts recorded, without creating duplicate appointments.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-record-pending-booking" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-record-pending-booking" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -420,7 +420,7 @@
     <bpmn:userTask id="T_DetermineFundingRoute" name="Determine the funding route for the treatment">
       <bpmn:documentation>Business rule: the system must determine whether the treatment is funded by the hospital, covered by an approved insurer or funding organisation, or requires payment by the patient.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-determine-funding-route" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-determine-funding-route" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -435,7 +435,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_RecordFundingApproval" name="Record the funding organisation, authorisation reference, amount and limitations">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-record-funding-approval" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-record-funding-approval" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -444,7 +444,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_RequestFundingApproval" name="Request funding approval or an additional payment">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-request-funding-approval" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-request-funding-approval" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -475,7 +475,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_RecordPayment" name="Record the payment reference, amount and date against the patient account">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-record-payment" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-record-payment" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -485,7 +485,7 @@
     <bpmn:userTask id="T_HandlePaymentFailure" name="Notify the patient and the responsible team and allow a further attempt">
       <bpmn:documentation>Business rule: a declined, cancelled or incomplete payment must not create a duplicate booking or charge the patient more than once.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-handle-payment-failure" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-handle-payment-failure" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -495,7 +495,7 @@
     <bpmn:userTask id="T_MarkForInvestigation" name="Mark the transaction for investigation and do not raise a second payment">
       <bpmn:documentation>Exception path: where the provider took the payment but confirmation was not returned because of a communication failure, the transaction must be marked for investigation rather than automatically requesting another payment.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-mark-payment-investigation" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-mark-payment-investigation" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -505,7 +505,7 @@
     <bpmn:userTask id="T_AuthoriseUrgentTreatment" name="Authorise urgent treatment without confirmed payment and record the reason">
       <bpmn:documentation>Business rule: clinical staff must still be able to authorise urgent treatment where delaying care would create a risk to the patient, but the reason must be recorded and referred to the Finance Team.</bpmn:documentation>
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-authorise-urgent-treatment" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-authorise-urgent-treatment" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="consultant-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -519,7 +519,7 @@
     </bpmn:parallelGateway>
     <bpmn:userTask id="T_ResolveTransaction" name="Resolve the outstanding transaction with the provider">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-resolve-payment-transaction" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-resolve-payment-transaction" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -528,7 +528,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_ReferUnconfirmedPayment" name="Refer the unconfirmed payment to the Finance Team for resolution">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-refer-unconfirmed-payment" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-refer-unconfirmed-payment" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="finance-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>
@@ -537,7 +537,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="T_ConfirmTreatmentSchedule" name="Confirm the treatment schedule and issue the patient instructions">
       <bpmn:extensionElements>
-        <zeebe:formDefinition formId="form-confirm-treatment-schedule" bindingType="deployment" />
+        <zeebe:formDefinition formId="form-confirm-treatment-schedule" bindingType="latest" />
         <zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" />
         <zeebe:userTask />
       </bpmn:extensionElements>

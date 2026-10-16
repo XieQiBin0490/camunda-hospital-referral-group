@@ -52,7 +52,7 @@
     </bpmn:startEvent>
     <bpmn:userTask id="T_Register" name="Register and validate the patient referral">
       <bpmn:documentation>Receives, registers and validates the referral and confirms patient identification.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral-landscape" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-register-referral-landscape" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="medical-secretaries" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_1</bpmn:incoming>
       <bpmn:incoming>F_1m</bpmn:incoming>
       <bpmn:incoming>F_5</bpmn:incoming>
@@ -87,13 +87,13 @@
     </bpmn:endEvent>
     <bpmn:userTask id="T_BookAppointment" name="Book the new patient appointment">
       <bpmn:documentation>A New Patient Appointment may only be arranged after an authorised Consultant has accepted the referral.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-book-new-patient-appointment" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-book-new-patient-appointment" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="outpatient-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_6</bpmn:incoming>
       <bpmn:outgoing>F_9</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_Consultation" name="Deliver the consultation and record consent">
       <bpmn:documentation>Consultant and clinical team assess the patient, discuss options and record consent to treatment.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-consultation-consent" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-record-consultation-consent" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_9</bpmn:incoming>
       <bpmn:outgoing>F_10</bpmn:outgoing>
     </bpmn:userTask>
@@ -104,7 +104,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_Advice" name="Provide clinical advice and close the episode">
       <bpmn:documentation>The Clinical Nurse Specialist Team supports the patient and the episode of care is closed.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-provide-clinical-advice" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-provide-clinical-advice" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_12</bpmn:incoming>
       <bpmn:outgoing>F_13</bpmn:outgoing>
     </bpmn:userTask>
@@ -113,7 +113,7 @@
     </bpmn:endEvent>
     <bpmn:userTask id="T_Authorise" name="Authorise treatment and confirm funding">
       <bpmn:documentation>Clinical authorisation of the Treatment Booking Request and confirmation of the funding route.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-authorise-treatment-funding" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team,finance-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-authorise-treatment-funding" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team,finance-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_11</bpmn:incoming>
       <bpmn:incoming>F_17</bpmn:incoming>
       <bpmn:outgoing>F_14</bpmn:outgoing>
@@ -125,19 +125,19 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_ResolveFunding" name="Resolve the authorisation or funding issue">
       <bpmn:documentation>Resolves a missing clinical authorisation or an unapproved funding route before treatment is scheduled.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-resolve-funding-issue" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="finance-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-resolve-funding-issue" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="finance-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_16</bpmn:incoming>
       <bpmn:outgoing>F_17</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_DeliverTreatment" name="Schedule and deliver the treatment cycles">
       <bpmn:documentation>Coordinates hospital and external treatment capacity and delivers the planned treatment cycles.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-deliver-treatment-cycle" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-deliver-treatment-cycle" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="treatment-bookings-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_15</bpmn:incoming>
       <bpmn:outgoing>F_18</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_FollowUp" name="Deliver follow-up care and clinical review">
       <bpmn:documentation>Pre-cycle clinical review, blood tests and decisions about continuing, delaying or changing treatment.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-follow-up-review" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-follow-up-review" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="clinical-nurse-specialist-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_18</bpmn:incoming>
       <bpmn:outgoing>F_19</bpmn:outgoing>
     </bpmn:userTask>
@@ -154,7 +154,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="T_Escalate" name="Escalate delayed correspondence">
       <bpmn:documentation>Pathway monitoring: weekly reminders, escalation to the Administrative Manager after one month and to higher management after three months.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-escalate-correspondence" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="patient-pathway-coordinators" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-escalate-correspondence" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="patient-pathway-coordinators" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_22</bpmn:incoming>
       <bpmn:outgoing>F_23</bpmn:outgoing>
     </bpmn:userTask>
@@ -163,13 +163,13 @@
     </bpmn:endEvent>
     <bpmn:userTask id="T_Enquiry" name="Handle the patient enquiry">
       <bpmn:documentation>Every enquiry is recorded, classified, prioritised and routed, and the resolution is recorded.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-handle-patient-enquiry" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-handle-patient-enquiry" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="call-handling-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_21</bpmn:incoming>
       <bpmn:outgoing>F_24</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="T_Complete" name="Complete the pathway and discharge the patient">
       <bpmn:documentation>Only an authorised clinical professional decides whether a patient continues treatment or is discharged.</bpmn:documentation>
-      <bpmn:extensionElements><zeebe:formDefinition formId="form-complete-pathway" binding="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
+      <bpmn:extensionElements><zeebe:formDefinition formId="form-complete-pathway" bindingType="deployment" /><zeebe:assignmentDefinition candidateGroups="consultant-team" /><zeebe:userTask /></bpmn:extensionElements>
       <bpmn:incoming>F_24</bpmn:incoming>
       <bpmn:outgoing>F_25</bpmn:outgoing>
     </bpmn:userTask>

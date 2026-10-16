@@ -1,0 +1,17 @@
+Fix the form-binding attribute, which is why the drop-downs vanished
+
+Every user task asked the engine to resolve its form from the instance's own
+deployment using binding="deployment", but `binding` is not an attribute of
+zeebe:formDefinition. The element takes formId, formKey, externalReference,
+bindingType and versionTag, and bindingType is an enum of exactly deployment,
+latest and versionTag - checked against zeebe-bpmn-model:8.9.0.
+
+An unknown attribute is not rejected, so the engine ignored it and used the
+default binding, which is latest. Under latest an instance renders whichever
+version of that form was deployed most recently, by anyone: that is how a
+teammate deploying their own copy of the forms made every drop-down disappear,
+and why a form missing from the latest set leaves the task unable to open.
+
+Camunda Modeler had been reporting it all along - 29 unknown-attribute warnings
+on O1, which is exactly its formDefinition count. All 99 across the four models
+now say bindingType="deployment" and validate clean.

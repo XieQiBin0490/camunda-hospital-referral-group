@@ -1,4 +1,4 @@
-﻿/** Deploy every form and model to the running Camunda 8 cluster. */
+/** Deploy every form and model to the running Camunda 8 cluster. */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -51,13 +51,19 @@ console.log(`deploying ${forms.length} forms and ${models.length} models ...`);
  * Each model is deployed **together with the forms it references**, in one
  * deployment.
  *
- * The form references carry binding="deployment", which means the engine resolves
- * a task's form from the same deployment as the process. That is what keeps a
- * process from running against a newer form than the one it was tested with - but
- * it also means a model deployed on its own fails with "Expected to find form with
- * id X in current deployment, but not found" for every task. So the forms travel
- * with the model, and the whole set of 68 is still covered because the models
- * between them reference all of them.
+ * The form references carry bindingType="deployment", which means the engine
+ * resolves a task's form from the same deployment as the process. That is what
+ * keeps a process from running against a newer form than the one it was tested
+ * with - but it also means a model deployed on its own fails with "Expected to
+ * find form with id X in current deployment, but not found" for every task. So the
+ * forms travel with the model, and the whole set of 69 is still covered because
+ * the models between them reference all of them.
+ *
+ * This pairing is not optional. The models used to say binding="deployment", which
+ * is not an attribute the element has; the engine ignored it and fell back to the
+ * default, `latest`, so a form deployed afterwards by someone else silently took
+ * over the task. Deploy with this script rather than by dropping a .bpmn on the
+ * cluster.
  */
 const formByName = new Map(forms.map(f => [path.basename(f, '.form'), f]));
 let allOk = true;

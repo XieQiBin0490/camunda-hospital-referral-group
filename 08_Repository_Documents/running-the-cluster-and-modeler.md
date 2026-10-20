@@ -199,14 +199,46 @@ python 09_Tests_and_Tools\verify-rbac.py          # 10 groups, 0 vs 785, 0 failu
 
 # Mode B - run the process end to end, including the worker fleet
 $env:CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED = "false"
+$env:CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI = "true"   # both switches: see 5.2
 .\c8run.exe start --disable-connectors
 java -jar 04_Java_Worker/target/hospital-external-workers-1.0.0.jar
 node 09_Tests_and_Tools/run-worker-demo.mjs        # or drive the Tasklist by hand
-Remove-Item Env:\CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED
+Remove-Item Env:\CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED, Env:\CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI
 ```
 
-Mode B changes no file: the override is an environment variable, so `git status` stays clean and
+Mode B changes no file: the overrides are environment variables, so `git status` stays clean and
 the checked-in configuration still documents the role behaviour.
+
+### 5.2 The gRPC gateway authenticates too, so two switches move together
+
+`unprotected-api` is not only about the REST API. With it at `false`, the gRPC gateway on 26500 also
+demands credentials, and the worker fleet sends none (`gateway.username` is empty in
+`workers.properties`). Measured on 20 October 2026, same cluster, same jar:
+
+| authorizations | unprotected-api | REST | worker fleet | symptom |
+| --- | --- | --- | --- | --- |
+| `true` (checked in) | `false` (checked in) | works with `demo:demo` | subscribes, activates nothing | role evidence is correct; every service task parks |
+| `false` | `false` | works | `UNAUTHENTICATED: Expected authentication information at header with key [authorization], but found nothing` | the fleet logs a stack trace and still activates nothing |
+| `false` | `true` | works | activates and completes jobs | the demo path: `T_QueryAvailableSlots` completed by the worker |
+
+So the two modes are two pairs, not one switch:
+
+```
+role evidence    unprotected-api=false + authorizations=true     (the checked-in file, no override)
+process demo     unprotected-api=true  + authorizations=false    (both overrides above)
+```
+
+Why the fleet cannot simply authenticate: the delivered client is Zeebe client 8.9 and it carries
+basic credentials over gRPC in a form this 8.10 gateway does not accept. Rebuilding against
+`zeebe.version` 8.10 and the current `CamundaClient` is the real fix and the first item of the next
+release; until then the demo runs with the API open, which is the state the acceptance evidence was
+produced in anyway.
+
+`run-worker-demo.mjs` also needed a page limit. Its `findInstance` asked for process instances with no
+`page`, the API answered with the **oldest** 100, and on a cluster that has been run more than a
+hundred times the instance it had just started was never in that page - the scenario then failed with
+`no PR_Operational_Merged instance was started (HTTP 200)` even though the instance existed. It now
+asks for `sort: startDate DESC` with `page: 0..100`.
 
 Two consequences that are worth stating in the demonstration rather than hiding:
 

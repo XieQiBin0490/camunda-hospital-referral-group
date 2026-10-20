@@ -88,7 +88,11 @@ async function findInstance(processDefinitionId, patientId, timeoutMs = 25000) {
   while (Date.now() - t0 < timeoutMs) {
     const r = await search('process-instances', {
       filter: { processDefinitionId },
-      sort: [{ field: 'startDate', order: 'DESC' }]
+      // Newest first, and a page big enough to hold the history: the default page
+      // returns the oldest 100 instances, so on a cluster that has been run more
+      // than a hundred times the instance just started is never in the page.
+      sort: [{ field: 'startDate', order: 'DESC' }],
+      page: { from: 0, limit: 100 }
     });
     for (const i of r.json?.items || []) {
       const v = await vars(i.processInstanceKey);

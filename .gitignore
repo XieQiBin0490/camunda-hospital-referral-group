@@ -24,3 +24,8 @@ desktop.ini
 
 # NOTE: 05_Test_Evidence/verification/*.log is delivered evidence and must be
 # committed, not ignored, even though verify-all.ps1 also writes new logs there.
+
+# Python bytecode from the verification scripts
+__pycache__/
+*.pyc
+

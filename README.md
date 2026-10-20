@@ -9,7 +9,7 @@ Camunda BPMN group project — hospital referral workflow.
 | Group | max, finn, henry, peter |
 | Assessment 1 — Presentation | 28 September 2026 |
 | Assessment 2 — Portfolio | 22 October 2026 |
-| Identifier of the delivered version | **build 1.0** (`Review-SR4-*`) |
+| Identifier of the delivered version | **tag `p6-submission`** (same commit as `sr4`); `git tag -l -n1` lists the snapshot kept for every review |
 | Repository | https://github.com/XieQiBin0490/camunda-hospital-referral-group |
 | Automated verification | `09_Tests_and_Tools/verify-all.ps1` |
 
@@ -29,14 +29,14 @@ shared, is set out in [`SUBMISSION_MAP.md`](SUBMISSION_MAP.md).
 | --- | --- |
 | `01_Agile_Planning/` | Product backlog and sprint backlogs (all four sprints), work division, review version snapshots |
 | `02_BPMN_Models/` | The four `.bpmn` models. `readable_exports/` holds the PDF, PNG and SVG export of each |
-| `03_Forms/` | The 68 Camunda Forms the user tasks bind to |
+| `03_Forms/` | The 69 Camunda Forms the user tasks bind to |
 | `04_Java_Worker/` | The Java job-worker fleet: source, `pom.xml`, `workers.properties`, run scripts, `README.md`, `DEPLOYMENT.md` |
 | `05_Test_Evidence/` | Acceptance test plan, acceptance run output, screenshots, verification logs, worker-driven scenario runs |
 | `06_iStar_Models/` | i* Strategic Dependency and Strategic Rationale models: PDF, PNG, editable SVG and the JSON source |
 | `07_Portfolio_Documents/` | The portfolio itself: cover and contents, Task 01/02, Task 03, Task 04, agile delivery record, references, appendices |
 | `08_Repository_Documents/` | Model inventory, defect log, integration decision, i* assumptions, assumption register, improvement proposals, strategic-to-operational map, manual run guide, test evidence |
 | `09_Tests_and_Tools/` | The verification harness and the scripts that reproduce every measurement the documents claim |
-| `10_Presentation/` | The September presentation deck for the operational model and acceptance test plan |
+| `10_Submission_Packs/` | The three packages as submitted: the P4 presentation, the P6 portfolio and the P6 presentation, each one mirroring what went to Blackboard |
 
 The four models are:
 
@@ -146,7 +146,7 @@ Steps 1 and 5 need a JDK 17+ and Maven on `PATH`. The package ships the worker
 passes either install Maven, or build the jar once and drop it into
 `04_Java_Worker/prebuilt/`.
 
-Those four `.bpmn` files, the 68 forms and the worker fleet are the whole
+Those four `.bpmn` files, the 69 forms and the worker fleet are the whole
 system; nothing else needs to be present for it to run.
 
 ## Modelling and delivery record
@@ -179,3 +179,44 @@ portfolio documents:
 * The `readable_exports/` images of `O1_Operational_Merged` must be re-exported
   from Camunda Modeler after the cross-pool message interaction was added to
   that model. The `.bpmn` file is authoritative.
+
+## Two ways to start the cluster, and why the difference matters
+
+The cluster is started in one of two configurations, and they are not interchangeable.
+
+```bat
+:: Role evidence (the checked-in configuration: role separation is enforced)
+cd /d D:\app\Camunda\c8run-8.10.0-alpha5
+c8run.exe start --disable-connectors
+
+:: Process demonstration (worker fleet needs an open gateway)
+set CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=false
+set CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=true
+c8run.exe start --disable-connectors
+```
+
+`authorizations.enabled` alone is not enough: with `unprotected-api: false` the gRPC gateway also
+demands credentials that the delivered 8.9 client does not send, so the fleet subscribes and then
+activates nothing. Section 5 of `08_Repository_Documents/running-the-cluster-and-modeler.md` records
+the measurement for each combination.
+
+With the cluster up in demonstration mode, one command shows the whole pathway:
+
+```bat
+node 09_Tests_and_Tools/run-worker-demo.mjs happy
+```
+
+It plays only the human roles, so every service task has to be completed by the worker fleet. A green
+run proves the model, the workers and the variable contract agree at runtime.
+
+## Review snapshots
+
+| Tag | What it marks |
+| --- | --- |
+| `sr1` | the first executable BPMN increment (17 September 2026) |
+| `sr2` | the initial release, as evidenced by the 26 September acceptance run |
+| `sr3` | the state available at sprint review SR3 (19 October 2026) |
+| `sr4` | the state presented at sprint review SR4 (22 October 2026) |
+| `p6-submission` | the version submitted for UFCEP6-0-3 (same commit as `sr4`) |
+
+`git show <tag>` prints the commit and `git diff <tag>..HEAD` prints everything that changed after it.

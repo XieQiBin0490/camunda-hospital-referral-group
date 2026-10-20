@@ -20,7 +20,7 @@ separately."* One project, one repository, two sets of criteria.
 | `02_BPMN_Models/` | `O1_Operational_Merged.bpmn` | Operational BPMN, `.bpmn` |
 | `02_BPMN_Models/readable_exports/` | `O1_Operational_Merged.{pdf,png,svg}` and the `_crop` set | Operational BPMN, readable export |
 | `05_Test_Evidence/` | `Acceptance_Test_Plan.md` | Acceptance test plan |
-| `10_Presentation/` | `UFCEP4-0-3_Presentation.pptx` | Presentation slides |
+| `10_Submission_Packs/` | `UFCEP4-0-3_Presentation/`, `UFCEP6-0-3_Portfolio/`, `UFCEP6-0-3_Presentation/` | The three packages exactly as submitted to Blackboard |
 
 ## Assessment 2 — Portfolio (22 October 2026)
 
@@ -39,7 +39,7 @@ separately."* One project, one repository, two sets of criteria.
 | Folder | What it holds | Why both units need it |
 | --- | --- | --- |
 | `01_Agile_Planning/` | Product backlog and the Sprint 1–4 backlogs, work division | Both units mark agile delivery: product backlog, sprint backlogs, first and second owners, estimates, acceptance conditions, status |
-| `03_Forms/` | The 68 Camunda Forms | The user tasks in every model bind to these |
+| `03_Forms/` | The 69 Camunda Forms | The user tasks in every model bind to these |
 | `04_Java_Worker/` | The Java job-worker fleet | Services the automated activities; also carries the cross-pool message publishing |
 | `05_Test_Evidence/` | Acceptance run, screenshots, verification logs, worker-driven scenarios | Execution evidence for the acceptance evaluation and the models |
 | `08_Repository_Documents/` | Model inventory, defect log, integration decision, assumption register, improvement proposals, strategic-to-operational map, manual run guide | The repository documents both specification sections ask for |

@@ -1,0 +1,66 @@
+UFCEP4-0-3  Business Process Modelling and Enterprise Architecture
+Presentation  -  submission pack  -  28 September 2026 (entry: Assessment Submission 20/10/26)
+
+=====================================================================
+1.  Contents, and the specification item each file answers
+=====================================================================
+
+01_Presentation/
+    P4_Slides.pdf          Presentation. Twelve slides: the operational model,
+                           the twelve decision gateways, the separation of duties,
+                           the acceptance criteria and the evidence. Submit this copy.
+    P4_Slides.pptx         Editable source of the same twelve slides.
+
+02_Operational_BPMN/
+    O1_Operational_Merged.bpmn        Operational BPMN, editable model (Camunda 8 / Zeebe 8.10).
+    O1_Operational_Merged.pdf         Readable PDF export of the same model.
+    O1_Operational_Merged_crop.pdf    The same export, cropped for projection.
+    S1_Strategic_Landscape.bpmn       Supporting context: the level 1 landscape.
+    S2_Strategic_Referral_To_Authorisation.bpmn
+    S3_Strategic_Treatment_To_Aftercare.bpmn
+                           The three strategic models are supplied as context and are
+                           not required by this assessment.
+
+03_Acceptance_Test_Plan/
+    UFCEP4_Acceptance_Test_Plan.pdf   Acceptance test plan, structured table with
+                                      criterion (AC) and requirement (REQ) identifiers.
+    UFCEP4_Acceptance_Test_Plan.docx  Editable source of the same plan.
+
+=====================================================================
+2.  Acceptance test plan: what is in it
+=====================================================================
+
+18 cases, each a complete path from the start event to an end state rather than a
+single step.
+
+    Section 1  the 18 cases, with the criterion (AC), requirement (REQ) and business
+               rule (BR) each case exercises, and its result
+    Section 2  preconditions common to every case, and where the cases differ
+    Section 3  test data: the start variables and the decisions the human roles take
+    Section 4  the actions performed for each case
+    Section 5  expected outcome and pass/fail condition for each case, followed by
+               what the recorded run actually produced
+
+Identifier scheme: AC-nn is a criterion identifier from the acceptance criteria set
+for this release (AC-01 to AC-20, stated in full in the acceptance criteria
+evaluation). REQ-nn is the case-study requirement the criterion traces to (REQ-01 to
+REQ-44). BR-nn names the business rule the scenario exercises.
+
+=====================================================================
+3.  Version control
+=====================================================================
+
+Recorded run behind the plan      26 September 2026, 18 cases executed, 18 passed,
+                                  0 incidents. Exported evidence in the repository
+                                  at 05_Test_Evidence/acceptance-run.json and .log.
+
+O1_Operational_Merged.bpmn        the repository model at commit c258c2a.
+
+O1 readable PDF exports           27 September 2026 snapshot.
+
+The model and its PDF export differ in exactly one element: the parallel gateway
+G_UrgentTreatmentAuthorised, added by the defect fix recorded as DEF-18 in the
+defect log. The 59 other flow nodes, the 8 lanes, the 8 black-box participants and
+the 15 message flows are identical, so the diagram is the model as demonstrated.
+
+Repository:  https://github.com/XieQiBin0490/camunda-hospital-referral-group

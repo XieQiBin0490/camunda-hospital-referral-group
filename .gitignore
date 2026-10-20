@@ -29,3 +29,8 @@ desktop.ini
 __pycache__/
 *.pyc
 
+
+# Camunda Modeler conflict copies and stray pid files
+*.modelerclobber.bak
+*.pid
+

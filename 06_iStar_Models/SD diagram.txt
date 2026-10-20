@@ -26,8 +26,8 @@
       "id": "A_MS",
       "text": "Medical Secretaries",
       "type": "istar.Actor",
-      "x": 670,
-      "y": 1214,
+      "x": 703,
+      "y": 1241,
       "customProperties": {
         "Description": "Receive and check referrals, request missing documents, process approved clinic letters and distribute them. They may not make clinical judgements."
       },
@@ -48,8 +48,8 @@
       "id": "A_CNS",
       "text": "CNS Team",
       "type": "istar.Actor",
-      "x": 1086,
-      "y": 631,
+      "x": 1143,
+      "y": 635,
       "customProperties": {
         "Description": "Provides clinical advice and support, answers clinical enquiries and handles urgent clinical concerns."
       },
@@ -59,8 +59,8 @@
       "id": "A_OB",
       "text": "Outpatient Bookings",
       "type": "istar.Actor",
-      "x": 1224,
-      "y": 735,
+      "x": 1314,
+      "y": 773,
       "customProperties": {
         "Description": "Finds and confirms new-patient and follow-up appointments, records contact attempts and escalates capacity exceptions."
       },
@@ -70,8 +70,8 @@
       "id": "A_TB",
       "text": "Treatment Bookings",
       "type": "istar.Actor",
-      "x": 1059,
-      "y": 1305,
+      "x": 1039,
+      "y": 1371,
       "customProperties": {
         "Description": "Validates authorised treatment requests and coordinates treatment, laboratory and imaging capacity without duplicating bookings."
       },
@@ -92,8 +92,8 @@
       "id": "A_CH",
       "text": "Call Handling",
       "type": "istar.Actor",
-      "x": 1912,
-      "y": 584,
+      "x": 1911,
+      "y": 587,
       "customProperties": {
         "Description": "Records, classifies, prioritises and routes patient enquiries; may answer administrative questions but must not give clinical advice."
       },
@@ -103,8 +103,8 @@
       "id": "A_COR",
       "text": "Correspondence Service",
       "type": "istar.Actor",
-      "x": 1550,
-      "y": 860,
+      "x": 1598,
+      "y": 857,
       "customProperties": {
         "Description": "Prints and distributes appointment and clinic letters through approved channels."
       },
@@ -114,8 +114,8 @@
       "id": "A_SCH",
       "text": "Scheduling Service",
       "type": "istar.Actor",
-      "x": 1718,
-      "y": 1289,
+      "x": 1637,
+      "y": 1326,
       "customProperties": {
         "Description": "Supplies available appointment slots. The hospital cannot create capacity it does not have."
       },
@@ -125,8 +125,8 @@
       "id": "A_CLIN",
       "text": "Clinical Services",
       "type": "istar.Actor",
-      "x": 1386,
-      "y": 1550,
+      "x": 1530,
+      "y": 1614,
       "customProperties": {
         "Description": "Provides treatment capacity and the laboratory, imaging and assessment results on which clinical decisions depend."
       },
@@ -136,8 +136,8 @@
       "id": "A_FIN",
       "text": "Finance Team",
       "type": "istar.Actor",
-      "x": 2830,
-      "y": 808,
+      "x": 2871,
+      "y": 743,
       "customProperties": {
         "Description": "Determines the funding route, records approval, sends secure payment requests, investigates unconfirmed payments and decides refunds under financial authority."
       },
@@ -158,7 +158,7 @@
       "id": "A_PSP",
       "text": "Payment Provider",
       "type": "istar.Actor",
-      "x": 2391,
+      "x": 2390,
       "y": 1217,
       "customProperties": {
         "Description": "Processes card payments and refunds and returns the status, transaction reference, date and amount."
@@ -169,7 +169,7 @@
       "id": "A_MGMT",
       "text": "Management",
       "type": "istar.Actor",
-      "x": 2369,
+      "x": 2371,
       "y": 1463,
       "customProperties": {
         "Description": "Needs reports on referrals, waiting times, delayed letters, enquiries, funding, payments and refunds; receives escalations."
@@ -183,8 +183,8 @@
       "id": "SD-01",
       "text": "Receive clinically appropriate treatment",
       "type": "istar.Goal",
-      "x": 234,
-      "y": 1069,
+      "x": 180,
+      "y": 1007,
       "source": "A_PAT",
       "target": "A_CON"
     },
@@ -193,7 +193,7 @@
       "text": "Referral decision, reason and decision-maker",
       "type": "istar.Resource",
       "x": 420,
-      "y": 1218,
+      "y": 1217,
       "source": "A_REF",
       "target": "A_CON"
     },
@@ -210,7 +210,7 @@
       "id": "SD-04",
       "text": "Approve clinic letter content",
       "type": "istar.Task",
-      "x": 456,
+      "x": 474,
       "y": 1324,
       "source": "A_MS",
       "target": "A_CON"
@@ -219,8 +219,8 @@
       "id": "SD-05",
       "text": "Referral checked and prepared for review",
       "type": "istar.Resource",
-      "x": 560,
-      "y": 1399,
+      "x": 591,
+      "y": 1391,
       "source": "A_CON",
       "target": "A_MS"
     },
@@ -228,8 +228,8 @@
       "id": "SD-06",
       "text": "Informed consent to treatment",
       "type": "istar.Resource",
-      "x": 353,
-      "y": 1137,
+      "x": 319,
+      "y": 1114,
       "source": "A_CON",
       "target": "A_PAT"
     },
@@ -237,8 +237,8 @@
       "id": "SD-07",
       "text": "Investigation and test results",
       "type": "istar.Resource",
-      "x": 1235,
-      "y": 1711,
+      "x": 1218,
+      "y": 1710,
       "source": "A_CON",
       "target": "A_CLIN"
     },
@@ -282,8 +282,8 @@
       "id": "SD-12",
       "text": "Accepted referral with priority and timeframe",
       "type": "istar.Resource",
-      "x": 697,
-      "y": 1395,
+      "x": 739,
+      "y": 1417,
       "source": "A_OB",
       "target": "A_CON"
     },
@@ -291,8 +291,8 @@
       "id": "SD-13",
       "text": "Available appointment slots",
       "type": "istar.Resource",
-      "x": 1377,
-      "y": 1126,
+      "x": 1392,
+      "y": 1113,
       "source": "A_OB",
       "target": "A_SCH"
     },
@@ -318,8 +318,8 @@
       "id": "SD-16",
       "text": "Authorised Treatment Booking Request",
       "type": "istar.Resource",
-      "x": 697,
-      "y": 1612,
+      "x": 669,
+      "y": 1595,
       "source": "A_TB",
       "target": "A_CON"
     },
@@ -327,8 +327,8 @@
       "id": "SD-17",
       "text": "Treatment, laboratory and imaging capacity",
       "type": "istar.Resource",
-      "x": 1193,
-      "y": 1446,
+      "x": 1211,
+      "y": 1476,
       "source": "A_TB",
       "target": "A_CLIN"
     },
@@ -337,7 +337,7 @@
       "text": "Funding confirmed before treatment",
       "type": "istar.Goal",
       "x": 1808,
-      "y": 1030,
+      "y": 1029,
       "source": "A_TB",
       "target": "A_FIN"
     },
@@ -345,8 +345,8 @@
       "id": "SD-19",
       "text": "Clinical decision that the patient is fit to continue",
       "type": "istar.Resource",
-      "x": 697,
-      "y": 1738,
+      "x": 800,
+      "y": 1702,
       "source": "A_TB",
       "target": "A_CON"
     },
@@ -372,7 +372,7 @@
       "id": "SD-22",
       "text": "Urgency rules agreed and usable",
       "type": "istar.Quality",
-      "x": 2064,
+      "x": 2063,
       "y": 1048,
       "source": "A_CH",
       "target": "A_MGMT"
@@ -390,7 +390,7 @@
       "id": "SD-24",
       "text": "Act on escalation after one month",
       "type": "istar.Task",
-      "x": 1818,
+      "x": 1817,
       "y": 1536,
       "source": "A_PPC",
       "target": "A_MGMT"
@@ -399,7 +399,7 @@
       "id": "SD-25",
       "text": "Funding authorisation, amount and limitations",
       "type": "istar.Resource",
-      "x": 2509,
+      "x": 2507,
       "y": 884,
       "source": "A_FIN",
       "target": "A_FUND"
@@ -408,8 +408,8 @@
       "id": "SD-26",
       "text": "Process payment or refund and return status",
       "type": "istar.Task",
-      "x": 2622,
-      "y": 987,
+      "x": 2521,
+      "y": 1032,
       "source": "A_FIN",
       "target": "A_PSP"
     },
@@ -426,8 +426,8 @@
       "id": "SD-28",
       "text": "Clinical authorisation to proceed without payment",
       "type": "istar.Resource",
-      "x": 2238,
-      "y": 1716,
+      "x": 2194,
+      "y": 1751,
       "source": "A_FIN",
       "target": "A_CON"
     },
@@ -435,7 +435,7 @@
       "id": "SD-29",
       "text": "Funding, payment and refund report",
       "type": "istar.Resource",
-      "x": 2649,
+      "x": 2647,
       "y": 1132,
       "source": "A_MGMT",
       "target": "A_FIN"
@@ -444,8 +444,8 @@
       "id": "SD-30",
       "text": "Blood test and assessment results",
       "type": "istar.Resource",
-      "x": 1287,
-      "y": 1324,
+      "x": 1382,
+      "y": 1364,
       "source": "A_CNS",
       "target": "A_CLIN"
     }
@@ -813,6 +813,126 @@
     }
   ],
   "display": {
+    "SD-01": {
+      "width": 182.2578125,
+      "height": 77.015625
+    },
+    "SD-02": {
+      "width": 145.2578125,
+      "height": 75.015625
+    },
+    "SD-03": {
+      "width": 175.2578125,
+      "height": 83.015625
+    },
+    "SD-04": {
+      "width": 153.2578125,
+      "height": 58.015625
+    },
+    "SD-05": {
+      "width": 138.2578125,
+      "height": 64.015625
+    },
+    "SD-06": {
+      "width": 188.2578125,
+      "height": 65.015625
+    },
+    "SD-07": {
+      "width": 178.2578125,
+      "height": 63.015625
+    },
+    "SD-08": {
+      "width": 192.3154296875,
+      "height": 79.0238037109375
+    },
+    "SD-09": {
+      "width": 162.2578125,
+      "height": 63.015625
+    },
+    "SD-10": {
+      "width": 166.2578125,
+      "height": 63.015625
+    },
+    "SD-11": {
+      "width": 144.2578125,
+      "height": 62.015625
+    },
+    "SD-12": {
+      "width": 168.2578125,
+      "height": 69.015625
+    },
+    "SD-13": {
+      "width": 222.2578125,
+      "height": 64.015625
+    },
+    "SD-14": {
+      "width": 218.2578125,
+      "height": 69.015625
+    },
+    "SD-15": {
+      "width": 135.2578125,
+      "height": 62.015625
+    },
+    "SD-16": {
+      "width": 203.2578125,
+      "height": 89.015625
+    },
+    "SD-17": {
+      "width": 164.2578125,
+      "height": 83.015625
+    },
+    "SD-18": {
+      "width": 194.2578125,
+      "height": 98.015625
+    },
+    "SD-19": {
+      "width": 212.2578125,
+      "height": 67.015625
+    },
+    "SD-20": {
+      "width": 166.2578125,
+      "height": 85.015625
+    },
+    "SD-21": {
+      "width": 202.2578125,
+      "height": 83.015625
+    },
+    "SD-22": {
+      "width": 182.3125,
+      "height": 89.02490234375
+    },
+    "SD-23": {
+      "width": 188.2578125,
+      "height": 76.015625
+    },
+    "SD-24": {
+      "width": 197.2578125,
+      "height": 98.015625
+    },
+    "SD-25": {
+      "width": 172.2578125,
+      "height": 84.015625
+    },
+    "SD-26": {
+      "width": 198.2578125,
+      "height": 63.015625
+    },
+    "SD-27": {
+      "width": 174.2578125,
+      "height": 80.015625
+    },
+    "SD-28": {
+      "width": 250.2578125,
+      "height": 102.015625
+    },
+    "SD-29": {
+      "width": 177.2578125,
+      "height": 91.015625
+    },
+    "SD-30": {
+      "width": 187.2578125,
+      "height": 80.015625
+    },
     "abfaf261-a910-4c83-9587-60bdad8f97e3": {
       "vertices": [
         {
@@ -824,16 +944,16 @@
     "24ccc3cd-3f71-4a13-ad56-ff69d2d34e37": {
       "vertices": [
         {
-          "x": 2671,
-          "y": 1343
+          "x": 2810,
+          "y": 1348
         }
       ]
     },
     "6747c71a-b655-46a6-8993-76423574c8a5": {
       "vertices": [
         {
-          "x": 1504,
-          "y": 1087
+          "x": 1604,
+          "y": 1081
         }
       ]
     },
@@ -856,12 +976,16 @@
     "5701e3c2-692a-434f-88df-52fe4ffb21ce": {
       "vertices": [
         {
-          "x": 857,
-          "y": 1974
+          "x": 855,
+          "y": 1977
         },
         {
-          "x": 1626,
-          "y": 1929
+          "x": 1192,
+          "y": 1983
+        },
+        {
+          "x": 1624,
+          "y": 1932
         }
       ]
     },
@@ -916,7 +1040,7 @@
   },
   "tool": "pistar.2.1.0",
   "istar": "2.0",
-  "saveDate": "Tue, 20 Oct 2026 13:44:30 GMT",
+  "saveDate": "Tue, 20 Oct 2026 13:50:21 GMT",
   "diagram": {
     "width": 3442,
     "height": 2450,

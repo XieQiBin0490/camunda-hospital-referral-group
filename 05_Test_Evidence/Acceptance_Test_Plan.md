@@ -1,4 +1,4 @@
-﻿# Acceptance Test Plan
+# Acceptance Test Plan
 
 Operational model `O1_Operational_Merged` and the strategic models, Camunda 8 (self-managed, c8run), executed 2026-09-26T16:17:23.628Z.
 

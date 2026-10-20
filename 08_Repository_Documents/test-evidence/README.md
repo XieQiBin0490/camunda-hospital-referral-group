@@ -1,4 +1,4 @@
-﻿# Test evidence
+# Test evidence
 
 Evidence for the acceptance test run recorded in Task 04 of the portfolio.
 

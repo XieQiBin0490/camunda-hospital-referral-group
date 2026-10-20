@@ -1,0 +1,323 @@
+[
+  {
+    "id": "TC-01",
+    "title": "Complete referral documentation is accepted for clinical review",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_ClinicalReviewReferral",
+        "T_RecordReferralDecision"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {},
+      "vars": {
+        "documentsComplete": true
+      }
+    }
+  },
+  {
+    "id": "TC-02",
+    "title": "Missing documentation triggers a request and a return path",
+    "start": {
+      "documentsComplete": false
+    },
+    "expectations": {
+      "reached": [
+        "T_RequestMissingDocuments",
+        "T_ClinicalReviewReferral"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_CheckReferralDocuments": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-03",
+    "title": "Rejected referral closes with a notification",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_NotifyReferralOutcome"
+      ],
+      "notReached": [
+        "T_ForwardAcceptedReferral"
+      ],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-04",
+    "title": "Redirected referral is sent to another specialist service",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_RedirectReferral"
+      ],
+      "notReached": [],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-05",
+    "title": "No suitable appointment slot is escalated to the pathway coordinator",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_ResolveCapacity",
+        "T_SelectAndBookSlot"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_QueryAvailableSlots": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-06",
+    "title": "Appointment within 14 days requires a telephone call",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_TelephonePatient",
+        "T_RecordContactAttempt"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-07",
+    "title": "Appointment more than 14 days away skips the telephone call",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_NewPatientConsultation"
+      ],
+      "notReached": [
+        "T_TelephonePatient"
+      ],
+      "end": null,
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-08",
+    "title": "Unsuccessful contact is recorded and a further attempt is made",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_TelephonePatient"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_TelephonePatient": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-09",
+    "title": "Patient refuses consent and the pathway closes",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_AdviseNoTreatment"
+      ],
+      "notReached": [
+        "T_CreateTreatmentBookingRequest"
+      ],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-10",
+    "title": "Unauthorised treatment booking request is returned to the clinical team",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_ReturnUnauthorisedRequest"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_CreateTreatmentBookingRequest": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-11",
+    "title": "Unavailable external capacity leaves the booking pending and retries",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_KeepPending"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_RequestTreatmentCapacity": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-12",
+    "title": "Unapproved funding raises a funding approval request",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_RequestFundingApproval",
+        "T_RecordFundingApproval"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_DetermineFundingRoute": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-13",
+    "title": "Happy path: referral accepted and treatment schedule confirmed",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_ConfirmTreatmentSchedule"
+      ],
+      "notReached": [],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-14",
+    "title": "Advance payment confirmed and recorded",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_SendSecurePaymentRequest",
+        "T_RecordPayment"
+      ],
+      "notReached": [],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-15",
+    "title": "Declined payment is handled without creating a duplicate booking",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_HandlePaymentFailure",
+        "T_RecordPayment"
+      ],
+      "notReached": [],
+      "end": null,
+      "minOccurrences": {
+        "T_SendSecurePaymentRequest": 2
+      },
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-16",
+    "title": "Payment without a returned confirmation is investigated, not re-requested",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_MarkForInvestigation",
+        "T_ResolveTransaction"
+      ],
+      "notReached": [],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-17",
+    "title": "Urgent treatment proceeds without confirmed payment and is referred to Finance",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_AuthoriseUrgentTreatment",
+        "T_ReferUnconfirmedPayment"
+      ],
+      "notReached": [],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  },
+  {
+    "id": "TC-18",
+    "title": "No advance payment required: no payment task is created",
+    "start": {
+      "documentsComplete": true
+    },
+    "expectations": {
+      "reached": [
+        "T_ConfirmTreatmentSchedule"
+      ],
+      "notReached": [
+        "T_SendSecurePaymentRequest"
+      ],
+      "end": "COMPLETED",
+      "minOccurrences": {},
+      "vars": {}
+    }
+  }
+]

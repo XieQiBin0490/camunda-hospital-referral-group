@@ -1,0 +1,46 @@
+Camunda 8 acceptance run
+target: http://127.0.0.1:8080/v2
+started: 2026-10-19T17:37:08.248Z
+
+deployed process definitions (68): PR_EnquiryHandling, PR_EnquiryHandling, PR_EnquiryHandling, PR_EnquiryHandling, PR_EnquiryHandling, PR_EnquiryHandling, PR_Landscape, PR_Landscape, PR_Landscape, PR_Landscape, PR_Landscape, PR_Landscape, PR_Landscape, PR_ManagementReporting, PR_ManagementReporting, PR_ManagementReporting, PR_ManagementReporting, PR_ManagementReporting, PR_ManagementReporting, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_Operational_Merged, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_ReferralToAuthorisation, PR_ReferringOrganisation, PR_ReferringOrganisation, PR_ReferringOrganisation, PR_ReferringOrganisation, PR_ReferringOrganisation, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_Model, PR_Strategy_ReferringOrganisation, PR_Strategy_ReferringOrganisation, PR_Strategy_ReferringOrganisation, PR_Strategy_ReferringOrganisation, PR_Strategy_ReferringOrganisation, PR_Strategy_ReferringOrganisation, PR_Strategy_ReferringOrganisation, PR_TreatmentToAftercare, PR_TreatmentToAftercare, PR_TreatmentToAftercare, PR_TreatmentToAftercare, PR_TreatmentToAftercare, PR_TreatmentToAftercare
+cluster reset (active instances cancelled, incidents resolved)
+
+TC-01  PASS  Complete referral documentation is accepted for clinical review
+        instance 2251799813916685  final=COMPLETED  events=9  ms=9514
+TC-02  PASS  Missing documentation triggers a request and a return path
+        instance 2251799813916764  final=COMPLETED  events=33  ms=23890
+TC-03  PASS  Rejected referral closes with a notification
+        instance 2251799813916942  final=COMPLETED  events=9  ms=7727
+TC-04  PASS  Redirected referral is sent to another specialist service
+        instance 2251799813917022  final=COMPLETED  events=9  ms=7680
+TC-05  PASS  No suitable appointment slot is escalated to the pathway coordinator
+        instance 2251799813917105  final=COMPLETED  events=33  ms=21355
+TC-06  PASS  Appointment within 14 days requires a telephone call
+        instance 2251799813917283  final=COMPLETED  events=33  ms=21259
+TC-07  PASS  Appointment more than 14 days away skips the telephone call
+        instance 2251799813917463  final=COMPLETED  events=30  ms=18836
+TC-08  PASS  Unsuccessful contact is recorded and a further attempt is made
+        instance 2251799813917677  final=COMPLETED  events=36  ms=21763
+TC-09  PASS  Patient refuses consent and the pathway closes
+        instance 2251799813917963  final=COMPLETED  events=20  ms=13177
+TC-10  PASS  Unauthorised treatment booking request is returned to the clinical team
+        instance 2251799813918136  final=COMPLETED  events=33  ms=19676
+TC-11  PASS  Unavailable external capacity leaves the booking pending and retries
+        instance 2251799813918409  final=COMPLETED  events=33  ms=18462
+TC-12  PASS  Unapproved funding raises a funding approval request
+        instance 2251799813918681  final=COMPLETED  events=33  ms=18990
+TC-13  PASS  Happy path: referral accepted and treatment schedule confirmed
+        instance 2251799813918907  final=COMPLETED  events=30  ms=15240
+TC-14  PASS  Advance payment confirmed and recorded
+        instance 2251799813919120  final=COMPLETED  events=33  ms=19432
+TC-15  PASS  Declined payment is handled without creating a duplicate booking
+        instance 2251799813919342  final=COMPLETED  events=36  ms=20365
+TC-16  PASS  Payment without a returned confirmation is investigated, not re-requested
+        instance 2251799813919559  final=COMPLETED  events=34  ms=20647
+TC-17  PASS  Urgent treatment proceeds without confirmed payment and is referred to Finance
+        instance 2251799813919770  final=COMPLETED  events=37  ms=18461
+TC-18  PASS  No advance payment required: no payment task is created
+        instance 2251799813919990  final=COMPLETED  events=30  ms=18680
+
+SUMMARY: 18 cases executed, 18 passed, 0 failed
+finished: 2026-10-19T17:42:33.624Z

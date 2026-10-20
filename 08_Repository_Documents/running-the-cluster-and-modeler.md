@@ -155,3 +155,95 @@ collected.
 The durable fix for both is to give the service tasks error boundary events that route to a
 handling path instead of leaving an uncaught error. That is a model change, and it is listed
 in the review list's item 3 as still open.
+
+## 5. Authorizations decide whether the worker fleet can do anything
+
+This one costs a whole afternoon if it is not known, so it is written down.
+
+The cluster configuration in `c8run-8.10.0-alpha5/configuration/application.yaml` carries two
+switches that pull in opposite directions:
+
+```yaml
+camunda:
+  security:
+    authentication:
+      method: BASIC
+      unprotected-api: true      # the REST API answers without credentials
+    authorizations:
+      enabled: true              # role-based access is enforced
+```
+
+`authorizations.enabled: true` is what the role evidence needs: with it on, a user with no
+group sees 0 tasks and a medical secretary sees 785. It is also what makes the **worker fleet
+stop working**. The delivered workers use the Zeebe client 8.9 (`zeebe.version` in the worker
+`pom.xml`) against a Camunda 8.10 cluster; when authorizations are enabled, its gRPC job
+activation is refused, the client retries silently, and every worker sits idle while the
+cluster looks healthy and the REST API keeps answering. The symptom is a process that parks on
+the first service task for ever, with **no incident and no error message** — verified on
+20 October 2026: 13 of 13 workers subscribed, one job waiting, nothing activated.
+
+Measured on 20 October 2026, same cluster, same jar:
+
+| authorizations.enabled | worker fleet | evidence |
+| --- | --- | --- |
+| `true` (the checked-in configuration) | subscribes, activates nothing; every service task parks | REST `POST /v2/jobs/activation` still returns the job, which is how the harness hides the problem |
+| `false` (environment override below) | activates and completes immediately | `query-available-appointment-slots ... -> completed in 617 ms` |
+
+So the cluster is started in one of two modes, and the two evidences are produced separately:
+
+```powershell
+# Mode A - role evidence (this is the checked-in configuration; nothing to set)
+cd D:\app\Camunda\c8run-8.10.0-alpha5
+.\c8run.exe start --disable-connectors
+python 09_Tests_and_Tools\verify-rbac.py          # 10 groups, 0 vs 785, 0 failures
+
+# Mode B - run the process end to end, including the worker fleet
+$env:CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED = "false"
+.\c8run.exe start --disable-connectors
+java -jar 04_Java_Worker/target/hospital-external-workers-1.0.0.jar
+node 09_Tests_and_Tools/run-worker-demo.mjs        # or drive the Tasklist by hand
+Remove-Item Env:\CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED
+```
+
+Mode B changes no file: the override is an environment variable, so `git status` stays clean and
+the checked-in configuration still documents the role behaviour.
+
+Two consequences that are worth stating in the demonstration rather than hiding:
+
+* `run-acceptance.mjs` completes service-task jobs **itself** through the REST API
+  (`POST /jobs/{key}/completion`). It therefore passes 18 of 18 with the worker fleet stopped, and
+  a green acceptance run is not evidence that the fleet works. Only `run-worker-demo.mjs` and a
+  hand-driven Tasklist require the fleet.
+* A worker that rejects a job for a missing mandatory input throws a named BPMN error
+  (`INVALID_JOB_INPUT`). None of the four models declares an error boundary event, so that error
+  surfaces as an **incident** and the instance stays where it is. That is the limitation recorded
+  in section 1.8 of the portfolio, demonstrated: start `PR_ReferringOrganisation` without
+  `patientId` and it stops at `RO_ComposeReferral` with
+  `rejected: missing mandatory input 'patientId'`.
+
+One more thing about the start message. `Patient referral` is the message name of a start event in
+**three** definitions - `PR_Operational_Merged`, `PR_Landscape` and `PR_ReferralToAuthorisation` -
+so publishing it creates one instance in each. Two of them are strategic views and will never be
+completed. Drive the operational model from its own start event, or expect three instances in
+Operate.
+
+### 5.1 `unprotected-api` has to be false for the role evidence
+
+`camunda.security.authentication.unprotected-api` is the switch that decides whether the REST API
+evaluates authorization at all. Measured on 20 October 2026, same cluster, only that key changed:
+
+| `unprotected-api` | `norole.demo` (no role) | `secretary.demo` | verdict |
+| --- | --- | --- | --- |
+| `true` (what the file contained) | 1340 tasks | 1340 tasks | both roles see everything: `verify-rbac.py` exits 1 |
+| `false` (checked in now) | 0 tasks | 1340 tasks | `RBAC in force - membership correct, enforcement active, inboxes routed` |
+
+Two things follow. First, the role evidence only exists in the second state, so the file must keep
+`unprotected-api: false`; the demo scripts keep working because every REST call carries `demo:demo`
+basic credentials. Second, the absolute count in the second column is **not** an invariant: it is the
+number of user tasks in the instance history, so it grows with every acceptance run (785 on
+15 October, 1340 on 20 October). The number that does not move is the **0**. Quote the date
+whenever the other one appears.
+
+Evidence: `05_Test_Evidence/rbac/task-visibility.json` (the 15 October run quoted in the portfolio),
+`task-visibility-2026-10-20.json` (the same checks re-run after the setting was corrected) and
+`rbac-visibility-evidence.pdf` (the one-page summary those two numbers come from).

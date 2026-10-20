@@ -1,0 +1,396 @@
+{
+  "cluster": "http://127.0.0.1:8080",
+  "configuration": {
+    "authorizations_enabled": true,
+    "unprotected_api": false
+  },
+  "declared_groups": {
+    "T_AdministrativeCheck": [
+      "medical-secretaries"
+    ],
+    "T_Advice": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_AdviseAndClose": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_AdviseNoTreatment": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_AnswerAdministrative": [
+      "call-handling-team"
+    ],
+    "T_AnswerClinical": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_AnswerFinancial": [
+      "finance-team"
+    ],
+    "T_ApplyTreatmentChange": [
+      "consultant-team"
+    ],
+    "T_ApproveClinicLetter": [
+      "consultant-team"
+    ],
+    "T_ArrangeFollowUp": [
+      "outpatient-bookings-team"
+    ],
+    "T_Authorise": [
+      "consultant-team",
+      "finance-team"
+    ],
+    "T_AuthoriseUrgentTreatment": [
+      "consultant-team"
+    ],
+    "T_BookAppointment": [
+      "outpatient-bookings-team"
+    ],
+    "T_CheckDocumentation": [
+      "medical-secretaries"
+    ],
+    "T_CheckReferralDocuments": [
+      "medical-secretaries"
+    ],
+    "T_ClassifyEnquiry": [
+      "call-handling-team"
+    ],
+    "T_ClinicalReview": [
+      "consultant-team"
+    ],
+    "T_ClinicalReviewReferral": [
+      "consultant-team"
+    ],
+    "T_Complete": [
+      "consultant-team"
+    ],
+    "T_CompletePathway": [
+      "consultant-team"
+    ],
+    "T_ConfirmAppointment": [
+      "outpatient-bookings-team"
+    ],
+    "T_ConfirmBooking": [
+      "outpatient-bookings-team"
+    ],
+    "T_ConfirmFollowUp": [
+      "outpatient-bookings-team"
+    ],
+    "T_ConfirmTreatmentSchedule": [
+      "treatment-bookings-team"
+    ],
+    "T_Consultation": [
+      "consultant-team"
+    ],
+    "T_CreateAuthorisedRequest": [
+      "consultant-team"
+    ],
+    "T_CreateTreatmentBookingRequest": [
+      "consultant-team"
+    ],
+    "T_DeliverTreatment": [
+      "treatment-bookings-team"
+    ],
+    "T_DeliverTreatmentCycle": [
+      "consultant-team"
+    ],
+    "T_DetermineFunding": [
+      "finance-team"
+    ],
+    "T_DetermineFundingRoute": [
+      "finance-team"
+    ],
+    "T_Enquiry": [
+      "call-handling-team"
+    ],
+    "T_Escalate": [
+      "patient-pathway-coordinators"
+    ],
+    "T_EscalateToHigherManagement": [
+      "administrative-management"
+    ],
+    "T_EscalateToManager": [
+      "administrative-management"
+    ],
+    "T_ExpediteBooking": [
+      "outpatient-bookings-team"
+    ],
+    "T_ExpediteUrgentBooking": [
+      "outpatient-bookings-team"
+    ],
+    "T_FollowUp": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_ForwardAccepted": [
+      "consultant-team"
+    ],
+    "T_ForwardAcceptedReferral": [
+      "consultant-team"
+    ],
+    "T_HandlePaymentFailure": [
+      "finance-team"
+    ],
+    "T_HandleUrgentConcern": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_HighlightFollowUp": [
+      "patient-pathway-coordinators"
+    ],
+    "T_KeepPending": [
+      "treatment-bookings-team"
+    ],
+    "T_MarkForInvestigation": [
+      "finance-team"
+    ],
+    "T_ModifyTreatment": [
+      "consultant-team"
+    ],
+    "T_NewPatientConsultation": [
+      "consultant-team"
+    ],
+    "T_OfferAnotherAppointment": [
+      "outpatient-bookings-team"
+    ],
+    "T_PrepareAccessibleFormat": [
+      "medical-secretaries"
+    ],
+    "T_PrepareClinicLetter": [
+      "consultant-team"
+    ],
+    "T_ProvideCnsContactDetails": [
+      "clinical-nurse-specialist-team"
+    ],
+    "T_ReceiveBookingRequest": [
+      "outpatient-bookings-team"
+    ],
+    "T_ReceiveReferral": [
+      "medical-secretaries"
+    ],
+    "T_RecordConsent": [
+      "consultant-team"
+    ],
+    "T_RecordContactAttempt": [
+      "call-handling-team"
+    ],
+    "T_RecordContactOutcome": [
+      "call-handling-team"
+    ],
+    "T_RecordDecision": [
+      "consultant-team"
+    ],
+    "T_RecordEnquiryOutcome": [
+      "call-handling-team"
+    ],
+    "T_RecordFundingApproval": [
+      "finance-team"
+    ],
+    "T_RecordNonAttendance": [
+      "outpatient-bookings-team"
+    ],
+    "T_RecordPatientConsent": [
+      "consultant-team"
+    ],
+    "T_RecordPayment": [
+      "finance-team"
+    ],
+    "T_RecordReferralDecision": [
+      "consultant-team"
+    ],
+    "T_RecordRefund": [
+      "finance-team"
+    ],
+    "T_ReferUnconfirmedPayment": [
+      "finance-team"
+    ],
+    "T_RefundDecision": [
+      "finance-team"
+    ],
+    "T_Register": [
+      "medical-secretaries"
+    ],
+    "T_RegisterReferral": [
+      "medical-secretaries"
+    ],
+    "T_RequestFollowUp": [
+      "consultant-team"
+    ],
+    "T_RequestFundingApproval": [
+      "finance-team"
+    ],
+    "T_ResolveCapacity": [
+      "patient-pathway-coordinators"
+    ],
+    "T_ResolveFunding": [
+      "finance-team"
+    ],
+    "T_ResolveTransaction": [
+      "finance-team"
+    ],
+    "T_ReturnUnauthorisedRequest": [
+      "treatment-bookings-team"
+    ],
+    "T_ReviewCycleResults": [
+      "consultant-team"
+    ],
+    "T_ReviewFinancialImpact": [
+      "finance-team"
+    ],
+    "T_ReviewManagementReports": [
+      "hospital-management"
+    ],
+    "T_SelectAndBookSlot": [
+      "outpatient-bookings-team"
+    ],
+    "T_SelectBookAppointment": [
+      "outpatient-bookings-team"
+    ],
+    "T_TelephonePatient": [
+      "call-handling-team"
+    ],
+    "T_UrgentPostponement": [
+      "consultant-team"
+    ],
+    "T_ValidateRequest": [
+      "treatment-bookings-team"
+    ],
+    "T_ValidateTreatmentRequest": [
+      "treatment-bookings-team"
+    ],
+    "T_WeeklyReminder": [
+      "patient-pathway-coordinators"
+    ]
+  },
+  "membership": {
+    "secretary.demo": [
+      "medical-secretaries"
+    ],
+    "consultant.demo": [
+      "consultant-team"
+    ],
+    "nurse.demo": [
+      "clinical-nurse-specialist-team"
+    ],
+    "bookings.demo": [
+      "outpatient-bookings-team"
+    ],
+    "treatment.demo": [
+      "treatment-bookings-team"
+    ],
+    "callhandler.demo": [
+      "call-handling-team"
+    ],
+    "finance.demo": [
+      "finance-team"
+    ],
+    "pathway.demo": [
+      "patient-pathway-coordinators"
+    ],
+    "adminmgmt.demo": [
+      "administrative-management"
+    ],
+    "management.demo": [
+      "hospital-management"
+    ]
+  },
+  "enforcement": {
+    "norole.demo": {
+      "status": 200,
+      "visible_tasks": 0
+    },
+    "secretary.demo": {
+      "status": 200,
+      "visible_tasks": 1340
+    }
+  },
+  "inbox_by_role": {
+    "medical-secretaries": [
+      "T_AdministrativeCheck",
+      "T_CheckDocumentation",
+      "T_CheckReferralDocuments",
+      "T_ReceiveReferral",
+      "T_Register",
+      "T_RegisterReferral"
+    ],
+    "consultant-team": [
+      "T_ApproveClinicLetter",
+      "T_Authorise",
+      "T_AuthoriseUrgentTreatment",
+      "T_ClinicalReview",
+      "T_ClinicalReviewReferral",
+      "T_Complete",
+      "T_CompletePathway",
+      "T_Consultation",
+      "T_CreateAuthorisedRequest",
+      "T_CreateTreatmentBookingRequest",
+      "T_DeliverTreatmentCycle",
+      "T_ForwardAccepted",
+      "T_ForwardAcceptedReferral",
+      "T_NewPatientConsultation",
+      "T_PrepareClinicLetter",
+      "T_RecordConsent",
+      "T_RecordDecision",
+      "T_RecordPatientConsent",
+      "T_RecordReferralDecision",
+      "T_RequestFollowUp"
+    ],
+    "clinical-nurse-specialist-team": [
+      "T_AdviseNoTreatment",
+      "T_FollowUp",
+      "T_ProvideCnsContactDetails"
+    ],
+    "outpatient-bookings-team": [
+      "T_ArrangeFollowUp",
+      "T_BookAppointment",
+      "T_ConfirmAppointment",
+      "T_ConfirmBooking",
+      "T_ConfirmFollowUp",
+      "T_ExpediteUrgentBooking",
+      "T_ReceiveBookingRequest",
+      "T_SelectAndBookSlot",
+      "T_SelectBookAppointment"
+    ],
+    "treatment-bookings-team": [
+      "T_ConfirmTreatmentSchedule",
+      "T_DeliverTreatment",
+      "T_KeepPending",
+      "T_ReturnUnauthorisedRequest",
+      "T_ValidateRequest",
+      "T_ValidateTreatmentRequest"
+    ],
+    "call-handling-team": [
+      "T_AnswerAdministrative",
+      "T_ClassifyEnquiry",
+      "T_Enquiry",
+      "T_RecordContactAttempt",
+      "T_RecordEnquiryOutcome",
+      "T_TelephonePatient"
+    ],
+    "finance-team": [
+      "T_Authorise",
+      "T_DetermineFunding",
+      "T_DetermineFundingRoute",
+      "T_HandlePaymentFailure",
+      "T_MarkForInvestigation",
+      "T_RecordFundingApproval",
+      "T_RecordPayment",
+      "T_ReferUnconfirmedPayment",
+      "T_RequestFundingApproval",
+      "T_ResolveTransaction"
+    ],
+    "patient-pathway-coordinators": [
+      "T_ResolveCapacity"
+    ],
+    "administrative-management": [],
+    "hospital-management": [
+      "T_ReviewManagementReports"
+    ]
+  },
+  "routed_task_definitions": 61,
+  "declared_task_definitions": 84,
+  "shared_task_definitions": {
+    "T_Authorise": [
+      "consultant-team",
+      "finance-team"
+    ]
+  },
+  "failures": []
+}

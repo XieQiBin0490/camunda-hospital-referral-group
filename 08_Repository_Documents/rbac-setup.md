@@ -89,6 +89,15 @@ portfolio refers to therefore have to be taken by hand:
 The two lists are disjoint, which is the requirement stated in the review list. Save them
 as `05_Test_Evidence/rbac/tasklist-medical-secretaries.png` and
 `05_Test_Evidence/rbac/tasklist-finance.png`.
+As delivered, no screenshot of the two inboxes is included: the two files that used to sit in
+that folder were byte-identical copies of the sign-in page (the same SHA256), so they evidenced
+nothing and were removed rather than kept as decoration. The evidence for the same claim is
+`05_Test_Evidence/rbac/rbac-visibility-evidence.pdf`, built from `task-visibility.json`: a user
+with no group sees 0 tasks, a medical secretary sees 785 (the count on 15 October 2026 - it
+grows with the instance history, so quote the date), and the ten role inboxes are listed with
+the task definitions each one receives. If a screen capture is wanted for the demonstration,
+follow the two steps above and save the files under the names given here.
+
 
 ## What the API cannot express, and why that is not a gap here
 

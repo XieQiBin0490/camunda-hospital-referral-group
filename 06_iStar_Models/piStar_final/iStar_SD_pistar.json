@@ -1,0 +1,928 @@
+{
+  "actors": [
+    {
+      "id": "A_PAT",
+      "text": "Patient / Representative",
+      "type": "istar.Actor",
+      "x": 780,
+      "y": 891,
+      "customProperties": {
+        "Description": "The person receiving care, or a representative acting with authority. Wants clinically appropriate, timely treatment; supplies identity, contact and consent information."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_REF",
+      "text": "Referring Organisation",
+      "type": "istar.Actor",
+      "x": 675,
+      "y": 1062,
+      "customProperties": {
+        "Description": "The GP practice or hospital that refers the patient and supplies the referral documentation."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_MS",
+      "text": "Medical Secretaries",
+      "type": "istar.Actor",
+      "x": 670,
+      "y": 1214,
+      "customProperties": {
+        "Description": "Receive and check referrals, request missing documents, process approved clinic letters and distribute them. They may not make clinical judgements."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_CON",
+      "text": "Consultant Team",
+      "type": "istar.Actor",
+      "x": 296,
+      "y": 1874,
+      "customProperties": {
+        "Description": "Accepts, rejects, redirects or requests more information on a referral; records the decision and reason; obtains consent; authorises treatment; approves clinic letters."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_CNS",
+      "text": "CNS Team",
+      "type": "istar.Actor",
+      "x": 1086,
+      "y": 631,
+      "customProperties": {
+        "Description": "Provides clinical advice and support, answers clinical enquiries and handles urgent clinical concerns."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_OB",
+      "text": "Outpatient Bookings",
+      "type": "istar.Actor",
+      "x": 1224,
+      "y": 735,
+      "customProperties": {
+        "Description": "Finds and confirms new-patient and follow-up appointments, records contact attempts and escalates capacity exceptions."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_TB",
+      "text": "Treatment Bookings",
+      "type": "istar.Actor",
+      "x": 1059,
+      "y": 1305,
+      "customProperties": {
+        "Description": "Validates authorised treatment requests and coordinates treatment, laboratory and imaging capacity without duplicating bookings."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_PPC",
+      "text": "Pathway Coordinators",
+      "type": "istar.Actor",
+      "x": 1280,
+      "y": 1811,
+      "customProperties": {
+        "Description": "Monitors pathways, reminds Consultants about outstanding letters, escalates persistent delays and resolves capacity exceptions."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_CH",
+      "text": "Call Handling",
+      "type": "istar.Actor",
+      "x": 1912,
+      "y": 584,
+      "customProperties": {
+        "Description": "Records, classifies, prioritises and routes patient enquiries; may answer administrative questions but must not give clinical advice."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_COR",
+      "text": "Correspondence Service",
+      "type": "istar.Actor",
+      "x": 1550,
+      "y": 860,
+      "customProperties": {
+        "Description": "Prints and distributes appointment and clinic letters through approved channels."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_SCH",
+      "text": "Scheduling Service",
+      "type": "istar.Actor",
+      "x": 1718,
+      "y": 1289,
+      "customProperties": {
+        "Description": "Supplies available appointment slots. The hospital cannot create capacity it does not have."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_CLIN",
+      "text": "Clinical Services",
+      "type": "istar.Actor",
+      "x": 1386,
+      "y": 1550,
+      "customProperties": {
+        "Description": "Provides treatment capacity and the laboratory, imaging and assessment results on which clinical decisions depend."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_FIN",
+      "text": "Finance Team",
+      "type": "istar.Actor",
+      "x": 2830,
+      "y": 808,
+      "customProperties": {
+        "Description": "Determines the funding route, records approval, sends secure payment requests, investigates unconfirmed payments and decides refunds under financial authority."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_FUND",
+      "text": "Funder / Insurer",
+      "type": "istar.Actor",
+      "x": 2275,
+      "y": 1051,
+      "customProperties": {
+        "Description": "Approves funding and states the authorised amount and any limitations."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_PSP",
+      "text": "Payment Provider",
+      "type": "istar.Actor",
+      "x": 2391,
+      "y": 1217,
+      "customProperties": {
+        "Description": "Processes card payments and refunds and returns the status, transaction reference, date and amount."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_MGMT",
+      "text": "Management",
+      "type": "istar.Actor",
+      "x": 2369,
+      "y": 1463,
+      "customProperties": {
+        "Description": "Needs reports on referrals, waiting times, delayed letters, enquiries, funding, payments and refunds; receives escalations."
+      },
+      "nodes": []
+    }
+  ],
+  "orphans": [],
+  "dependencies": [
+    {
+      "id": "SD-01",
+      "text": "Receive clinically appropriate treatment",
+      "type": "istar.Goal",
+      "x": 234,
+      "y": 1069,
+      "source": "A_PAT",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-02",
+      "text": "Referral decision, reason and decision-maker",
+      "type": "istar.Resource",
+      "x": 420,
+      "y": 1218,
+      "source": "A_REF",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-03",
+      "text": "Supply missing referral information",
+      "type": "istar.Task",
+      "x": 833,
+      "y": 1032,
+      "source": "A_MS",
+      "target": "A_REF"
+    },
+    {
+      "id": "SD-04",
+      "text": "Approve clinic letter content",
+      "type": "istar.Task",
+      "x": 456,
+      "y": 1324,
+      "source": "A_MS",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-05",
+      "text": "Referral checked and prepared for review",
+      "type": "istar.Resource",
+      "x": 560,
+      "y": 1399,
+      "source": "A_CON",
+      "target": "A_MS"
+    },
+    {
+      "id": "SD-06",
+      "text": "Informed consent to treatment",
+      "type": "istar.Resource",
+      "x": 353,
+      "y": 1137,
+      "source": "A_CON",
+      "target": "A_PAT"
+    },
+    {
+      "id": "SD-07",
+      "text": "Investigation and test results",
+      "type": "istar.Resource",
+      "x": 1235,
+      "y": 1711,
+      "source": "A_CON",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "SD-08",
+      "text": "Clinical time protected from avoidable recording",
+      "type": "istar.Quality",
+      "x": 1999,
+      "y": 1684,
+      "source": "A_CON",
+      "target": "A_MGMT"
+    },
+    {
+      "id": "SD-09",
+      "text": "Clinically safe advice and support",
+      "type": "istar.Goal",
+      "x": 871,
+      "y": 689,
+      "source": "A_PAT",
+      "target": "A_CNS"
+    },
+    {
+      "id": "SD-10",
+      "text": "Distribute approved clinic letters",
+      "type": "istar.Task",
+      "x": 1514,
+      "y": 986,
+      "source": "A_MS",
+      "target": "A_COR"
+    },
+    {
+      "id": "SD-11",
+      "text": "Appointment within the clinically requested period",
+      "type": "istar.Goal",
+      "x": 946,
+      "y": 775,
+      "source": "A_PAT",
+      "target": "A_OB"
+    },
+    {
+      "id": "SD-12",
+      "text": "Accepted referral with priority and timeframe",
+      "type": "istar.Resource",
+      "x": 697,
+      "y": 1395,
+      "source": "A_OB",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-13",
+      "text": "Available appointment slots",
+      "type": "istar.Resource",
+      "x": 1377,
+      "y": 1126,
+      "source": "A_OB",
+      "target": "A_SCH"
+    },
+    {
+      "id": "SD-14",
+      "text": "Send appointment letters",
+      "type": "istar.Task",
+      "x": 1528,
+      "y": 728,
+      "source": "A_OB",
+      "target": "A_COR"
+    },
+    {
+      "id": "SD-15",
+      "text": "Confirm attendance when telephoned",
+      "type": "istar.Task",
+      "x": 963,
+      "y": 862,
+      "source": "A_OB",
+      "target": "A_PAT"
+    },
+    {
+      "id": "SD-16",
+      "text": "Authorised Treatment Booking Request",
+      "type": "istar.Resource",
+      "x": 697,
+      "y": 1612,
+      "source": "A_TB",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-17",
+      "text": "Treatment, laboratory and imaging capacity",
+      "type": "istar.Resource",
+      "x": 1193,
+      "y": 1446,
+      "source": "A_TB",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "SD-18",
+      "text": "Funding confirmed before treatment",
+      "type": "istar.Goal",
+      "x": 1808,
+      "y": 1030,
+      "source": "A_TB",
+      "target": "A_FIN"
+    },
+    {
+      "id": "SD-19",
+      "text": "Clinical decision that the patient is fit to continue",
+      "type": "istar.Resource",
+      "x": 697,
+      "y": 1738,
+      "source": "A_TB",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-20",
+      "text": "Answer clinical enquiries",
+      "type": "istar.Task",
+      "x": 1541,
+      "y": 595,
+      "source": "A_CH",
+      "target": "A_CNS"
+    },
+    {
+      "id": "SD-21",
+      "text": "Answer payment and funding enquiries",
+      "type": "istar.Task",
+      "x": 2213,
+      "y": 594,
+      "source": "A_CH",
+      "target": "A_FIN"
+    },
+    {
+      "id": "SD-22",
+      "text": "Urgency rules agreed and usable",
+      "type": "istar.Quality",
+      "x": 2064,
+      "y": 1048,
+      "source": "A_CH",
+      "target": "A_MGMT"
+    },
+    {
+      "id": "SD-23",
+      "text": "Complete and approve clinic letters",
+      "type": "istar.Task",
+      "x": 905,
+      "y": 1885,
+      "source": "A_PPC",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-24",
+      "text": "Act on escalation after one month",
+      "type": "istar.Task",
+      "x": 1818,
+      "y": 1536,
+      "source": "A_PPC",
+      "target": "A_MGMT"
+    },
+    {
+      "id": "SD-25",
+      "text": "Funding authorisation, amount and limitations",
+      "type": "istar.Resource",
+      "x": 2509,
+      "y": 884,
+      "source": "A_FIN",
+      "target": "A_FUND"
+    },
+    {
+      "id": "SD-26",
+      "text": "Process payment or refund and return status",
+      "type": "istar.Task",
+      "x": 2622,
+      "y": 987,
+      "source": "A_FIN",
+      "target": "A_PSP"
+    },
+    {
+      "id": "SD-27",
+      "text": "Payment, exemption or approved arrangement",
+      "type": "istar.Resource",
+      "x": 2212,
+      "y": 703,
+      "source": "A_FIN",
+      "target": "A_PAT"
+    },
+    {
+      "id": "SD-28",
+      "text": "Clinical authorisation to proceed without payment",
+      "type": "istar.Resource",
+      "x": 2238,
+      "y": 1716,
+      "source": "A_FIN",
+      "target": "A_CON"
+    },
+    {
+      "id": "SD-29",
+      "text": "Funding, payment and refund report",
+      "type": "istar.Resource",
+      "x": 2649,
+      "y": 1132,
+      "source": "A_MGMT",
+      "target": "A_FIN"
+    },
+    {
+      "id": "SD-30",
+      "text": "Blood test and assessment results",
+      "type": "istar.Resource",
+      "x": 1287,
+      "y": 1324,
+      "source": "A_CNS",
+      "target": "A_CLIN"
+    }
+  ],
+  "links": [
+    {
+      "id": "eecfb8a3-6eba-4bf7-8f10-61844aa8ec1f",
+      "type": "istar.DependencyLink",
+      "source": "SD-30",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "d6aab3bc-99ef-4a97-a6d9-f2712bf6158b",
+      "type": "istar.DependencyLink",
+      "source": "A_CNS",
+      "target": "SD-30"
+    },
+    {
+      "id": "c4201034-f6c7-4c46-83fa-a4988dc6be9e",
+      "type": "istar.DependencyLink",
+      "source": "SD-29",
+      "target": "A_FIN"
+    },
+    {
+      "id": "fb20c3d6-560b-4495-9583-7623e4f7e2ad",
+      "type": "istar.DependencyLink",
+      "source": "A_MGMT",
+      "target": "SD-29"
+    },
+    {
+      "id": "abfaf261-a910-4c83-9587-60bdad8f97e3",
+      "type": "istar.DependencyLink",
+      "source": "SD-28",
+      "target": "A_CON"
+    },
+    {
+      "id": "24ccc3cd-3f71-4a13-ad56-ff69d2d34e37",
+      "type": "istar.DependencyLink",
+      "source": "A_FIN",
+      "target": "SD-28"
+    },
+    {
+      "id": "6747c71a-b655-46a6-8993-76423574c8a5",
+      "type": "istar.DependencyLink",
+      "source": "SD-27",
+      "target": "A_PAT"
+    },
+    {
+      "id": "ce592473-4d50-4a8a-9614-a5a7319b9cc3",
+      "type": "istar.DependencyLink",
+      "source": "A_FIN",
+      "target": "SD-27"
+    },
+    {
+      "id": "0f5f8fcf-aca3-496b-9bbe-6c2d84154a9c",
+      "type": "istar.DependencyLink",
+      "source": "SD-26",
+      "target": "A_PSP"
+    },
+    {
+      "id": "d4a3e713-f9e8-49a9-898a-e6698e6319a5",
+      "type": "istar.DependencyLink",
+      "source": "A_FIN",
+      "target": "SD-26"
+    },
+    {
+      "id": "084432e0-aafe-459b-9b3c-41e766b024a5",
+      "type": "istar.DependencyLink",
+      "source": "SD-25",
+      "target": "A_FUND"
+    },
+    {
+      "id": "ee8f9c08-c00b-41da-b82e-48b90a43778b",
+      "type": "istar.DependencyLink",
+      "source": "A_FIN",
+      "target": "SD-25"
+    },
+    {
+      "id": "351466d1-a62c-4190-90a7-e64f7bc3003f",
+      "type": "istar.DependencyLink",
+      "source": "SD-24",
+      "target": "A_MGMT"
+    },
+    {
+      "id": "cc2b7ca3-7c67-4e07-9916-e78d69353c98",
+      "type": "istar.DependencyLink",
+      "source": "A_PPC",
+      "target": "SD-24"
+    },
+    {
+      "id": "e0ec1418-a094-4393-9a3f-e2c205c81ddc",
+      "type": "istar.DependencyLink",
+      "source": "SD-23",
+      "target": "A_CON"
+    },
+    {
+      "id": "b6f92388-c1ea-45d2-8d79-e448ca7c8661",
+      "type": "istar.DependencyLink",
+      "source": "A_PPC",
+      "target": "SD-23"
+    },
+    {
+      "id": "9456df99-4df5-4315-8f1d-bceae28bed3d",
+      "type": "istar.DependencyLink",
+      "source": "SD-22",
+      "target": "A_MGMT"
+    },
+    {
+      "id": "af4207f1-ee69-4f5a-9bbb-f8ab619afd1d",
+      "type": "istar.DependencyLink",
+      "source": "A_CH",
+      "target": "SD-22"
+    },
+    {
+      "id": "6af986ff-b563-4775-b878-077cc768ae25",
+      "type": "istar.DependencyLink",
+      "source": "SD-21",
+      "target": "A_FIN"
+    },
+    {
+      "id": "9ae9d0af-f319-4a91-a10a-d18e18611b7b",
+      "type": "istar.DependencyLink",
+      "source": "A_CH",
+      "target": "SD-21"
+    },
+    {
+      "id": "9f276ffb-2682-4105-833e-d4943b272105",
+      "type": "istar.DependencyLink",
+      "source": "SD-20",
+      "target": "A_CNS"
+    },
+    {
+      "id": "fe10d119-1e0c-4af0-90ca-5216ae679aca",
+      "type": "istar.DependencyLink",
+      "source": "A_CH",
+      "target": "SD-20"
+    },
+    {
+      "id": "790d4ea3-f5e8-42f3-89b5-5df8d3abd19e",
+      "type": "istar.DependencyLink",
+      "source": "SD-19",
+      "target": "A_CON"
+    },
+    {
+      "id": "d9916938-5f62-4dae-bdfe-6910f2a697ce",
+      "type": "istar.DependencyLink",
+      "source": "A_TB",
+      "target": "SD-19"
+    },
+    {
+      "id": "e8e4411e-38e0-4e7a-8f0e-e8fc131101e3",
+      "type": "istar.DependencyLink",
+      "source": "SD-18",
+      "target": "A_FIN"
+    },
+    {
+      "id": "a1fe859b-3fd9-4464-8d5d-cf6add77a84f",
+      "type": "istar.DependencyLink",
+      "source": "A_TB",
+      "target": "SD-18"
+    },
+    {
+      "id": "a2ebab97-52c4-45c1-a2c6-514abcef7c29",
+      "type": "istar.DependencyLink",
+      "source": "SD-17",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "d48ce0b4-d731-41ee-b472-93da608a8736",
+      "type": "istar.DependencyLink",
+      "source": "A_TB",
+      "target": "SD-17"
+    },
+    {
+      "id": "065663ca-d373-426b-8c18-20dbe910c9b4",
+      "type": "istar.DependencyLink",
+      "source": "SD-16",
+      "target": "A_CON"
+    },
+    {
+      "id": "bc7ff39b-382a-4e1a-b187-51a9f9ac1e79",
+      "type": "istar.DependencyLink",
+      "source": "A_TB",
+      "target": "SD-16"
+    },
+    {
+      "id": "4c58bb86-f191-4a9e-a756-210a06a126a7",
+      "type": "istar.DependencyLink",
+      "source": "SD-15",
+      "target": "A_PAT"
+    },
+    {
+      "id": "95ffb52f-dda4-4215-92b9-621da2de1d0b",
+      "type": "istar.DependencyLink",
+      "source": "A_OB",
+      "target": "SD-15"
+    },
+    {
+      "id": "e55a3b7d-e316-43ed-9cb7-fc568dffbf4a",
+      "type": "istar.DependencyLink",
+      "source": "SD-14",
+      "target": "A_COR"
+    },
+    {
+      "id": "c0e42225-96c1-4bb0-a52a-720f1be7f350",
+      "type": "istar.DependencyLink",
+      "source": "A_OB",
+      "target": "SD-14"
+    },
+    {
+      "id": "4467a5f8-7e90-43b5-acc1-8c1e83ea6479",
+      "type": "istar.DependencyLink",
+      "source": "SD-13",
+      "target": "A_SCH"
+    },
+    {
+      "id": "f17242ef-c574-48ca-93e6-fb157fffed04",
+      "type": "istar.DependencyLink",
+      "source": "A_OB",
+      "target": "SD-13"
+    },
+    {
+      "id": "611f5df0-cfbe-475e-9885-2869ae1e8671",
+      "type": "istar.DependencyLink",
+      "source": "SD-12",
+      "target": "A_CON"
+    },
+    {
+      "id": "64b80bd0-af73-41c0-9d88-d8c99d529961",
+      "type": "istar.DependencyLink",
+      "source": "A_OB",
+      "target": "SD-12"
+    },
+    {
+      "id": "cd365e44-3a25-48ff-8025-49b0409485e2",
+      "type": "istar.DependencyLink",
+      "source": "SD-11",
+      "target": "A_OB"
+    },
+    {
+      "id": "6ade7d65-2fe8-41d1-bdef-5dea1399e54a",
+      "type": "istar.DependencyLink",
+      "source": "A_PAT",
+      "target": "SD-11"
+    },
+    {
+      "id": "14138bd7-5a7b-4dd8-b3da-b920465498d1",
+      "type": "istar.DependencyLink",
+      "source": "SD-10",
+      "target": "A_COR"
+    },
+    {
+      "id": "789be9bf-61c6-45d6-8968-e0f003ca2b7d",
+      "type": "istar.DependencyLink",
+      "source": "A_MS",
+      "target": "SD-10"
+    },
+    {
+      "id": "8f38bec8-9e63-4b73-802c-aa5060846f72",
+      "type": "istar.DependencyLink",
+      "source": "SD-09",
+      "target": "A_CNS"
+    },
+    {
+      "id": "2a6e307a-7618-4e13-8840-e5efb9d90a80",
+      "type": "istar.DependencyLink",
+      "source": "A_PAT",
+      "target": "SD-09"
+    },
+    {
+      "id": "83e3aa0b-c8b2-4973-9ab4-ebcecca1f1e8",
+      "type": "istar.DependencyLink",
+      "source": "SD-08",
+      "target": "A_MGMT"
+    },
+    {
+      "id": "5701e3c2-692a-434f-88df-52fe4ffb21ce",
+      "type": "istar.DependencyLink",
+      "source": "A_CON",
+      "target": "SD-08"
+    },
+    {
+      "id": "29df1469-982d-439d-ada4-af1444958170",
+      "type": "istar.DependencyLink",
+      "source": "SD-07",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "50383503-3eb8-42e0-a00c-50c6a47c0908",
+      "type": "istar.DependencyLink",
+      "source": "A_CON",
+      "target": "SD-07"
+    },
+    {
+      "id": "30c745f0-b0c5-4567-914f-2106bf48df1b",
+      "type": "istar.DependencyLink",
+      "source": "SD-06",
+      "target": "A_PAT"
+    },
+    {
+      "id": "fc893bfe-92b3-4290-af44-a83dfe08ae87",
+      "type": "istar.DependencyLink",
+      "source": "A_CON",
+      "target": "SD-06"
+    },
+    {
+      "id": "82e91270-ed0a-4654-942d-63e997aa7571",
+      "type": "istar.DependencyLink",
+      "source": "SD-05",
+      "target": "A_MS"
+    },
+    {
+      "id": "885e384c-3d51-4306-93bc-bdb9349dedd8",
+      "type": "istar.DependencyLink",
+      "source": "A_CON",
+      "target": "SD-05"
+    },
+    {
+      "id": "5470cca9-52e2-4e92-bb58-f8507b4b2835",
+      "type": "istar.DependencyLink",
+      "source": "SD-04",
+      "target": "A_CON"
+    },
+    {
+      "id": "69c4bd67-7400-4082-90b0-e32bfc3d7e24",
+      "type": "istar.DependencyLink",
+      "source": "A_MS",
+      "target": "SD-04"
+    },
+    {
+      "id": "ef77a499-099b-4b97-81bb-406c9601ae4a",
+      "type": "istar.DependencyLink",
+      "source": "SD-03",
+      "target": "A_REF"
+    },
+    {
+      "id": "c1ae1864-60f8-4a83-bbbf-f6e30011ac7f",
+      "type": "istar.DependencyLink",
+      "source": "A_MS",
+      "target": "SD-03"
+    },
+    {
+      "id": "2896e692-5223-45b8-a638-f5c004c6ef7b",
+      "type": "istar.DependencyLink",
+      "source": "SD-02",
+      "target": "A_CON"
+    },
+    {
+      "id": "535a72fe-3a8d-4c64-a2de-86d8716cc497",
+      "type": "istar.DependencyLink",
+      "source": "A_REF",
+      "target": "SD-02"
+    },
+    {
+      "id": "59781cbb-271e-47f0-805f-4b79246465cc",
+      "type": "istar.DependencyLink",
+      "source": "SD-01",
+      "target": "A_CON"
+    },
+    {
+      "id": "a0e3297f-1847-405b-b5aa-f73ac94c8a72",
+      "type": "istar.DependencyLink",
+      "source": "A_PAT",
+      "target": "SD-01"
+    }
+  ],
+  "display": {
+    "abfaf261-a910-4c83-9587-60bdad8f97e3": {
+      "vertices": [
+        {
+          "x": 1395,
+          "y": 2037
+        }
+      ]
+    },
+    "24ccc3cd-3f71-4a13-ad56-ff69d2d34e37": {
+      "vertices": [
+        {
+          "x": 2671,
+          "y": 1343
+        }
+      ]
+    },
+    "6747c71a-b655-46a6-8993-76423574c8a5": {
+      "vertices": [
+        {
+          "x": 1504,
+          "y": 1087
+        }
+      ]
+    },
+    "e8e4411e-38e0-4e7a-8f0e-e8fc131101e3": {
+      "vertices": [
+        {
+          "x": 2352,
+          "y": 849
+        }
+      ]
+    },
+    "64b80bd0-af73-41c0-9d88-d8c99d529961": {
+      "vertices": [
+        {
+          "x": 1050,
+          "y": 1099
+        }
+      ]
+    },
+    "5701e3c2-692a-434f-88df-52fe4ffb21ce": {
+      "vertices": [
+        {
+          "x": 857,
+          "y": 1974
+        },
+        {
+          "x": 1626,
+          "y": 1929
+        }
+      ]
+    },
+    "A_PAT": {
+      "collapsed": true
+    },
+    "A_REF": {
+      "collapsed": true
+    },
+    "A_MS": {
+      "collapsed": true
+    },
+    "A_CON": {
+      "collapsed": true
+    },
+    "A_CNS": {
+      "collapsed": true
+    },
+    "A_OB": {
+      "collapsed": true
+    },
+    "A_TB": {
+      "collapsed": true
+    },
+    "A_PPC": {
+      "collapsed": true
+    },
+    "A_CH": {
+      "collapsed": true
+    },
+    "A_COR": {
+      "collapsed": true
+    },
+    "A_SCH": {
+      "collapsed": true
+    },
+    "A_CLIN": {
+      "collapsed": true
+    },
+    "A_FIN": {
+      "collapsed": true
+    },
+    "A_FUND": {
+      "collapsed": true
+    },
+    "A_PSP": {
+      "collapsed": true
+    },
+    "A_MGMT": {
+      "collapsed": true
+    }
+  },
+  "tool": "pistar.2.1.0",
+  "istar": "2.0",
+  "saveDate": "Tue, 20 Oct 2026 13:44:30 GMT",
+  "diagram": {
+    "width": 3442,
+    "height": 2450,
+    "name": "i* SD - HPAS initial release",
+    "customProperties": {
+      "Description": "Strategic Dependency model: 16 actors and 30 typed dependencies."
+    }
+  }
+}

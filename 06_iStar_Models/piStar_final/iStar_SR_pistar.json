@@ -1,0 +1,1477 @@
+{
+  "actors": [
+    {
+      "id": "ACT_CON",
+      "text": "Consultant / Clinical Team",
+      "type": "istar.Actor",
+      "x": 62,
+      "y": 75,
+      "customProperties": {
+        "Description": "Accepts, rejects, redirects or requests more information on a referral; records the decision and reason; obtains consent; authorises treatment; approves clinic letters."
+      },
+      "nodes": [
+        {
+          "id": "T_CON0",
+          "text": "Manage patient clinical pathway",
+          "type": "istar.Task",
+          "x": 215,
+          "y": 101,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_CON1",
+          "text": "Referral decision justified and recorded",
+          "type": "istar.Goal",
+          "x": 105,
+          "y": 216,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_CON2",
+          "text": "Treatment authorised and auditable",
+          "type": "istar.Goal",
+          "x": 536,
+          "y": 131,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_CON1",
+          "text": "Review referral and record decision",
+          "type": "istar.Task",
+          "x": 90,
+          "y": 327,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_CON2",
+          "text": "Discuss options and record consent",
+          "type": "istar.Task",
+          "x": 426,
+          "y": 323,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_CON3",
+          "text": "Authorise Treatment Booking Request",
+          "type": "istar.Task",
+          "x": 744,
+          "y": 360,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_CON1",
+          "text": "Clinical accountability maintained",
+          "type": "istar.Quality",
+          "x": 201,
+          "y": 472,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_CON2",
+          "text": "Clinical time protected",
+          "type": "istar.Quality",
+          "x": 626,
+          "y": 457,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "ACT_MS",
+      "text": "Medical Secretaries",
+      "type": "istar.Actor",
+      "x": 1219,
+      "y": 291,
+      "customProperties": {
+        "Description": "Receive and check referrals, request missing documents, process approved clinic letters and distribute them. They may not make clinical judgements."
+      },
+      "nodes": [
+        {
+          "id": "T_MS0",
+          "text": "Process referrals and letters",
+          "type": "istar.Task",
+          "x": 1726,
+          "y": 328,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_MS1",
+          "text": "Referral prepared for clinical review",
+          "type": "istar.Goal",
+          "x": 1500,
+          "y": 406,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_MS2",
+          "text": "Letter processed without clinical change",
+          "type": "istar.Goal",
+          "x": 1840,
+          "y": 435,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_MS1",
+          "text": "Check referral and request missing information",
+          "type": "istar.Task",
+          "x": 1219,
+          "y": 537,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_MS2",
+          "text": "Admin checks, confirm recipients, distribute",
+          "type": "istar.Task",
+          "x": 1821,
+          "y": 576,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_MS1",
+          "text": "No clinical judgement by admin staff",
+          "type": "istar.Quality",
+          "x": 1415,
+          "y": 675,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_MS2",
+          "text": "Referral administration proportionate",
+          "type": "istar.Quality",
+          "x": 1977,
+          "y": 656,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "ACT_OB",
+      "text": "Outpatient Bookings Team",
+      "type": "istar.Actor",
+      "x": 93,
+      "y": 712,
+      "customProperties": {
+        "Description": "Finds and confirms new-patient and follow-up appointments, records contact attempts and escalates capacity exceptions."
+      },
+      "nodes": [
+        {
+          "id": "T_OB0",
+          "text": "Book and confirm new-patient appointments",
+          "type": "istar.Task",
+          "x": 232,
+          "y": 754,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_OB1",
+          "text": "Appointment in requested period",
+          "type": "istar.Goal",
+          "x": 153,
+          "y": 853,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_OB2",
+          "text": "Patient informed and attendance confirmed",
+          "type": "istar.Goal",
+          "x": 483,
+          "y": 874,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_OB1",
+          "text": "Validate request and query external slots",
+          "type": "istar.Task",
+          "x": 152,
+          "y": 981,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_OB2",
+          "text": "Book, confirm and telephone within 14 days",
+          "type": "istar.Task",
+          "x": 450,
+          "y": 1019,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_OB1",
+          "text": "Never booked silently outside period",
+          "type": "istar.Quality",
+          "x": 190,
+          "y": 1088,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_OB2",
+          "text": "No duplicate appointments",
+          "type": "istar.Quality",
+          "x": 722,
+          "y": 865,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "ACT_TB",
+      "text": "Treatment & Chemotherapy Bookings Team",
+      "type": "istar.Actor",
+      "x": 1109,
+      "y": 902,
+      "customProperties": {
+        "Description": "Validates authorised treatment requests and coordinates treatment, laboratory and imaging capacity without duplicating bookings."
+      },
+      "nodes": [
+        {
+          "id": "T_TB0",
+          "text": "Coordinate treatment appointments",
+          "type": "istar.Task",
+          "x": 1297,
+          "y": 937,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_TB1",
+          "text": "Treatment scheduled without duplication",
+          "type": "istar.Goal",
+          "x": 1157,
+          "y": 1052,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_TB2",
+          "text": "Only authorised requests processed",
+          "type": "istar.Goal",
+          "x": 1570,
+          "y": 1031,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_TB1",
+          "text": "Validate authorised request",
+          "type": "istar.Task",
+          "x": 1140,
+          "y": 1172,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_TB2",
+          "text": "Request capacity and hold pending",
+          "type": "istar.Task",
+          "x": 1454,
+          "y": 1179,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_TB3",
+          "text": "Refer fitness decisions to Consultant",
+          "type": "istar.Task",
+          "x": 1785,
+          "y": 1187,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_TB1",
+          "text": "No duplicate appointments",
+          "type": "istar.Quality",
+          "x": 1169,
+          "y": 1308,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_TB2",
+          "text": "No admin decision on clinical fitness",
+          "type": "istar.Quality",
+          "x": 1776,
+          "y": 1326,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "ACT_FIN",
+      "text": "Finance Team",
+      "type": "istar.Actor",
+      "x": 84,
+      "y": 1423,
+      "customProperties": {
+        "Description": "Determines the funding route, records approval, sends secure payment requests, investigates unconfirmed payments and decides refunds under financial authority."
+      },
+      "nodes": [
+        {
+          "id": "T_FIN0",
+          "text": "Administer funding, payment and refunds",
+          "type": "istar.Task",
+          "x": 203,
+          "y": 1464,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_FIN1",
+          "text": "Funding route recorded",
+          "type": "istar.Goal",
+          "x": 156,
+          "y": 1587,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_FIN2",
+          "text": "Payment collected without double charging",
+          "type": "istar.Goal",
+          "x": 443,
+          "y": 1575,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_FIN3",
+          "text": "Refunds under financial authority",
+          "type": "istar.Goal",
+          "x": 789,
+          "y": 1491,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_FIN1",
+          "text": "Request funding approval",
+          "type": "istar.Task",
+          "x": 109,
+          "y": 1720,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_FIN2",
+          "text": "Send payment request and investigate failure",
+          "type": "istar.Task",
+          "x": 477,
+          "y": 1742,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_FIN3",
+          "text": "Determine retention, transfer or refund",
+          "type": "istar.Task",
+          "x": 126,
+          "y": 1796,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_FIN1",
+          "text": "Patient is never charged twice",
+          "type": "istar.Quality",
+          "x": 474,
+          "y": 1825,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_FIN2",
+          "text": "No unnecessary financial data stored",
+          "type": "istar.Quality",
+          "x": 781,
+          "y": 1748,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "ACT_CNS",
+      "text": "Clinical Nurse Specialist Team",
+      "type": "istar.Actor",
+      "x": 1909,
+      "y": 1926,
+      "customProperties": {
+        "Description": "Provides clinical advice and support, answers clinical enquiries and handles urgent clinical concerns."
+      },
+      "nodes": [
+        {
+          "id": "T_CNS0",
+          "text": "Provide clinical advice and support",
+          "type": "istar.Task",
+          "x": 2042,
+          "y": 1954,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_CNS1",
+          "text": "Patients receive clinically safe advice",
+          "type": "istar.Goal",
+          "x": 1946,
+          "y": 2054,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "G_CNS2",
+          "text": "Clinical enquiries handled by clinicians",
+          "type": "istar.Goal",
+          "x": 2271,
+          "y": 2055,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_CNS1",
+          "text": "Answer clinical enquiries and advise",
+          "type": "istar.Task",
+          "x": 1951,
+          "y": 2195,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "T_CNS2",
+          "text": "Handle urgent clinical concerns",
+          "type": "istar.Task",
+          "x": 2421,
+          "y": 2287,
+          "customProperties": {
+            "Description": ""
+          }
+        },
+        {
+          "id": "S_CNS1",
+          "text": "No clinical advice from admin staff",
+          "type": "istar.Quality",
+          "x": 1981,
+          "y": 2312,
+          "customProperties": {
+            "Description": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "A_PAT",
+      "text": "Patient / Authorised Representative",
+      "type": "istar.Actor",
+      "x": 3280,
+      "y": 159,
+      "customProperties": {
+        "Description": "The person receiving care, or a representative acting with authority. Wants clinically appropriate, timely treatment; supplies identity, contact and consent information."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_REF",
+      "text": "Referring Organisation (GP or other hospital)",
+      "type": "istar.Actor",
+      "x": 3272,
+      "y": 438,
+      "customProperties": {
+        "Description": "The GP practice or hospital that refers the patient and supplies the referral documentation."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_CLIN",
+      "text": "External Clinical Services (treatment, laboratory, imaging)",
+      "type": "istar.Actor",
+      "x": 3264,
+      "y": 648,
+      "customProperties": {
+        "Description": "Provides treatment capacity and the laboratory, imaging and assessment results on which clinical decisions depend."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_SCH",
+      "text": "External Scheduling Service",
+      "type": "istar.Actor",
+      "x": 3275,
+      "y": 960,
+      "customProperties": {
+        "Description": "Supplies available appointment slots. The hospital cannot create capacity it does not have."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_COR",
+      "text": "External Correspondence Service",
+      "type": "istar.Actor",
+      "x": 3224,
+      "y": 1269,
+      "customProperties": {
+        "Description": "Prints and distributes appointment and clinic letters through approved channels."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_PSP",
+      "text": "External Payment Service Provider",
+      "type": "istar.Actor",
+      "x": 3221,
+      "y": 1492,
+      "customProperties": {
+        "Description": "Processes card payments and refunds and returns the status, transaction reference, date and amount."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_FUND",
+      "text": "Funding Organisation / Insurer",
+      "type": "istar.Actor",
+      "x": 3247,
+      "y": 1706,
+      "customProperties": {
+        "Description": "Approves funding and states the authorised amount and any limitations."
+      },
+      "nodes": []
+    },
+    {
+      "id": "A_MGMT",
+      "text": "Hospital Management Team (including Administrative Management)",
+      "type": "istar.Actor",
+      "x": 3243,
+      "y": 2005,
+      "customProperties": {
+        "Description": "Needs reports on referrals, waiting times, delayed letters, enquiries, funding, payments and refunds; receives escalations."
+      },
+      "nodes": []
+    }
+  ],
+  "orphans": [],
+  "dependencies": [
+    {
+      "id": "SRB-01",
+      "text": "Investigation and test results",
+      "type": "istar.Resource",
+      "x": 2755,
+      "y": 214,
+      "source": "T_CON1",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "SRB-02",
+      "text": "Informed consent",
+      "type": "istar.Resource",
+      "x": 2707,
+      "y": 342,
+      "source": "T_CON2",
+      "target": "A_PAT"
+    },
+    {
+      "id": "SRB-03",
+      "text": "Supply missing referral information",
+      "type": "istar.Task",
+      "x": 2698,
+      "y": 442,
+      "source": "T_MS1",
+      "target": "A_REF"
+    },
+    {
+      "id": "SRB-04",
+      "text": "Distribute approved clinic letters",
+      "type": "istar.Task",
+      "x": 2690,
+      "y": 613,
+      "source": "T_MS2",
+      "target": "A_COR"
+    },
+    {
+      "id": "SRB-05",
+      "text": "Available appointment slots",
+      "type": "istar.Resource",
+      "x": 2600,
+      "y": 786,
+      "source": "T_OB1",
+      "target": "A_SCH"
+    },
+    {
+      "id": "SRB-06",
+      "text": "Confirm attendance when telephoned",
+      "type": "istar.Task",
+      "x": 2682,
+      "y": 1037,
+      "source": "T_OB2",
+      "target": "A_PAT"
+    },
+    {
+      "id": "SRB-07",
+      "text": "Treatment, laboratory and imaging capacity",
+      "type": "istar.Resource",
+      "x": 2768,
+      "y": 1262,
+      "source": "T_TB2",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "SRB-08",
+      "text": "Funding authorisation and limitations",
+      "type": "istar.Resource",
+      "x": 2528,
+      "y": 1392,
+      "source": "T_FIN1",
+      "target": "A_FUND"
+    },
+    {
+      "id": "SRB-09",
+      "text": "Process payment or refund and return status",
+      "type": "istar.Task",
+      "x": 2493,
+      "y": 1643,
+      "source": "T_FIN2",
+      "target": "A_PSP"
+    },
+    {
+      "id": "SRB-10",
+      "text": "Blood test and assessment results",
+      "type": "istar.Resource",
+      "x": 2734,
+      "y": 2009,
+      "source": "T_CNS2",
+      "target": "A_CLIN"
+    }
+  ],
+  "links": [
+    {
+      "id": "43e67268-223e-4a98-accb-21de6d05ad30",
+      "type": "istar.DependencyLink",
+      "source": "SRB-10",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "ac036dc6-95cd-476c-bebb-402c52c22b2a",
+      "type": "istar.DependencyLink",
+      "source": "T_CNS2",
+      "target": "SRB-10"
+    },
+    {
+      "id": "8a2c8a71-50ce-45a9-be80-2fe23d3f64ec",
+      "type": "istar.DependencyLink",
+      "source": "SRB-09",
+      "target": "A_PSP"
+    },
+    {
+      "id": "e00117e9-d86c-4fc0-b1d6-4ecde0231b7e",
+      "type": "istar.DependencyLink",
+      "source": "T_FIN2",
+      "target": "SRB-09"
+    },
+    {
+      "id": "2e6c9611-db87-4bca-bd63-23bed1f02e99",
+      "type": "istar.DependencyLink",
+      "source": "SRB-08",
+      "target": "A_FUND"
+    },
+    {
+      "id": "42b3bd4e-41e5-4410-a481-b70128c63bb0",
+      "type": "istar.DependencyLink",
+      "source": "T_FIN1",
+      "target": "SRB-08"
+    },
+    {
+      "id": "c2622202-6f55-4e84-847d-6a4b43ede31c",
+      "type": "istar.DependencyLink",
+      "source": "SRB-07",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "c061e568-23b1-45f0-ad6d-b63032ab4301",
+      "type": "istar.DependencyLink",
+      "source": "T_TB2",
+      "target": "SRB-07"
+    },
+    {
+      "id": "7e6b2fde-1c12-4f9f-8d49-c61074ecc612",
+      "type": "istar.DependencyLink",
+      "source": "SRB-06",
+      "target": "A_PAT"
+    },
+    {
+      "id": "4e1ab18e-a3b0-48bf-9067-89f105aa3568",
+      "type": "istar.DependencyLink",
+      "source": "T_OB2",
+      "target": "SRB-06"
+    },
+    {
+      "id": "055a3758-f68b-4f29-9a93-6f84eb84e450",
+      "type": "istar.DependencyLink",
+      "source": "SRB-05",
+      "target": "A_SCH"
+    },
+    {
+      "id": "8af41d24-a050-46ba-a4a3-c0608f349c01",
+      "type": "istar.DependencyLink",
+      "source": "T_OB1",
+      "target": "SRB-05"
+    },
+    {
+      "id": "cfeafc68-7c7b-4cdb-9cce-88a503833aac",
+      "type": "istar.DependencyLink",
+      "source": "SRB-04",
+      "target": "A_COR"
+    },
+    {
+      "id": "52460121-92db-42b0-9b4e-2dc0d56c56a2",
+      "type": "istar.DependencyLink",
+      "source": "T_MS2",
+      "target": "SRB-04"
+    },
+    {
+      "id": "67c14f5c-44c6-4f98-9033-4a01267411e8",
+      "type": "istar.DependencyLink",
+      "source": "SRB-03",
+      "target": "A_REF"
+    },
+    {
+      "id": "dacdc1b2-0924-46ef-92e1-c50611ad629e",
+      "type": "istar.DependencyLink",
+      "source": "T_MS1",
+      "target": "SRB-03"
+    },
+    {
+      "id": "14b93ed3-4d91-409e-bdad-c3a77471a632",
+      "type": "istar.DependencyLink",
+      "source": "SRB-02",
+      "target": "A_PAT"
+    },
+    {
+      "id": "42cdbb4a-55ef-464d-915e-7bdcb4baa788",
+      "type": "istar.DependencyLink",
+      "source": "T_CON2",
+      "target": "SRB-02"
+    },
+    {
+      "id": "b46dde74-2240-49c4-9108-240e17be427b",
+      "type": "istar.DependencyLink",
+      "source": "SRB-01",
+      "target": "A_CLIN"
+    },
+    {
+      "id": "fabfb8cf-c6fe-4cf9-9384-75fde77da0a3",
+      "type": "istar.DependencyLink",
+      "source": "T_CON1",
+      "target": "SRB-01"
+    },
+    {
+      "id": "1de565a9-f026-42f4-b6e9-efe06432d59a",
+      "type": "istar.AndRefinementLink",
+      "source": "G_CON1",
+      "target": "T_CON0"
+    },
+    {
+      "id": "f61bf49e-6557-4666-b366-08b3000e5ecf",
+      "type": "istar.AndRefinementLink",
+      "source": "G_CON2",
+      "target": "T_CON0"
+    },
+    {
+      "id": "b73d1656-40f6-429a-9735-5ddc7cae06fe",
+      "type": "istar.OrRefinementLink",
+      "source": "T_CON1",
+      "target": "G_CON1"
+    },
+    {
+      "id": "c0474cba-de84-4a7c-8502-203eed2dcf23",
+      "type": "istar.OrRefinementLink",
+      "source": "T_CON2",
+      "target": "G_CON2"
+    },
+    {
+      "id": "cfc6c18d-ad70-4220-ad9d-1ce2157178a8",
+      "type": "istar.OrRefinementLink",
+      "source": "T_CON3",
+      "target": "G_CON2"
+    },
+    {
+      "id": "86f3d235-5c65-444d-8e34-b949a81dc70d",
+      "type": "istar.ContributionLink",
+      "source": "T_CON1",
+      "target": "S_CON1",
+      "label": "help"
+    },
+    {
+      "id": "4831a029-ae12-4139-8bc7-6660c8c35b52",
+      "type": "istar.ContributionLink",
+      "source": "T_CON3",
+      "target": "S_CON1",
+      "label": "help"
+    },
+    {
+      "id": "1eab0cbf-3262-468e-965b-5cdac820ee82",
+      "type": "istar.ContributionLink",
+      "source": "T_CON1",
+      "target": "S_CON2",
+      "label": "hurt"
+    },
+    {
+      "id": "b54133a7-39f8-4868-81a6-b1d0abaca3d8",
+      "type": "istar.AndRefinementLink",
+      "source": "G_MS1",
+      "target": "T_MS0"
+    },
+    {
+      "id": "1771a1e2-c9ba-409c-adc7-c0fef3bde6e7",
+      "type": "istar.AndRefinementLink",
+      "source": "G_MS2",
+      "target": "T_MS0"
+    },
+    {
+      "id": "ea219d8d-7e53-4092-927a-a901aaf1cdfe",
+      "type": "istar.OrRefinementLink",
+      "source": "T_MS1",
+      "target": "G_MS1"
+    },
+    {
+      "id": "e07ba15e-72d3-4c54-81eb-659f4bf4ebf7",
+      "type": "istar.OrRefinementLink",
+      "source": "T_MS2",
+      "target": "G_MS2"
+    },
+    {
+      "id": "b3da0705-4b99-4ee1-b925-b454de83db6d",
+      "type": "istar.ContributionLink",
+      "source": "T_MS1",
+      "target": "S_MS1",
+      "label": "make"
+    },
+    {
+      "id": "543f38a8-a2dd-4f66-b219-44659619cec0",
+      "type": "istar.ContributionLink",
+      "source": "T_MS2",
+      "target": "S_MS1",
+      "label": "make"
+    },
+    {
+      "id": "debcb216-baa0-4c28-b772-7e1e6c3ccf0d",
+      "type": "istar.ContributionLink",
+      "source": "T_MS1",
+      "target": "S_MS2",
+      "label": "hurt"
+    },
+    {
+      "id": "ce69ac24-fed6-432f-bd8e-05b8c527b115",
+      "type": "istar.AndRefinementLink",
+      "source": "G_OB1",
+      "target": "T_OB0"
+    },
+    {
+      "id": "4dc392bb-4169-4301-94e8-235df8762b93",
+      "type": "istar.AndRefinementLink",
+      "source": "G_OB2",
+      "target": "T_OB0"
+    },
+    {
+      "id": "7a8652a0-9a4d-4000-b3e9-aa88c10c970e",
+      "type": "istar.OrRefinementLink",
+      "source": "T_OB1",
+      "target": "G_OB1"
+    },
+    {
+      "id": "53140f6e-49f0-4c6a-a812-81b54bbf576e",
+      "type": "istar.OrRefinementLink",
+      "source": "T_OB2",
+      "target": "G_OB1"
+    },
+    {
+      "id": "4fda4b5a-b8f1-4ba7-8514-71bb7cbee63a",
+      "type": "istar.OrRefinementLink",
+      "source": "T_OB2",
+      "target": "G_OB2"
+    },
+    {
+      "id": "0b1de886-e04c-4d41-828e-54339adc1692",
+      "type": "istar.ContributionLink",
+      "source": "T_OB1",
+      "target": "S_OB1",
+      "label": "help"
+    },
+    {
+      "id": "6f3d86d3-a497-4800-9ab2-b7b613077d18",
+      "type": "istar.ContributionLink",
+      "source": "T_OB2",
+      "target": "S_OB1",
+      "label": "help"
+    },
+    {
+      "id": "88ff0ccb-beff-419d-8840-6b754400cf4c",
+      "type": "istar.ContributionLink",
+      "source": "T_OB2",
+      "target": "S_OB2",
+      "label": "make"
+    },
+    {
+      "id": "b750aff3-d926-44e3-b68e-e2998ac91868",
+      "type": "istar.AndRefinementLink",
+      "source": "G_TB1",
+      "target": "T_TB0"
+    },
+    {
+      "id": "eae0adc7-eadc-4d81-9edb-3f867f446985",
+      "type": "istar.AndRefinementLink",
+      "source": "G_TB2",
+      "target": "T_TB0"
+    },
+    {
+      "id": "3f0b3364-ba5e-4943-bc63-f38d5e3ef6e9",
+      "type": "istar.OrRefinementLink",
+      "source": "T_TB2",
+      "target": "G_TB1"
+    },
+    {
+      "id": "630837a5-311a-482c-a5a4-a3b2dad7343c",
+      "type": "istar.OrRefinementLink",
+      "source": "T_TB1",
+      "target": "G_TB2"
+    },
+    {
+      "id": "896987b3-7932-4da0-b7da-4f8f83af1b68",
+      "type": "istar.OrRefinementLink",
+      "source": "T_TB3",
+      "target": "G_TB2"
+    },
+    {
+      "id": "7a5698f3-a552-4e18-8fc5-9189f971c690",
+      "type": "istar.ContributionLink",
+      "source": "T_TB2",
+      "target": "S_TB1",
+      "label": "make"
+    },
+    {
+      "id": "1abea88d-c0dc-4fe7-85bc-06aaa0fb7d96",
+      "type": "istar.ContributionLink",
+      "source": "T_TB1",
+      "target": "S_TB2",
+      "label": "make"
+    },
+    {
+      "id": "6d5db7bb-17df-41c9-8aad-ecca0b0fe39e",
+      "type": "istar.ContributionLink",
+      "source": "T_TB3",
+      "target": "S_TB2",
+      "label": "make"
+    },
+    {
+      "id": "d1742c40-99da-49f6-b4c5-bcbc7d870759",
+      "type": "istar.AndRefinementLink",
+      "source": "G_FIN1",
+      "target": "T_FIN0"
+    },
+    {
+      "id": "5e0277d9-b338-48de-b14b-4d93f3415b6b",
+      "type": "istar.AndRefinementLink",
+      "source": "G_FIN2",
+      "target": "T_FIN0"
+    },
+    {
+      "id": "21f32ea1-7eb6-40b4-ae1f-144c5b8cad4c",
+      "type": "istar.AndRefinementLink",
+      "source": "G_FIN3",
+      "target": "T_FIN0"
+    },
+    {
+      "id": "7ef1456e-20e8-4fd0-bd2d-20ae24f3e35a",
+      "type": "istar.OrRefinementLink",
+      "source": "T_FIN1",
+      "target": "G_FIN1"
+    },
+    {
+      "id": "1e44fb32-653f-4e3c-8b1d-e7d17d0dfca8",
+      "type": "istar.OrRefinementLink",
+      "source": "T_FIN2",
+      "target": "G_FIN2"
+    },
+    {
+      "id": "6d6ac799-ad9b-4b7d-9a2c-a49af8d12cb0",
+      "type": "istar.OrRefinementLink",
+      "source": "T_FIN3",
+      "target": "G_FIN3"
+    },
+    {
+      "id": "668f5b18-52e4-4260-8d3a-3934c68cb2e5",
+      "type": "istar.ContributionLink",
+      "source": "T_FIN2",
+      "target": "S_FIN1",
+      "label": "hurt"
+    },
+    {
+      "id": "2db0e81b-ac47-405a-ac09-dd4b30e70179",
+      "type": "istar.ContributionLink",
+      "source": "T_FIN3",
+      "target": "S_FIN1",
+      "label": "help"
+    },
+    {
+      "id": "cc85042d-876a-467f-83b1-40affad1a4b6",
+      "type": "istar.ContributionLink",
+      "source": "T_FIN2",
+      "target": "S_FIN2",
+      "label": "make"
+    },
+    {
+      "id": "4a9773bf-53fe-420e-8ac1-77a06be7f134",
+      "type": "istar.AndRefinementLink",
+      "source": "G_CNS1",
+      "target": "T_CNS0"
+    },
+    {
+      "id": "8329ba63-4821-481e-b97d-9becd5b6b48a",
+      "type": "istar.AndRefinementLink",
+      "source": "G_CNS2",
+      "target": "T_CNS0"
+    },
+    {
+      "id": "c69a1377-7f60-410c-bf53-39bb3cbf8f9d",
+      "type": "istar.OrRefinementLink",
+      "source": "T_CNS1",
+      "target": "G_CNS1"
+    },
+    {
+      "id": "c312d012-c3d6-474e-8391-0aa576e329b3",
+      "type": "istar.OrRefinementLink",
+      "source": "T_CNS2",
+      "target": "G_CNS1"
+    },
+    {
+      "id": "9e5d407b-07ba-4e31-b929-a68811788523",
+      "type": "istar.OrRefinementLink",
+      "source": "T_CNS1",
+      "target": "G_CNS2"
+    },
+    {
+      "id": "8d97c64b-bf18-469c-925b-140f7cd5e952",
+      "type": "istar.ContributionLink",
+      "source": "T_CNS1",
+      "target": "S_CNS1",
+      "label": "make"
+    },
+    {
+      "id": "89e32893-fa98-4fd6-9bff-c7c495f232c7",
+      "type": "istar.ContributionLink",
+      "source": "T_CNS2",
+      "target": "S_CNS1",
+      "label": "help"
+    }
+  ],
+  "display": {
+    "T_CON0": {
+      "width": 200.41665649414062,
+      "height": 65.39582824707031
+    },
+    "G_CON1": {
+      "width": 164.41665649414062,
+      "height": 61.39582824707031
+    },
+    "G_CON2": {
+      "width": 143.703125,
+      "height": 82.9453125
+    },
+    "T_CON1": {
+      "width": 193.41665649414062,
+      "height": 66.39582824707031
+    },
+    "T_CON2": {
+      "width": 228.703125,
+      "height": 74.9453125
+    },
+    "T_CON3": {
+      "width": 153.41665649414062,
+      "height": 60.39582824707031
+    },
+    "S_CON1": {
+      "width": 162.46591186523438,
+      "height": 95.40580749511719
+    },
+    "S_CON2": {
+      "width": 119.45266723632812,
+      "height": 89.40507507324219
+    },
+    "T_MS0": {
+      "width": 288.84375,
+      "height": 61.7109375
+    },
+    "G_MS1": {
+      "width": 197.84375,
+      "height": 67.7109375
+    },
+    "G_MS2": {
+      "width": 263.84375,
+      "height": 70.7109375
+    },
+    "T_MS1": {
+      "width": 209.84375,
+      "height": 78.7109375
+    },
+    "T_MS2": {
+      "width": 199.84375,
+      "height": 70.7109375
+    },
+    "S_MS1": {
+      "width": 291.931396484375,
+      "height": 73.71856689453125
+    },
+    "S_MS2": {
+      "width": 228.912841796875,
+      "height": 77.718994140625
+    },
+    "T_OB0": {
+      "width": 226.41665649414062,
+      "height": 59.06248474121094
+    },
+    "G_OB1": {
+      "width": 125.41665649414062,
+      "height": 75.06248474121094
+    },
+    "G_OB2": {
+      "width": 222.703125,
+      "height": 79.9453125
+    },
+    "T_OB1": {
+      "width": 197.41665649414062,
+      "height": 51.06248474121094
+    },
+    "T_OB2": {
+      "width": 139.41665649414062,
+      "height": 103.06248474121094
+    },
+    "S_OB1": {
+      "width": 212.48068237304688,
+      "height": 62.06895446777344
+    },
+    "S_OB2": {
+      "width": 139.45870971679688,
+      "height": 139.41029357910156
+    },
+    "T_TB0": {
+      "width": 357.84375,
+      "height": 61.7109375
+    },
+    "G_TB1": {
+      "width": 203.84375,
+      "height": 72.7109375
+    },
+    "G_TB2": {
+      "width": 192.84375,
+      "height": 120.7109375
+    },
+    "T_TB1": {
+      "width": 185.84375,
+      "height": 78.7109375
+    },
+    "T_TB2": {
+      "width": 284.84375,
+      "height": 79.7109375
+    },
+    "T_TB3": {
+      "width": 220.84375,
+      "height": 85.7109375
+    },
+    "S_TB1": {
+      "width": 171.8958740234375,
+      "height": 117.72314453125
+    },
+    "S_TB2": {
+      "width": 227.911865234375,
+      "height": 94.7205810546875
+    },
+    "T_FIN0": {
+      "width": 256.4166564941406,
+      "height": 73.06251525878906
+    },
+    "G_FIN1": {
+      "width": 179.41665649414062,
+      "height": 68.06251525878906
+    },
+    "G_FIN2": {
+      "width": 177.41665649414062,
+      "height": 55.06251525878906
+    },
+    "G_FIN3": {
+      "width": 138.41665649414062,
+      "height": 103.39582824707031
+    },
+    "T_FIN1": {
+      "width": 141.41665649414062,
+      "height": 60.39582824707031
+    },
+    "T_FIN2": {
+      "width": 188.41665649414062,
+      "height": 66.39582824707031
+    },
+    "T_FIN3": {
+      "width": 188.41665649414062,
+      "height": 76.39582824707031
+    },
+    "S_FIN1": {
+      "width": 162.46530151367188,
+      "height": 87.40486145019531
+    },
+    "S_FIN2": {
+      "width": 157.46438598632812,
+      "height": 104.40669250488281
+    },
+    "T_CNS0": {
+      "width": 271.7499694824219,
+      "height": 62.06251525878906
+    },
+    "G_CNS1": {
+      "width": 127.74996948242188,
+      "height": 91.06251525878906
+    },
+    "G_CNS2": {
+      "width": 125.74996948242188,
+      "height": 87.06251525878906
+    },
+    "T_CNS1": {
+      "width": 194.74996948242188,
+      "height": 71.06251525878906
+    },
+    "T_CNS2": {
+      "width": 178.74996948242188,
+      "height": 85.06251525878906
+    },
+    "S_CNS1": {
+      "width": 298.8400573730469,
+      "height": 77.07044982910156
+    },
+    "SRB-01": {
+      "width": 126.125,
+      "height": 54.65313720703125
+    },
+    "SRB-02": {
+      "width": 172.125,
+      "height": 65.453125
+    },
+    "SRB-03": {
+      "width": 163.125,
+      "height": 109.453125
+    },
+    "SRB-04": {
+      "width": 178.125,
+      "height": 102.453125
+    },
+    "SRB-05": {
+      "width": 208.125,
+      "height": 129.453125
+    },
+    "SRB-06": {
+      "width": 221.125,
+      "height": 118.453125
+    },
+    "SRB-07": {
+      "width": 204.125,
+      "height": 98.453125
+    },
+    "SRB-08": {
+      "width": 173.125,
+      "height": 94.453125
+    },
+    "SRB-09": {
+      "width": 252.125,
+      "height": 129.453125
+    },
+    "SRB-10": {
+      "width": 353.125,
+      "height": 150.453125
+    },
+    "ac036dc6-95cd-476c-bebb-402c52c22b2a": {
+      "vertices": [
+        {
+          "x": 2868,
+          "y": 2317
+        }
+      ]
+    },
+    "e00117e9-d86c-4fc0-b1d6-4ecde0231b7e": {
+      "vertices": [
+        {
+          "x": 1179,
+          "y": 1882
+        },
+        {
+          "x": 1425,
+          "y": 1876
+        }
+      ]
+    },
+    "42b3bd4e-41e5-4410-a481-b70128c63bb0": {
+      "vertices": [
+        {
+          "x": 1140,
+          "y": 2198
+        },
+        {
+          "x": 1646,
+          "y": 2042
+        }
+      ]
+    },
+    "c061e568-23b1-45f0-ad6d-b63032ab4301": {
+      "vertices": [
+        {
+          "x": 2232,
+          "y": 1059
+        }
+      ]
+    },
+    "4e1ab18e-a3b0-48bf-9067-89f105aa3568": {
+      "vertices": [
+        {
+          "x": 1589,
+          "y": 1591
+        }
+      ]
+    },
+    "8af41d24-a050-46ba-a4a3-c0608f349c01": {
+      "vertices": [
+        {
+          "x": 994,
+          "y": 738
+        }
+      ]
+    },
+    "dacdc1b2-0924-46ef-92e1-c50611ad629e": {
+      "vertices": [
+        {
+          "x": 1746,
+          "y": 233
+        }
+      ]
+    },
+    "42cdbb4a-55ef-464d-915e-7bdcb4baa788": {
+      "vertices": [
+        {
+          "x": 993,
+          "y": 272
+        },
+        {
+          "x": 1762,
+          "y": 23
+        }
+      ]
+    },
+    "fabfb8cf-c6fe-4cf9-9384-75fde77da0a3": {
+      "vertices": [
+        {
+          "x": 1597,
+          "y": 127
+        }
+      ]
+    },
+    "1abea88d-c0dc-4fe7-85bc-06aaa0fb7d96": {
+      "vertices": [
+        {
+          "x": 1568,
+          "y": 1419
+        }
+      ]
+    },
+    "A_PAT": {
+      "collapsed": true
+    },
+    "A_REF": {
+      "collapsed": true
+    },
+    "A_CLIN": {
+      "collapsed": true
+    },
+    "A_SCH": {
+      "collapsed": true
+    },
+    "A_COR": {
+      "collapsed": true
+    },
+    "A_PSP": {
+      "collapsed": true
+    },
+    "A_FUND": {
+      "collapsed": true
+    },
+    "A_MGMT": {
+      "collapsed": true
+    }
+  },
+  "tool": "pistar.2.1.0",
+  "istar": "2.0",
+  "saveDate": "Tue, 20 Oct 2026 14:20:09 GMT",
+  "diagram": {
+    "width": 3800,
+    "height": 2461,
+    "name": "i* SR - HPAS initial release",
+    "customProperties": {
+      "Description": "Strategic Rationale model: seven opened actors; 72 intentional elements; 84 internal links; 12 boundary dependencies."
+    }
+  }
+}
